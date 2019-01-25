@@ -12,11 +12,19 @@
     </head>
     <body>
     <!--just a basic form so i can test the servlet -->
-    <form method="post" action="register.jsp">
+    <!-- if the username is already taken, print a message/or show a popup??-->
+<% if (request.getAttribute("message") != null){
+    %>
+${message}
+
+    <%
+} %>
+
+    <form method="post" action="register">
         <label for="username">username:</label>
         <input type="text" id="username" name="username">
         <label for="password">password:</label>
-        <input type="text" id="password" name="password">
+        <input type="password" id="password" name="password">
         <input type="submit" value="submit">
     </form>
         
