@@ -19,7 +19,7 @@
             <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
 
             <!--todo show the login and register only if nobody is logged in -->
-            <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+            <li class="nav-item"><a class="nav-link" href="login">Login</a></li>
             <li class="nav-item"><a class="nav-link" href="register">Register</a></li>
 
             <!--todo show the profile and 'look at your own entries' only if logged in -->

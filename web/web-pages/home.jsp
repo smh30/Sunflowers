@@ -27,6 +27,10 @@
 <!-- i've included the navbar here so that i can have links to test the login etc with - steph -->
 <%@ include file="navbar.jsp" %>
 
+<p>content goes here</p>
+
+<p>welcome, ${sessionScope.username}</p>
+
 
 
 
