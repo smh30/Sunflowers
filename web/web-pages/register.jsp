@@ -11,6 +11,14 @@
         <title>Title</title>
     </head>
     <body>
+    <!--just a basic form so i can test the servlet -->
+    <form method="post" action="register.jsp">
+        <label for="username">username:</label>
+        <input type="text" id="username" name="username">
+        <label for="password">password:</label>
+        <input type="text" id="password" name="password">
+        <input type="submit" value="submit">
+    </form>
         
     </body>
 </html>
