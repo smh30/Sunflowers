@@ -16,6 +16,6 @@ public class HelloWorldServlet extends HttpServlet {
         req.setAttribute("helloWorld", helloWorld);
 
         req.getRequestDispatcher("/WEB-INF/hello-world-view.jsp").forward(req, resp);
-
+//Great template!
     }
 }
