@@ -29,7 +29,7 @@
 
 <p>content goes here</p>
 
-<p>welcome, ${sessionScope.username}</p>
+
 
 
 
