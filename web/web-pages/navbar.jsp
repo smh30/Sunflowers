@@ -19,31 +19,42 @@
         <ul class="nav navbar-nav">
 
             <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
-<c:if test = "${sessionScope.username == null}">
-            <%--<% if (session.getAttribute("username")==null){%>--%>
-            <!--todo show the login and register only if nobody is logged in -->
-            <li class="nav-item"><a class="nav-link" href="login">Login</a></li>
-            <li class="nav-item"><a class="nav-link" href="register">Register</a></li>
+            <c:if test="${sessionScope.username == null}">
+                <%--<% if (session.getAttribute("username")==null){%>--%>
+                <!--todo show the login and register only if nobody is logged in -->
+                <li class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        Login
+                    </a>
+                        <%--<ul class="dropdown-menu">--%>
+                        <%--<li><a class="dropdown-item" href="#">Link 1</a></li>--%>
+                        <%--<li><a class="dropdown-item" href="#">Link 2</a></li>--%>
+                        <%--<li><a class="dropdown-item" href="#">Link 3</a></li>--%>
+                        <%--</ul>--%>
+                    <div class="dropdown-menu">
+                        <form class="px-4 py-3" method="post" action="login">
+                            <input type="text" class="form-control" id="username" placeholder="username" name="username">
+                            <input type="password" class="form-control" id="password" placeholder="password"
+                                   name="password">
+                            <input type="submit">
+                        </form>
+                    </div>
+                </li>
+
+                <li class="nav-item"><a class="nav-link" href="register">Register</a></li>
+
+
             </c:if>
             <%--<%}else{%>--%>
-            <c:if test = "${sessionScope.username != null}">
-            <!--todo show the profile and 'look at your own entries' only if logged in -->
-            <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">My Blog</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Logout</a></li>
+            <c:if test="${sessionScope.username != null}">
+                <!--todo show the profile and 'look at your own entries' only if logged in -->
+                <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">My Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="logout">Logout</a></li>
             </c:if>
             <%--<% } %>--%>
             <!-- Dropdown, not sure if needed but leaving this code here in case because i hate them, delete if unnecessary -->
-            <li class="dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    Dropdown link??
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Link 1</a></li>
-                    <li><a class="dropdown-item" href="#">Link 2</a></li>
-                    <li><a class="dropdown-item" href="#">Link 3</a></li>
-                </ul>
-            </li>
+
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="navbar-text">welcome, ${sessionScope.username}</li>
