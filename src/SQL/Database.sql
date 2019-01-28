@@ -36,5 +36,5 @@ comments_timestamp TIMESTAMP,
 article_id INT,
 PRIMARY KEY (comments_id, comments_author, article_id),
 FOREIGN KEY (comments_author) REFERENCES (),
-FOREIGN KEY (article_id) REFERENCES 
+FOREIGN KEY (article_id) REFERENCES
 );
