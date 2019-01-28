@@ -87,7 +87,7 @@ dbProps = new Properties();
                             System.out.println("password didn't match");
                             String message = "The username or password was incorrect (password)";
                             request.setAttribute("message", message);
-                            request.getRequestDispatcher("login.jsp").forward(request,response);
+                            request.getRequestDispatcher("web-pages/login.jsp").forward(request,response);
                             return;
                         }
                     
@@ -106,7 +106,8 @@ dbProps = new Properties();
                         //todo how to add a message sayint the user/pw we3re incorrect??
                         //doGet(request, response);
                         //or
-                        request.getRequestDispatcher("login.jsp").forward(request, response);
+                        request.getRequestDispatcher("web-pages/login.jsp").forward(request,
+                                response);
                         //or
                     return;
                         //response.sendRedirect("login.jsp");
