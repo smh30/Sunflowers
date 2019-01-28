@@ -17,15 +17,15 @@ public class GetArticlesServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-System.out.println("in the home servlet");
+        System.out.println("in the home servlet");
 //todo get the recent articles using dao
         //todo create a List<Article>
         //needs to include title, text, date/time, author...
         //todo send the list through to the home.jsp
-        
-        // and can do a doget for just that user's articles as well
-        
 
-request.getRequestDispatcher("web-pages/home.jsp").forward(request, response);
+
+
+
+        request.getRequestDispatcher("web-pages/home.jsp").forward(request, response);
     }
 }
