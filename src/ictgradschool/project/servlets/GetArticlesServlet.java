@@ -23,6 +23,8 @@ System.out.println("in the home servlet");
         //needs to include title, text, date/time, author...
         //todo send the list through to the home.jsp
         
+        // and can do a doget for just that user's articles as well
+        
 
 request.getRequestDispatcher("web-pages/home.jsp").forward(request, response);
     }
