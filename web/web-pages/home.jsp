@@ -29,6 +29,7 @@
 
 
 <p>content goes here</p>
+<%--display the articles as appropriate--%>
 
 
 
