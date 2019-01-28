@@ -1,6 +1,6 @@
 package ictgradschool.project.servlets;
 
-import utilities.Passwords;
+import ictgradschool.project.utilities.Passwords;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
