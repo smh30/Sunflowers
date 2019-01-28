@@ -11,7 +11,7 @@
 <!-- THIS IS A NAVBAR WHICH CAN BE INCLUDED INTO ALL OF THE OTHER PAGES AS NECESSARY -->
 <!-- todo add actual link destinations to all the buttons -->
 <body>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-expand-md">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">BLOGIFY</a>

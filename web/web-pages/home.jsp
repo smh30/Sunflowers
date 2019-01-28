@@ -31,6 +31,15 @@
 <p>content goes here</p>
 <%--display the articles as appropriate--%>
 
+    <c:forEach items="${articles}" var="article">
+        <h2>${article.title}</h2>
+        <p>Author: ${article.author.username}</p>
+        <p>${article.timestamp}</p>
+        <p>${article.articleText}</p>
+
+
+    </c:forEach>
+
 
 
 

@@ -1,11 +1,17 @@
 package ictgradschool.project.servlets;
 
+import ictgradschool.project.JavaBeans.Article;
+import ictgradschool.project.JavaBeans.User;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 @WebServlet(name = "GetArticlesServlet")
 public class GetArticlesServlet extends HttpServlet {
@@ -23,8 +29,18 @@ public class GetArticlesServlet extends HttpServlet {
         //needs to include title, text, date/time, author...
         //todo send the list through to the home.jsp
 
+       // List<Article> articleList = ArticleDAO.getAllArticles(getServletContext());
 
+        //todo delete this
+        List<Article> articleList = new ArrayList<>();
+        Article article = new Article();
+        article.setTitle("Article 1");
+        article.setArticleText("a manually created article for testing purposes");
+        article.setTimestamp(new java.sql.Timestamp(Calendar.getInstance().getTime().getTime()));
+        article.setAuthor(new User("harry"));
+        articleList.add(article);
 
+        request.setAttribute("articles", articleList);
 
         request.getRequestDispatcher("web-pages/home.jsp").forward(request, response);
     }
