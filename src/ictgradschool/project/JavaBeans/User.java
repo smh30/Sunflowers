@@ -1,4 +1,4 @@
-package JavaBeans;
+package ictgradschool.project.JavaBeans;
 
 public class User {
     String username;
