@@ -54,10 +54,30 @@
                     <br>
                     <br>
 
-                    <%--TODO: Create forms for: username, password, country, real_name, description--%>
-
-                    <%--TODO: Make this webpage RESPONSIVE--%>
+                    <%--TODO: Create forms for: description--%>
+                    <label for="unameID">Username:</label>
+                    <input type="text" id="unameID" name="username">
+                    <br>
+                    <label for="pwordID">Password:</label>
+                    <input type="text" id="pwordID" name="password">
+                    <br>
+                    <label for="countryID">Country:</label>
+                    <input type="text" id="countryID" name="country">
+                    <br>
+                    <label for="rnameID">Real name:</label>
+                    <input type="text" id="rnameID" name="realname">
+                    <br>
                 </form>
+                <label for="profile_text"> About Text</label>
+                <textarea id="profile_text"
+                          name="profile_text_area"
+                          rows="4"
+                          cols="40">
+
+                </textarea>
+
+                <%--TODO: Make this webpage RESPONSIVE--%>
+
             </div>
         </div>
     </body>
