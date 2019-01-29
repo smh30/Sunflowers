@@ -76,6 +76,16 @@
         <url-pattern>/new-article</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ViewArticle</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.GetSingleArticleServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ViewArticle</servlet-name>
+        <url-pattern>/article</url-pattern>
+    </servlet-mapping>
+
 
 
 
