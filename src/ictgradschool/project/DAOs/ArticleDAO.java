@@ -204,6 +204,7 @@ public class ArticleDAO {
 
                     article.setTitle(rs.getString(1));
                     User articleAuthor = new User(rs.getString(2));
+                    article.setID(rs.getInt(3));
                     article.setAuthor(articleAuthor);
                     article.setArticleText(rs.getString(4));
                     article.setTimestamp(rs.getTimestamp(5));

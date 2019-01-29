@@ -16,12 +16,12 @@ public class DeleteArticleServlet extends HttpServlet {
         System.out.println("The deleting article servlet");
 
         String title = request.getParameter("title");
-        PrintWriter out = response.getWriter();
-        out.println("<h1>" + title + "</h1>");
+
+
 
         String content = request.getParameter("articleText");
-        PrintWriter out2 = response.getWriter();
-        out2.println(content);
+
+
 
         String user = (String) request.getSession().getAttribute("username");
 
