@@ -18,39 +18,38 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
         <title>Profile</title>
-            <script type ="text/javascript">
+        <script type="text/javascript">
             function switchImage() {
-            var image = document.getElementById("imageToSwap");
-            var dropdown = document.getElementById("dlist");
-            image.src = dropdown.value;
+                var image = document.getElementById("imageToSwap");
+                var dropdown = document.getElementById("dlist");
+                image.src = dropdown.value;
             }
         </script>
     </head>
     <body>
         <%@ include file="navbar.jsp" %>
-        <div class = "container-fluid">
+        <div class="container-fluid">
             <h1>User Account</h1>
             <br>
             <br>
             <%--Adding form for uploading default user pic (the one the user sees when they click on the profile webpage)--%>
-            <%--TODO: upload x4 default pics; Below is the default user pic link --%>
-            <img id="imageToSwap" src="" width="225">
+            <%--Below is the default user pic link --%>
+            <img id="imageToSwap" src="../default-photos-for-profile-page/Default.jpg" width="225">
 
-            <div style=""margin-left; 250px>
+            <div style="margin-left: 250px">
                 <h4>Choose default picture: </h4>
                 <%--TODO: What servlet are we linking to here??--%>
-                <form action="" method="post" enctype="multipart/form-data">
+                <form action="UploadProfilePictureServlet" method="post" enctype="multipart/form-data">
                     <select id="dlist" onchange="switchImage()">
-                        <%--TODO: upload x3 default pics OPTIONS below --%>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
+                        <option value="../default-photos-for-profile-page/CloneTrooper.jpg">Clone Trooper</option>
+                        <option value="../default-photos-for-profile-page/Jigglypuff.jpg">Jigglypuff</option>
+                        <option value="../default-photos-for-profile-page/Yoda.jpg">Yoda</option>
                     </select>
                     <h4>Choose your own picture to upload: </h4>
                     <input type="file" name="userPicture" size="50"/>
                     <br>
                     <br>
-                    <input type="submit" value=uploadPic">
+                    <input type="submit" value="Upload">
                     <%--TODO: Make this webpage RESPONSIVE--%>
                 </form>
             </div>
