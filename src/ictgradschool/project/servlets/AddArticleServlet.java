@@ -20,7 +20,7 @@ public class AddArticleServlet extends HttpServlet {
 
 
         String content = request.getParameter("article_content");
-        
+
 
         String user = (String) request.getSession().getAttribute("username");
 
