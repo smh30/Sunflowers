@@ -29,6 +29,7 @@ public class AddArticleServlet extends HttpServlet {
         boolean articeCreated = ArticleDAO.newArticle(title,content,user,getServletContext());
 
         if(!articeCreated){
+            System.out.println("article not created??");
             String message = "Some trouble with uploading your article. Please try again.";
             request.setAttribute("message",message);
 
@@ -36,8 +37,8 @@ public class AddArticleServlet extends HttpServlet {
 
 
         }else{
+            System.out.println("article created!!!!!!!");
             // TODO to finish the single-article.jsp. It is the page after user submit their new article.  add attribute
-            System.out.println("created the article!!");
             request.getRequestDispatcher("/article").forward(request,response);
         }
 
