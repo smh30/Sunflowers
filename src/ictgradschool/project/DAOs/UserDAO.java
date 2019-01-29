@@ -30,20 +30,20 @@ public class UserDAO {
         }
         try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
             System.out.println("connection successful");
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM loginTable WHERE username = ?")) {
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE username = ?")) {
                 stmt.setString(1, username);
                 try (ResultSet r = stmt.executeQuery()) {
                     if (r.next()) {
-                        System.out.println("username found! " + r.getString(1));
+                        System.out.println("username found! " + r.getString(4));
                         /* If a matching row was found, hash the provided password with the retrieved salt and
         repetitions and compare it against the hash from the database.*/
                         // first column is name, already have
                         //todo see if these are working
                         // second column is binary hash, what data type to save it as??
-                        byte[] hash = r.getBytes(2);
+                        byte[] hash = r.getBytes(5);
                         // third column is salt, also binary
-                        byte[] salt = r.getBytes(3);
-                        int iterations = r.getInt(4);
+                        byte[] salt = r.getBytes(2);
+                        int iterations = r.getInt(1);
 
 
                         if (Passwords.isExpectedPassword(password.toCharArray(), salt, iterations,
@@ -91,7 +91,7 @@ public class UserDAO {
 
         try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
             System.out.println("connection successful");
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM loginTable WHERE username = ?")) {
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE username = ?")) {
                 stmt.setString(1, username);
                 ResultSet rs = stmt.executeQuery();
 
@@ -107,12 +107,14 @@ public class UserDAO {
                     byte[] salt = Passwords.getNextSalt(32);
                     byte[] hash = Passwords.hash(password.toCharArray(), salt);
                     System.out.println("done hash");
-                    try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO loginTable " +
+                    try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO user(iteration, salt, username, password)"+
                             "VALUES (?, ?, ?, ?)")){
-                        s2.setString(1, username);
-                        s2.setBytes(2, hash);
-                        s2.setBytes(3, salt);
-                        s2.setInt(4, 100000);
+                        s2.setInt(1, 100000);
+                        s2.setBytes(2, salt);
+                        s2.setString(3, username);
+                        s2.setBytes(4, hash);
+
+
                         s2.execute();
                     }
 
