@@ -1,5 +1,6 @@
 package ictgradschool.project.servlets;
 
+import ictgradschool.project.DAOs.ArticleDAO;
 import ictgradschool.project.JavaBeans.Article;
 import ictgradschool.project.JavaBeans.User;
 
@@ -29,16 +30,33 @@ public class GetArticlesServlet extends HttpServlet {
         //needs to include title, text, date/time, author...
         //todo send the list through to the home.jsp
 
-       // List<Article> articleList = ArticleDAO.getAllArticles(getServletContext());
+
 
         //todo delete this
         List<Article> articleList = new ArrayList<>();
-        Article article = new Article();
-        article.setTitle("Article 1");
-        article.setArticleText("a manually created article for testing purposes");
-        article.setTimestamp(new java.sql.Timestamp(Calendar.getInstance().getTime().getTime()));
-        article.setAuthor(new User("harry"));
-        articleList.add(article);
+
+        // if looking for all the articles ie no search parameter were entered....
+        if((request.getParameter("author")==null)&&(request.getParameter("title")==null)&&(request.getParameter("date")==null)) {
+
+            //articleList = ArticleDAO.getAllArticles(getServletContext());
+            System.out.println("getting all articles");
+
+            Article article = new Article();
+            article.setTitle("Article 1");
+            article.setArticleText("a manually created article for testing purposes");
+            article.setTimestamp(new java.sql.Timestamp(Calendar.getInstance().getTime().getTime()));
+            article.setAuthor(new User("harry"));
+            articleList.add(article);
+        } else {
+            // if search parameter were entered or user wants to see their own articles...
+            //todo search by other params (title/ date) and by combinations of params
+
+            String author = request.getParameter("author");
+            System.out.println("getting articles by " + author);
+
+            articleList = ArticleDAO.getArticlesByAuthor(author, getServletContext());
+            // get articles by that author
+        }
 
         request.setAttribute("articles", articleList);
 
