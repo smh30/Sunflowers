@@ -57,7 +57,15 @@
         <url-pattern>/search</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>UploadProfilePictureServlet</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.UploadProfilePictureServlet</servlet-class>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>UploadProfilePictureServlet</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
 
 
 
