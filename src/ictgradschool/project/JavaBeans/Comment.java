@@ -1,4 +1,6 @@
 package ictgradschool.project.JavaBeans;
 
-public class Comment {
+import java.io.Serializable;
+
+public class Comment implements Serializable {
 }

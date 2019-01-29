@@ -11,7 +11,8 @@
 <!-- THIS IS A NAVBAR WHICH CAN BE INCLUDED INTO ALL OF THE OTHER PAGES AS NECESSARY -->
 <!-- todo add actual link destinations to all the buttons -->
 <body>
-<nav class="navbar navbar-default">
+    <!--todo navbar expand/collapse seems to be stuck on md no matter what i change this to -->
+<nav class="navbar navbar-expand-sm navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">BLOGIFY</a>
@@ -19,6 +20,7 @@
         <ul class="nav navbar-nav">
 
             <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="web-pages/search.jsp">Search</a></li>
             <c:if test="${sessionScope.username == null}">
                 <!-- show only the login and register if nobody is logged in -->
                 <li class="dropdown">
@@ -42,12 +44,14 @@
                 </li>
 
                 <li class="nav-item"><a class="nav-link" href="register">Register</a></li>
+
             </c:if>
 
             <c:if test="${sessionScope.username != null}">
             <!-- show the profile, 'look at your own entries' and logout only if logged in -->
+
             <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">My Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="?author=${sessionScope.username}">My Blog</a></li>
             <li class="nav-item"><a class="nav-link" href="logout">Logout</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
