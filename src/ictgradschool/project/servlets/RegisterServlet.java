@@ -17,7 +17,7 @@ import java.util.Properties;
 @WebServlet(name = "RegisterServlet")
 public class RegisterServlet extends HttpServlet {
     
-    Properties dbProps;
+
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("in the register servlet POST");
