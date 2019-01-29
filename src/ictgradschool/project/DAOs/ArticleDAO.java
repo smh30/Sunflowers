@@ -1,6 +1,8 @@
 package ictgradschool.project.DAOs;
 
 import ictgradschool.project.JavaBeans.Article;
+import ictgradschool.project.JavaBeans.Comment;
+import ictgradschool.project.JavaBeans.User;
 
 import javax.servlet.ServletContext;
 import java.io.FileInputStream;
@@ -34,23 +36,23 @@ public class ArticleDAO {
 
         try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
             System.out.println("connection successful");
-            // select the most recent 10 from the articles table??? ordered by timestamp:
+            // select the most recent 6 from the articles table??? ordered by timestamp:
             //todo will this bring newest first or oldest first???
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM articles ORDER BY timestamp LIMIT 10")) {
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article ORDER BY article_timestamp DESC LIMIT 6")) {
                 //stmt.setString(1, username);
                 ResultSet rs = stmt.executeQuery();
 
                 while(rs.next()){
 
                     //todo uncomment these once database is ready
-//                    Article article = new Article();
-//                    article.setTitle();
-//                    article.setArticleText();
-//                    article.setTimestamp();
-//                    User author = new User();
-//                    article.setAuthor(author);
-//
-//                    articles.add(article);
+                    Article article = new Article();
+                    article.setTitle(rs.getString(1));
+                    article.setArticleText(rs.getString(4));
+                    article.setTimestamp(rs.getTimestamp(5));
+                    User articleAuthor = new User(rs.getString(2));
+                    article.setAuthor(articleAuthor);
+
+                    articles.add(article);
                 }
 
             }
@@ -85,23 +87,26 @@ public class ArticleDAO {
 
         try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
             System.out.println("connection successful");
-            // select the most recent 10 from the articles table??? ordered by timestamp with certain author:
+            // select the most recent 6 the articles table??? ordered by timestamp with certain author:
             //todo will this bring newest first or oldest first???
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM articles AS a WHERE author = ? ORDER BY a.timestamp LIMIT 10")) {
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author = ? ORDER BY article_timestamp DESC LIMIT 6")) {
                 stmt.setString(1, author);
                 ResultSet rs = stmt.executeQuery();
 
                 while(rs.next()){
 
                     //todo uncomment these once database is ready
-//                    Article article = new Article();
-//                    article.setTitle();
-//                    article.setArticleText();
-//                    article.setTimestamp();
-//                    User author = new User();
-//                    article.setAuthor(author);
 
-//                    articles.add(article);
+                    //didn't get the id??
+                    Article article = new Article();
+                    article.setTitle(rs.getString(1));
+                    article.setArticleText(rs.getString(4));
+                    article.setTimestamp(rs.getTimestamp(5));
+                    User articleAuthor = new User(rs.getString(2));
+                    article.setAuthor(articleAuthor);
+                    //todo another query or add to this one to return the comments as well, and create a list<comment>
+
+                    articles.add(article);
                 }
 
             }

@@ -25,14 +25,7 @@ public class GetArticlesServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("in the home servlet");
-//todo get the recent articles using dao
-        //todo create a List<Article>
-        //needs to include title, text, date/time, author...
-        //todo send the list through to the home.jsp
 
-
-
-        //todo delete this
         List<Article> articleList = new ArrayList<>();
 
         // if looking for all the articles ie no search parameter were entered....
@@ -41,12 +34,9 @@ public class GetArticlesServlet extends HttpServlet {
             //articleList = ArticleDAO.getAllArticles(getServletContext());
             System.out.println("getting all articles");
 
-            Article article = new Article();
-            article.setTitle("Article 1");
-            article.setArticleText("a manually created article for testing purposes");
-            article.setTimestamp(new java.sql.Timestamp(Calendar.getInstance().getTime().getTime()));
-            article.setAuthor(new User("harry"));
-            articleList.add(article);
+            articleList = ArticleDAO.getAllArticles(getServletContext());
+
+
         } else {
             // if search parameter were entered or user wants to see their own articles...
             //todo search by other params (title/ date) and by combinations of params
