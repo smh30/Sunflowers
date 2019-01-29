@@ -28,8 +28,16 @@ public class GetArticlesServlet extends HttpServlet {
 
         List<Article> articleList = new ArrayList<>();
 
+        String author = request.getParameter("author");
+        String title = request.getParameter("title");
+        String date = request.getParameter("date");
+
+        System.out.println("author = " + author);
+        System.out.println("title = " + title);
+        System.out.println("date = " + date);
+
         // if looking for all the articles ie no search parameter were entered....
-        if((request.getParameter("author")==null)&&(request.getParameter("title")==null)&&(request.getParameter("date")==null)) {
+        if (author == null && title == null && date == null) {
 
             //articleList = ArticleDAO.getAllArticles(getServletContext());
             System.out.println("getting all articles");
@@ -40,12 +48,14 @@ public class GetArticlesServlet extends HttpServlet {
         } else {
             // if search parameter were entered or user wants to see their own articles...
             //todo search by other params (title/ date) and by combinations of params
+            if (!author.equals("")) {
+                author = request.getParameter("author");
+                System.out.println("getting articles by " + author);
+                articleList = ArticleDAO.getArticlesByAuthor(author, getServletContext());
+                // get articles by that author
+            }
 
-            String author = request.getParameter("author");
-            System.out.println("getting articles by " + author);
-
-            articleList = ArticleDAO.getArticlesByAuthor(author, getServletContext());
-            // get articles by that author
+           // if (title != "")
         }
 
         request.setAttribute("articles", articleList);
