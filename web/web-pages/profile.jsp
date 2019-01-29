@@ -39,7 +39,7 @@
 
             <div style="margin-left: 250px">
                 <h4>Choose default picture: </h4>
-                <%--TODO: What servlet are we linking to here??--%>
+                <%--TODO: What servlet are we linking to here?? Will be for uploading own photo--%>
                 <form action="UploadProfilePictureServlet" method="post" enctype="multipart/form-data">
                     <select id="dlist" onchange="switchImage()">
                         <option value="../default-photos-for-profile-page/CloneTrooper.jpg">Clone Trooper</option>
@@ -51,6 +51,11 @@
                     <br>
                     <br>
                     <input type="submit" value="Upload">
+                    <br>
+                    <br>
+                    
+                    <%--TODO: Create forms for: username, password, country, real_name, description--%>
+
                     <%--TODO: Make this webpage RESPONSIVE--%>
                 </form>
             </div>
