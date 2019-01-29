@@ -17,7 +17,7 @@ import java.util.Properties;
 @WebServlet(name = "RegisterServlet")
 public class RegisterServlet extends HttpServlet {
     
-    Properties dbProps;
+
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("in the register servlet POST");
@@ -26,6 +26,9 @@ public class RegisterServlet extends HttpServlet {
         supplied.*/
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String realname = request.getParameter("realname");
+        String country = request.getParameter("country");
+        String date = request.getParameter("dob");
 
         boolean userCreated = UserDAO.newUser(username, password, getServletContext());
         if (!userCreated){

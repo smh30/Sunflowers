@@ -33,11 +33,19 @@ ${message}
     <%
 } %>
 
+        <%--todo coordinate this with Yaz's profile edit--%>
     <form method="post" action="register">
         <label for="username">username:</label>
         <input type="text" id="username" name="username">
         <label for="password">password:</label>
         <input type="password" id="password" name="password">
+        <label for="realname">Name:</label>
+        <input type="text" id="realname" name="realname">
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country">
+        // also date of birth
+        <label for="dob">D.O.B:</label>
+        <input type="date" id="dob" name="dob">
         <input type="submit" value="submit">
     </form>
         

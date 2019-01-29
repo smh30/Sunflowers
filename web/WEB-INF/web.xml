@@ -66,6 +66,17 @@
         <servlet-name>UploadProfilePictureServlet</servlet-name>
         <url-pattern>/upload</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>AddArticle</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.AddArticleServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddArticle</servlet-name>
+        <url-pattern>/new-article</url-pattern>
+    </servlet-mapping>
+
+
 
 
 
