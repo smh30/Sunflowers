@@ -51,7 +51,7 @@ public class ArticleDAO {
 //                    article.setTimestamp();
 //                    User author = new User();
 //                    article.setAuthor(author);
-
+//
 //                    articles.add(article);
                 }
 
