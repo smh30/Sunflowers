@@ -38,10 +38,20 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession(true);
             session.setAttribute("username", username);
             //todo yet another place where i'm not sure what redirect to use
+            String newUser = (String)request.getAttribute("new");
 
-            System.out.println("logged in, attemting redirect to home");
-            response.sendRedirect("home");
-            //request.getRequestDispatcher("home").forward(request,response);
+            if(newUser != null){
+                System.out.println("logged in new user, attemting redirect to profile edit");
+
+                //todo change this to redirect to edit profile server once it's wired up
+                request.getRequestDispatcher("web-pages/profile.jsp").forward(request, response);
+
+            } else {
+
+                System.out.println("logged in, attemting redirect to home");
+                response.sendRedirect("home");
+            }
+
             return;
         } else {
 

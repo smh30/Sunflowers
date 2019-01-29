@@ -39,7 +39,7 @@ public class RegisterServlet extends HttpServlet {
             request.getRequestDispatcher("web-pages/register.jsp").forward(request,
                     response);
         } else {
-
+request.setAttribute("new", true);
             request.getRequestDispatcher("login").forward(request, response);
         }
 
