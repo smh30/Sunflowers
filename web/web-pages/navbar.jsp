@@ -50,7 +50,7 @@
             <c:if test="${sessionScope.username != null}">
             <!-- show the profile, 'look at your own entries' and logout only if logged in -->
 
-            <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
+            <li class="nav-item"><a class="nav-link" href="web-pages/profile.jsp">Profile</a></li>
             <li class="nav-item"><a class="nav-link" href="?author=${sessionScope.username}">My Blog</a></li>
             <li class="nav-item"><a class="nav-link" href="logout">Logout</a></li>
         </ul>
