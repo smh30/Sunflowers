@@ -48,15 +48,15 @@ FOREIGN KEY (article_id) REFERENCES article(article_id)
 
 
 INSERT INTO article (article_title, article_author, article_body)
-VALUES ('Cats', 'a', 'Cats are cool'),
-        ('Dogs', 'b', 'Dogs are cooler than cats'),
-        ('Kittens', 'c', 'Got a new kitten she rocks'),
-        ('Birds', 'a', 'Get an owl'),
-        ('Rats', 'b', 'Never again');
+VALUES ('Cats', 'y', 'Cats are cool'),
+        ('Dogs', 'y', 'Dogs are cooler than cats'),
+        ('Kittens', 'y', 'Got a new kitten she rocks'),
+        ('Birds', 'y', 'Get an owl'),
+        ('Rats', 'y', 'Never again');
 
 INSERT INTO comments(comments_author, coments_body, article_id)
-VALUES  ( 'c', 'Ron you are so wrong', '2'),
-        ( 'a', 'Guys, please be quiet', '2'),
-        ('a', 'Good call Ron!', '5'),
-        ( 'b', 'Little bit', '3'),
-        ( 'b', 'LOL you are so lucky bro', '4');
+VALUES  ( 'y', 'Ron you are so wrong', '2'),
+        ( 'y', 'Guys, please be quiet', '2'),
+        ('y', 'Good call Ron!', '5'),
+        ( 'y', 'Little bit', '3'),
+        ( 'y', 'LOL you are so lucky bro', '4');
