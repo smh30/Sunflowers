@@ -37,7 +37,8 @@ public class AddArticleServlet extends HttpServlet {
 
         }else{
             // TODO to finish the single-article.jsp. It is the page after user submit their new article.  add attribute
-            request.getRequestDispatcher("web-pages/single-article.jsp").forward(request,response);
+            System.out.println("created the article!!");
+            request.getRequestDispatcher("/article").forward(request,response);
         }
 
     }

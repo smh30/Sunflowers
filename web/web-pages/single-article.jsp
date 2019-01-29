@@ -33,9 +33,11 @@
                 <form method="post" action=#>
                 <input type="submit" value="Edit Article">
                 </form>
-<form method="post" action="#">
+
+
+                <form method="post" action="#">
                 <input type="submit" value="Delete Article">
-</form>
+                </form>
             </div>
 
 
