@@ -29,6 +29,7 @@ public class RegisterServlet extends HttpServlet {
         String realname = request.getParameter("realname");
         String country = request.getParameter("country");
         String date = request.getParameter("dob");
+        String description = request.getParameter("description");
 
         boolean userCreated = UserDAO.newUser(username, password, getServletContext());
         if (!userCreated){
