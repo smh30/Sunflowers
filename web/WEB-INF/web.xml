@@ -86,7 +86,15 @@
         <url-pattern>/article</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>DeleteArticle</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.DeleteArticleServlet</servlet-class>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>DeleteArticle</servlet-name>
+        <url-pattern>/single-article</url-pattern>
+    </servlet-mapping>
 
 
 
