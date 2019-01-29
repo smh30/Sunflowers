@@ -172,6 +172,66 @@ public class ArticleDAO {
 
     }
 
+    public static Article getSingleArticle(String user, ServletContext context){
+        Article article = new Article();
+        Properties dbProps = new Properties();
+
+        /*Connect to your database and from the table created in Exercise Five and check to see if
+        a record with the specified username already exists in the table.*/
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        dbProps = new Properties();
+
+        try (FileInputStream fIn = new FileInputStream(context.getRealPath("WEB-INF/mysql.properties"))) {
+            dbProps.load(fIn);
+        } catch (IOException e) {
+            System.out.println("couldn't find the properties file???????");
+            e.printStackTrace();
+        }
+
+        try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+            System.out.println("connection successful");
+
+
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author = ? ORDER BY article_timestamp DESC LIMIT 1")){
+                stmt.setString(1, user);
+                ResultSet rs = stmt.executeQuery();
+
+                while(rs.next()){
+
+                    article.setTitle(rs.getString(1));
+                    User articleAuthor = new User(rs.getString(2));
+                    article.setAuthor(articleAuthor);
+                    article.setArticleText(rs.getString(4));
+                    article.setTimestamp(rs.getTimestamp(5));
+
+
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+
+            }
+
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+
+
+
+
+        return article;
+    }
+
 
 
 }

@@ -39,13 +39,16 @@ ${message}
         <input type="text" id="username" name="username">
         <label for="password">password:</label>
         <input type="password" id="password" name="password">
+
+        <%--todo do we need to gather all of this data when registering users, or can it happen later only when editing??--%>
         <label for="realname">Name:</label>
         <input type="text" id="realname" name="realname">
         <label for="country">Country:</label>
         <input type="text" id="country" name="country">
-        // also date of birth
         <label for="dob">D.O.B:</label>
         <input type="date" id="dob" name="dob">
+        <label for="bio">Bio:</label>
+        <textarea id="bio" rows="10" cols="50"></textarea>
         <input type="submit" value="submit">
     </form>
         

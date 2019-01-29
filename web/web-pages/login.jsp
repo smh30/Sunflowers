@@ -11,8 +11,8 @@
     <title>Login</title>
 </head>
 <body>
- I don't intend to leave it like this; I want to make it so login can be done with the navbar even if pw is wrong.
-Need a simple page for testing though.
+ THIS PAGE WILL STOP BEING A THING EVENTUALLY
+    BUT FOR NOW: YOUR USERNAME OR PASSWORD WAS INCORRECT
 
  <% if (request.getAttribute("message") != null){
  %>
