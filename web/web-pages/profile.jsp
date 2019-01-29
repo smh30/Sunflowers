@@ -34,6 +34,7 @@
             <br>
             <%--Adding form for uploading default user pic (the one the user sees when they click on the profile webpage)--%>
             <%--Below is the default user pic link --%>
+
             <img id="imageToSwap" src="../default-photos-for-profile-page/Default.jpg" width="225">
 
             <div style="margin-left: 250px">
