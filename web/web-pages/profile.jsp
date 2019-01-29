@@ -53,7 +53,7 @@
                     <input type="submit" value="Upload">
                     <br>
                     <br>
-                    
+
                     <%--TODO: Create forms for: username, password, country, real_name, description--%>
 
                     <%--TODO: Make this webpage RESPONSIVE--%>
