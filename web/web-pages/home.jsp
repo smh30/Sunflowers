@@ -26,22 +26,25 @@
 <body>
 <!-- i've included the navbar here so that i can have links to test the login etc with - steph -->
 <%@ include file="navbar.jsp" %>
-
-
-<p>content goes here</p>
+<div class="container">
 <%--display the articles as appropriate--%>
 
     <c:forEach items="${articles}" var="article">
+        <div class="article">
         <h2>${article.title}</h2>
+            <%--todo make the 'author' link or popup the user info box/page--%>
         <p>Author: ${article.author.username}</p>
         <p>${article.timestamp}</p>
         <p>${article.articleText}</p>
+            <%--todo add readmore--%>
+            <%--todo add "see comments" and maybe a counter of how many comments there are--%>
+        </div>
 
 
     </c:forEach>
 
 
-
+</div>
 
 
 
