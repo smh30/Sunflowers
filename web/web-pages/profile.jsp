@@ -40,7 +40,7 @@
             <div style="margin-left: 250px">
                 <h4>Choose default picture: </h4>
                 <%--TODO: What servlet are we linking to here?? Will be for uploading own photo--%>
-                <form action="UploadProfilePictureServlet" method="post" enctype="multipart/form-data">
+                <form method="POST" action= "/Upload" enctype="multipart/form-data">
                     <select id="dlist" onchange="switchImage()">
                         <option value="../default-photos-for-profile-page/CloneTrooper.jpg">Clone Trooper</option>
                         <option value="../default-photos-for-profile-page/Jigglypuff.jpg">Jigglypuff</option>
