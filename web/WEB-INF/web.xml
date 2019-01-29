@@ -87,10 +87,18 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>Upload</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.UploadProfilePictureServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>DeleteArticle</servlet-name>
         <servlet-class>ictgradschool.project.servlets.DeleteArticleServlet</servlet-class>
     </servlet>
 
+    <servlet-mapping>
+        <servlet-name>Upload</servlet-name>
+        <url-pattern>/Upload</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteArticle</servlet-name>
         <url-pattern>/single-article</url-pattern>
