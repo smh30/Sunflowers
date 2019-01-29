@@ -6,11 +6,54 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%--TODO: Write JS external file and pop in????--%>
 <html>
     <head>
-        <title>Title</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+        <title>Profile</title>
+            <script type ="text/javascript">
+            function switchImage() {
+            var image = document.getElementById("imageToSwap");
+            var dropdown = document.getElementById("dlist");
+            image.src = dropdown.value;
+            }
+        </script>
     </head>
     <body>
-        
+        <%@ include file="navbar.jsp" %>
+        <div class = "container-fluid">
+            <h1>User Account</h1>
+            <br>
+            <br>
+            <%--Adding form for uploading default user pic (the one the user sees when they click on the profile webpage)--%>
+            <%--TODO: upload x4 default pics; Below is the default user pic link --%>
+            <img id="imageToSwap" src="" width="225">
+
+            <div style=""margin-left; 250px>
+                <h4>Choose default picture: </h4>
+                <%--TODO: What servlet are we linking to here??--%>
+                <form action="" method="post" enctype="multipart/form-data">
+                    <select id="dlist" onchange="switchImage()">
+                        <%--TODO: upload x3 default pics OPTIONS below --%>
+                            <option value=""></option>
+                            <option value=""></option>
+                            <option value=""></option>
+                    </select>
+                    <h4>Choose your own picture to upload: </h4>
+                    <input type="file" name="userPicture" size="50"/>
+                    <br>
+                    <br>
+                    <input type="submit" value=uploadPic">
+                    <%--TODO: Make this webpage RESPONSIVE--%>
+                </form>
+            </div>
+        </div>
     </body>
 </html>
