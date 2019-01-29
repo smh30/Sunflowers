@@ -28,6 +28,9 @@
 <%@ include file="navbar.jsp" %>
 <div class="container">
 <%--display the articles as appropriate--%>
+<c:if test="${empty articles}">
+    <p>No articles found for your search parameters</p>
+</c:if>
 
     <c:forEach items="${articles}" var="article">
         <div class="article">
