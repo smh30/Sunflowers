@@ -8,15 +8,6 @@ public class Article implements Serializable {
     private User author;
     private String articleText;
     private Timestamp timestamp;
-
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
     private int ID;
     // this one will depend on how we implement the comments
     //todo getters and setters for comments once
@@ -55,5 +46,13 @@ public class Article implements Serializable {
 
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 }

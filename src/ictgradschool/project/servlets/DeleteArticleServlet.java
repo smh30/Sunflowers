@@ -16,16 +16,16 @@ public class DeleteArticleServlet extends HttpServlet {
         System.out.println("The deleting article servlet");
 
         String title = request.getParameter("title");
-        PrintWriter out = response.getWriter();
-        out.println("<h1>" + title + "</h1>");
 
         String content = request.getParameter("articleText");
-        PrintWriter out2 = response.getWriter();
-        out2.println(content);
+
+        String id = request.getParameter("articleID");
+
+
 
         String user = (String) request.getSession().getAttribute("username");
 
-        boolean articeDeleted = ArticleDAO.deleteArticle(title, content,  getServletContext());
+        boolean articeDeleted = ArticleDAO.deleteArticle(title, content, id ,getServletContext());
 
         if (!articeDeleted) {
             String message = "Some trouble with deleting your article. Please try again.";

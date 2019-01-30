@@ -40,6 +40,22 @@
                     <input type="hidden" name="articleID" value="${article.ID}">
                 <input type="submit" value="Delete Article">
                 </form>
+
+            </div>
+
+            <%--another form which posts to /addcomment
+            text field for writing comment
+            submit button--%>
+            <div class = "comments">
+                <div class="form-group">
+                    <form method="post" action="/addcomment">
+                        <input type="hidden" name="articleID" value="${article.ID}">
+                    <label for="comment">Comment:</label>
+                    <textarea class="form-control" name="comment"  rows="5" id="comment" placeholder="Comment here:"></textarea>
+                        <br>
+                    <input type="submit" value="Add Comment">
+                    </form>
+                </div>
             </div>
 
 

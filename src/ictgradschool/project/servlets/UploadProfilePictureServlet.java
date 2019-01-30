@@ -10,7 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-//TODO: find library on web for these
+
+import ictgradschool.project.DAOs.CustomProfilePicDAO;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -29,8 +30,7 @@ public class UploadProfilePictureServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         //Get the upload folder, ensure it exists
-        //TODO: add file path
-        this.uploadsFolder = new File(getServletContext().getRealPath("/Final-Project"));
+        this.uploadsFolder = new File(getServletContext().getRealPath("/Uploaded-Photos"));
         if(!uploadsFolder.exists()) {
             uploadsFolder.mkdirs();
         }
@@ -39,6 +39,7 @@ public class UploadProfilePictureServlet extends HttpServlet {
         if(!tempFolder.exists()) {
             tempFolder.mkdirs();
         }
+        System.out.println("init() done");
     }
 
     @Override
@@ -51,19 +52,38 @@ public class UploadProfilePictureServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
+        System.out.println("Print Writer set ");
+
         try{
             List<FileItem> fileItems = upload.parseRequest(request);
             File fullsizeImageFile = null;
-
+//
             for (FileItem fi: fileItems) {
-                if(!fi.isFormField()&&(fi.getContentType().equals("image/jpeg")|| fi.getContentType().equals("image/png"))) {
+//                if(!fi.isFormField()&&(fi.getContentType().equals("image/jpeg")|| fi.getContentType().equals("image/png"))) {
+                System.out.println("Reached FileItems list");
+                if(!fi.isFormField()){
+                    System.out.println("Reached if statement");
                     String fileName = fi.getName();
-                    fullsizeImageFile = new File(uploadsFolder, fileName);
+                    System.out.println(fileName);
+                    System.out.println("Gotten file name");
+                    String [] split = fileName.split("\\\\");
+                    String splited = split[split.length -1];
+                    fullsizeImageFile = new File(uploadsFolder, splited);
+                    System.out.println("Creating new file");
+                    //THE PROBLEM LINE
+                    System.out.println(fullsizeImageFile.toString());
                     fi.write(fullsizeImageFile);
+                    System.out.println("Written to file");
                 }
             }
-            //TODO: Complete line below
-            out.println("<img src = ");
+            out.println("<img src = ../Uploaded-Photos/" + fullsizeImageFile.getName()+ " " + "width\"200\">");
+            System.out.println("Getting uploaded photo");
+            String image = fullsizeImageFile.getName();
+            String user = (String) request.getSession().getAttribute("username");
+            CustomProfilePicDAO.addImage(image, user, getServletContext());
+
+
+
         } catch (Exception e) {
             throw new ServletException(e);
         }
@@ -71,21 +91,5 @@ public class UploadProfilePictureServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        ServletContext servletContext = getServletContext();
-        String fullPhotoPath = servletContext.getRealPath("/default-photos-for-profile-page");
-
-        File pFolder = new File(fullPhotoPath);
-        File[] photoList = pFolder.listFiles();
-
-        if (photoList.length < 1) {
-            System.out.println("No photos stored in folder.");
-        } else {
-            for (File aPhotoList : photoList) {
-                   //TODO: Go through and print out photos onto page?????
-            }
-        }
-
-        System.out.println("In the Upload Profile Picture Servlet, doGet");
-        request.getRequestDispatcher("webpages/profile.jsp").forward(request, response);
     }
 }

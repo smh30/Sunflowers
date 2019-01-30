@@ -17,12 +17,10 @@ public class AddArticleServlet extends HttpServlet {
         System.out.println("The adding article servlet");
 
         String title = request.getParameter("article_title");
-        PrintWriter out = response.getWriter();
-        out.println("<h1>" + title + "</h1>");
+
 
         String content = request.getParameter("article_content");
-        PrintWriter out2 = response.getWriter();
-        out2.println(content);
+
 
         String user = (String) request.getSession().getAttribute("username");
 

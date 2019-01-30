@@ -209,6 +209,7 @@ public class ArticleDAO {
 
                     article.setTitle(rs.getString(1));
                     User articleAuthor = new User(rs.getString(2));
+                    article.setID(rs.getInt(3));
                     article.setAuthor(articleAuthor);
                     article.setArticleText(rs.getString(4));
                     article.setTimestamp(rs.getTimestamp(5));
@@ -232,7 +233,7 @@ public class ArticleDAO {
         return article;
     }
 
-    public static boolean deleteArticle(String title, String content,  ServletContext context) {
+    public static boolean deleteArticle(String title, String content, String id, ServletContext context) {
         Properties dbProps = new Properties();
 
         /*Connect to your database and from the table created in Exercise Five and check to see if
@@ -256,11 +257,11 @@ public class ArticleDAO {
         try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
             System.out.println("connection successful");
 
-
+    //  TODO    deal the prolem with id stuff
             try (PreparedStatement s3 = conn.prepareStatement("INSERT INTO article(article_title,article_author , article_body)" +
                     "VALUES (?, ?, ?)")) {
                 s3.setString(1, title);
-                s3.setString(2, "deleted");
+                s3.setString(2, "__deleted__");
 
                 s3.setString(3, content);
 
