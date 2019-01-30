@@ -260,7 +260,7 @@ public class ArticleDAO {
     //  TODO    deal the prolem with id stuff
             //TODO: Create user called "delete"
             //TODO: Finish UPDATE query; SET article_author = delete;
-            try (PreparedStatement s3 = conn.prepareStatement("UPDATE article SET article_author = ? WHERE article_id = ?"))  {
+            try (PreparedStatement s3 = conn.prepareStatement("UPDATE article SET article_author = admindelete WHERE article_id = ?"))  {
                 s3.setString(1, title);
                 s3.setString(2, "__deleted__");
 
