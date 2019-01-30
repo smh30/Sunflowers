@@ -76,6 +76,8 @@ public class UploadProfilePictureServlet extends HttpServlet {
             }
             out.println("<img src = ../Uploaded-Photos/" + fullsizeImageFile.getName()+ " " + "width\"200\">");
             System.out.println("Getting uploaded photo");
+            String profilePicURL = request.getParameter("");
+
 
         } catch (Exception e) {
             throw new ServletException(e);

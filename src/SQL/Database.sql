@@ -13,6 +13,7 @@ password binary (64),
 country VARCHAR (20),
 real_name VARCHAR (50),
 description VARCHAR (100),
+image VARCHAR(80),
 PRIMARY KEY (username)
 );
 
@@ -55,8 +56,8 @@ VALUES ('Cats', 'y', 'Cats are cool'),
         ('Rats', 'y', 'Never again');
 
 INSERT INTO comments(comments_author, coments_body, article_id)
-VALUES  ( 'y', 'Ron you are so wrong', '2'),
-        ( 'y', 'Guys, please be quiet', '2'),
+VALUES  ('y', 'Ron you are so wrong', '2'),
+        ('y', 'Guys, please be quiet', '2'),
         ('y', 'Good call Ron!', '5'),
-        ( 'y', 'Little bit', '3'),
-        ( 'y', 'LOL you are so lucky bro', '4');
+        ('y', 'Little bit', '3'),
+        ('y', 'LOL you are so lucky bro', '4');
