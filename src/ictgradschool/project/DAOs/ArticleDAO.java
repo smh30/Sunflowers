@@ -233,7 +233,7 @@ public class ArticleDAO {
         return article;
     }
 
-    public static boolean deleteArticle(String title, String content, String id, ServletContext context) {
+    public static boolean deleteArticle(String username, String title, String content, String id, ServletContext context) {
         Properties dbProps = new Properties();
 
         /*Connect to your database and from the table created in Exercise Five and check to see if
@@ -260,9 +260,9 @@ public class ArticleDAO {
     //  TODO    deal the prolem with id stuff
             //TODO: Create user called "delete"
             //TODO: Finish UPDATE query; SET article_author = delete;
-            try (PreparedStatement s3 = conn.prepareStatement("UPDATE article SET article_author = admindelete WHERE article_id = ?"))  {
-                s3.setString(1, title);
-                s3.setString(2, "__deleted__");
+            try (PreparedStatement s3 = conn.prepareStatement("UPDATE article SET article_author ='admindelete' WHERE article_id = ?"))  {
+                //TODO: I think we need to pass author through the constructor and do the right order. Yun, I don't want to break your code!!! Yaz
+                s3.setString(1, username);
 
                 s3.execute();
 

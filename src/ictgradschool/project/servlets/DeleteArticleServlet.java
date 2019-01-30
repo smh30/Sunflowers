@@ -15,6 +15,8 @@ public class DeleteArticleServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("The deleting article servlet");
 
+        String username = request.getParameter("author");
+
         String title = request.getParameter("title");
 
         String content = request.getParameter("articleText");
@@ -25,7 +27,7 @@ public class DeleteArticleServlet extends HttpServlet {
 
         String user = (String) request.getSession().getAttribute("username");
 
-        boolean articeDeleted = ArticleDAO.deleteArticle(title, content, id ,getServletContext());
+        boolean articeDeleted = ArticleDAO.deleteArticle(username, title, content, id ,getServletContext());
 
         if (!articeDeleted) {
             String message = "Some trouble with deleting your article. Please try again.";
