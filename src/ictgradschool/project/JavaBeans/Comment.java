@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 public class Comment implements Serializable {
     private String  commentContent;
     private User commentAuthor;
+    private int articleId;
     private Timestamp timestamp;
 
     public String getCommentContent() {
@@ -22,6 +23,14 @@ public class Comment implements Serializable {
 
     public void setCommentAuthor(User commentAuthor) {
         this.commentAuthor = commentAuthor;
+    }
+
+    public int getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(int articleId) {
+        this.articleId = articleId;
     }
 
     public Timestamp getTimestamp() {

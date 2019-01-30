@@ -44,9 +44,27 @@
 
             </div>
 
+
+         <%-- show single comment under the article --%>
+            <c:if test="${empty articles}">
+
+            </c:if>
+
+            <c:forEach items="${comment}" var="comment">
+            <div class="comment">
+                    <%-- use a table to hold the comments --%>
+                <p>${comment.commentAuthor} :</p>
+
+                <p>${comment.commentContent}</p>
+
+                <input type="submit" value="Delete comment">
+            </div>
+            </c:forEach>
+
+
             <%--another form which posts to /addcomment
-            text field for writing comment
-            submit button--%>
+                     text field for writing comment
+                     submit button--%>
             <div class = "comments">
                 <div class="form-group">
                     <form method="post" action="/addcomment">
@@ -59,20 +77,6 @@
                 </div>
             </div>
 
-
-<%--<c:if test="${empty articles}">--%>
-    <%--<p>No articles found for your search parameters</p>--%>
-<%--</c:if>--%>
-
-<c:forEach items="${comments}" var="comment">
-    <div class="comment">
-    <p>${comment.commentAuthor} :</p>
-
-    <p>${comment.commentContent}</p>
-
-
-        </div>
-            </c:forEach>
 
     </body>
 </html>
