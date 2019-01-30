@@ -40,24 +40,41 @@
             <div style="margin-left: 250px">
                 <h4>Choose default picture: </h4>
                 <%--TODO: What servlet are we linking to here?? Will be for uploading own photo--%>
-                <form action="UploadProfilePictureServlet" method="post" enctype="multipart/form-data">
+                <form method="POST" action= "/Upload" enctype="multipart/form-data">
                     <select id="dlist" onchange="switchImage()">
                         <option value="../default-photos-for-profile-page/CloneTrooper.jpg">Clone Trooper</option>
                         <option value="../default-photos-for-profile-page/Jigglypuff.jpg">Jigglypuff</option>
                         <option value="../default-photos-for-profile-page/Yoda.jpg">Yoda</option>
                     </select>
                     <h4>Choose your own picture to upload: </h4>
-                    <input type="file" name="userPicture" size="50"/>
+                    <input type="file" id ="userPicture" name="userPicture" size="50" accept="image/png, image/jpeg">
                     <br>
                     <br>
                     <input type="submit" value="Upload">
                     <br>
                     <br>
 
-                    <%--TODO: Create forms for: username, password, country, real_name, description--%>
-
-                    <%--TODO: Make this webpage RESPONSIVE--%>
+                    <%--TODO: Create forms for: description--%>
+                    <label for="unameID">Username:</label>
+                    <input type="text" id="unameID" name="username">
+                    <br>
+                    <label for="pwordID">Password:</label>
+                    <input type="text" id="pwordID" name="password">
+                    <br>
+                    <label for="countryID">Country:</label>
+                    <input type="text" id="countryID" name="country">
+                    <br>
+                    <label for="rnameID">Real name:</label>
+                    <input type="text" id="rnameID" name="realname">
+                    <br>
                 </form>
+                <label for="profile_text"> About Text</label>
+                <textarea id="profile_text"
+                          name="profile_text_area"
+                          rows="4"
+                          cols="40">
+                </textarea>
+                <%--TODO: Make this webpage RESPONSIVE--%>
             </div>
         </div>
     </body>

@@ -28,8 +28,16 @@ public class GetArticlesServlet extends HttpServlet {
 
         List<Article> articleList = new ArrayList<>();
 
+        String author = request.getParameter("author");
+        String title = request.getParameter("title");
+        String date = request.getParameter("date");
+
+        System.out.println("author = " + author);
+        System.out.println("title = " + title);
+        System.out.println("date = " + date);
+
         // if looking for all the articles ie no search parameter were entered....
-        if((request.getParameter("author")==null)&&(request.getParameter("title")==null)&&(request.getParameter("date")==null)) {
+        if (author == null && title == null && date == null) {
 
             //articleList = ArticleDAO.getAllArticles(getServletContext());
             System.out.println("getting all articles");
@@ -37,16 +45,36 @@ public class GetArticlesServlet extends HttpServlet {
             articleList = ArticleDAO.getAllArticles(getServletContext());
 
 
-        } else {
-            // if search parameter were entered or user wants to see their own articles...
-            //todo search by other params (title/ date) and by combinations of params
-
-            String author = request.getParameter("author");
-            System.out.println("getting articles by " + author);
-
+        } else if(author!=null && title == null && date == null) {
+            System.out.println("getting articles  by logged in user " + author);
             articleList = ArticleDAO.getArticlesByAuthor(author, getServletContext());
-            // get articles by that author
-        }
+
+        }else  {
+                // if search parameter were entered or user wants to see their own articles...
+                //todo search by other params (title/ date) and by combinations of params
+                if (!author.equals("")) {
+                    if (!title.equals("")){
+                        System.out.println("getting articles by title and author :  " + title + author);
+                        articleList = ArticleDAO.getArticlesByTitleAndAuthor(title, author, getServletContext());
+                    } else {
+                        System.out.println("getting articles by " + author);
+                        articleList = ArticleDAO.getArticlesByAuthor(author, getServletContext());
+                        // get articles by that author
+                    }
+                }
+
+                if (!title.equals("")){
+                    System.out.println("getting articles by title:  " + title);
+                    articleList = ArticleDAO.getArticlesByTitle(title, getServletContext());
+                }
+
+                if (!date.equals("")){
+                    //search by datetime
+                }
+
+                // if (title != "")
+            }
+
 
         request.setAttribute("articles", articleList);
 

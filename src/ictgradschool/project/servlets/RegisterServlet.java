@@ -29,6 +29,7 @@ public class RegisterServlet extends HttpServlet {
         String realname = request.getParameter("realname");
         String country = request.getParameter("country");
         String date = request.getParameter("dob");
+        String description = request.getParameter("description");
 
         boolean userCreated = UserDAO.newUser(username, password, getServletContext());
         if (!userCreated){
@@ -38,7 +39,7 @@ public class RegisterServlet extends HttpServlet {
             request.getRequestDispatcher("web-pages/register.jsp").forward(request,
                     response);
         } else {
-
+request.setAttribute("new", true);
             request.getRequestDispatcher("login").forward(request, response);
         }
 

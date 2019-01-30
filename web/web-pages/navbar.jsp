@@ -19,8 +19,8 @@
         </div>
         <ul class="nav navbar-nav">
 
-            <li class="nav-item active"><a class="nav-link" href="home">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="web-pages/search.jsp">Search</a></li>
+            <li class="nav-item active"><a class="nav-link" href="/home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/web-pages/search.jsp">Search</a></li>
             <c:if test="${sessionScope.username == null}">
                 <!-- show only the login and register if nobody is logged in -->
                 <li class="dropdown">
@@ -50,10 +50,10 @@
             <c:if test="${sessionScope.username != null}">
             <!-- show the profile, 'look at your own entries' and logout only if logged in -->
 
-            <li class="nav-item"><a class="nav-link" href="web-pages/new-article.jsp">New Article</a> </li>
-            <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
-            <li class="nav-item"><a class="nav-link" href="?author=${sessionScope.username}">My Blog</a></li>
-            <li class="nav-item"><a class="nav-link" href="logout">Logout</a></li>
+            <li class="nav-item"><a class="nav-link" href="/web-pages/new-article.jsp">New Article</a> </li>
+            <li class="nav-item"><a class="nav-link" href="/web-pages/profile.jsp">Profile</a></li>
+            <li class="nav-item"><a class="nav-link" href="/home/?author=${sessionScope.username}">My Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="navbar-text">welcome, ${sessionScope.username}</li>
