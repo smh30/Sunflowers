@@ -58,7 +58,18 @@
                 </div>
             </div>
 
+<%--<c:if test="${empty articles}">--%>
+    <%--<p>No articles found for your search parameters</p>--%>
+<%--</c:if>--%>
+
+<c:forEach items="${comments}" var="comment">
+    <div class="comment">
+    <p>${comment.commentAuthor} :</p>
+
+    <p>${comment.commentContent}</p>
+
         </div>
+            </c:forEach>
 
     </body>
 </html>

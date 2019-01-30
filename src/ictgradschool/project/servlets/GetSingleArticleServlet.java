@@ -1,7 +1,9 @@
 package ictgradschool.project.servlets;
 
 import ictgradschool.project.DAOs.ArticleDAO;
+import ictgradschool.project.DAOs.CommentDAO;
 import ictgradschool.project.JavaBeans.Article;
+import ictgradschool.project.JavaBeans.Comment;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,9 +29,23 @@ public class GetSingleArticleServlet extends HttpServlet {
         // get articles by that author
 
 
+        // a list of comments
+        //(articleId )
+        //set attribute
+        //
+
+
+
+
+
+
         request.setAttribute("article", article);
 
         request.getRequestDispatcher("web-pages/single-article.jsp").forward(request, response);
+
+
+
+
     }
 
 
