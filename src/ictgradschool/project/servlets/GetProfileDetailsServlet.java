@@ -10,7 +10,8 @@ import java.io.IOException;
 @WebServlet(name = "GetProfileDetailsServlet")
 public class GetProfileDetailsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        // this is basically to create the homepage
+        // should it be renamed 'homepageservlet??'
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
