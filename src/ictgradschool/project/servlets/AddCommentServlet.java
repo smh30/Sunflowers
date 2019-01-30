@@ -30,7 +30,8 @@ public class AddCommentServlet extends HttpServlet {
             String message = "Some trouble with adding your comment. Please try again.";
             request.setAttribute("message",message);
 
-            request.getRequestDispatcher("web-pages/single-article.jsp").forward(request,response);
+            request.getRequestDispatcher("article?id="+Integer.parseInt(ArticleId)).forward(request,response);
+
 
 
         }else{

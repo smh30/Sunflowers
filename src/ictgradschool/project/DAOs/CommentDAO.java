@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 public class CommentDAO {
-    public static List<Comment> getAllComments(ServletContext context) {
+    public static List<Comment> getAllComments(int articleId, ServletContext context) {
         List<Comment> comments = new ArrayList<>();
 
         Properties dbProps = new Properties();
@@ -37,8 +37,8 @@ public class CommentDAO {
             System.out.println("connection successful");
             // select the most recent 6 from the articles table??? ordered by timestamp:
             //todo will this bring newest first or oldest first???
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM ysy.comments ORDER BY article_timestamp DESC LIMIT 6")) {
-                //stmt.setString(1, username);
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM ysy.comments WHERE article_id =? ORDER BY comments_timestamp ")) {
+                stmt.setInt(1, articleId);
                 ResultSet rs = stmt.executeQuery();
 
                 while (rs.next()) {
