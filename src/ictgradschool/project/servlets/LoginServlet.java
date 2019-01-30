@@ -38,9 +38,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession(true);
             session.setAttribute("username", username);
             //todo yet another place where i'm not sure what redirect to use
-            String newUser = (String)request.getAttribute("new");
-
-            if(newUser != null){
+            if (request.getAttribute("new")!= null) {
                 System.out.println("logged in new user, attemting redirect to profile edit");
 
                 //todo change this to redirect to edit profile server once it's wired up
