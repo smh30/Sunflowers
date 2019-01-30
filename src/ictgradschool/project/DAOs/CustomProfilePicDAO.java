@@ -28,7 +28,7 @@ public class CustomProfilePicDAO {
         }
         try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
             System.out.println("connection successful");
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE profilePicURL= ?")) {
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE image= ?")) {
                 stmt.setString(1, profilePicURL);
                 try (ResultSet r = stmt.executeQuery()) {
                     if (r.next()) {
