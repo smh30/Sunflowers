@@ -49,10 +49,23 @@ public class GetArticlesServlet extends HttpServlet {
             // if search parameter were entered or user wants to see their own articles...
             //todo search by other params (title/ date) and by combinations of params
             if (!author.equals("")) {
-                author = request.getParameter("author");
-                System.out.println("getting articles by " + author);
-                articleList = ArticleDAO.getArticlesByAuthor(author, getServletContext());
-                // get articles by that author
+                if (!title.equals("")){
+                    System.out.println("getting articles by title and author :  " + title + author);
+                    articleList = ArticleDAO.getArticlesByTitleAndAuthor(title, author, getServletContext());
+                } else {
+                    System.out.println("getting articles by " + author);
+                    articleList = ArticleDAO.getArticlesByAuthor(author, getServletContext());
+                    // get articles by that author
+                }
+            }
+
+            if (!title.equals("")){
+                System.out.println("getting articles by title:  " + title);
+                articleList = ArticleDAO.getArticlesByTitle(title, getServletContext());
+            }
+
+            if (!date.equals("")){
+                //search by datetime
             }
 
            // if (title != "")

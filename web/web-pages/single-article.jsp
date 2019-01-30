@@ -31,13 +31,13 @@
 
                 <%--todo --%>
                 <form method="post" action=#>
-                    <input type="hidden" name="articleID" value="${article.getID}">
-                    ${article.getID}
+                    <input type="hidden" name="articleID" value="${article.ID}">
                 <input type="submit" value="Edit Article">
                 </form>
 
 
                 <form method="post" action="#">
+                    <input type="hidden" name="articleID" value="${article.ID}">
                 <input type="submit" value="Delete Article">
                 </form>
             </div>

@@ -34,8 +34,9 @@
 
     <c:forEach items="${articles}" var="article">
         <div class="article">
-        <h2>${article.title}</h2>
+            <h2><a href="/article?id=${article.ID}">${article.title}</a></h2>
             <%--todo make the 'author' link or popup the user info box/page--%>
+
         <p>Author: ${article.author.username}</p>
         <p>${article.timestamp}</p>
         <p>${article.articleText}</p>
