@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+
+import ictgradschool.project.DAOs.CustomProfilePicDAO;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -76,7 +78,10 @@ public class UploadProfilePictureServlet extends HttpServlet {
             }
             out.println("<img src = ../Uploaded-Photos/" + fullsizeImageFile.getName()+ " " + "width\"200\">");
             System.out.println("Getting uploaded photo");
-            String profilePicURL = request.getParameter("");
+            String image = fullsizeImageFile.getName();
+            String user = (String) request.getSession().getAttribute("username");
+            CustomProfilePicDAO.addImage(image, user, getServletContext());
+
 
 
         } catch (Exception e) {

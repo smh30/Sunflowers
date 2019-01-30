@@ -61,3 +61,5 @@ VALUES  ('y', 'Ron you are so wrong', '2'),
         ('y', 'Good call Ron!', '5'),
         ('y', 'Little bit', '3'),
         ('y', 'LOL you are so lucky bro', '4');
+
+ALTER TABLE user ADD COLUMN image varchar(80);
