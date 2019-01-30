@@ -233,7 +233,7 @@ public class ArticleDAO {
         return article;
     }
 
-    public static boolean deleteArticle(String title, String content, String id, ServletContext context) {
+    public static boolean deleteArticle(String username, String title, String content, String id, ServletContext context) {
         Properties dbProps = new Properties();
 
         /*Connect to your database and from the table created in Exercise Five and check to see if
@@ -258,6 +258,8 @@ public class ArticleDAO {
             System.out.println("connection successful");
 
     //  TODO    deal the prolem with id stuff
+            //TODO: Create user called "delete"
+            //TODO: Finish UPDATE query; SET article_author = delete;
 
                 //TODO: Create user called "delete"
                 //TODO: Finish UPDATE query; SET article_author = delete;
