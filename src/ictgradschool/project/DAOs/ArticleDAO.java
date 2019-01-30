@@ -47,6 +47,7 @@ public class ArticleDAO {
                     //todo uncomment these once database is ready
                     Article article = new Article();
                     article.setTitle(rs.getString(1));
+                    article.setID(rs.getInt(3));
                     article.setArticleText(rs.getString(4));
                     article.setTimestamp(rs.getTimestamp(5));
                     User articleAuthor = new User(rs.getString(2));
@@ -89,8 +90,11 @@ public class ArticleDAO {
             System.out.println("connection successful");
             // select the most recent 6 the articles table??? ordered by timestamp with certain author:
             //todo will this bring newest first or oldest first???
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author = ? ORDER BY article_timestamp DESC LIMIT 6")) {
-                stmt.setString(1, author);
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author LIKE ? ORDER BY article_timestamp DESC LIMIT 6")) {
+               //todo some sort of boolean that says wheter we've come here from a user looking for their own articles (ie shouldn't be fuzzy search in that case)
+
+
+                stmt.setString(1, "%" + author + "%");
                 ResultSet rs = stmt.executeQuery();
 
                 while (rs.next()) {
@@ -100,6 +104,7 @@ public class ArticleDAO {
                     //didn't get the id??
                     Article article = new Article();
                     article.setTitle(rs.getString(1));
+                    article.setID(rs.getInt(3));
                     article.setArticleText(rs.getString(4));
                     article.setTimestamp(rs.getTimestamp(5));
                     User articleAuthor = new User(rs.getString(2));
@@ -204,9 +209,11 @@ public class ArticleDAO {
 
                     article.setTitle(rs.getString(1));
                     User articleAuthor = new User(rs.getString(2));
+                    article.setID(rs.getInt(3));
                     article.setAuthor(articleAuthor);
                     article.setArticleText(rs.getString(4));
                     article.setTimestamp(rs.getTimestamp(5));
+                    article.setID(rs.getInt(3));
 
 
                 }
@@ -226,7 +233,166 @@ public class ArticleDAO {
         return article;
     }
 
-    public static boolean deleteArticle(String title, String content,  ServletContext context) {
+    public static boolean deleteArticle(String title, String content, String id, ServletContext context) {
+        Properties dbProps = new Properties();
+
+        /*Connect to your database and from the table created in Exercise Five and check to see if
+        a record with the specified username already exists in the table.*/
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        dbProps = new Properties();
+
+        try (FileInputStream fIn = new FileInputStream(context.getRealPath("WEB-INF/mysql.properties"))) {
+            dbProps.load(fIn);
+        } catch (IOException e) {
+            System.out.println("couldn't find the properties file???????");
+            e.printStackTrace();
+        }
+
+        try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+            System.out.println("connection successful");
+
+    //  TODO    deal the prolem with id stuff
+            try (PreparedStatement s3 = conn.prepareStatement("INSERT INTO article(article_title,article_author , article_body)" +
+                    "VALUES (?, ?, ?)")) {
+                s3.setString(1, title);
+                s3.setString(2, "__deleted__");
+
+                s3.setString(3, content);
+
+
+                s3.execute();
+
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+
+    }
+
+    public static List<Article> getArticlesByTitle(String title, ServletContext context) {
+        List<Article> articles = new ArrayList<>();
+        Properties dbProps = new Properties();
+
+        /*Connect to your database and from the table created in Exercise Five and check to see if
+        a record with the specified username already exists in the table.*/
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        dbProps = new Properties();
+
+        try (FileInputStream fIn = new FileInputStream(context.getRealPath("WEB-INF/mysql.properties"))) {
+            dbProps.load(fIn);
+        } catch (IOException e) {
+            System.out.println("couldn't find the properties file???????");
+            e.printStackTrace();
+        }
+
+        try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+            System.out.println("connection successful");
+            // select the most recent 6 the articles table??? ordered by timestamp with certain author:
+            //todo will this bring newest first or oldest first???
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? ORDER BY article_timestamp DESC LIMIT 6")) {
+                stmt.setString(1, "%" + title + "%");
+                ResultSet rs = stmt.executeQuery();
+
+                while (rs.next()) {
+
+                    Article article = new Article();
+                    article.setTitle(rs.getString(1));
+                    article.setID(rs.getInt(3));
+                    article.setArticleText(rs.getString(4));
+                    article.setTimestamp(rs.getTimestamp(5));
+                    User articleAuthor = new User(rs.getString(2));
+                    article.setAuthor(articleAuthor);
+
+
+                    articles.add(article);
+                }
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return articles;
+    }
+
+    public static List<Article> getArticlesByTitleAndAuthor(String title, String author, ServletContext context) {
+        List<Article> articles = new ArrayList<>();
+        Properties dbProps = new Properties();
+
+        /*Connect to your database and from the table created in Exercise Five and check to see if
+        a record with the specified username already exists in the table.*/
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        dbProps = new Properties();
+
+        try (FileInputStream fIn = new FileInputStream(context.getRealPath("WEB-INF/mysql.properties"))) {
+            dbProps.load(fIn);
+        } catch (IOException e) {
+            System.out.println("couldn't find the properties file???????");
+            e.printStackTrace();
+        }
+
+        try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+            System.out.println("connection successful");
+            // select the most recent 6 the articles table??? ordered by timestamp with certain author:
+            //todo will this bring newest first or oldest first???
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND article_author LIKE ? ORDER BY article_timestamp DESC LIMIT 6")) {
+                stmt.setString(1, "%" + title + "%");
+                stmt.setString(2, "%" + author + "%");
+                ResultSet rs = stmt.executeQuery();
+
+                while (rs.next()) {
+
+                    Article article = new Article();
+                    article.setTitle(rs.getString(1));
+                    article.setID(rs.getInt(3));
+                    article.setArticleText(rs.getString(4));
+                    article.setTimestamp(rs.getTimestamp(5));
+                    User articleAuthor = new User(rs.getString(2));
+                    article.setAuthor(articleAuthor);
+
+
+                    articles.add(article);
+                }
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return articles;
+    }
+
+    public static Article getArticleByID(int id, ServletContext context) {
+        Article article = new Article();
         Properties dbProps = new Properties();
 
         /*Connect to your database and from the table created in Exercise Five and check to see if
@@ -251,30 +417,34 @@ public class ArticleDAO {
             System.out.println("connection successful");
 
 
-            try (PreparedStatement s3 = conn.prepareStatement("INSERT INTO article(article_title,article_author , article_body)" +
-                    "VALUES (?, ?, ?)")) {
-                s3.setString(1, title);
-                s3.setString(2, "deleted");
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_id = ?")) {
+                stmt.setInt(1, id);
+                ResultSet rs = stmt.executeQuery();
 
-                s3.setString(3, content);
+                while (rs.next()) {
+System.out.println("title = "+ rs.getString(1));
+                    article.setTitle(rs.getString(1));
+                    User articleAuthor = new User(rs.getString(2));
+                    article.setAuthor(articleAuthor);
+                    article.setArticleText(rs.getString(4));
+                    article.setTimestamp(rs.getTimestamp(5));
+                    article.setID(rs.getInt(3));
 
 
-                s3.execute();
-
+                }
 
             } catch (SQLException e) {
                 e.printStackTrace();
-                return false;
+
             }
 
 
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
+
         }
 
-        return true;
 
+        return article;
     }
-
 }

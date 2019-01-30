@@ -99,9 +99,20 @@
         <servlet-name>Upload</servlet-name>
         <url-pattern>/Upload</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>DeleteArticle</servlet-name>
         <url-pattern>/single-article</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddComment</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.AddCommentServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AddComment</servlet-name>
+        <url-pattern>/addcomment</url-pattern>
     </servlet-mapping>
 
 
