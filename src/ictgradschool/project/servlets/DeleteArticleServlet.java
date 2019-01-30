@@ -17,15 +17,15 @@ public class DeleteArticleServlet extends HttpServlet {
 
         String title = request.getParameter("title");
 
-
-
         String content = request.getParameter("articleText");
+
+        String id = request.getParameter("articleID");
 
 
 
         String user = (String) request.getSession().getAttribute("username");
 
-        boolean articeDeleted = ArticleDAO.deleteArticle(title, content,  getServletContext());
+        boolean articeDeleted = ArticleDAO.deleteArticle(title, content, id ,getServletContext());
 
         if (!articeDeleted) {
             String message = "Some trouble with deleting your article. Please try again.";
