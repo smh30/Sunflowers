@@ -35,6 +35,20 @@ public class GetSingleArticleServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("in the single article doget");
+        String param = (request.getParameter("id"));
+        System.out.println("get param = " + param);
+int articleID = Integer.parseInt(request.getParameter("id"));
+
+
+        Article article = new Article();
+
+        article = ArticleDAO.getArticleByID(articleID, getServletContext());
+        // get articles by that author
+
+        request.setAttribute("article", article);
+
+        request.getRequestDispatcher("web-pages/single-article.jsp").forward(request, response);
 
     }
 }
