@@ -26,7 +26,7 @@ public class EditProfileServlet extends HttpServlet {
         //Send to database
 
         //Update DAO method
-        
+
         request.getRequestDispatcher("/profile").forward(request,response);
     }
 
