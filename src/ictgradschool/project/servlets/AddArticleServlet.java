@@ -1,6 +1,7 @@
 package ictgradschool.project.servlets;
 
 import ictgradschool.project.DAOs.ArticleDAO;
+import ictgradschool.project.JavaBeans.Article;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,9 +25,9 @@ public class AddArticleServlet extends HttpServlet {
 
         String user = (String) request.getSession().getAttribute("username");
 
-        boolean articeCreated = ArticleDAO.newArticle(title,content,user,getServletContext());
+        Article newArticle = ArticleDAO.newArticle(title,content,user,getServletContext());
 
-        if(!articeCreated){
+        if(newArticle == null){
             System.out.println("article not created??");
             String message = "Some trouble with uploading your article. Please try again.";
             request.setAttribute("message",message);
@@ -36,6 +37,11 @@ public class AddArticleServlet extends HttpServlet {
 
         }else{
             System.out.println("article created!!!!!!!");
+            request.setAttribute("new", true);
+            request.setAttribute("article", newArticle);
+            int id = newArticle.getID();
+            System.out.println("new aartic's id" + id);
+            request.setAttribute("articleID", id);
             // TODO to finish the single-article.jsp. It is the page after user submit their new article.  add attribute
             request.getRequestDispatcher("/article").forward(request,response);
         }
