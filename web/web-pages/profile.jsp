@@ -47,7 +47,7 @@
                         <option value="../default-photos-for-profile-page/Yoda.jpg">Yoda</option>
                     </select>
                     <h4>Choose your own picture to upload: </h4>
-                    <input type="file" name="userPicture" size="50"/>
+                    <input type="file" id ="userPicture" name="userPicture" size="50" accept="image/png, image/jpeg">
                     <br>
                     <br>
                     <input type="submit" value="Upload">
@@ -73,11 +73,8 @@
                           name="profile_text_area"
                           rows="4"
                           cols="40">
-
                 </textarea>
-
                 <%--TODO: Make this webpage RESPONSIVE--%>
-
             </div>
         </div>
     </body>
