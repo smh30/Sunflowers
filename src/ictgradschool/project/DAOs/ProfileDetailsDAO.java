@@ -1,16 +1,20 @@
 package ictgradschool.project.DAOs;
 
-import javax.servlet.ServletContext;
+
+import ictgradschool.project.JavaBeans.User;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 import java.sql.*;
+import javax.servlet.ServletContext;
 
 
 public class ProfileDetailsDAO {
-    public String checkDetails(String username, int password, String country, String realName, String desc) {
-        Properties dbProps = new Properties();
 
+    public User checkDetails(String username, int password, String country, String realName, String desc, ServletContext context) {
+        Properties dbProps = new Properties();
+        User user = new User();
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (Exception e) {
@@ -26,20 +30,27 @@ public class ProfileDetailsDAO {
         }
         try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
             System.out.println("connection successful");
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE username= ? AND password = ? AND country=? AND real_name = ? AND description = ?")) {
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE username= ?")) {
                 stmt.setString(1, username);
-                stmt.setInt(2, password);
-                stmt.setString(3, country);
-                stmt.setString(4, realName);
-                stmt.setString(5, desc);
                 try (ResultSet r = stmt.executeQuery()) {
                     if (r.next()) {
                         //todo see if these are working
+                        //
                         String USERNAME = r.getString(4);
                         int PASSWORD = r.getInt(5);
                         String COUNTRY = r.getString(6);
                         String REALNAME= r.getString(7);
                         String DESC= r.getString(8);
+                        String DOB= r.getString(3);
+                        String IMAGEURL = r.getString(9);
+
+
+                        user.setUsername(USERNAME);
+                        user.setCountry(COUNTRY);
+                        user.setRealName(REALNAME);
+                        user.setDescription(DESC);
+                        user.setDOB(DOB);
+                        user.setPictureURL(IMAGEURL);
                     }
             }
 
@@ -49,7 +60,7 @@ public class ProfileDetailsDAO {
     } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return user;
     }
 
 }
