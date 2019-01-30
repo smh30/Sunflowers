@@ -5,6 +5,7 @@
   Time: 3:17 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
@@ -59,7 +60,19 @@
             </div>
 
 
+<%--<c:if test="${empty articles}">--%>
+    <%--<p>No articles found for your search parameters</p>--%>
+<%--</c:if>--%>
+
+<c:forEach items="${comments}" var="comment">
+    <div class="comment">
+    <p>${comment.commentAuthor} :</p>
+
+    <p>${comment.commentContent}</p>
+
+
         </div>
+            </c:forEach>
 
     </body>
 </html>

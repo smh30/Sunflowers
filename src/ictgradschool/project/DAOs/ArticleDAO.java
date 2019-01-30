@@ -258,18 +258,19 @@ public class ArticleDAO {
             System.out.println("connection successful");
 
     //  TODO    deal the prolem with id stuff
-            //TODO: Create user called "delete"
-            //TODO: Finish UPDATE query; SET article_author = delete;
-            try (PreparedStatement s3 = conn.prepareStatement("UPDATE article SET article_author = admindelete WHERE article_id = ?"))  {
-                s3.setString(1, title);
-                s3.setString(2, "__deleted__");
 
-                s3.execute();
+                //TODO: Create user called "delete"
+                //TODO: Finish UPDATE query; SET article_author = delete;
+                try (PreparedStatement s3 = conn.prepareStatement("UPDATE article SET article_author = ? WHERE article_id = ?")) {
+                    s3.setString(1, title);
+                    s3.setString(2, "deleted");
 
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return false;
-            }
+                    s3.execute();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return false;
+                }
 
 
         } catch (SQLException e) {
