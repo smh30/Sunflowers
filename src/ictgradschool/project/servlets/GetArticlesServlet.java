@@ -31,23 +31,31 @@ public class GetArticlesServlet extends HttpServlet {
         String author = request.getParameter("author");
         String title = request.getParameter("title");
         String date = request.getParameter("date");
+        int offset = 0;
+        try {
+            offset = Integer.parseInt(request.getParameter("back"));
+        } catch (NumberFormatException e){
+            System.out.println("no offset supplied:" + e);
+        }
 
         System.out.println("author = " + author);
         System.out.println("title = " + title);
         System.out.println("date = " + date);
 
+
         // if looking for all the articles ie no search parameter were entered....
         if (author == null && title == null && date == null) {
 
             //articleList = ArticleDAO.getAllArticles(getServletContext());
-            System.out.println("getting all articles");
+            System.out.println("getting all articles from offset " + offset);
 
-            articleList = ArticleDAO.getAllArticles(getServletContext());
+            articleList = ArticleDAO.getAllArticles(offset, getServletContext());
 
 
         } else if(author!=null && title == null && date == null) {
+            //todo fix unfuzzy search for loogged in / fuzzy for search function
             System.out.println("getting articles  by logged in user " + author);
-            articleList = ArticleDAO.getArticlesByAuthor(author, getServletContext());
+            articleList = ArticleDAO.getArticlesByAuthor(offset, author, getServletContext());
 
         }else  {
                 // if search parameter were entered or user wants to see their own articles...
@@ -55,17 +63,17 @@ public class GetArticlesServlet extends HttpServlet {
                 if (!author.equals("")) {
                     if (!title.equals("")){
                         System.out.println("getting articles by title and author :  " + title + author);
-                        articleList = ArticleDAO.getArticlesByTitleAndAuthor(title, author, getServletContext());
+                        articleList = ArticleDAO.getArticlesByTitleAndAuthor(offset, title, author, getServletContext());
                     } else {
                         System.out.println("getting articles by " + author);
-                        articleList = ArticleDAO.getArticlesByAuthor(author, getServletContext());
+                        articleList = ArticleDAO.getArticlesByAuthor(offset, author, getServletContext());
                         // get articles by that author
                     }
                 }
 
                 if (!title.equals("")){
                     System.out.println("getting articles by title:  " + title);
-                    articleList = ArticleDAO.getArticlesByTitle(title, getServletContext());
+                    articleList = ArticleDAO.getArticlesByTitle(offset, title, getServletContext());
                 }
 
                 if (!date.equals("")){
