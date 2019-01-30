@@ -2,3 +2,5 @@
 *.iml
 out/*
 mysql.properties
+output/*
+lib/*
