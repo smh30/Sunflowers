@@ -17,18 +17,27 @@ import java.util.List;
 @WebServlet(name = "GetSingleArticleServlet")
 public class GetSingleArticleServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("in the single article servlet");
+        System.out.println("in the single article servlet post");
+        System.out.println("id param = " + request.getAttribute("articleID"));
+        int articleID= 0;
 
         Article article = new Article();
 
-        String currentUser = (String)(request.getSession().getAttribute("username"));
-        // String author = request.getParameter("author");
-        System.out.println("getting newest article by " + currentUser);
+        if(request.getAttribute("new")!=null){
+            //if we have reached this page from creating a new article...
+            System.out.println("came from a new article");
+            articleID = Integer.parseInt(request.getAttribute("articleID").toString());
 
-        article = ArticleDAO.getSingleArticle(currentUser, getServletContext());
+
+        } else {
+            // if we have reached this page from clicking an article link in the main page or from adding a commnt
+            System.out.println("came from a link");
+            articleID = Integer.parseInt(request.getAttribute("articleID").toString());
+        }
+
+        System.out.println("article id is = " + articleID);
+        article = ArticleDAO.getSingleArticle(articleID, getServletContext());
         // get articles by that author
-
-
 
         List<Comment> comment = new ArrayList<Comment>();
 
@@ -55,9 +64,9 @@ public class GetSingleArticleServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("in the single article doget");
-        String param = (request.getParameter("id"));
+        String param = (request.getParameter("articleID"));
         System.out.println("get param = " + param);
-int articleID = Integer.parseInt(request.getParameter("id"));
+int articleID = Integer.parseInt(request.getParameter("articleID"));
 
 
         Article article = new Article();
