@@ -14,7 +14,7 @@ import java.util.Properties;
 
 public class ArticleDAO {
 
-    public static List<Article> getAllArticles(ServletContext context) {
+    public static List<Article> getAllArticles(int offset, ServletContext context) {
         List<Article> articles = new ArrayList<>();
 
         Properties dbProps = new Properties();
@@ -38,8 +38,8 @@ public class ArticleDAO {
             System.out.println("connection successful");
             // select the most recent 6 from the articles table??? ordered by timestamp:
             //todo will this bring newest first or oldest first???
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article ORDER BY article_timestamp DESC LIMIT 6")) {
-                //stmt.setString(1, username);
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article ORDER BY article_timestamp DESC LIMIT 10 OFFSET ?")) {
+                stmt.setInt(1, offset);
                 ResultSet rs = stmt.executeQuery();
 
                 while (rs.next()) {
@@ -64,7 +64,7 @@ public class ArticleDAO {
         return articles;
     }
 
-    public static List<Article> getArticlesByAuthor(String author, ServletContext context) {
+    public static List<Article> getArticlesByAuthor(int offset, String author, ServletContext context) {
         List<Article> articles = new ArrayList<>();
         Properties dbProps = new Properties();
 
@@ -90,11 +90,12 @@ public class ArticleDAO {
             System.out.println("connection successful");
             // select the most recent 6 the articles table??? ordered by timestamp with certain author:
             //todo will this bring newest first or oldest first???
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author LIKE ? ORDER BY article_timestamp DESC LIMIT 6")) {
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author LIKE ? ORDER BY article_timestamp DESC LIMIT 10 OFFSET ?")) {
                //todo some sort of boolean that says wheter we've come here from a user looking for their own articles (ie shouldn't be fuzzy search in that case)
 
 
                 stmt.setString(1, "%" + author + "%");
+                stmt.setInt(2, offset);
                 ResultSet rs = stmt.executeQuery();
 
                 while (rs.next()) {
@@ -284,7 +285,7 @@ public class ArticleDAO {
 
     }
 
-    public static List<Article> getArticlesByTitle(String title, ServletContext context) {
+    public static List<Article> getArticlesByTitle(int offset, String title, ServletContext context) {
         List<Article> articles = new ArrayList<>();
         Properties dbProps = new Properties();
 
@@ -310,8 +311,9 @@ public class ArticleDAO {
             System.out.println("connection successful");
             // select the most recent 6 the articles table??? ordered by timestamp with certain author:
             //todo will this bring newest first or oldest first???
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? ORDER BY article_timestamp DESC LIMIT 6")) {
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? ORDER BY article_timestamp DESC  LIMIT 10 OFFSET ?")) {
                 stmt.setString(1, "%" + title + "%");
+                stmt.setInt(2, offset);
                 ResultSet rs = stmt.executeQuery();
 
                 while (rs.next()) {
@@ -337,7 +339,7 @@ public class ArticleDAO {
         return articles;
     }
 
-    public static List<Article> getArticlesByTitleAndAuthor(String title, String author, ServletContext context) {
+    public static List<Article> getArticlesByTitleAndAuthor(int offset, String title, String author, ServletContext context) {
         List<Article> articles = new ArrayList<>();
         Properties dbProps = new Properties();
 
@@ -363,9 +365,10 @@ public class ArticleDAO {
             System.out.println("connection successful");
             // select the most recent 6 the articles table??? ordered by timestamp with certain author:
             //todo will this bring newest first or oldest first???
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND article_author LIKE ? ORDER BY article_timestamp DESC LIMIT 6")) {
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND article_author LIKE ? ORDER BY article_timestamp DESC  LIMIT 10 OFFSET ?")) {
                 stmt.setString(1, "%" + title + "%");
                 stmt.setString(2, "%" + author + "%");
+                stmt.setInt(3, offset);
                 ResultSet rs = stmt.executeQuery();
 
                 while (rs.next()) {
