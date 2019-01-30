@@ -12,10 +12,22 @@ public class EditProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //TODO: if do post, actually filled in/change in form
         //get parameters in forms
-        //Have look at over form
-        //Send to database
-        //Update DAO method
+        //Check if set to database variables or form variables
 
+        String username = request.getParameter("username");
+        String country = request.getParameter("country");
+        String realName = request.getParameter("real_name");
+        String description = request.getParameter("description");
+        String dateOfBirth = request.getParameter("date_of_birth");
+        String pictureURL = request.getParameter("image");
+
+        //Have look at over form
+
+        //Send to database
+
+        //Update DAO method
+        
+        request.getRequestDispatcher("/profile").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
