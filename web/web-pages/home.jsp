@@ -34,6 +34,7 @@
 
     <c:forEach items="${articles}" var="article">
         <div class="article">
+            <%--todo what to do if the article doesn't have a title? or should we make title compulsory??--%>
             <h2><a href="/article?id=${article.ID}">${article.title}</a></h2>
             <%--todo make the 'author' link or popup the user info box/page--%>
 
@@ -46,6 +47,25 @@
 
 
     </c:forEach>
+
+
+    <%--todo see if this can be done with jstl/el instead for correctness' sake--%>
+    <%
+        String getURL=request.getQueryString();
+        String param = request.getParameter("back");
+    %>
+    <p>Url = <%=getURL%></p>
+    <p>Back = <%=param%></p>
+
+    <% int back = 0;
+    if (param!= null) {
+        back = Integer.parseInt(param);
+    }
+    back += 10;
+    %>
+
+    <%--todo get this so it works in search resuls as well (ie with other params)--%>
+    <a href="?back=<%=back%>">older articles</a>
 
 
 </div>
