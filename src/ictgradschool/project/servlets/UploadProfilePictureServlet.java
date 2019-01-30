@@ -62,19 +62,21 @@ public class UploadProfilePictureServlet extends HttpServlet {
                 if(!fi.isFormField()){
                     System.out.println("Reached if statement");
                     String fileName = fi.getName();
+                    System.out.println(fileName);
                     System.out.println("Gotten file name");
-                    fullsizeImageFile = new File(uploadsFolder, fileName);
+                    String [] split = fileName.split("\\\\");
+                    String splited = split[split.length -1];
+                    fullsizeImageFile = new File(uploadsFolder, splited);
                     System.out.println("Creating new file");
                     //THE PROBLEM LINE
                     System.out.println(fullsizeImageFile.toString());
                     fi.write(fullsizeImageFile);
                     System.out.println("Written to file");
                 }
-                out.println("folder: " + fullsizeImageFile.toString());
-                out.println("<img src = ../Uploaded-Photos/" + fullsizeImageFile.getName()+ " " + "width\"200\">");
-                System.out.println("Getting uploaded photo");
             }
-
+            out.println("<img src = ../Uploaded-Photos/" + fullsizeImageFile.getName()+ " " + "width\"200\">");
+            System.out.println("Getting uploaded photo");
+            
         } catch (Exception e) {
             throw new ServletException(e);
         }
