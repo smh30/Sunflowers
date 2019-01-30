@@ -68,12 +68,21 @@
                     <input type="text" id="rnameID" name="realname">
                     <br>
                 </form>
+
+                <%--TODO: Link this up to a servlet--%>
+                <input type="submit" value="submit">
+
+
                 <label for="profile_text"> About Text</label>
                 <textarea id="profile_text"
                           name="profile_text_area"
                           rows="4"
                           cols="40">
                 </textarea>
+                <br>
+                <br>
+                <%--TODO: Link this up to a servlet--%>
+                <input type="submit" value="submit">
                 <%--TODO: Make this webpage RESPONSIVE--%>
             </div>
         </div>
