@@ -21,7 +21,7 @@ public class DeleteArticleServlet extends HttpServlet {
 
         String content = request.getParameter("articleText");
 
-        String id = request.getParameter("articleID");
+        int id = Integer.parseInt(request.getParameter("articleID"));
 
 
 

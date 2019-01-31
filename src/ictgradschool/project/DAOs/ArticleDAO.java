@@ -242,7 +242,7 @@ public class ArticleDAO {
         return article;
     }
 
-    public static boolean deleteArticle(String username, String title, String content, String id, ServletContext context) {
+    public static boolean deleteArticle(String username, String title, String content, int id, ServletContext context) {
         Properties dbProps = new Properties();
 
         /*Connect to your database and from the table created in Exercise Five and check to see if
@@ -266,15 +266,10 @@ public class ArticleDAO {
         try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
             System.out.println("connection successful");
 
-            //  TODO    deal the prolem with id stuff
-            //TODO: Create user called "delete"
-            //TODO: Finish UPDATE query; SET article_author = delete;
 
-            //TODO: Create user called "delete"
-            //TODO: Finish UPDATE query; SET article_author = delete;
             try (PreparedStatement s3 = conn.prepareStatement("UPDATE article SET article_author = ? WHERE article_id = ?")) {
-                s3.setString(1, title);
-                s3.setString(2, "deleted");
+                s3.setString(1, "deleted");
+                s3.setInt(2, id);
 
                 s3.execute();
 
