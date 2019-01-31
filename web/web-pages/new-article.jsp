@@ -25,12 +25,6 @@
         <body>
         <%@ include file="navbar.jsp" %>
 
-        <% if (request.getAttribute("message") != null){
-        %>
-        ${message}
-
-        <%
-            } %>
             <form action="/new-article" method="post">
 
                 <div class="container text-center">
