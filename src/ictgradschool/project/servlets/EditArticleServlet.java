@@ -27,11 +27,12 @@ public class EditArticleServlet extends HttpServlet {
         request.setAttribute("id", temp.getID());
 
 
-
+        String title = request.getParameter("article-title");
         String content = request.getParameter("article-content");
+        System.out.println("title = " +title);
         System.out.println("content = " +content);
 
-        Article arti = ArticleDAO.editArticle(temp.getID(), temp.getTitle(), content, getServletContext());
+        Article arti = ArticleDAO.editArticle(temp.getID(), title, content, getServletContext());
 
 
         System.out.println("article edited!!!!!!!");

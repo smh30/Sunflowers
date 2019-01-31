@@ -489,6 +489,7 @@ public class ArticleDAO {
                 s2.setString(1, title);
                 s2.setString(2,content);
                 s2.setInt(3, id);
+
                 s2.execute();
 
 
