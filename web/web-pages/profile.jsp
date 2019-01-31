@@ -33,6 +33,7 @@
         <div class="container-fluid">
 
             <div class="user">
+                <%--All of these are showing up on the profile webpage--%>
                 <p>${user.username}'s Account: </p>
                 <%--TODO: Grab JSTL and put it into forms?????--%>
                 <p>${user.country}</p>
@@ -40,6 +41,20 @@
                 <p>${user.description}</p>
                 <p>${user.DOB}</p>
                 <p>${user.pictureURL}</p>
+
+
+                    <%--todo: copied from Yun's code--%>
+                    <%--ask Yun or Steph for help!--%>
+                    <form method="post" action=#>
+                        <input type="hidden" name="articleID" value="${user.ID}">
+                        <input type="submit" value="Edit Article">
+                    </form>
+
+
+                    <form method="post" action="#">
+                        <input type="hidden" name="articleID" value="${user.ID}">
+                        <input type="submit" value="Delete Article">
+                    </form>
 
 
                 <%--todo --%>
