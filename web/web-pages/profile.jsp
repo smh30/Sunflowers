@@ -62,6 +62,62 @@
             <div style="margin-left: 250px">
                 <h4>Choose default picture: </h4>
                 <%--TODO: What servlet are we linking to here?? Will be for uploading own photo--%>
+
+                <% if (request.getAttribute("country")!= null){%>
+                <form action="/Upload" method="post">
+                <%-- figure out what to do here --%>
+                </form>
+                <%}else{%>
+                <form action="/editprofile" method="post">
+                <input type="hidden" name="country" value="${user.country}"></form>
+                <%}%>
+
+                <% if (request.getAttribute("realname")!= null){%>
+                <form action="/Upload" method="post">
+                    <%-- figure out what to do here --%>
+                </form>
+                <%}else{%>
+                <form action="/editprofile" method="post">
+                    <input type="hidden" name="realname" value="${user.realName}"></form>
+                <%}%>
+
+                <% if (request.getAttribute("description")!= null){%>
+                <form action="/Upload" method="post">
+                    <%-- figure out what to do here --%>
+                </form>
+                <%}else{%>
+                <form action="/editprofile" method="post">
+                    <input type="hidden" name="desc" value="${user.desc}"></form>
+                <%}%>
+
+                <% if (request.getAttribute("imageURL")!= null){%>
+                <form action="/Upload" method="post">
+                    <%-- figure out what to do here --%>
+                </form>
+                <%}else{%>
+                <form action="/editprofile" method="post">
+                    <input type="hidden" name="imageURL" value="${user.pictureURL}"></form>
+                <%}%>
+
+                <% if (request.getAttribute("dateofbirth")!= null){%>
+                <form action="/Upload" method="post">
+                    <%-- figure out what to do here --%>
+                </form>
+                <%}else{%>
+                <form action="/editprofile" method="post">
+                    <input type="hidden" name="dateofbirth" value="${user.DOB}"></form>
+                <%}%>
+
+                <% if (request.getAttribute("username")!= null){%>
+                <form action="/Upload" method="post">
+                    <%-- figure out what to do here --%>
+                </form>
+                <%}else{%>
+                <form action="/editprofile" method="post">
+                    <input type="hidden" name="username" value="${user.username}"></form>
+                <%}%>
+
+
                 <form method="POST" action= "/Upload" enctype="multipart/form-data">
                     <select id="dlist" onchange="switchImage()">
                         <option value="../default-photos-for-profile-page/CloneTrooper.jpg">Clone Trooper</option>
@@ -77,6 +133,9 @@
                     <br>
 
                     <%--TODO: Create forms for: description--%>
+
+
+
                     <label for="unameID">Username:</label>
                     <% if (request.getAttribute("username") != null){
                     %>
@@ -125,6 +184,17 @@
                     <br>
                     <%}else{ %>
                     <input type="text" id="pictureurlID" name="pictureurl">
+                    <br>
+                    <%  } %>
+
+                    <%--TODO: Make this more useable--%>
+                    <label for="descID">Description:</label>
+                    <% if (request.getAttribute("description") != null){
+                    %>
+                    <input type="text" id="descID" name="description" value="${user.desc}">
+                    <br>
+                    <%}else{ %>
+                    <input type="text" id="descID" name="description">
                     <br>
                     <%  } %>
 
