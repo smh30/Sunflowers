@@ -145,7 +145,7 @@ public class CommentDAO {
                 System.out.println("maybe delete it ");
                 s3.setString(1, "deleted");
                 s3.setInt(2, commentID);
-//               
+//
 
 
 
