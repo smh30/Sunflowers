@@ -38,7 +38,7 @@
                 </form>
 
 
-                <form method="post" action="#">
+                <form method="post" action="/deletecomment">
                     <input type="hidden" name="articleID" value="${article.ID}">
                 <input type="submit" value="Delete Article">
                 </form>

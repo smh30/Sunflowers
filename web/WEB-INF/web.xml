@@ -134,8 +134,18 @@
     <servlet-mapping>
         <servlet-name>LoadProfileServlet</servlet-name>
         <url-pattern>/profile</url-pattern>
-
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteComment</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.DeleteCommentServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteComment</servlet-name>
+        <url-pattern>/deletecomment</url-pattern>
+    </servlet-mapping>
+
 
 
 </web-app>
