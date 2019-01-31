@@ -59,7 +59,9 @@
                 <p>${comment.commentContent}</p>
 
                         <c:if test="${article.author.username == sessionScope.username || comment.commentAuthor.username == sessionScope.username}">
-                            <form method="post" action="/deletecomment">
+                            <form method="get" action="/deletecomment">
+                                <input type="hidden" name="articleID" value="${article.ID}">
+                                <input type="hidden" name="commentID" value="${comment.commentID}">
                 <input type="submit" value="Delete comment">
                             </form>
                         </c:if>
