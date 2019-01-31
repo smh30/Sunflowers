@@ -15,7 +15,7 @@ public class AddCommentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("The adding comment servlet");
 
-        String ArticleId = request.getParameter("articleID");
+        String articleID = request.getParameter("articleID");
 
 
         String content = request.getParameter("comment");
@@ -23,19 +23,20 @@ public class AddCommentServlet extends HttpServlet {
 
         String user = (String) request.getSession().getAttribute("username");
 
-        boolean commentAdded = CommentDAO.newComment(content,ArticleId,user,getServletContext());
+        boolean commentAdded = CommentDAO.newComment(content,articleID,user,getServletContext());
 
         if(!commentAdded){
             System.out.println("comment not added??");
             String message = "Some trouble with adding your comment. Please try again.";
             request.setAttribute("message",message);
 
-            request.getRequestDispatcher("article?id="+Integer.parseInt(ArticleId)).forward(request,response);
+            request.getRequestDispatcher("article?articleID="+Integer.parseInt(articleID)).forward(request,response);
 
 
 
         }else{
-            System.out.println("article created!!!!!!!");
+            System.out.println("commetn created!!!!!!!");
+            request.setAttribute("articleID", articleID);
             // TODO to finish the single-article.jsp. It is the page after user submit their new article.  add attribute
             request.getRequestDispatcher("/article").forward(request,response);
         }
