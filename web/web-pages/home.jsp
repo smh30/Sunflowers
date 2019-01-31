@@ -61,12 +61,22 @@
     <% int back = 0;
     if (param!= null) {
         back = Integer.parseInt(param);
+
     }
     back += 10;
     %>
 
     <%--todo get this so it works in search resuls as well (ie with other params)--%>
+
     <a href="?back=<%=back%>">older articles</a>
+
+    <% if(back>=11){
+        int forward = back -=20;
+        %>
+
+    <a href="?back=<%=forward%>">newer articles</a>
+    <%
+    }%>
 
 
 </div>
