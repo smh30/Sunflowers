@@ -42,10 +42,6 @@
             <input type="hidden" name="articleID" value="${article.ID}">
                 <%}%>
 
-            <%--<form action="/new-article" method="post">--%>
-
-
-
 
                 <div class="container text-center">
                     <label for="exampleFormControlInput1">Article Title Here:</label>
