@@ -36,10 +36,10 @@
                 <p>${user.username}'s Account: </p>
                 <%--TODO: Grab JSTL and put it into forms?????--%>
                 <p>${user.country}</p>
-                <p>${user.real_name}</p>
+                <p>${user.realName}</p>
                 <p>${user.description}</p>
-                <p>${user.date_of_birth}</p>
-                <p>${user.image}</p>
+                <p>${user.DOB}</p>
+                <p>${user.pictureURL}</p>
 
 
                 <%--todo --%>
