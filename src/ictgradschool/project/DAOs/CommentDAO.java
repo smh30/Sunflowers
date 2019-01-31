@@ -138,15 +138,16 @@ public class CommentDAO {
         }
 
         try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-            System.out.println("connection successful");
+            System.out.println("connection successful - delete comm dao");
 
 
-            try (PreparedStatement s3 = conn.prepareStatement("UPDATE comments SET comments_author = ? ,  WHERE article_id = ?, comments_id = ?")) {
-                s3.setString(1, "c_deleted");
-                s3.setInt(2, articleID);
-                s3.setInt(3, commentID);
-
+            try (PreparedStatement s3 = conn.prepareStatement("UPDATE comments SET comments_author = ? WHERE comments_id = ?")) {
                 System.out.println("maybe delete it ");
+                s3.setString(1, "deleted");
+                s3.setInt(2, commentID);
+//               
+
+
 
                 s3.execute();
 
