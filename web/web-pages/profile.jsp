@@ -45,29 +45,17 @@
 
                     <%--todo: copied from Yun's code--%>
                     <%--ask Yun or Steph for help!--%>
-                    <form method="post" action=#>
-                        <input type="hidden" name="articleID" value="${user.ID}">
-                        <input type="submit" value="Edit Article">
-                    </form>
+                    <%--<form method="post" action=#>--%>
+                        <%--<input type="hidden" name="articleID" value="${user.ID}">--%>
+                        <%--<input type="submit" value="Edit Article">--%>
+                    <%--</form>--%>
 
 
-                    <form method="post" action="#">
-                        <input type="hidden" name="articleID" value="${user.ID}">
-                        <input type="submit" value="Delete Article">
-                    </form>
+                    <%--<form method="post" action="#">--%>
+                        <%--<input type="hidden" name="articleID" value="${user.ID}">--%>
+                        <%--<input type="submit" value="Delete Article">--%>
+                    <%--</form>--%>
 
-
-                <%--todo --%>
-                <form method="post" action=#>
-                    <input type="hidden" name="articleID" value="${article.ID}">
-                    <input type="submit" value="Edit Article">
-                </form>
-
-
-                <form method="post" action="#">
-                    <input type="hidden" name="articleID" value="${article.ID}">
-                    <input type="submit" value="Delete Article">
-                </form>
 
             </div>
             <h1>User Account</h1>
@@ -97,13 +85,13 @@
 
                     <%--TODO: Create forms for: description--%>
                     <label for="unameID">Username:</label>
-                    <input type="text" id="unameID" name="username">
+                    <input type="text" id="unameID" name="username" value=${user.username}>
                     <br>
                     <label for="pwordID">Password:</label>
                     <input type="text" id="pwordID" name="password">
                     <br>
                     <label for="countryID">Country:</label>
-                    <input type="text" id="countryID" name="country">
+                    <input type="text" id="countryID" name="country" value=${user.country}>
                     <br>
                     <label for="rnameID">Real name:</label>
                     <input type="text" id="rnameID" name="realname">
