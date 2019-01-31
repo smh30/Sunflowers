@@ -43,6 +43,7 @@
         <p>${article.articleText}</p>
             <%--todo add readmore--%>
             <%--todo add "see comments" and maybe a counter of how many comments there are--%>
+            <hr>
         </div>
 
 
