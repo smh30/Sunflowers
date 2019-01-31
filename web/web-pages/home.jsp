@@ -33,11 +33,17 @@
 </c:if>
 
     <c:forEach items="${articles}" var="article">
+        <c:if test="${article.author.username != 'deleted'}">
         <div class="article">
-            <%--todo what to do if the article doesn't have a title? or should we make title compulsory??--%>
+            <c:choose>
+            <c:when test="${article.title == null}">
+                <h2><a href="/article?articleID=${article.ID}">Untitled</a></h2>
+            </c:when>
+                <c:otherwise>
             <h2><a href="/article?articleID=${article.ID}">${article.title}</a></h2>
+                </c:otherwise>
             <%--todo make the 'author' link or popup the user info box/page--%>
-
+            </c:choose>
         <p>Author: ${article.author.username}</p>
         <p>${article.timestamp}</p>
         <p>${article.articleText}</p>
@@ -46,7 +52,7 @@
             <hr>
         </div>
 
-
+    </c:if>
     </c:forEach>
 
 
