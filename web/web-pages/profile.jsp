@@ -78,24 +78,59 @@
 
                     <%--TODO: Create forms for: description--%>
                     <label for="unameID">Username:</label>
+                    <% if (request.getAttribute("username") != null){
+                    %>
                     <input type="text" id="unameID" name="username" value=${user.username}>
                     <br>
-                    <label for="pwordID">Password:</label>
-                    <%--TODO: link up password in more secure way - talk to Steph re hashing--%>
-                    <input type="text" id="pwordID" name="password">
+                    <%}else{ %>
+                    <input type="text" id="unameID" name="username">
                     <br>
+                    <%  } %>
+
                     <label for="countryID">Country:</label>
+                    <% if (request.getAttribute("country") != null){
+                    %>
                     <input type="text" id="countryID" name="country" value=${user.country}>
                     <br>
+                    <%}else{ %>
+                    <input type="text" id="countryID" name="country">
+                    <br>
+                    <%  } %>
+
                     <label for="rnameID">Real name:</label>
+                    <% if (request.getAttribute("realname") != null){
+                    %>
                     <input type="text" id="rnameID" name="realname" value="${user.realName}">
                     <br>
+                    <%}else{ %>
+                    <input type="text" id="rnameID" name="realname">
+                    <br>
+                    <%  } %>
+
                     <label for="dateofbirthID">Date of birth:</label>
+                    <% if (request.getAttribute("dateofbirth") != null){
+                    %>
                     <input type="text" id="dateofbirthID" name="dateofbirth" value="${user.DOB}">
                     <br>
+                    <%}else{ %>
+                    <input type="text" id="dateofbirthID" name="dateofbirth">
+                    <br>
+                    <%  } %>
+
                     <%--TODO: Make this more useable--%>
                     <label for="pictureurlID">Picture URL:</label>
-                    <input type="text" id="pictureurlID" name="picture url" value="${user.pictureURL}">
+                    <% if (request.getAttribute("pictureurl") != null){
+                    %>
+                    <input type="text" id="pictureurlID" name="pictureurl" value="${user.pictureURL}">
+                    <br>
+                    <%}else{ %>
+                    <input type="text" id="pictureurlID" name="pictureurl">
+                    <br>
+                    <%  } %>
+
+                    <%--TODO: link up password in more secure way - talk to Steph re hashing--%>
+                    <label for="pwordID">Password:</label>
+                    <input type="text" id="pwordID" name="password">
                     <br>
                 </form>
 
