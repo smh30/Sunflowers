@@ -1,7 +1,10 @@
 package ictgradschool.project.servlets;
 
+import ictgradschool.project.DAOs.ArticleDAO;
 import ictgradschool.project.DAOs.ProfileDetailsDAO;
 import ictgradschool.project.DAOs.UserDAO;
+import ictgradschool.project.JavaBeans.Article;
+import ictgradschool.project.JavaBeans.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -53,6 +56,32 @@ public class EditProfileServlet extends HttpServlet {
         //Call DAO method to use details, return user id here
         //Here would request.setAttribute - set user onto it so send back to jsp - (profile) - forward req and res
 //        request.setAttribute("user", user);
+        User temp = UserDAO.getUserDetails(request.getParameter("username"), getServletContext());
+
+        request.setAttribute("country", temp.getCountry());
+        request.setAttribute("description", temp.getDescription());
+        request.setAttribute("dateofbirth", temp.getDOB());
+        request.setAttribute("image", temp.getPictureURL());
+        request.setAttribute("realname", temp.getRealName());
+        request.setAttribute("username", temp.getUsername());
+
+
+
+        String country = request.getParameter("country");
+        String description = request.getParameter("description");
+        String dateofbirth = request.getParameter("dateofbirth");
+        String image = request.getParameter("pictureURL");
+        String realname = request.getParameter("realname");
+        String username = request.getParameter("username");
+
+        User user = UserDAO.editUser(temp.getCountry(), temp.getDescription(), temp.getDOB(), temp.getPictureURL(), temp.getRealName(), temp.getUsername(), getServletContext());
+
+        System.out.println("user edited!!!!!!!");
+
+        request.setAttribute("user", user);
+        String get = user.getUsername();
+
+        request.setAttribute("user", user);
 
         request.getRequestDispatcher("web-pages/profile.jsp").forward(request,
                 response);
