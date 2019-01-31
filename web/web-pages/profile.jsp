@@ -28,7 +28,29 @@
     </head>
     <body>
         <%@ include file="navbar.jsp" %>
+
+
         <div class="container-fluid">
+
+            <div class="user">
+                <%--All of these are showing up on the profile webpage--%>
+                <p>${user.username}'s Account: </p>
+
+                    <%--todo: copied from Yun's code--%>
+                    ask Yun or Steph for help!
+                    <form method="post" action=#>
+                        <input type="hidden" name="userID" value="${user.ID}">
+                        <input type="submit" value="Edit User">
+                    </form>
+
+
+                    <form method="post" action="#">
+                        <input type="hidden" name="userID" value="${user.ID}">
+                        <input type="submit" value="Delete User">
+                    </form>
+
+
+            </div>
             <h1>User Account</h1>
             <br>
             <br>
@@ -56,16 +78,24 @@
 
                     <%--TODO: Create forms for: description--%>
                     <label for="unameID">Username:</label>
-                    <input type="text" id="unameID" name="username">
+                    <input type="text" id="unameID" name="username" value=${user.username}>
                     <br>
                     <label for="pwordID">Password:</label>
+                    <%--TODO: link up password in more secure way - talk to Steph re hashing--%>
                     <input type="text" id="pwordID" name="password">
                     <br>
                     <label for="countryID">Country:</label>
-                    <input type="text" id="countryID" name="country">
+                    <input type="text" id="countryID" name="country" value=${user.country}>
                     <br>
                     <label for="rnameID">Real name:</label>
-                    <input type="text" id="rnameID" name="realname">
+                    <input type="text" id="rnameID" name="realname" value="${user.realName}">
+                    <br>
+                    <label for="dateofbirthID">Date of birth:</label>
+                    <input type="text" id="dateofbirthID" name="dateofbirth" value="${user.DOB}">
+                    <br>
+                    <%--TODO: Make this more useable--%>
+                    <label for="pictureurlID">Picture URL:</label>
+                    <input type="text" id="pictureurlID" name="picture url" value="${user.pictureURL}">
                     <br>
                 </form>
 
@@ -73,17 +103,20 @@
                 <input type="submit" value="submit">
 
 
-                <label for="profile_text"> About Text</label>
-                <textarea id="profile_text"
-                          name="profile_text_area"
-                          rows="4"
-                          cols="40">
-                </textarea>
+                <%--<label for="profile_text"> About Text</label>--%>
+                <%--<textarea input="text"--%>
+                          <%--id="profile_text"--%>
+                          <%--name="profile_text_area"--%>
+                          <%--value="${user.description}"--%>
+                          <%--rows="4"--%>
+                          <%--cols="40">--%>
+                <%--</textarea>--%>
                 <br>
                 <br>
                 <%--TODO: Link this up to a servlet--%>
                 <input type="submit" value="submit">
                 <%--TODO: Make this webpage RESPONSIVE--%>
+
             </div>
         </div>
     </body>

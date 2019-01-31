@@ -63,3 +63,5 @@ VALUES  ('y', 'Ron you are so wrong', '2'),
         ('y', 'LOL you are so lucky bro', '4');
 
 ALTER TABLE user ADD COLUMN image varchar(80);
+
+UPDATE user SET date_of_birth = 06121996, country='Australia', real_name='Pork Chop', description='Testing code is my sole hobby right now.' WHERE username = 'z';

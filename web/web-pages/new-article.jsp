@@ -19,11 +19,13 @@
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-        <!-- Latest compiled JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    </head>
-        <body>
-        <%@ include file="navbar.jsp" %>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="../ckeditor/ckeditor.js"></script>
+</head>
+<body>
+<%@ include file="navbar.jsp" %>
+
 
         <% if (request.getAttribute("message") != null){
         %>
@@ -31,11 +33,29 @@
 
         <%
             } %>
+
+        <% if (request.getAttribute("newarticle")!= null){%>
+        <form action="new-article" method="post">
+            <%-- figure out what to do here --%>
+        </form>
+            <%}else{%>
+        <form action="/edit-article" method="post">
+            <input type="hidden" name="articleID" value="${article.ID}"></form>
+                <%}%>
+
+            <%--<form action="/new-article" method="post">--%>
+
             <form action="/new-article" method="post">
+
 
                 <div class="container text-center">
                     <label for="exampleFormControlInput1">Article Title Here:</label>
+                    <% if (request.getAttribute("title") != null){
+                    %>
+                    <input type="text" name="article_title" class="form-control" id="exampleFormControlInput1" value=${title}>
+                    <%}else{ %>
                     <input type="text" name="article_title" class="form-control" id="exampleFormControlInput1" placeholder="Your new article title...">
+                    <%  } %>
                     <br>
                     <br>
                 </div>
@@ -43,9 +63,17 @@
 
                 <div class="container text-center">
                     <label for="exampleFormControlTextarea1">Article Content Here:</label>
+
+                    <% if (request.getAttribute("content") != null){
+                    %>
+                    <textarea class="form-control"  name="article_content" id="exampleFormControlTextarea1" rows="30">${content}</textarea>
+                    <br>
+                    <%}else{ %>
                     <textarea class="form-control" name="article_content" id="exampleFormControlTextarea1" rows="30" placeholder="Content here..."></textarea>
                     <br>
+                    <%  } %>
                 </div>
+
 
                 <div class="container text-right">
                     <button class="btn btn-primary" type="submit">Submit</button>
@@ -53,7 +81,9 @@
                 </div>
             </form>
 
-
+        <script>
+            CKEDITOR.replace('exampleFormControlTextarea1');
+        </script>
 
         </body>
     </html>

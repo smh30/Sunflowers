@@ -115,6 +115,27 @@
         <url-pattern>/addcomment</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+
+        <servlet-name>EditArticle</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.EditArticleServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>EditArticle</servlet-name>
+        <url-pattern>/edit-article</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LoadProfileServlet</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.LoadProfileServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LoadProfileServlet</servlet-name>
+        <url-pattern>/profile</url-pattern>
+
+    </servlet-mapping>
 
 
 </web-app>

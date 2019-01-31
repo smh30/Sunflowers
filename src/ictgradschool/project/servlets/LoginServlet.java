@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
                 System.out.println("logged in new user, attemting redirect to profile edit");
 
                 //todo change this to redirect to edit profile server once it's wired up
-                request.getRequestDispatcher("web-pages/profile.jsp").forward(request, response);
+                request.getRequestDispatcher("/profile").forward(request, response);
 
             } else {
 
