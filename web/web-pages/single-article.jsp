@@ -30,7 +30,8 @@
                 <p>${article.articleText}</p>
 
 
-                <%--todo --%>
+                <%--the 'edit' and 'delete' buttons will only appear if the logged in user wrote the article --%>
+                <c:if test="${article.author.username == sessionScope.username}">
                 <form method="get" action=/edit-article>
                     <input type="hidden" name="articleID" value="${article.ID}">
                 <input type="submit" value="Edit Article">
@@ -41,7 +42,7 @@
                     <input type="hidden" name="articleID" value="${article.ID}">
                 <input type="submit" value="Delete Article">
                 </form>
-
+                </c:if>
             </div>
 
 
@@ -57,7 +58,9 @@
 
                 <p>${comment.commentContent}</p>
 
+                        <c:if test="${article.author.username == sessionScope.username || comment.commentAuthor.username == sessionScope.username}">
                 <input type="submit" value="Delete comment">
+                        </c:if>
             </div>
             </c:forEach>
 
