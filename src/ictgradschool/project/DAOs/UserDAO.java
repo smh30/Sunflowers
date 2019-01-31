@@ -175,7 +175,7 @@ public class UserDAO {
         }
         return user;
     }
-    public static User editUser(String username, String country, String realName, String desc, String dateOfBirth, String imageURL,ServletContext context) {
+    public static User editUser(String username, String country, String realName, String desc, String dateOfBirth, String imageURL, int userID,ServletContext context) {
         Properties dbProps = new Properties();
         User user = new User();
 
