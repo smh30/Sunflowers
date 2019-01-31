@@ -44,6 +44,7 @@ public class EditArticleServlet extends HttpServlet {
         request.setAttribute("content", temp.getArticleText());
         request.setAttribute("id", temp.getID());
         request.setAttribute("article", temp);
+        System.out.println("title to be returned for editing: " + temp.getTitle());
         
         request.getRequestDispatcher("web-pages/new-article.jsp").forward(request, response);
 
