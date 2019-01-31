@@ -35,17 +35,16 @@
             } %>
 
         <% if (request.getAttribute("newarticle")!= null){%>
-        <form action="new-article" method="post">
+        <form action="/new-article" method="post">
             <%-- figure out what to do here --%>
-        </form>
             <%}else{%>
         <form action="/edit-article" method="post">
-            <input type="hidden" name="articleID" value="${article.ID}"></form>
+            <input type="hidden" name="articleID" value="${article.ID}">
                 <%}%>
 
             <%--<form action="/new-article" method="post">--%>
 
-            <form action="/new-article" method="post">
+
 
 
                 <div class="container text-center">
