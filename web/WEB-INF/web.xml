@@ -90,19 +90,20 @@
         <servlet-name>Upload</servlet-name>
         <servlet-class>ictgradschool.project.servlets.UploadProfilePictureServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>DeleteArticle</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.DeleteArticleServlet</servlet-class>
-    </servlet>
 
     <servlet-mapping>
         <servlet-name>Upload</servlet-name>
         <url-pattern>/Upload</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>DeleteArticle</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.DeleteArticleServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>DeleteArticle</servlet-name>
-        <url-pattern>/single-article</url-pattern>
+        <url-pattern>/deleteArticle</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -136,6 +137,7 @@
         <url-pattern>/profile</url-pattern>
     </servlet-mapping>
 
+
     <servlet>
         <servlet-name>EditProfileServlet</servlet-name>
         <servlet-class>ictgradschool.project.servlets.EditProfileServlet</servlet-class>
@@ -145,6 +147,17 @@
         <servlet-name>EditProfileServlet</servlet-name>
         <url-pattern>/editprofile</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteComment</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.DeleteCommentServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteComment</servlet-name>
+        <url-pattern>/deletecomment</url-pattern>
+    </servlet-mapping>
+
 
 
 </web-app>

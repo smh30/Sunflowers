@@ -38,7 +38,7 @@ public class ArticleDAO {
             System.out.println("connection successful");
             // select the most recent 6 from the articles table??? ordered by timestamp:
             //todo will this bring newest first or oldest first???
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article ORDER BY article_timestamp DESC LIMIT 10 OFFSET ?")) {
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article WHERE NOT (article_author = 'deleted') ORDER BY article_timestamp DESC LIMIT 10 OFFSET ?")) {
                 stmt.setInt(1, offset);
                 ResultSet rs = stmt.executeQuery();
 
@@ -87,14 +87,13 @@ public class ArticleDAO {
         }
 
         try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-            System.out.println("connection successful");
-            // select the most recent 6 the articles table??? ordered by timestamp with certain author:
-            //todo will this bring newest first or oldest first???
+            System.out.println("connection successful search by author:" + author);
+            // select the most recent 10 from the articles table??? ordered by timestamp with certain author:
             try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author LIKE ? ORDER BY article_timestamp DESC LIMIT 10 OFFSET ?")) {
                 //todo some sort of boolean that says wheter we've come here from a user looking for their own articles (ie shouldn't be fuzzy search in that case)
 
 
-                stmt.setString(1, "%" + author + "%");
+                stmt.setString(1, author);
                 stmt.setInt(2, offset);
                 ResultSet rs = stmt.executeQuery();
 
@@ -242,7 +241,7 @@ public class ArticleDAO {
         return article;
     }
 
-    public static boolean deleteArticle(String username, String title, String content, String id, ServletContext context) {
+    public static boolean deleteArticle(String username, String title, String content, int id, ServletContext context) {
         Properties dbProps = new Properties();
 
         /*Connect to your database and from the table created in Exercise Five and check to see if
@@ -266,15 +265,10 @@ public class ArticleDAO {
         try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
             System.out.println("connection successful");
 
-            //  TODO    deal the prolem with id stuff
-            //TODO: Create user called "delete"
-            //TODO: Finish UPDATE query; SET article_author = delete;
 
-            //TODO: Create user called "delete"
-            //TODO: Finish UPDATE query; SET article_author = delete;
             try (PreparedStatement s3 = conn.prepareStatement("UPDATE article SET article_author = ? WHERE article_id = ?")) {
-                s3.setString(1, title);
-                s3.setString(2, "deleted");
+                s3.setString(1, "deleted");
+                s3.setInt(2, id);
 
                 s3.execute();
 
@@ -319,7 +313,7 @@ public class ArticleDAO {
             System.out.println("connection successful");
             // select the most recent 6 the articles table??? ordered by timestamp with certain author:
             //todo will this bring newest first or oldest first???
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? ORDER BY article_timestamp DESC  LIMIT 10 OFFSET ?")) {
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND NOT (article_author = 'deleted') ORDER BY article_timestamp DESC  LIMIT 10 OFFSET ?")) {
                 stmt.setString(1, "%" + title + "%");
                 stmt.setInt(2, offset);
                 ResultSet rs = stmt.executeQuery();
@@ -373,9 +367,9 @@ public class ArticleDAO {
             System.out.println("connection successful");
             // select the most recent 6 the articles table??? ordered by timestamp with certain author:
             //todo will this bring newest first or oldest first???
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND article_author LIKE ? ORDER BY article_timestamp DESC  LIMIT 10 OFFSET ?")) {
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND article_author LIKE ? AND NOT (article_author = 'deleted') ORDER BY article_timestamp DESC  LIMIT 10 OFFSET ?")) {
                 stmt.setString(1, "%" + title + "%");
-                stmt.setString(2, "%" + author + "%");
+                stmt.setString(2, author);
                 stmt.setInt(3, offset);
                 ResultSet rs = stmt.executeQuery();
 
@@ -489,6 +483,7 @@ public class ArticleDAO {
                 s2.setString(1, title);
                 s2.setString(2,content);
                 s2.setInt(3, id);
+
                 s2.execute();
 
 

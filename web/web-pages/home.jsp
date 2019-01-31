@@ -1,3 +1,4 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: yab2
@@ -33,11 +34,17 @@
 </c:if>
 
     <c:forEach items="${articles}" var="article">
+        <%--<c:if test="${article.author.username != 'deleted'}">--%>
         <div class="article">
-            <%--todo what to do if the article doesn't have a title? or should we make title compulsory??--%>
+            <c:choose>
+            <c:when test="${article.title == null}">
+                <h2><a href="/article?articleID=${article.ID}">Untitled</a></h2>
+            </c:when>
+                <c:otherwise>
             <h2><a href="/article?articleID=${article.ID}">${article.title}</a></h2>
+                </c:otherwise>
             <%--todo make the 'author' link or popup the user info box/page--%>
-
+            </c:choose>
         <p>Author: ${article.author.username}</p>
         <p>${article.timestamp}</p>
         <p>${article.articleText}</p>
@@ -46,7 +53,7 @@
             <hr>
         </div>
 
-
+    <%--</c:if>--%>
     </c:forEach>
 
 
@@ -55,8 +62,6 @@
         String getURL=request.getQueryString();
         String param = request.getParameter("back");
     %>
-    <p>Url = <%=getURL%></p>
-    <p>Back = <%=param%></p>
 
     <% int back = 0;
     if (param!= null) {
@@ -66,22 +71,26 @@
     back += 10;
     %>
 
+  
     <%--todo get this so it works in search resuls as well (ie with other params)--%>
-
+<c:if test="${fn:length(articles) == 10}">
+    <%--<div id="goback">--%>
     <a href="?back=<%=back%>">older articles</a>
 
     <% if(back>=11){
         int forward = back -=20;
         %>
 
-    <a href="?back=<%=forward%>">newer articles</a>
+   || <a href="?back=<%=forward%>">newer articles</a>
     <%
     }%>
 
+    <%--</div>--%>
+    </c:if>
+
+
 
 </div>
-
-
 
 </body>
 </html>
