@@ -29,27 +29,15 @@
 <% if (request.getAttribute("message") != null){
     %>
 ${message}
-
     <%
 } %>
 
-        <%--todo coordinate this with Yaz's profile edit--%>
     <form method="post" action="register">
         <label for="username">username:</label>
         <input type="text" id="username" name="username"><br>
         <label for="password">password:</label>
         <input type="password" id="password" name="password"><br>
 
-        <%--todo do we need to gather all of this data when registering users, or can it happen later only when editing??--%>
-        Ignore these ones, we will redirect to the profile edit page instead
-        <label for="realname">Name:</label>
-        <input type="text" id="realname" name="realname">
-        <label for="country">Country:</label>
-        <input type="text" id="country" name="country">
-        <label for="dob">D.O.B:</label>
-        <input type="date" id="dob" name="dob">
-        <label for="bio">Bio:</label>
-        <textarea id="bio" rows="10" cols="50"></textarea><br>
 
         <input type="submit" value="submit">
     </form>

@@ -37,6 +37,8 @@
                                        name="password">
                             </div>
                             <div class="form-group">
+                                <input type="hidden" name="from" value="${pageContext.request.requestURI}">
+                                <input type="hidden" name="articleID" value="${article.ID}">
                                 <input type="submit" value="Login">
                             </div>
                         </form>
@@ -55,7 +57,7 @@
 
             <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
 
-            <li class="nav-item"><a class="nav-link" href="/home/?author=${sessionScope.username}">My Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="/home?author=${sessionScope.username}">My Blog</a></li>
             <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">

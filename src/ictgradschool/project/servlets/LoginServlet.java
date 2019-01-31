@@ -20,15 +20,10 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("in the login servlet doPost");
-
-
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         System.out.println("attempting login: " + username + " : " + password);   //successfully " +
-        
-
-        /*Connect to your database and from the table created in Exercise Five, retrieve the
-        row identified by the username provided.*/
+System.out.println(request.getParameter("articleID"));
 
         boolean passwordOK;
 
@@ -37,29 +32,31 @@ public class LoginServlet extends HttpServlet {
             System.out.println("creating session");
             HttpSession session = request.getSession(true);
             session.setAttribute("username", username);
-            //todo yet another place where i'm not sure what redirect to use
+
             if (request.getAttribute("new")!= null) {
                 System.out.println("logged in new user, attemting redirect to profile edit");
-
-                //todo change this to redirect to edit profile server once it's wired up
                 request.getRequestDispatcher("/profile").forward(request, response);
-
             } else {
+               //redirects to the previous page if it was an article page
+                if(request.getParameter("from").equals("/web-pages/home.jsp")){
+                    response.sendRedirect("/home");
 
-                System.out.println("logged in, attemting redirect to home");
-                response.sendRedirect("home");
+                } else if (request.getParameter("from").equals("/web-pages/single-article.jsp")){
+request.setAttribute("articleID", request.getParameter("articleID"));
+                    request.getRequestDispatcher("/article").forward(request,response);
+                }
+               // System.out.println(request.getParameter("from"));
+                //response.sendRedirect(request.getParameter("/home"));
             }
 
             return;
         } else {
-
             System.out.println("password didn't match");
             String message = "The username or password was incorrect (password)";
             request.setAttribute("message", message);
             request.getRequestDispatcher("web-pages/login.jsp").forward(request, response);
             return;
         }
-
 
 //request.getRequestDispatcher("home").forward(request, response); apparently doesn't work
         //response.sendRedirect("home");
