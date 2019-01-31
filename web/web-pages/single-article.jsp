@@ -53,7 +53,7 @@
             <c:forEach items="${comment}" var="comment">
             <div class="comment">
                     <%-- use a table to hold the comments --%>
-                <p>${comment.commentAuthor} :</p>
+                <p>${comment.commentAuthor.username} :</p>
 
                 <p>${comment.commentContent}</p>
 
