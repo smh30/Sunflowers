@@ -20,25 +20,28 @@ public class EditArticleServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         Article temp = ArticleDAO.getArticleByID(Integer.parseInt(request.getParameter("articleID")), getServletContext());
 
         request.setAttribute("title", temp.getTitle());
         request.setAttribute("content", temp.getArticleText());
         request.setAttribute("id", temp.getID());
 
-        String content = (String) request.getAttribute("article-content");
+
+
+        String content = request.getParameter("article-content");
+        System.out.println("content = " +content);
 
         Article arti = ArticleDAO.editArticle(temp.getID(), temp.getTitle(), content, getServletContext());
 
 
-            System.out.println("article edited!!!!!!!");
+        System.out.println("article edited!!!!!!!");
 
-            request.setAttribute("article", arti);
-            int id = arti.getID();
+        request.setAttribute("article", arti);
+        int id = arti.getID();
 
-            request.setAttribute("articleID", id);
-            request.getRequestDispatcher("web-pages/new-article.jsp").forward(request, response);
+        request.setAttribute("articleID", id);
+        request.getRequestDispatcher("web-pages/new-article.jsp").forward(request, response);
+
 
     }
 }
