@@ -46,6 +46,7 @@ public class CommentDAO {
                     //todo uncomment these once database is ready
                     Comment comment = new Comment();
                     comment.setCommentContent(rs.getString(3));
+                    comment.setCommentID(rs.getInt(1));
 
                     comment.setTimestamp(rs.getTimestamp(5));
                     User commentAuthor = new User(rs.getString(2));
@@ -114,7 +115,7 @@ public class CommentDAO {
 
     }
 
-    public static boolean deleteComment(String commentAuthor, String commentContent, int articleID,ServletContext context){
+    public static boolean deleteComment(String commentAuthor, String commentContent, int articleID, int commentID ,ServletContext context){
 
         Properties dbProps = new Properties();
 
@@ -140,9 +141,12 @@ public class CommentDAO {
             System.out.println("connection successful");
 
 
-            try (PreparedStatement s3 = conn.prepareStatement("UPDATE comments SET comments_author = ? WHERE article_id = ?")) {
-                s3.setString(1, "deleted");
+            try (PreparedStatement s3 = conn.prepareStatement("UPDATE comments SET comments_author = ? ,  WHERE article_id = ?, comments_id = ?")) {
+                s3.setString(1, "c_deleted");
                 s3.setInt(2, articleID);
+                s3.setInt(3, commentID);
+
+                System.out.println("maybe delete it ");
 
                 s3.execute();
 
