@@ -55,7 +55,7 @@
 
             <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
 
-            <li class="nav-item"><a class="nav-link" href="/home/?author=${sessionScope.username}">My Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="/home?author=${sessionScope.username}">My Blog</a></li>
             <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
