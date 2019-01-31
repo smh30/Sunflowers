@@ -31,7 +31,7 @@
 
 
                 <%--todo --%>
-                <form method="post" action=#>
+                <form method="get" action=/edit-article>
                     <input type="hidden" name="articleID" value="${article.ID}">
                 <input type="submit" value="Edit Article">
                 </form>

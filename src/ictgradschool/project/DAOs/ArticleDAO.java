@@ -91,7 +91,7 @@ public class ArticleDAO {
             // select the most recent 6 the articles table??? ordered by timestamp with certain author:
             //todo will this bring newest first or oldest first???
             try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author LIKE ? ORDER BY article_timestamp DESC LIMIT 10 OFFSET ?")) {
-               //todo some sort of boolean that says wheter we've come here from a user looking for their own articles (ie shouldn't be fuzzy search in that case)
+                //todo some sort of boolean that says wheter we've come here from a user looking for their own articles (ie shouldn't be fuzzy search in that case)
 
 
                 stmt.setString(1, "%" + author + "%");
@@ -161,13 +161,13 @@ public class ArticleDAO {
 
             } catch (SQLException e) {
                 e.printStackTrace();
-               //return false;
+                //return false;
             }
 
-            try (PreparedStatement s3 = conn.prepareStatement("SELECT article_id FROM article WHERE article_author = ? ORDER BY article_timestamp DESC LIMIT 1")){
+            try (PreparedStatement s3 = conn.prepareStatement("SELECT article_id FROM article WHERE article_author = ? ORDER BY article_timestamp DESC LIMIT 1")) {
                 s3.setString(1, user);
-                try (ResultSet rs = s3.executeQuery()){
-                    if (rs.next()){
+                try (ResultSet rs = s3.executeQuery()) {
+                    if (rs.next()) {
                         article.setID(rs.getInt(1));
                     }
                 }
@@ -176,10 +176,10 @@ public class ArticleDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-           // return false;
+            // return false;
         }
 
-      //  return true;
+        //  return true;
         return article;
 
     }
@@ -266,22 +266,22 @@ public class ArticleDAO {
         try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
             System.out.println("connection successful");
 
-    //  TODO    deal the prolem with id stuff
+            //  TODO    deal the prolem with id stuff
             //TODO: Create user called "delete"
             //TODO: Finish UPDATE query; SET article_author = delete;
 
-                //TODO: Create user called "delete"
-                //TODO: Finish UPDATE query; SET article_author = delete;
-                try (PreparedStatement s3 = conn.prepareStatement("UPDATE article SET article_author = ? WHERE article_id = ?")) {
-                    s3.setString(1, title);
-                    s3.setString(2, "deleted");
+            //TODO: Create user called "delete"
+            //TODO: Finish UPDATE query; SET article_author = delete;
+            try (PreparedStatement s3 = conn.prepareStatement("UPDATE article SET article_author = ? WHERE article_id = ?")) {
+                s3.setString(1, title);
+                s3.setString(2, "deleted");
 
-                    s3.execute();
+                s3.execute();
 
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    return false;
-                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
 
 
         } catch (SQLException e) {
@@ -433,7 +433,7 @@ public class ArticleDAO {
                 ResultSet rs = stmt.executeQuery();
 
                 while (rs.next()) {
-System.out.println("title = "+ rs.getString(1));
+                    System.out.println("title = " + rs.getString(1));
                     article.setTitle(rs.getString(1));
                     User articleAuthor = new User(rs.getString(2));
                     article.setAuthor(articleAuthor);
@@ -458,4 +458,55 @@ System.out.println("title = "+ rs.getString(1));
 
         return article;
     }
+
+    public static Article editArticle(int id, String title, String content, ServletContext context) {
+        Properties dbProps = new Properties();
+        Article article = new Article();
+
+        /*Connect to your database and from the table created in Exercise Five and check to see if
+        a record with the specified username already exists in the table.*/
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        dbProps = new Properties();
+
+        try (FileInputStream fIn = new FileInputStream(context.getRealPath("WEB-INF/mysql.properties"))) {
+            dbProps.load(fIn);
+        } catch (IOException e) {
+            System.out.println("couldn't find the properties file???????");
+            e.printStackTrace();
+        }
+
+        try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+            System.out.println("connection successful");
+
+            // TODO update the database
+            try (PreparedStatement s2 = conn.prepareStatement("update  )" +
+                    "VALUES (?, ?, ?)")) {
+
+                s2.execute();
+
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                //return false;
+            }
+
+
+            //  return true;
+            return article;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    return article;
+    }
+
+
+
 }
