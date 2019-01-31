@@ -38,7 +38,7 @@
                 </form>
 
 
-                <form method="post" action="#">
+                <form method="post" action="/deleteArticle">
                     <input type="hidden" name="articleID" value="${article.ID}">
                 <input type="submit" value="Delete Article">
                 </form>
@@ -59,7 +59,9 @@
                 <p>${comment.commentContent}</p>
 
                         <c:if test="${article.author.username == sessionScope.username || comment.commentAuthor.username == sessionScope.username}">
+                            <form method="post" action="/deletecomment">
                 <input type="submit" value="Delete comment">
+                            </form>
                         </c:if>
             </div>
             </c:forEach>
