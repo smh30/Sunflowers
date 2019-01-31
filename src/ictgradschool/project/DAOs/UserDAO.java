@@ -227,4 +227,50 @@ public class UserDAO {
 
         return user;
     }
+
+    public static boolean deleteArticle(String username, String title, String content, int id, ServletContext context) {
+        Properties dbProps = new Properties();
+
+        /*Connect to your database and from the table created in Exercise Five and check to see if
+        a record with the specified username already exists in the table.*/
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        dbProps = new Properties();
+
+        try (FileInputStream fIn = new FileInputStream(context.getRealPath("WEB-INF/mysql.properties"))) {
+            dbProps.load(fIn);
+        } catch (IOException e) {
+            System.out.println("couldn't find the properties file???????");
+            e.printStackTrace();
+        }
+
+        try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+            System.out.println("connection successful");
+
+
+            try (PreparedStatement s3 = conn.prepareStatement("UPDATE article SET article_author = ? WHERE article_id = ?")) {
+                s3.setString(1, "deleted");
+                s3.setInt(2, id);
+
+                s3.execute();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+
+    }
 }
