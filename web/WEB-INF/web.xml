@@ -102,7 +102,7 @@
 
     <servlet-mapping>
         <servlet-name>DeleteArticle</servlet-name>
-        <url-pattern>/single-article</url-pattern>
+        <url-pattern>/deleteArticle</url-pattern>
     </servlet-mapping>
 
     <servlet>
