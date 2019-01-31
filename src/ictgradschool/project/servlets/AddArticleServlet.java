@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 @WebServlet(name = "AddArticleServlet")
 public class AddArticleServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("post!");
         System.out.println("The adding article servlet");
 
         String title = request.getParameter("article_title");
@@ -49,7 +50,8 @@ public class AddArticleServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.setAttribute("newarticle", true);
+request.getRequestDispatcher("web-pages/new-article.jsp").forward(request, response);
 
     }
 }

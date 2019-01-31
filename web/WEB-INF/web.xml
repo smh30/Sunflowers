@@ -115,6 +115,15 @@
         <url-pattern>/addcomment</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>EditArticle</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.EditArticleServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>EditArticle</servlet-name>
+        <url-pattern>/edit-article</url-pattern>
+    </servlet-mapping>
 
 
 </web-app>
