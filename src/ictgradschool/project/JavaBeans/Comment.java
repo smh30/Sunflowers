@@ -8,6 +8,15 @@ public class Comment implements Serializable {
     private User commentAuthor;
     private int articleId;
     private Timestamp timestamp;
+    private int commentID;
+
+    public int getCommentID() {
+        return commentID;
+    }
+
+    public void setCommentID(int commentID) {
+        this.commentID = commentID;
+    }
 
     public String getCommentContent() {
         return commentContent;
