@@ -63,7 +63,7 @@
 
                     <% if (request.getAttribute("content") != null){
                     %>
-                    <textarea class="form-control"  id="exampleFormControlTextarea1" rows="30">${content}</textarea>
+                    <textarea class="form-control"  name="article_content" id="exampleFormControlTextarea1" rows="30">${content}</textarea>
                     <br>
                     <%}else{ %>
                     <textarea class="form-control" name="article_content" id="exampleFormControlTextarea1" rows="30" placeholder="Content here..."></textarea>

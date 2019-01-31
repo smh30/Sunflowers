@@ -484,10 +484,11 @@ public class ArticleDAO {
         try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
             System.out.println("connection successful");
 
-            // TODO update the database
-            try (PreparedStatement s2 = conn.prepareStatement("update  )" +
-                    "VALUES (?, ?, ?)")) {
 
+            try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.article SET article_title =?, article_body = ? WHERE ysy.article.article_id = ?")){
+                s2.setString(1, title);
+                s2.setString(2,content);
+                s2.setInt(3, id);
                 s2.execute();
 
 
