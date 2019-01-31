@@ -42,12 +42,11 @@
             <input type="hidden" name="articleID" value="${article.ID}">
                 <%}%>
 
-
                 <div class="container text-center">
                     <label for="exampleFormControlInput1">Article Title Here:</label>
                     <% if (request.getAttribute("title") != null){
                     %>
-                    <input type="text" name="article_title" class="form-control" id="exampleFormControlInput1" value=${title}>
+                    <input type="text" name="article_title" class="form-control" id="exampleFormControlInput1" value='${title}'>
                     <%}else{ %>
                     <input type="text" name="article_title" class="form-control" id="exampleFormControlInput1" placeholder="Your new article title...">
                     <%  } %>
