@@ -52,9 +52,7 @@
 
 
             <li class="nav-item"><a class="nav-link" href="/new-article">New Article</a> </li>
-            <li class="nav-item"><a class="nav-link" href="/web-pages/profile.jsp">Profile</a></li>
 
-            <li class="nav-item"><a class="nav-link" href="/web-pages/new-article.jsp">New Article</a> </li>
             <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
 
             <li class="nav-item"><a class="nav-link" href="/home/?author=${sessionScope.username}">My Blog</a></li>
