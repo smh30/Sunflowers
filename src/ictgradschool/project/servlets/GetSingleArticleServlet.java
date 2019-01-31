@@ -73,6 +73,9 @@ int articleID = Integer.parseInt(request.getParameter("articleID"));
 
         article = ArticleDAO.getArticleByID(articleID, getServletContext());
         // get articles by that author
+        List<Comment> comment = CommentDAO.getAllComments(articleID,getServletContext());
+
+        request.setAttribute("comment",comment);
 
         request.setAttribute("article", article);
 
