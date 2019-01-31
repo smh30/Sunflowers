@@ -12,7 +12,7 @@ import javax.servlet.ServletContext;
 
 public class ProfileDetailsDAO {
 
-    public User checkDetails(String username, int password, String country, String realName, String desc, ServletContext context) {
+    public static User checkDetails(String username, String country, String realName, String desc, String dateOfBirth, String imageURL,ServletContext context) {
         Properties dbProps = new Properties();
         User user = new User();
         try {
@@ -37,7 +37,6 @@ public class ProfileDetailsDAO {
                         //todo see if these are working
                         //
                         String USERNAME = r.getString(4);
-                        int PASSWORD = r.getInt(5);
                         String COUNTRY = r.getString(6);
                         String REALNAME= r.getString(7);
                         String DESC= r.getString(8);

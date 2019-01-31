@@ -25,6 +25,7 @@
         <body>
         <%@ include file="navbar.jsp" %>
 
+
         <% if (request.getAttribute("message") != null){
         %>
         ${message}
@@ -40,6 +41,9 @@
                 <%}%>
 
             <%--<form action="/new-article" method="post">--%>
+
+            <form action="/new-article" method="post">
+
 
                 <div class="container text-center">
                     <label for="exampleFormControlInput1">Article Title Here:</label>

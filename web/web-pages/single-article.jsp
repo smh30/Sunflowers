@@ -61,7 +61,7 @@
             </div>
             </c:forEach>
 
-
+<c:if test="${sessionScope.username != null}">
             <%--another form which posts to /addcomment
                      text field for writing comment
                      submit button--%>
@@ -77,6 +77,6 @@
                 </div>
             </div>
 
-
+            </c:if>
     </body>
 </html>

@@ -28,7 +28,48 @@
     </head>
     <body>
         <%@ include file="navbar.jsp" %>
+
+
         <div class="container-fluid">
+
+            <div class="user">
+                <%--All of these are showing up on the profile webpage--%>
+                <p>${user.username}'s Account: </p>
+                <%--TODO: Grab JSTL and put it into forms?????--%>
+                <p>${user.country}</p>
+                <p>${user.realName}</p>
+                <p>${user.description}</p>
+                <p>${user.DOB}</p>
+                <p>${user.pictureURL}</p>
+
+
+                    <%--todo: copied from Yun's code--%>
+                    <%--ask Yun or Steph for help!--%>
+                    <form method="post" action=#>
+                        <input type="hidden" name="articleID" value="${user.ID}">
+                        <input type="submit" value="Edit Article">
+                    </form>
+
+
+                    <form method="post" action="#">
+                        <input type="hidden" name="articleID" value="${user.ID}">
+                        <input type="submit" value="Delete Article">
+                    </form>
+
+
+                <%--todo --%>
+                <form method="post" action=#>
+                    <input type="hidden" name="articleID" value="${article.ID}">
+                    <input type="submit" value="Edit Article">
+                </form>
+
+
+                <form method="post" action="#">
+                    <input type="hidden" name="articleID" value="${article.ID}">
+                    <input type="submit" value="Delete Article">
+                </form>
+
+            </div>
             <h1>User Account</h1>
             <br>
             <br>
@@ -67,6 +108,13 @@
                     <label for="rnameID">Real name:</label>
                     <input type="text" id="rnameID" name="realname">
                     <br>
+                    <label for="dateofbirthID">Date of birth:</label>
+                    <input type="text" id="dateofbirthID" name="dateofbirth">
+                    <br>
+                    <%--TODO: Make this more useable--%>
+                    <label for="pictureurlID">Picture URL:</label>
+                    <input type="text" id="pictureurlID" name="picture url">
+                    <br>
                 </form>
 
                 <%--TODO: Link this up to a servlet--%>
@@ -84,6 +132,14 @@
                 <%--TODO: Link this up to a servlet--%>
                 <input type="submit" value="submit">
                 <%--TODO: Make this webpage RESPONSIVE--%>
+
+
+                <%--In profile.jsp, have && etc EL user. ask Yun.--%>
+                <%--Set into form inputs - one called placeholder = $[user.realname} PASSWORD--%>
+                <%--value = if submit, value already was... Not great for updating!!--%>
+                <%--But if had value, would update every value in database every time--%>
+                <%--VALUE WINS--%>
+
             </div>
         </div>
     </body>
