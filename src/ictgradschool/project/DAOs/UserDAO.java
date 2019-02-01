@@ -143,7 +143,10 @@ public class UserDAO {
         }
         return null;
     }
-    public static User editUser(String username, String country, String realName, String desc, String dateOfBirth, String imageURL, int userID,ServletContext context) {
+
+
+
+    public static User editUser(String username, String country, String realName, String desc, String dateOfBirth, String imageURL,ServletContext context) {
 
         User user = new User();
         Properties dbProps = DAOCheckProperties.check(context);
@@ -182,6 +185,8 @@ public class UserDAO {
         }
         return null;
     }
+
+
 
 
 }

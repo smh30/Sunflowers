@@ -39,13 +39,13 @@
                     <%--todo: copied from Yun's code--%>
                     ask Yun or Steph for help!
                     <form method="post" action=#>
-                        <input type="hidden" name="userID" value="${user.userID}">
+                        <input type="hidden" name="username" value="${user.username}">
                         <input type="submit" value="Edit User">
                     </form>
 
 
                     <form method="post" action="#">
-                        <input type="hidden" name="userID" value="${user.userID}">
+                        <input type="hidden" name="username" value="${user.username}">
                         <input type="submit" value="Delete User">
                     </form>
 
@@ -206,16 +206,6 @@
 
                 <%--TODO: Link this up to a servlet--%>
                 <input type="submit" value="submit">
-
-
-                <%--<label for="profile_text"> About Text</label>--%>
-                <%--<textarea input="text"--%>
-                          <%--id="profile_text"--%>
-                          <%--name="profile_text_area"--%>
-                          <%--value="${user.description}"--%>
-                          <%--rows="4"--%>
-                          <%--cols="40">--%>
-                <%--</textarea>--%>
                 <br>
                 <br>
                 <%--TODO: Link this up to a servlet--%>
