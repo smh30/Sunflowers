@@ -26,7 +26,7 @@
 
 <body>
 <!-- i've included the navbar here so that i can have links to test the login etc with - steph -->
-<%@ include file="navbar.jsp" %>
+<%@ include file="../WEB-INF/partial/navbar.jsp" %>
 <div class="container">
 <%--display the articles as appropriate--%>
 <c:if test="${empty articles}">
