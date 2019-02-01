@@ -175,7 +175,7 @@ public class UserDAO {
         }
         return user;
     }
-    public static User editUser(String username, String country, String realName, String desc, String dateOfBirth, String imageURL, int userID,ServletContext context) {
+    public static User editUser(String username, String country, String realName, String desc, String dateOfBirth, String imageURL,ServletContext context) {
         Properties dbProps = new Properties();
         User user = new User();
 
@@ -228,7 +228,7 @@ public class UserDAO {
         return user;
     }
 
-    public static boolean deleteArticle(String username, String title, String content, int id, ServletContext context) {
+    public static boolean deleteArticle(String username, String title, String content, ServletContext context) {
         Properties dbProps = new Properties();
 
         /*Connect to your database and from the table created in Exercise Five and check to see if
@@ -255,7 +255,6 @@ public class UserDAO {
 
             try (PreparedStatement s3 = conn.prepareStatement("UPDATE article SET article_author = ? WHERE article_id = ?")) {
                 s3.setString(1, "deleted");
-                s3.setInt(2, id);
 
                 s3.execute();
 
