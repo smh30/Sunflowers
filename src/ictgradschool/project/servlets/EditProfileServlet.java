@@ -64,7 +64,6 @@ public class EditProfileServlet extends HttpServlet {
         request.setAttribute("image", temp.getPictureURL());
         request.setAttribute("realname", temp.getRealName());
         request.setAttribute("username", temp.getUsername());
-        request.setAttribute("userID", temp.getUserID());
 
 
 
@@ -74,9 +73,9 @@ public class EditProfileServlet extends HttpServlet {
         String image = request.getParameter("pictureURL");
         String realname = request.getParameter("realname");
         String username = request.getParameter("username");
-        int userID = Integer.parseInt(request.getParameter("userID"));
 
-        User user = UserDAO.editUser(temp.getCountry(), temp.getDescription(), temp.getDOB(), temp.getPictureURL(), temp.getRealName(), temp.getUsername(),temp.getUserID(), getServletContext());
+
+        User user = UserDAO.editUser(temp.getCountry(), temp.getDescription(), temp.getDOB(), temp.getPictureURL(), temp.getRealName(), temp.getUsername(),getServletContext());
 
         System.out.println("user edited!!!!!!!");
 

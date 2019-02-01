@@ -4,7 +4,6 @@ import javax.servlet.ServletContext;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    int userID;
     String username;
     String country;
     String realName;
@@ -14,14 +13,6 @@ public class User implements Serializable {
 
     public String getCountry() {
         return country;
-    }
-
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
     }
 
     public void setCountry(String country) {
