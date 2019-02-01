@@ -22,7 +22,7 @@ PRIMARY KEY (username)
 DROP TABLE IF EXISTS article;
 
 CREATE TABLE article(
-article_title VARCHAR (30),
+article_title VARCHAR (100),
 article_author VARCHAR (30),
 article_id INT AUTO_INCREMENT,
 article_body VARCHAR (5000),

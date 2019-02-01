@@ -19,7 +19,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <%@ include file="navbar.jsp" %>
+        <%@ include file="../WEB-INF/partial/navbar.jsp" %>
         <div class="container">
 
             <div class="article">
@@ -59,7 +59,7 @@
                 <p>${comment.commentContent}</p>
 
                         <c:if test="${article.author.username == sessionScope.username || comment.commentAuthor.username == sessionScope.username}">
-                            <form method="get" action="/deletecomment">
+                            <form method="GET" action="/deletecomment">
                                 <input type="hidden" name="articleID" value="${article.ID}">
                                 <input type="hidden" name="commentID" value="${comment.commentID}">
                 <input type="submit" value="Delete comment">

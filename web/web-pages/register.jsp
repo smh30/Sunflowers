@@ -23,7 +23,7 @@
 
     <body>
     <!-- i've included the navbar here so that i can have links to test the login etc with - steph -->
-    <%@ include file="navbar.jsp" %>
+    <%@ include file="../WEB-INF/partial/navbar.jsp" %>
     <!--just a basic form so i can test the servlet -->
     <!-- if the username is already taken, print a message/or show a popup??-->
 <% if (request.getAttribute("message") != null){
