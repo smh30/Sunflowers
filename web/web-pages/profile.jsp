@@ -34,10 +34,8 @@
 
             <div class="user">
                 <%--All of these are showing up on the profile webpage--%>
-                <p>${user.username}'s Account: </p>
+                <p> </p>
 
-                    <%--todo: copied from Yun's code--%>
-                    ask Yun or Steph for help!
                     <form method="post" action=#>
                         <input type="hidden" name="username" value="${user.username}">
                         <input type="submit" value="Edit User">
@@ -51,7 +49,7 @@
 
 
             </div>
-            <h1>User Account</h1>
+            <h1>${user.username}'s Account:</h1>
             <br>
             <br>
             <%--Adding form for uploading default user pic (the one the user sees when they click on the profile webpage)--%>
@@ -61,62 +59,6 @@
 
             <div style="margin-left: 250px">
                 <h4>Choose default picture: </h4>
-                <%--TODO: What servlet are we linking to here?? Will be for uploading own photo--%>
-
-                <% if (request.getAttribute("country")!= null){%>
-                <form action="/Upload" method="post">
-                <%-- figure out what to do here --%>
-                </form>
-                <%}else{%>
-                <form action="/editprofile" method="post">
-                <input type="hidden" name="country" value="${user.country}"></form>
-                <%}%>
-
-                <% if (request.getAttribute("realname")!= null){%>
-                <form action="/Upload" method="post">
-                    <%-- figure out what to do here --%>
-                </form>
-                <%}else{%>
-                <form action="/editprofile" method="post">
-                    <input type="hidden" name="realname" value="${user.realName}"></form>
-                <%}%>
-
-                <% if (request.getAttribute("description")!= null){%>
-                <form action="/Upload" method="post">
-                    <%-- figure out what to do here --%>
-                </form>
-                <%}else{%>
-                <form action="/editprofile" method="post">
-                    <input type="hidden" name="desc" value="${user.description}"></form>
-                <%}%>
-
-                <% if (request.getAttribute("imageURL")!= null){%>
-                <form action="/Upload" method="post">
-                    <%-- figure out what to do here --%>
-                </form>
-                <%}else{%>
-                <form action="/editprofile" method="post">
-                    <input type="hidden" name="imageURL" value="${user.pictureURL}"></form>
-                <%}%>
-
-                <% if (request.getAttribute("dateofbirth")!= null){%>
-                <form action="/Upload" method="post">
-                    <%-- figure out what to do here --%>
-                </form>
-                <%}else{%>
-                <form action="/editprofile" method="post">
-                    <input type="hidden" name="dateofbirth" value="${user.DOB}"></form>
-                <%}%>
-
-                <% if (request.getAttribute("username")!= null){%>
-                <form action="/Upload" method="post">
-                    <%-- figure out what to do here --%>
-                </form>
-                <%}else{%>
-                <form action="/editprofile" method="post">
-                    <input type="hidden" name="username" value="${user.username}"></form>
-                <%}%>
-
 
                 <form method="POST" action= "/Upload" enctype="multipart/form-data">
                     <select id="dlist" onchange="switchImage()">
@@ -129,22 +71,29 @@
                     <br>
                     <br>
                     <input type="submit" value="Upload">
+                </form>
                     <br>
                     <br>
-
-                    <%--TODO: Create forms for: description--%>
-
-
+<%--Image form ends. Edit from here--%>
+                <form>
 
                     <label for="unameID">Username:</label>
-                    <% if (request.getAttribute("username") != null){
-                    %>
-                    <input type="text" id="unameID" name="username" value=${user.username}>
-                    <br>
-                    <%}else{ %>
-                    <input type="text" id="unameID" name="username">
-                    <br>
-                    <%  } %>
+                    <c:choose>
+                        <c:when test="${user.username!=null}" >
+                            <input type="text" id="unameID" name="username" value=${user.username}>
+                        </c:when>
+                        <c:otherwise>
+                            <input type="text" id="unameID" name="username">
+                        </c:otherwise>
+                    </c:choose>
+                    <%--<% if (request.getAttribute("username") != null){--%>
+                    <%--%>--%>
+                    <%--<input type="text" id="unameID" name="username" value=${user.username}>--%>
+                    <%--<br>--%>
+                    <%--<%}else{ %>--%>
+
+                    <%--<br>--%>
+                    <%--<%  } %>--%>
 
                     <label for="countryID">Country:</label>
                     <% if (request.getAttribute("country") != null){
@@ -186,6 +135,62 @@
                     <input type="text" id="pictureurlID" name="pictureurl">
                     <br>
                     <%  } %>
+
+
+                    <% if (request.getAttribute("country")!= null){%>
+                    <form action="/Upload" method="post">
+                        <%-- figure out what to do here --%>
+                    </form>
+                    <%}else{%>
+                    <form action="/editprofile" method="post">
+                        <input type="hidden" name="country" value="${user.country}"></form>
+                    <%}%>
+
+                    <% if (request.getAttribute("realname")!= null){%>
+                    <form action="/Upload" method="post">
+                        <%-- figure out what to do here --%>
+                    </form>
+                    <%}else{%>
+                    <form action="/editprofile" method="post">
+                        <input type="hidden" name="realname" value="${user.realName}"></form>
+                    <%}%>
+
+                    <% if (request.getAttribute("description")!= null){%>
+                    <form action="/Upload" method="post">
+                        <%-- figure out what to do here --%>
+                    </form>
+                    <%}else{%>
+                    <form action="/editprofile" method="post">
+                        <input type="hidden" name="desc" value="${user.description}"></form>
+                    <%}%>
+
+                    <% if (request.getAttribute("imageURL")!= null){%>
+                    <form action="/Upload" method="post">
+                        <%-- figure out what to do here --%>
+                    </form>
+                    <%}else{%>
+                    <form action="/editprofile" method="post">
+                        <input type="hidden" name="imageURL" value="${user.pictureURL}"></form>
+                    <%}%>
+
+                    <% if (request.getAttribute("dateofbirth")!= null){%>
+                    <form action="/Upload" method="post">
+                        <%-- figure out what to do here --%>
+                    </form>
+                    <%}else{%>
+                    <form action="/editprofile" method="post">
+                        <input type="hidden" name="dateofbirth" value="${user.DOB}"></form>
+                    <%}%>
+
+                    <% if (request.getAttribute("username")!= null){%>
+                    <form action="/Upload" method="post">
+                        <%-- figure out what to do here --%>
+                    </form>
+                    <%}else{%>
+                    <form action="/editprofile" method="post">
+                        <input type="hidden" name="username" value="${user.username}"></form>
+                    <%}%>
+
 
                     <%--TODO: Make this more useable--%>
                     <label for="descID">Description:</label>
