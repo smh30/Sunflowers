@@ -158,6 +158,14 @@
         <url-pattern>/deletecomment</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>DeleteProfile</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.user.DeleteProfileServlet</servlet-class>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>DeleteProfile</servlet-name>
+        <url-pattern>/deleteprofile</url-pattern>
+    </servlet-mapping>
 
 </web-app>
