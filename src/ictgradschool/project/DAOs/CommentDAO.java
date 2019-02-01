@@ -21,24 +21,23 @@ public class CommentDAO {
 
         if(dbProps!=null) {
 
-            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
-                // select the most recent 6 from the articles table??? ordered by timestamp:
-                //todo will this bring newest first or oldest first???
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM ysy.comments WHERE article_id =? ORDER BY comments_timestamp ")) {
-                    stmt.setInt(1, articleId);
-                    ResultSet rs = stmt.executeQuery();
+        try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+            System.out.println("connection successful");
+            // select the most recent 6 from the articles table??? ordered by timestamp:
+            //todo will this bring newest first or oldest first???
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM ysy.comments WHERE article_id =? ORDER BY comments_timestamp ")) {
+                stmt.setInt(1, articleId);
+                ResultSet rs = stmt.executeQuery();
 
                     while (rs.next()) {
 
-                        //todo uncomment these once database is ready
-                        Comment comment = new Comment();
-                        comment.setCommentContent(rs.getString(3));
-                        comment.setCommentID(rs.getInt(1));
+                    Comment comment = new Comment();
+                    comment.setCommentContent(rs.getString(3));
+                    comment.setCommentID(rs.getInt(1));
 
-                        comment.setTimestamp(rs.getTimestamp(5));
-                        User commentAuthor = new User(rs.getString(2));
-                        comment.setCommentAuthor(commentAuthor);
+                    comment.setTimestamp(rs.getTimestamp(5));
+                    User commentAuthor = new User(rs.getString(2));
+                    comment.setCommentAuthor(commentAuthor);
 
                         comments.add(comment);
                     }
