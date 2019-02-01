@@ -419,7 +419,7 @@ public class ArticleDAO {
         }
 
         try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-            System.out.println("connection successful");
+            //System.out.println("connection successful");
 
 
             try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_id = ?")) {
@@ -427,7 +427,7 @@ public class ArticleDAO {
                 ResultSet rs = stmt.executeQuery();
 
                 while (rs.next()) {
-                    System.out.println("title = " + rs.getString(1));
+                    System.out.println("title found from query = " + rs.getString(1));
                     article.setTitle(rs.getString(1));
                     User articleAuthor = new User(rs.getString(2));
                     article.setAuthor(articleAuthor);

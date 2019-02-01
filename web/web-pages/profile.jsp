@@ -87,7 +87,7 @@
                 </form>
                 <%}else{%>
                 <form action="/editprofile" method="post">
-                    <input type="hidden" name="desc" value="${user.desc}"></form>
+                    <input type="hidden" name="desc" value="${user.description}"></form>
                 <%}%>
 
                 <% if (request.getAttribute("imageURL")!= null){%>
@@ -191,7 +191,7 @@
                     <label for="descID">Description:</label>
                     <% if (request.getAttribute("description") != null){
                     %>
-                    <input type="text" id="descID" name="description" value="${user.desc}">
+                    <input type="text" id="descID" name="description" value="${user.description}">
                     <br>
                     <%}else{ %>
                     <input type="text" id="descID" name="description">
