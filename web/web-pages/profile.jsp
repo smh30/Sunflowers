@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: yab2
@@ -24,23 +25,6 @@
 
         <div class="container-fluid">
 
-            <div class="user">
-                <%--All of these are showing up on the profile webpage--%>
-                <p> </p>
-
-                    <form method="post" action=#>
-                        <input type="hidden" name="username" value="${user.username}">
-                        <input type="submit" value="Edit User">
-                    </form>
-
-
-                    <form method="post" action="#">
-                        <input type="hidden" name="username" value="${user.username}">
-                        <input type="submit" value="Delete User">
-                    </form>
-
-
-            </div>
             <h1>${user.username}'s Account:</h1>
             <br>
             <br>
@@ -150,6 +134,16 @@
                     <%}%>
 
 
+                    <label for="descID">Description:</label>
+                    <c:choose>
+                        <c:when test="${user.description}">
+                            <input type="text" id="descID" name="description" value="${user.description}">
+                        </c:when>
+                        <c:otherwise>
+                            <input type="text" id="descID" name="description">
+                        </c:otherwise>
+                    </c:choose>
+
 
                     <% if (request.getAttribute("description")!= null){%>
                     <form action="/Upload" method="post">
@@ -157,10 +151,8 @@
                     </form>
                     <%}else{%>
                     <form action="/editprofile" method="post">
-                        <input type="hidden" name="desc" value="${user.description}"></form>
+                        <input type="hidden" name="description" value="${user.description}"></form>
                     <%}%>
-
-
 
 
 
@@ -183,16 +175,7 @@
                     <%}%>
 
 
-                    <%--TODO: Make this more useable--%>
-                    <label for="descID">Description:</label>
-                    <% if (request.getAttribute("description") != null){
-                    %>
-                    <input type="text" id="descID" name="description" value="${user.description}">
-                    <br>
-                    <%}else{ %>
-                    <input type="text" id="descID" name="description">
-                    <br>
-                    <%  } %>
+
 
                     <%--TODO: link up password in more secure way - talk to Steph re hashing--%>
                     <label for="pwordID">Password:</label>
@@ -200,6 +183,22 @@
                     <br>
                 </form>
 
+                <div class="user">
+                    <%--All of these are showing up on the profile webpage--%>
+                    <p> </p>
+
+                    <form method="post" action=#>
+                        <input type="hidden" name="username" value="${user.username}">
+                        <input type="submit" value="Edit User">
+                    </form>
+
+
+                    <form method="post" action="#">
+                        <input type="hidden" name="username" value="${user.username}">
+                        <input type="submit" value="Delete User">
+                    </form>
+
+                </div>
                 <%--TODO: Link this up to a servlet--%>
                 <input type="submit" value="submit">
                 <br>
