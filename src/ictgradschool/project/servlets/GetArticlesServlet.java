@@ -46,14 +46,12 @@ public class GetArticlesServlet extends HttpServlet {
         // if looking for all the articles ie no search parameter were entered....
         if (author == null && title == null && date == null) {
 
-            //articleList = ArticleDAO.getAllArticles(getServletContext());
             System.out.println("getting all articles from offset " + offset);
 
             articleList = ArticleDAO.getAllArticles(offset, getServletContext());
 
 
         } else if(author!=null && title == null && date == null) {
-            //todo fix unfuzzy search for loogged in / fuzzy for search function
             System.out.println("getting articles  by logged in user " + author);
             articleList = ArticleDAO.getArticlesByAuthor(offset, author, getServletContext());
 
@@ -62,6 +60,7 @@ public class GetArticlesServlet extends HttpServlet {
                 //todo search by other params (title/ date) and by combinations of params
                 if (!author.equals("")) {
                     if (!title.equals("")){
+                        //if (!date.equals(""){
                         System.out.println("getting articles by title and author :  " + title + author);
                         articleList = ArticleDAO.getArticlesByTitleAndAuthor(offset, title, author, getServletContext());
                     } else {
@@ -74,15 +73,13 @@ public class GetArticlesServlet extends HttpServlet {
                 if (!title.equals("")){
                     System.out.println("getting articles by title:  " + title);
                     articleList = ArticleDAO.getArticlesByTitle(offset, title, getServletContext());
+                    // if (!date.equals(""){
                 }
 
                 if (!date.equals("")){
                     //search by datetime
                 }
-
-                // if (title != "")
             }
-
 
         request.setAttribute("articles", articleList);
 

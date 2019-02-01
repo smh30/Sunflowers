@@ -35,15 +35,14 @@ public class CommentDAO {
 
         try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
             System.out.println("connection successful");
-            // select the most recent 6 from the articles table??? ordered by timestamp:
-            //todo will this bring newest first or oldest first???
+
+            //todo make it so that we can not retrieve the comments by c_deleted
             try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM ysy.comments WHERE article_id =? ORDER BY comments_timestamp ")) {
                 stmt.setInt(1, articleId);
                 ResultSet rs = stmt.executeQuery();
 
                 while (rs.next()) {
 
-                    //todo uncomment these once database is ready
                     Comment comment = new Comment();
                     comment.setCommentContent(rs.getString(3));
                     comment.setCommentID(rs.getInt(1));
@@ -67,8 +66,6 @@ public class CommentDAO {
 
         Properties dbProps = new Properties();
 
-        /*Connect to your database and from the table created in Exercise Five and check to see if
-        a record with the specified username already exists in the table.*/
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -141,10 +138,10 @@ public class CommentDAO {
             System.out.println("connection successful");
 
 
-            try (PreparedStatement s3 = conn.prepareStatement("UPDATE comments SET comments_author = ? ,  WHERE article_id = ?, comments_id = ?")) {
+            try (PreparedStatement s3 = conn.prepareStatement("UPDATE comments SET comments_author = ?  WHERE comments_id = ?")) {
                 s3.setString(1, "c_deleted");
-                s3.setInt(2, articleID);
-                s3.setInt(3, commentID);
+               // s3.setInt(2, articleID);
+                s3.setInt(2, commentID);
 
                 System.out.println("maybe delete it ");
 
