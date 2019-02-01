@@ -25,7 +25,7 @@ public class CommentDAO {
             System.out.println("connection successful");
             // select the most recent 6 from the articles table??? ordered by timestamp:
             //todo will this bring newest first or oldest first???
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM ysy.comments WHERE article_id =? ORDER BY comments_timestamp ")) {
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM comments WHERE article_id =? ORDER BY comments_timestamp ")) {
                 stmt.setInt(1, articleId);
                 ResultSet rs = stmt.executeQuery();
 
@@ -61,7 +61,7 @@ public class CommentDAO {
                 System.out.println("connection successful");
 
 
-                try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO ysy.comments(comments_author,article_id , coments_body)" +
+                try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO comments(comments_author,article_id , coments_body)" +
                         "VALUES (?, ?, ?)")) {
                     s2.setString(1, user);
                     s2.setString(2, ArticleId);
