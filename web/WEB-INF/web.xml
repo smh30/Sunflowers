@@ -9,7 +9,7 @@
 
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.LoginServlet</servlet-class>
+        <servlet-class>ictgradschool.project.servlets.user.LoginServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -19,7 +19,7 @@
 
     <servlet>
         <servlet-name>Register</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.RegisterServlet</servlet-class>
+        <servlet-class>ictgradschool.project.servlets.user.RegisterServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -29,7 +29,7 @@
 
     <servlet>
         <servlet-name>Logout</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.LogOutServlet</servlet-class>
+        <servlet-class>ictgradschool.project.servlets.user.LogOutServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -68,7 +68,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>AddArticle</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.AddArticleServlet</servlet-class>
+        <servlet-class>ictgradschool.project.servlets.article.AddArticleServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -98,7 +98,7 @@
 
     <servlet>
         <servlet-name>DeleteArticle</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.DeleteArticleServlet</servlet-class>
+        <servlet-class>ictgradschool.project.servlets.article.DeleteArticleServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -119,7 +119,7 @@
     <servlet>
 
         <servlet-name>EditArticle</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.EditArticleServlet</servlet-class>
+        <servlet-class>ictgradschool.project.servlets.article.EditArticleServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>
@@ -129,7 +129,7 @@
 
     <servlet>
         <servlet-name>LoadProfileServlet</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.LoadProfileServlet</servlet-class>
+        <servlet-class>ictgradschool.project.servlets.user.LoadProfileServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -140,7 +140,7 @@
 
     <servlet>
         <servlet-name>EditProfileServlet</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.EditProfileServlet</servlet-class>
+        <servlet-class>ictgradschool.project.servlets.user.EditProfileServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

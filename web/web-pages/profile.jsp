@@ -8,26 +8,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--TODO: Write JS external file and pop in????--%>
 <html>
-    <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <%! String title = "Profile"; %>
+    <%@ include file="../WEB-INF/_partial_header.jsp"%>
 
-        <!-- jQuery library -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-        <!-- Latest compiled JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
-        <title>Profile</title>
-        <script type="text/javascript">
-            function switchImage() {
-                var image = document.getElementById("imageToSwap");
-                var dropdown = document.getElementById("dlist");
-                image.src = dropdown.value;
-            }
-        </script>
-    </head>
+    <script type="text/javascript">
+    function switchImage() {
+        var image = document.getElementById("imageToSwap");
+        var dropdown = document.getElementById("dlist");
+        image.src = dropdown.value;
+    }
+</script>
     <body>
-        <%@ include file="navbar.jsp" %>
+        <%@ include file="../WEB-INF/partial/navbar.jsp" %>
 
 
         <div class="container-fluid">
@@ -86,7 +78,8 @@
                             <input type="text" id="unameID" name="username">
                         </c:otherwise>
                     </c:choose>
-                    
+
+
                     <label for="countryID">Country:</label>
                     <c:choose>
                         <c:when test="${user.country!=null}">
@@ -97,6 +90,16 @@
                         </c:otherwise>
                     </c:choose>
 
+                    <% if (request.getAttribute("country")!= null){%>
+                    <form action="/Upload" method="post">
+                        <%-- figure out what to do here --%>
+                    </form>
+                    <%}else{%>
+                    <form action="/editprofile" method="post">
+                        <input type="hidden" name="country" value="${user.country}"></form>
+                    <%}%>
+
+
                     <label for="rnameID">Real name:</label>
                     <c:choose>
                         <c:when test="${user.realName!=null}">
@@ -105,8 +108,17 @@
                             <c:otherwise>
                                 <input type="text" id="rnameID" name="realname">   
                             </c:otherwise>
-
                     </c:choose>
+
+                    <% if (request.getAttribute("realname")!= null){%>
+                    <form action="/Upload" method="post">
+                        <%-- figure out what to do here --%>
+                    </form>
+                    <%}else{%>
+                    <form action="/editprofile" method="post">
+                        <input type="hidden" name="realname" value="${user.realName}"></form>
+                    <%}%>
+
 
                     <label for="dateofbirthID">Date of birth:</label>
                     <c:choose>
@@ -128,25 +140,16 @@
                         </c:otherwise>
                     </c:choose>
 
-
-
-                    <% if (request.getAttribute("country")!= null){%>
+                    <% if (request.getAttribute("imageURL")!= null){%>
                     <form action="/Upload" method="post">
                         <%-- figure out what to do here --%>
                     </form>
                     <%}else{%>
                     <form action="/editprofile" method="post">
-                        <input type="hidden" name="country" value="${user.country}"></form>
+                        <input type="hidden" name="imageURL" value="${user.pictureURL}"></form>
                     <%}%>
 
-                    <% if (request.getAttribute("realname")!= null){%>
-                    <form action="/Upload" method="post">
-                        <%-- figure out what to do here --%>
-                    </form>
-                    <%}else{%>
-                    <form action="/editprofile" method="post">
-                        <input type="hidden" name="realname" value="${user.realName}"></form>
-                    <%}%>
+
 
                     <% if (request.getAttribute("description")!= null){%>
                     <form action="/Upload" method="post">
@@ -157,14 +160,9 @@
                         <input type="hidden" name="desc" value="${user.description}"></form>
                     <%}%>
 
-                    <% if (request.getAttribute("imageURL")!= null){%>
-                    <form action="/Upload" method="post">
-                        <%-- figure out what to do here --%>
-                    </form>
-                    <%}else{%>
-                    <form action="/editprofile" method="post">
-                        <input type="hidden" name="imageURL" value="${user.pictureURL}"></form>
-                    <%}%>
+
+
+
 
                     <% if (request.getAttribute("dateofbirth")!= null){%>
                     <form action="/Upload" method="post">

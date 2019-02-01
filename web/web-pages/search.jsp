@@ -19,7 +19,7 @@
 
     </head>
     <body>
-        <%@ include file="navbar.jsp" %>
+        <%@ include file="../WEB-INF/partial/navbar.jsp" %>
         <div class="container">
 
             <h3>Search the Articles Database</h3>
