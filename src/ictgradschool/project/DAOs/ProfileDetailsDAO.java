@@ -144,7 +144,7 @@ public class ProfileDetailsDAO {
         return null;
     }
 
-    public static boolean deleteUser(String country, String description, String dateofbirth, String image, String realname, String username, int userID, ServletContext context) {
+    public static boolean deleteUser(String country, String description, String dateofbirth, String image, String realname, String username, ServletContext context) {
         Properties dbProps = DAOCheckProperties.check(context);
 
         if(dbProps!=null) {
@@ -153,8 +153,10 @@ public class ProfileDetailsDAO {
                 System.out.println("connection successful");
 
                 //TODO: Change placement re username to userID when linked up on database
-                try (PreparedStatement s3 = conn.prepareStatement("UPDATE ysy.user SET username = ?")) {
+                try (PreparedStatement s3 = conn.prepareStatement("UPDATE ysy.user SET username = ? WHERE real_name=?")) {
+                    System.out.println("working!!!");
                     s3.setString(1, "deleted");
+                    s3.setString(2, realname);
 
                     s3.execute();
 
