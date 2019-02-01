@@ -86,55 +86,48 @@
                             <input type="text" id="unameID" name="username">
                         </c:otherwise>
                     </c:choose>
-                    <%--<% if (request.getAttribute("username") != null){--%>
-                    <%--%>--%>
-                    <%--<input type="text" id="unameID" name="username" value=${user.username}>--%>
-                    <%--<br>--%>
-                    <%--<%}else{ %>--%>
-
-                    <%--<br>--%>
-                    <%--<%  } %>--%>
-
+                    
                     <label for="countryID">Country:</label>
-                    <% if (request.getAttribute("country") != null){
-                    %>
-                    <input type="text" id="countryID" name="country" value=${user.country}>
-                    <br>
-                    <%}else{ %>
-                    <input type="text" id="countryID" name="country">
-                    <br>
-                    <%  } %>
+                    <c:choose>
+                        <c:when test="${user.country!=null}">
+                            <input type="text" id="countryID" name="country" value=${user.country}>
+                        </c:when>
+                        <c:otherwise>
+                            <input type="text" id="countryID" name="country">
+                        </c:otherwise>
+                    </c:choose>
 
                     <label for="rnameID">Real name:</label>
-                    <% if (request.getAttribute("realname") != null){
-                    %>
-                    <input type="text" id="rnameID" name="realname" value="${user.realName}">
-                    <br>
-                    <%}else{ %>
-                    <input type="text" id="rnameID" name="realname">
-                    <br>
-                    <%  } %>
+                    <c:choose>
+                        <c:when test="${user.realName!=null}">
+                            <input type="text" id="rnameID" name="realname" value="${user.realName}">
+                        </c:when>
+                            <c:otherwise>
+                                <input type="text" id="rnameID" name="realname">   
+                            </c:otherwise>
+
+                    </c:choose>
 
                     <label for="dateofbirthID">Date of birth:</label>
-                    <% if (request.getAttribute("dateofbirth") != null){
-                    %>
-                    <input type="text" id="dateofbirthID" name="dateofbirth" value="${user.DOB}">
-                    <br>
-                    <%}else{ %>
-                    <input type="text" id="dateofbirthID" name="dateofbirth">
-                    <br>
-                    <%  } %>
+                    <c:choose>
+                        <c:when test="${user.DOB!=null}">
+                            <input type="text" id="dateofbirthID" name="dateofbirth" value="${user.DOB}">
+                        </c:when>
+                        <c:otherwise>
+                            <input type="text" id="dateofbirthID" name="dateofbirth">
+                        </c:otherwise>
+                    </c:choose>
 
-                    <%--TODO: Make this more useable--%>
                     <label for="pictureurlID">Picture URL:</label>
-                    <% if (request.getAttribute("pictureurl") != null){
-                    %>
-                    <input type="text" id="pictureurlID" name="pictureurl" value="${user.pictureURL}">
-                    <br>
-                    <%}else{ %>
-                    <input type="text" id="pictureurlID" name="pictureurl">
-                    <br>
-                    <%  } %>
+                    <c:choose>
+                        <c:when test="${user.pictureURL!=null}">
+                            <input type="text" id="pictureurlID" name="pictureurl" value="${user.pictureURL}">
+                        </c:when>
+                        <c:otherwise>
+                            <input type="text" id="pictureurlID" name="pictureurl">
+                        </c:otherwise>
+                    </c:choose>
+
 
 
                     <% if (request.getAttribute("country")!= null){%>
