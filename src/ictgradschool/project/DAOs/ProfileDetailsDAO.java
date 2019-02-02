@@ -74,16 +74,16 @@ public class ProfileDetailsDAO {
                         String USERNAME = rs.getString(4);
                         String COUNTRY = rs.getString(6);
                         String REALNAME = rs.getString(7);
-                        String DESC = rs.getString(8);
+                        String DESCRIPTION = rs.getString(8);
                         String DOB = rs.getString(3);
-                        String IMAGEURL = rs.getString(9);
+                        String PICTUREURL = rs.getString(9);
 
                         user.setUsername(USERNAME);
                         user.setCountry(COUNTRY);
                         user.setRealName(REALNAME);
-                        user.setDescription(DESC);
+                        user.setDescription(DESCRIPTION);
                         user.setDOB(DOB);
-                        user.setPictureURL(IMAGEURL);
+                        user.setPictureURL(PICTUREURL);
 
 
                     }
@@ -176,6 +176,4 @@ public class ProfileDetailsDAO {
         return false;
 
     }
-
-
 }
