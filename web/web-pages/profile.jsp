@@ -139,7 +139,7 @@
 
                     <label for="descID">Description:</label>
                     <c:choose>
-                        <c:when test="${user.description}">
+                        <c:when test="${user.description!=null}">
                             <input type="text" id="descID" name="description" value="${user.description}">
                         </c:when>
                         <c:otherwise>
