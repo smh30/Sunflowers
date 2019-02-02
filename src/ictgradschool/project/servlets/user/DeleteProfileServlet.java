@@ -25,7 +25,7 @@ public class DeleteProfileServlet extends HttpServlet {
 
 
         //TODO: Check what on earth below line means
-        String user = (String) request.getSession().getAttribute("");
+        String username1 = (String) request.getSession().getAttribute("username");
 
         boolean userDeleted = ProfileDetailsDAO.deleteUser(country, description, dateofbirth, image, realname, username, getServletContext());
 
