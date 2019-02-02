@@ -67,3 +67,5 @@ ALTER TABLE user ADD COLUMN image varchar(80);
 UPDATE user SET date_of_birth = 06121996, country='Australia', real_name='Pork Chop', description='Testing code is my sole hobby right now.' WHERE username = 'z';
 
 UPDATE user SET date_of_birth = 09121995, country='NZ', real_name='Tulip', description='I am tired' WHERE username = 'y';
+
+
