@@ -1,4 +1,4 @@
-package ictgradschool.project.servlets;
+package ictgradschool.project.servlets.user;
 
 import ictgradschool.project.DAOs.ProfileDetailsDAO;
 import ictgradschool.project.DAOs.UserDAO;
@@ -22,12 +22,12 @@ public class DeleteProfileServlet extends HttpServlet {
         String image = request.getParameter("pictureURL");
         String realname = request.getParameter("realname");
         String username = request.getParameter("username");
-        int userID = Integer.parseInt(request.getParameter("userID"));
+
 
         //TODO: Check what on earth below line means
-        String user = (String) request.getSession().getAttribute("");
+        String username1 = (String) request.getSession().getAttribute("username");
 
-        boolean userDeleted = ProfileDetailsDAO.deleteUser(country, description, dateofbirth, image, realname, username, userID, getServletContext());
+        boolean userDeleted = ProfileDetailsDAO.deleteUser(country, description, dateofbirth, image, realname, username, getServletContext());
 
         if (!userDeleted) {
             String message = "Some trouble with deleting your profile. Please try again.";
@@ -36,8 +36,6 @@ public class DeleteProfileServlet extends HttpServlet {
             request.getRequestDispatcher("web-pages/profile.jsp").forward(request,response);
             System.out.println("profile");
         }else{
-
-//            request.getRequestDispatcher("home").forward(request, response);
             response.sendRedirect("home");
             System.out.println("home");
         }

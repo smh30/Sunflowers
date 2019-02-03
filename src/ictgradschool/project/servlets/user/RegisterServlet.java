@@ -1,4 +1,4 @@
-package ictgradschool.project.servlets;
+package ictgradschool.project.servlets.user;
 
 import ictgradschool.project.DAOs.UserDAO;
 import ictgradschool.project.JavaBeans.User;

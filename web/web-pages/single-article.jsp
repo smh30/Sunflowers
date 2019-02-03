@@ -19,7 +19,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <%@ include file="navbar.jsp" %>
+        <%@ include file="../WEB-INF/partial/navbar.jsp" %>
         <div class="container">
 
             <div class="article">
@@ -52,6 +52,8 @@
             </c:if>
 
             <c:forEach items="${comment}" var="comment">
+            <c:if test="${comment.commentAuthor.username != 'deleted'}">
+
             <div class="comment">
                     <%-- use a table to hold the comments --%>
                 <p>${comment.commentAuthor.username} :</p>
@@ -65,6 +67,7 @@
                 <input type="submit" value="Delete comment">
                             </form>
                         </c:if>
+                 </c:if>
             </div>
             </c:forEach>
 

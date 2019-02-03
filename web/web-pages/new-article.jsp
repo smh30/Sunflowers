@@ -24,7 +24,7 @@
     <script src="../ckeditor/ckeditor.js"></script>
 </head>
 <body>
-<%@ include file="navbar.jsp" %>
+<%@ include file="../WEB-INF/partial/navbar.jsp" %>
 
 
         <% if (request.getAttribute("message") != null){

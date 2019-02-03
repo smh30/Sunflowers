@@ -12,7 +12,7 @@ username VARCHAR (20),
 password binary (64),
 country VARCHAR (20),
 real_name VARCHAR (50),
-description VARCHAR (100),
+description VARCHAR (500),
 image VARCHAR(80),
 PRIMARY KEY (username)
 );
@@ -22,7 +22,7 @@ PRIMARY KEY (username)
 DROP TABLE IF EXISTS article;
 
 CREATE TABLE article(
-article_title VARCHAR (30),
+article_title VARCHAR (100),
 article_author VARCHAR (30),
 article_id INT AUTO_INCREMENT,
 article_body VARCHAR (5000),
@@ -65,3 +65,8 @@ VALUES  ('y', 'Ron you are so wrong', '2'),
 ALTER TABLE user ADD COLUMN image varchar(80);
 
 UPDATE user SET date_of_birth = 06121996, country='Australia', real_name='Pork Chop', description='Testing code is my sole hobby right now.' WHERE username = 'z';
+
+UPDATE user SET date_of_birth = 09121995, country='NZ', real_name='Tulip', description='I am tired' WHERE username = 'y';
+
+UPDATE user SET date_of_birth = 09121995, country='NZ', real_name='Tulip', description='I am tired' WHERE username = 'steph';
+

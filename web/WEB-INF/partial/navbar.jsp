@@ -1,17 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: stephaniehope
-  Date: 25/01/19
-  Time: 9:15 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
 <!-- THIS IS A NAVBAR WHICH CAN BE INCLUDED INTO ALL OF THE OTHER PAGES AS NECESSARY -->
-<!-- todo add actual link destinations to all the buttons -->
-<body>
     <!--todo navbar expand/collapse seems to be stuck on md no matter what i change this to -->
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <nav class="navbar navbar-expand-sm navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -68,5 +57,3 @@
         </ul>
     </div>
 </nav>
-</body>
-</html>
