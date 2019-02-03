@@ -10,6 +10,9 @@ public class Comment implements Serializable {
     private Timestamp timestamp;
     private int commentID;
 
+    private String nestedComment;
+
+
     public int getCommentID() {
         return commentID;
     }

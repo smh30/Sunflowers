@@ -145,7 +145,7 @@ public class CommentDAO {
 
 
                 try (PreparedStatement s3 = conn.prepareStatement("UPDATE comments SET comments_author = ? WHERE comments_id = ?")) {
-                    System.out.println("maybe delete it ");
+
                     s3.setString(1, "deleted");
                     s3.setInt(2, commentID);
 

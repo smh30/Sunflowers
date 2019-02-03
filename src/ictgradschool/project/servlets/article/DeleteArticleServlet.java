@@ -35,8 +35,6 @@ public class DeleteArticleServlet extends HttpServlet {
             request.getRequestDispatcher("web-pages/single-article.jsp").forward(request,response);
             System.out.println("single");
         }else{
-
-//            request.getRequestDispatcher("home").forward(request, response);
             response.sendRedirect("home");
             System.out.println("home");
         }
