@@ -46,8 +46,7 @@
 
         <form method="post" action="register">
             <%--Below line for reCAPTCHA--%>
-            <div class="g-recaptcha" data-sitekey="6Lc52o4UAAAAAF2qwLx_jR66r2nUDGMTz9FSM2-N"
-                 data-callback="recaptchaCallback"></div>
+
             <button type="submit" class="btn btn-default hidden" id="btnSubmit">Submit</button>
 
             <label for="username">username:</label>
@@ -56,7 +55,8 @@
             <label for="password">password:</label>
             <input type="password" id="password" name="password">
             <br>
-
+                <div class="g-recaptcha" data-sitekey="6Lc52o4UAAAAAF2qwLx_jR66r2nUDGMTz9FSM2-N"
+                     data-callback="recaptchaCallback"></div>
             <%--In here goes reCAPTCHA--%>
 
             <input type="submit" value="submit">
