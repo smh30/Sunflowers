@@ -16,18 +16,13 @@ public class DeleteProfileServlet extends HttpServlet {
 
     System.out.println("The deleting profile servlet");
 
-        String country = request.getParameter("country");
-        String description = request.getParameter("description");
-        String dateofbirth = request.getParameter("dateofbirth");
-        String image = request.getParameter("pictureURL");
-        String realname = request.getParameter("realname");
         String username = request.getParameter("username");
 
 
         //TODO: Check what on earth below line means
         String username1 = (String) request.getSession().getAttribute("username");
 
-        boolean userDeleted = ProfileDetailsDAO.deleteUser(country, description, dateofbirth, image, realname, username, getServletContext());
+        boolean userDeleted = ProfileDetailsDAO.deleteUser(username, getServletContext());
 
         if (!userDeleted) {
             String message = "Some trouble with deleting your profile. Please try again.";
@@ -36,6 +31,7 @@ public class DeleteProfileServlet extends HttpServlet {
             request.getRequestDispatcher("web-pages/profile.jsp").forward(request,response);
             System.out.println("profile");
         }else{
+            request.getSession().invalidate();
             response.sendRedirect("home");
             System.out.println("home");
         }

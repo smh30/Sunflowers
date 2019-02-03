@@ -15,24 +15,14 @@ public class DeleteAccountServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("The deleting account servlet");
 
-        String country = request.getParameter("country");
-
-        String description = request.getParameter("description");
-
-        String dateofbirth = request.getParameter("dateofbirth");
-
-        String image = request.getParameter("image");
-
-        String realname = request.getParameter("realname");
-
         //Line below left over from Yun's code - keep for now
 
         String username = (String) request.getSession().getAttribute("username");
 
-        boolean articeDeleted = ProfileDetailsDAO.deleteUser(country, description, dateofbirth, image, realname, username, getServletContext());
+        boolean userDeleted = ProfileDetailsDAO.deleteUser(username, getServletContext());
 
-        if (!articeDeleted) {
-            String message = "Some trouble with deleting your account. Please try again.";
+        if (!userDeleted) {
+            String message = "There is some trouble with deleting your account. Please try again.";
             request.setAttribute("message", message);
 
             request.getRequestDispatcher("web-pages/profile.jsp").forward(request,response);
