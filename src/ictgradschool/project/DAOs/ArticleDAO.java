@@ -17,8 +17,8 @@ import java.util.*;
 
 public class ArticleDAO {
 
-    public static List<Article> getAllArticles(int offset, String sort, ServletContext context) {
-        List<Article> articles = new ArrayList<>();
+    public static List <Article> getAllArticles(int offset, String sort, ServletContext context) {
+        List <Article> articles = new ArrayList <>();
 
         Properties dbProps = DAOCheckProperties.check(context);
 
@@ -93,8 +93,8 @@ public class ArticleDAO {
         return orderBy;
     }
 
-    public static List<Article> getArticlesByAuthor(int offset, String author, String sort, ServletContext context) {
-        List<Article> articles = new ArrayList<>();
+    public static List <Article> getArticlesByAuthor(int offset, String author, String sort, ServletContext context) {
+        List <Article> articles = new ArrayList <>();
 
         Properties dbProps = DAOCheckProperties.check(context);
 
@@ -273,8 +273,8 @@ String dbTimestamp = "";
 
     }
 
-    public static List<Article> getArticlesByTitle(int offset, String title, String sort, ServletContext context) {
-        List<Article> articles = new ArrayList<>();
+    public static List <Article> getArticlesByTitle(int offset, String title, String sort, ServletContext context) {
+        List <Article> articles = new ArrayList <>();
         Properties dbProps = DAOCheckProperties.check(context);
 
         if (dbProps != null) {
@@ -316,8 +316,8 @@ String dbTimestamp = "";
         return null;
     }
 
-    public static List<Article> getArticlesByTitleAndAuthor(int offset, String title, String author, String sort, ServletContext context) {
-        List<Article> articles = new ArrayList<>();
+    public static List <Article> getArticlesByTitleAndAuthor(int offset, String title, String author, String sort, ServletContext context) {
+        List <Article> articles = new ArrayList <>();
         Properties dbProps = DAOCheckProperties.check(context);
 
         if (dbProps != null) {
@@ -366,8 +366,6 @@ String dbTimestamp = "";
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                //System.out.println("connection successful");
-
 
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_id = ?")) {
                     stmt.setInt(1, id);
@@ -438,8 +436,8 @@ String dbTimestamp = "";
         return null;
     }
 
-    public static List<Article> getArticlesByDate(int offset, String date, String sort, ServletContext context) {
-        List<Article> articles = new ArrayList<>();
+    public static List <Article> getArticlesByDate(int offset, String date, String sort, ServletContext context) {
+        List <Article> articles = new ArrayList <>();
         Properties dbProps = DAOCheckProperties.check(context);
 
         if (dbProps != null) {
@@ -493,7 +491,7 @@ String dbTimestamp = "";
 
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author LIKE ? AND article_title LIKE ? AND article_timestamp LIKE ? AND NOT (article_author = 'deleted')  AND NOT (article_timestamp > ?) ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
                     stmt.setString(1, author);
-                    stmt.setString(2, "%"+title+"%");
+                    stmt.setString(2, "%" + title + "%");
                     stmt.setString(3, date + "%");
                     stmt.setString(4, todaysDate);
                     stmt.setInt(5, offset);
@@ -524,8 +522,8 @@ String dbTimestamp = "";
         return null;
     }
 
-    public static List<Article> getArticlesByTitleAndDate(int offset, String title, String date, String sort, ServletContext context) {
-        List<Article> articles = new ArrayList<>();
+    public static List <Article> getArticlesByTitleAndDate(int offset, String title, String date, String sort, ServletContext context) {
+        List <Article> articles = new ArrayList <>();
         Properties dbProps = DAOCheckProperties.check(context);
 
         if (dbProps != null) {

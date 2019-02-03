@@ -18,20 +18,20 @@ public class EditArticleServlet extends HttpServlet {
         String title = request.getParameter("article_title");
         String content = request.getParameter("article_content");
         String stringID = request.getParameter("articleID");
-        System.out.println("title = " +title);
-        System.out.println("content = " +content);
+        System.out.println("title = " + title);
+        System.out.println("content = " + content);
         System.out.println("id needs to get here:" + stringID);
         int articleID = Integer.parseInt(stringID);
         Article arti = ArticleDAO.editArticle(articleID, title, content, getServletContext());
-    
-    
+
+
         System.out.println("article edited!!!!!!!");
-    
+
         request.setAttribute("article", arti);
-        
-    
+
+
         request.setAttribute("articleID", articleID);
-        request.getRequestDispatcher("/article").forward(request,response);
+        request.getRequestDispatcher("/article").forward(request, response);
 
     }
 
@@ -45,7 +45,7 @@ public class EditArticleServlet extends HttpServlet {
         request.setAttribute("id", temp.getID());
         request.setAttribute("article", temp);
         System.out.println("title to be returned for editing: " + temp.getTitle());
-        
+
         request.getRequestDispatcher("web-pages/new-article.jsp").forward(request, response);
 
 

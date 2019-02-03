@@ -1,4 +1,4 @@
-package ictgradschool.project.servlets;
+package ictgradschool.project.servlets.user;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -59,7 +59,6 @@ public class UploadProfilePictureServlet extends HttpServlet {
             File fullsizeImageFile = null;
 //
             for (FileItem fi: fileItems) {
-//                if(!fi.isFormField()&&(fi.getContentType().equals("image/jpeg")|| fi.getContentType().equals("image/png"))) {
                 System.out.println("Reached FileItems list");
                 if(!fi.isFormField()){
                     System.out.println("Reached if statement");
@@ -70,17 +69,17 @@ public class UploadProfilePictureServlet extends HttpServlet {
                     String splited = split[split.length -1];
                     fullsizeImageFile = new File(uploadsFolder, splited);
                     System.out.println("Creating new file");
-                    //THE PROBLEM LINE
                     System.out.println(fullsizeImageFile.toString());
                     fi.write(fullsizeImageFile);
                     System.out.println("Written to file");
                 }
             }
-            out.println("<img src = ../Uploaded-Photos/" + fullsizeImageFile.getName()+ " " + "width\"200\">");
+//            out.println("<img src = ../Uploaded-Photos/" + fullsizeImageFile.getName()+ " " + "width\"200\">");
             System.out.println("Getting uploaded photo");
             String image = fullsizeImageFile.getName();
             String user = (String) request.getSession().getAttribute("username");
             CustomProfilePicDAO.addImage(image, user, getServletContext());
+            request.getRequestDispatcher("/profile").forward(request, response);
 
 
 

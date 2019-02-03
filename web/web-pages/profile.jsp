@@ -33,6 +33,11 @@
 
             <img id="imageToSwap" src="../default-photos-for-profile-page/Default.jpg" width="225">
 
+            <%--Instead of default jpeg, need EL that gets image--%>
+            <%-- Where folder is where things are saved /whatever URL is--%>
+            <%--Default pics stored in one location; customer in another, so might need an if x location else y location--%>
+
+
             <div style="margin-left: 250px">
                 <h4>Choose default picture: </h4>
 

@@ -32,14 +32,13 @@ public class DeleteArticleServlet extends HttpServlet {
             String message = "Some trouble with deleting your article. Please try again.";
             request.setAttribute("message", message);
 
-            request.getRequestDispatcher("web-pages/single-article.jsp").forward(request,response);
+            request.getRequestDispatcher("web-pages/single-article.jsp").forward(request, response);
             System.out.println("single");
-        }else{
+        } else {
             response.sendRedirect("home");
             System.out.println("home");
         }
     }
-
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
