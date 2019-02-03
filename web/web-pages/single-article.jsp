@@ -19,6 +19,8 @@
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
+
+
         <style>
             body {font-family: Arial, Helvetica, sans-serif;}
             * {box-sizing: border-box;}
@@ -31,16 +33,16 @@
                 border: none;
                 cursor: pointer;
                 opacity: 0.8;
-                position: fixed;
+
                 bottom: 23px;
                 right: 28px;
-                width: 280px;
+                width: 100px;
             }
 
             /* The popup form - hidden by default */
             .form-popup {
                 display: none;
-                position: fixed;
+
                 bottom: 0;
                 right: 15px;
                 border: 3px solid #f1f1f1;
@@ -138,22 +140,25 @@
                             <form method="GET" action="/deletecomment">
                                 <input type="hidden" name="articleID" value="${article.ID}">
                                 <input type="hidden" name="commentID" value="${comment.commentID}">
-                                <%--<button class="open-button" onclick="openForm()">Reply</button>--%>
 
-                                <%--<div class="form-popup" id="myForm">--%>
-                                    <%--<form action="/action_page.php" class="form-container">--%>
 
-                                        <%--<label for="reply"><b>Reply</b></label>--%>
-                                        <%--<input type="text" placeholder="Enter Reply" id="reply" name="reply" required>--%>
-
-                                        <%--<button type="submit" class="btn">Submit</button>--%>
-                                        <%--<button type="button" class="btn cancel" onclick="closeForm()">Close</button>--%>
-                                    <%--</form>--%>
-                                <%--</div>--%>
-                <input type="submit" value="Delete comment">
+                                <input type="submit" value="Delete comment">
 
 
                             </form>
+
+                            <%-- the popup form for replying the comment --%>
+                            <button class="open-button" onclick="openForm()">Reply</button>
+                            <div class="form-popup" id="myForm">
+                                <form action="/action_page.php" class="form-container">
+
+                                    <label for="reply"><b>Reply</b></label>
+                                    <input type="textarea" placeholder="Enter Reply" id="reply" name="reply" required>
+
+                                    <button type="submit" class="btn">Submit</button>
+                                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                                </form>
+                            </div>
                         </c:if>
 
 
