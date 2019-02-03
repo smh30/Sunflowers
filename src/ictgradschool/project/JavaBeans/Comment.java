@@ -14,8 +14,6 @@ public class Comment implements Serializable {
 
     private List Children;
 
-
-
     public List getChildren() {
         return Children;
     }
@@ -64,11 +62,5 @@ public class Comment implements Serializable {
         this.timestamp = timestamp;
     }
     
-    public List<Comment> getChildren() {
-        return children;
-    }
     
-    public void setChildren(List<Comment> children) {
-        this.children = children;
-    }
 }

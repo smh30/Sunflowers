@@ -27,28 +27,36 @@ public class GetArticlesServlet extends HttpServlet {
         System.out.println("in the home servlet");
 
         List<Article> articleList = new ArrayList<>();
-
+        
+        //first, get sort order
+        String sort = "newest";
+        if(request.getParameter("sort-options")!=null){
+            sort = request.getParameter("sort-options");
+            System.out.println("sort order = " +sort);
+        }
+        
+        // also, get offset. does this need a try/catch for numberformat exception??
+        int offset = 0;
+        if(request.getParameter("back")!=null){
+            offset = Integer.parseInt(request.getParameter("back"));
+            System.out.println("offset = " +offset);
+        }
+        
+        // then, get search params
         String author = request.getParameter("author");
         String title = request.getParameter("title");
         String date = request.getParameter("date");
-        int offset = 0;
-        try {
-            offset = Integer.parseInt(request.getParameter("back"));
-        } catch (NumberFormatException e){
-            System.out.println("no offset supplied:" + e);
-        }
+        
 
-        System.out.println("author = " + author);
-        System.out.println("title = " + title);
-        System.out.println("date = " + date);
+//        System.out.println("author = " + author);
+//        System.out.println("title = " + title);
+//        System.out.println("date = " + date);
 
 
         // if looking for all the articles ie no search parameter were entered....
         if (author == null && title == null && date == null) {
-
             System.out.println("getting all articles from offset " + offset);
-
-            articleList = ArticleDAO.getAllArticles(offset, getServletContext());
+            articleList = ArticleDAO.getAllArticles(offset, sort, getServletContext());
 
 
         } else if(author!=null && title == null && date == null) {
@@ -80,7 +88,7 @@ public class GetArticlesServlet extends HttpServlet {
                     //search by datetime
                 }
             }
-
+request.setAttribute("currentsort", sort);
         request.setAttribute("articles", articleList);
 
         request.getRequestDispatcher("web-pages/home.jsp").forward(request, response);
