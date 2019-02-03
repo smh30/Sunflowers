@@ -105,44 +105,44 @@ public class ProfileDetailsDAO {
         return null;
     }
 
-    public static User editUser(String username, String country, String realName, String desc, String dateOfBirth, String imageURL,ServletContext context) {
-        User user = new User();
-        Properties dbProps = DAOCheckProperties.check(context);
-
-        if(dbProps!=null) {
-
-            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
-
-
-                try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.user SET country = ? ,real_name=?, description = ?, image = ?,date_of_birth = ? WHERE username= ?")) {
-                    s2.setString(1, country);
-                    s2.setString(2, realName);
-                    s2.setString(3, desc);
-                    s2.setString(4, imageURL);
-                    s2.setString(5, dateOfBirth);
-                    s2.setString(6, username);
-
-                    s2.execute();
-
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    //return false;
-                }
-
-
-                //  return true;
-                return user;
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-            return user;
-        }
-        return null;
-    }
+//    public static User editUser(String username, String country, String realName, String desc, String dateOfBirth, String imageURL,ServletContext context) {
+//        User user = new User();
+//        Properties dbProps = DAOCheckProperties.check(context);
+//
+//        if(dbProps!=null) {
+//
+//            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+//                System.out.println("connection successful");
+//
+//
+//                try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.user SET country = ? ,real_name=?, description = ?, image = ?,date_of_birth = ? WHERE username= ?")) {
+//                    s2.setString(1, country);
+//                    s2.setString(2, realName);
+//                    s2.setString(3, desc);
+//                    s2.setString(4, imageURL);
+//                    s2.setString(5, dateOfBirth);
+//                    s2.setString(6, username);
+//
+//                    s2.execute();
+//
+//
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                    //return false;
+//                }
+//
+//
+//                //  return true;
+//                return user;
+//
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//
+//            return user;
+//        }
+//        return null;
+//    }
 
     public static boolean deleteUser(String country, String description, String dateofbirth, String image, String realname, String username, ServletContext context) {
         Properties dbProps = DAOCheckProperties.check(context);

@@ -23,17 +23,21 @@ public class EditProfileServlet extends HttpServlet {
         System.out.println("Edit account.");
         String username = request.getParameter("username");
         String country = request.getParameter("country");
-        String realName = request.getParameter("real_name");
+        String realName = request.getParameter("realname");
         String description = request.getParameter("description");
-        String dateOfBirth = request.getParameter("date_of_birth");
+        String dateOfBirth = request.getParameter("dateofbirth");
         String pictureURL = request.getParameter("image");
+
+        System.out.print(username);
+        System.out.println(realName);
 
         User user = UserDAO.editUser(username, country, realName, description, dateOfBirth, pictureURL, getServletContext());
 
         request.setAttribute("user", user);
 
         request.setAttribute("username", username);
-        request.getRequestDispatcher("/home").forward(request, response);
+//        request.getRequestDispatcher("home").forward(request, response);
+        response.sendRedirect("/home");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
