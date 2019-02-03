@@ -23,7 +23,7 @@ public class AddArticleServlet extends HttpServlet {
         String date = request.getParameter("pub-date");
         String user = (String) request.getSession().getAttribute("username");
 
-        Article newArticle = ArticleDAO.newArticle(title, content, user, getServletContext());
+        Article newArticle = ArticleDAO.newArticle(title, content, user, date, getServletContext());
         System.out.println("provided date: " + date);
 
 
