@@ -9,6 +9,7 @@ import javax.servlet.ServletContext;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -30,11 +31,6 @@ public class CommentDAO {
                 ResultSet rs = stmt.executeQuery();
 
                     while (rs.next()) {
-                    //TODO: include these lines to change to localtimedate timestamp.
-                        //Talk to yaz if needed
-                        //     LocalDateTime a = LocalDateTime.now();
-                        //        Timestamp timestamp = Timestamp.valueOf(a);
-                        //        System.out.print(timestamp);
 
                     Comment comment = new Comment();
                     comment.setCommentContent(rs.getString(3));
@@ -65,12 +61,16 @@ public class CommentDAO {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
 
+                     LocalDateTime a = LocalDateTime.now();
+                        Timestamp timestamp = Timestamp.valueOf(a);
+                        System.out.print(timestamp);
 
-                try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO comments(comments_author,article_id , coments_body)" +
-                        "VALUES (?, ?, ?)")) {
+                try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO comments(comments_author,article_id , coments_body, comments_timestamp)" +
+                        "VALUES (?, ?, ?, ?)")) {
                     s2.setString(1, user);
                     s2.setString(2, ArticleId);
                     s2.setString(3, content);
+                    s2.setString(4, timestamp.toString());
 
 
                     s2.execute();
