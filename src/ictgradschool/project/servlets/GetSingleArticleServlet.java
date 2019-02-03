@@ -39,15 +39,13 @@ public class GetSingleArticleServlet extends HttpServlet {
         article = ArticleDAO.getSingleArticle(articleID, getServletContext());
         // get articles by that author
 
-        List<Comment> comment = new ArrayList<Comment>();
+        List<Comment> comments = new ArrayList<Comment>();
 
        int articleId = article.getID();
 
-        System.out.println("One new comment about the "+articleId+"article");
+        comments = CommentDAO.getAllComments(articleId,getServletContext());
 
-        comment = CommentDAO.getAllComments(articleId,getServletContext());
-
-        request.setAttribute("comment",comment);
+        request.setAttribute("comment",comments);
 
 
 

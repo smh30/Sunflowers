@@ -46,10 +46,12 @@
             </div>
 
 
-         <%-- show single comment under the article --%>
-            <c:if test="${empty articles}">
 
+            <%--wtf is this empty 'if' meant to be doing?????--%>
+            <c:if test="${empty articles}">
             </c:if>
+
+
 
             <c:forEach items="${comment}" var="comment">
             <c:if test="${comment.commentAuthor.username != 'deleted'}">
@@ -67,8 +69,9 @@
                 <input type="submit" value="Delete comment">
                             </form>
                         </c:if>
-                 </c:if>
             </div>
+                 </c:if>
+
             </c:forEach>
 
 <c:if test="${sessionScope.username != null}">
