@@ -70,3 +70,7 @@ UPDATE user SET date_of_birth = 09121995, country='NZ', real_name='Tulip', descr
 
 UPDATE user SET date_of_birth = 09121995, country='NZ', real_name='Tulip', description='I am tired' WHERE username = 'steph';
 
+
+
+ALTER TABLE comments ADD COLUMN parent_comment INT;
+ALTER TABLE comments ADD FOREIGN KEY (parent_comment) REFERENCES comments (comments_id) ON DELETE CASCADE ;
