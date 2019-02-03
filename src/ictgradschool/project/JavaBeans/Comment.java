@@ -2,6 +2,7 @@ package ictgradschool.project.JavaBeans;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Comment implements Serializable {
     private String  commentContent;
@@ -9,6 +10,17 @@ public class Comment implements Serializable {
     private int articleId;
     private Timestamp timestamp;
     private int commentID;
+    private List<Comment> children;
+
+    private List Children;
+
+    public List getChildren() {
+        return Children;
+    }
+
+    public void setChildren(List children) {
+        Children = children;
+    }
 
     public int getCommentID() {
         return commentID;
@@ -49,4 +61,6 @@ public class Comment implements Serializable {
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
     }
+    
+    
 }

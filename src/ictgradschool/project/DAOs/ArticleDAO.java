@@ -13,25 +13,62 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.*;
 
 public class ArticleDAO {
 
-    public static List<Article> getAllArticles(int offset, ServletContext context) {
+    public static List<Article> getAllArticles(int offset, String sort, ServletContext context) {
         List<Article> articles = new ArrayList<>();
 
         Properties dbProps = DAOCheckProperties.check(context);
 
-        if(dbProps!=null) {
+        if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
-                // select the most recent 6 from the articles table??? ordered by timestamp:
-                //todo will this bring newest first or oldest first???
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article WHERE NOT (article_author = 'deleted') ORDER BY article_timestamp DESC LIMIT 10 OFFSET ?")) {
+                //it seems that the only way to do this without having to write an unreasonable
+                // number of statements/DAO methods is to concatenate it. owasp says to use a
+                // whitelist, so I'm gonna try.
+                String orderBy;
+                switch (sort) {
+                    case "newest":
+                        orderBy = " article_timestamp DESC ";
+                        break;
+                    case "oldest":
+                        orderBy = " article_timestamp ASC ";
+                        break;
+                    case "author-a":
+                        orderBy = " article_author ASC ";
+                        break;
+                    case "author-z":
+                        orderBy = " article_author DESC ";
+                        break;
+                    case "title-a":
+                        orderBy = " article_title ASC ";
+                        break;
+                    case "title-z":
+                        orderBy = " article_title DESC ";
+                        break;
+                    default:
+                        orderBy = " article_timestamp DESC ";
+                        break;
+
+                }
+
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article WHERE " +
+                        "NOT (article_author = 'deleted') ORDER BY" + orderBy + "LIMIT 10 " +
+                        "OFFSET ?")) {
+//                    stmt.setString(1, "article_author");
                     stmt.setInt(1, offset);
                     ResultSet rs = stmt.executeQuery();
 
                     while (rs.next()) {
+                        //TODO: include these lines to change to localtimedate timestamp.
+                        //Talk to yaz if needed
+                        //     LocalDateTime a = LocalDateTime.now();
+                        //        Timestamp timestamp = Timestamp.valueOf(a);
+                        //        System.out.print(timestamp);
+
                         Article article = new Article();
                         article.setTitle(rs.getString(1));
                         article.setID(rs.getInt(3));
@@ -58,7 +95,7 @@ public class ArticleDAO {
 
         Properties dbProps = DAOCheckProperties.check(context);
 
-        if(dbProps!=null) {
+        if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful search by author:" + author);
@@ -104,7 +141,7 @@ public class ArticleDAO {
         Article article = new Article();
         Properties dbProps = DAOCheckProperties.check(context);
 
-        if(dbProps!=null) {
+        if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
@@ -153,7 +190,7 @@ public class ArticleDAO {
         Article article = new Article();
         Properties dbProps = DAOCheckProperties.check(context);
 
-        if(dbProps!=null) {
+        if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
@@ -196,7 +233,7 @@ public class ArticleDAO {
     public static boolean deleteArticle(String username, String title, String content, int id, ServletContext context) {
         Properties dbProps = DAOCheckProperties.check(context);
 
-        if(dbProps!=null) {
+        if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
@@ -229,7 +266,7 @@ public class ArticleDAO {
         List<Article> articles = new ArrayList<>();
         Properties dbProps = DAOCheckProperties.check(context);
 
-        if(dbProps!=null) {
+        if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
@@ -269,7 +306,7 @@ public class ArticleDAO {
         List<Article> articles = new ArrayList<>();
         Properties dbProps = DAOCheckProperties.check(context);
 
-        if(dbProps!=null) {
+        if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
@@ -310,7 +347,7 @@ public class ArticleDAO {
         Article article = new Article();
         Properties dbProps = DAOCheckProperties.check(context);
 
-        if(dbProps!=null) {
+        if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 //System.out.println("connection successful");
@@ -353,7 +390,7 @@ public class ArticleDAO {
         Article article = new Article();
         Properties dbProps = DAOCheckProperties.check(context);
 
-        if(dbProps!=null) {
+        if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
@@ -384,7 +421,6 @@ public class ArticleDAO {
         }
         return null;
     }
-
 
 
 }

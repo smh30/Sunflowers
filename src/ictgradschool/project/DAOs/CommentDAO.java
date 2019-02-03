@@ -19,27 +19,33 @@ public class CommentDAO {
         List<Comment> comments = new ArrayList<>();
 
         Properties dbProps = DAOCheckProperties.check(context);
-
-        if(dbProps!=null) {
-
-        try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-            System.out.println("connection successful");
-            // select the most recent 6 from the articles table??? ordered by timestamp:
-            //todo will this bring newest first or oldest first???
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM comments WHERE article_id =? ORDER BY comments_timestamp ")) {
-                stmt.setInt(1, articleId);
-                ResultSet rs = stmt.executeQuery();
-
+        
+        if (dbProps != null) {
+            
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+                System.out.println("connection successful");
+                //todo get the top-level comments (those without a parent)
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM comments WHERE " +
+                        "article_id =? ORDER BY comments_timestamp ")) {
+                    stmt.setInt(1, articleId);
+                    ResultSet rs = stmt.executeQuery();
+                    
                     while (rs.next()) {
 
-                    Comment comment = new Comment();
-                    comment.setCommentContent(rs.getString(3));
-                    comment.setCommentID(rs.getInt(1));
+                  
 
-                    comment.setTimestamp(rs.getTimestamp(5));
-                    User commentAuthor = new User(rs.getString(2));
-                    comment.setCommentAuthor(commentAuthor);
-
+                        
+                        Comment comment = new Comment();
+                        comment.setCommentContent(rs.getString(3));
+                        comment.setCommentID(rs.getInt(1));
+                        comment.setTimestamp(rs.getTimestamp(5));
+                        User commentAuthor = new User(rs.getString(2));
+                        comment.setCommentAuthor(commentAuthor);
+                        
+                        //todo get a list of all of the children comments of those comments.
+                        List<Comment> children = getChildren(comment.getCommentID(), dbProps);
+                        comment.setChildren(children);
+                        
                         comments.add(comment);
                     }
 
@@ -52,9 +58,43 @@ public class CommentDAO {
         }
         return null;
     }
-
-    public static boolean newComment(String content,String ArticleId, String user, ServletContext context) {
-
+    
+    public static List<Comment> getChildren(int parentID, Properties dbProps) {
+        List<Comment> children = new ArrayList<>();
+        
+        try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+            System.out.println("connection successful");
+            //get the children of the given parent (those without a parent)
+            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM comments WHERE " +
+                    "parent_comment = ? ORDER BY comments_timestamp ")) {
+                stmt.setInt(1, parentID);
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    Comment comment = new Comment();
+                    comment.setCommentContent(rs.getString(3));
+                    comment.setCommentID(rs.getInt(1));
+                    comment.setTimestamp(rs.getTimestamp(5));
+                    User commentAuthor = new User(rs.getString(2));
+                    comment.setCommentAuthor(commentAuthor);
+                    
+                    // this part for sure isn't right;
+                    List<Comment> childrenList = getChildren(comment.getCommentID(), dbProps);
+                    if (childrenList.size() == 0) {
+                    
+                    }
+                    comment.setChildren(childrenList);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        
+        return children;
+    }
+    
+    public static boolean newComment(String content, String ArticleId, String user, ServletContext context) {
+        
         Properties dbProps = DAOCheckProperties.check(context);
 
         if(dbProps!=null) {
@@ -69,6 +109,7 @@ public class CommentDAO {
                         "VALUES (?, ?, ?, ?)")) {
                     s2.setString(1, user);
                     s2.setString(2, ArticleId);
+                    
                     s2.setString(3, content);
                     s2.setString(4, timestamp.toString());
 
@@ -104,7 +145,7 @@ public class CommentDAO {
 
 
                 try (PreparedStatement s3 = conn.prepareStatement("UPDATE comments SET comments_author = ? WHERE comments_id = ?")) {
-                    System.out.println("maybe delete it ");
+
                     s3.setString(1, "deleted");
                     s3.setInt(2, commentID);
 

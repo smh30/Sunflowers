@@ -38,12 +38,11 @@ System.out.println(request.getParameter("articleID"));
                 request.getRequestDispatcher("/profile").forward(request, response);
             } else {
                //redirects to the previous page if it was an article page
-                if(request.getParameter("from").equals("/web-pages/home.jsp")){
-                    response.sendRedirect("/home");
-
-                } else if (request.getParameter("from").equals("/web-pages/single-article.jsp")){
-request.setAttribute("articleID", request.getParameter("articleID"));
+                if(request.getParameter("from").equals("/web-pages/single-article.jsp")){
+                    request.setAttribute("articleID", request.getParameter("articleID"));
                     request.getRequestDispatcher("/article").forward(request,response);
+                } else {
+                    response.sendRedirect("/home");
                 }
                // System.out.println(request.getParameter("from"));
                 //response.sendRedirect(request.getParameter("/home"));
