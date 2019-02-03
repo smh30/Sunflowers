@@ -10,7 +10,7 @@
 <%--TODO: Write JS external file and pop in????--%>
 <html>
     <%! String title = "Profile"; %>
-    <%@ include file="../WEB-INF/_partial_header.jsp" %>
+    <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
 
     <script type="text/javascript">
         function switchImage() {
