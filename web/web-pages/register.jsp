@@ -66,7 +66,7 @@
 
         <script type="text/javascript">
             function recaptchaCallback() {
-                var btnSubmit = document.getElementById("btnSubmit");
+                var btnSubmit = document.getElementById("btnSubmit").disabled = true;
 
                 if (btnSubmit.classList.contains("hidden")) {
                     btnSubmit.classList.remove("hidden");
