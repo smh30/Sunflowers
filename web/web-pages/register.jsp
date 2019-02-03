@@ -21,7 +21,7 @@
         <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>--%>
 
         <%--Script below is for reCAPTCHA--%>
-        
+
 
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
