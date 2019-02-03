@@ -33,6 +33,63 @@
     <p>No articles found for your search parameters</p>
 </c:if>
 
+    <%--begin dropdown for selecting sort order for articles--%>
+    <p id="sort_options">
+    <form action="home" method="GET">
+    <label for="sort-options">Sort articles by: </label>
+        <select name="sort-options" id="sort-options" onchange="this.form.submit()">
+            <c:choose>
+            <c:when test="${currentsort == 'title-z'}">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="author-a">Author</option>
+            <option value="author-z">Author (reversed)</option>
+            <option value="title-a">Title</option>
+            <option value="title-z" selected="selected">Title (reversed)</option></c:when>
+                <c:when test="${currentsort == 'oldest'}">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest" selected="selected">Oldest First</option>
+                    <option value="author-a">Author</option>
+                    <option value="author-z">Author (reversed)</option>
+                    <option value="title-a">Title</option>
+                    <option value="title-z">Title (reversed)</option></c:when>
+                <c:when test="${currentsort == 'author-a'}">
+                    <option value="newest" >Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="author-a" selected="selected">Author</option>
+                    <option value="author-z">Author (reversed)</option>
+                    <option value="title-a">Title</option>
+                    <option value="title-z">Title (reversed)</option></c:when>
+                <c:when test="${currentsort == 'author-z'}">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="author-a">Author</option>
+                    <option value="author-z" selected="selected">Author (reversed)</option>
+                    <option value="title-a">Title</option>
+                    <option value="title-z">Title (reversed)</option></c:when>
+                <c:when test="${currentsort == 'title-a'}">
+                    <option value="newest" >Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="author-a">Author</option>
+                    <option value="author-z">Author (reversed)</option>
+                    <option value="title-a" selected="selected">Title</option>
+                    <option value="title-z">Title (reversed)</option></c:when>
+                <c:otherwise>
+                    <option value="newest" selected="selected">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="author-a">Author</option>
+                    <option value="author-z">Author (reversed)</option>
+                    <option value="title-a">Title</option>
+                    <option value="title-z">Title (reversed)</option></c:otherwise>
+
+            </c:choose>
+        </select>
+    </form>
+    </p>
+    <%--      end sort order dropdown     --%>
+
+
+<%--  begin showing articles    --%>
     <c:forEach items="${articles}" var="article">
         <%--<c:if test="${article.author.username != 'deleted'}">--%>
         <div class="article">
@@ -52,11 +109,10 @@
             <%--todo add "see comments" and maybe a counter of how many comments there are--%>
             <hr>
         </div>
-
-    <%--</c:if>--%>
     </c:forEach>
+<%--end articles display--%>
 
-
+    <%--begin forward/ back block --%>
     <%--todo see if this can be done with jstl/el instead for correctness' sake--%>
     <%
         String getURL=request.getQueryString();
