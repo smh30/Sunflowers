@@ -31,8 +31,12 @@ public class ArticleDAO {
                     ResultSet rs = stmt.executeQuery();
 
                     while (rs.next()) {
+                        //TODO: include these lines to change to localtimedate timestamp.
+                        //Talk to yaz if needed
+                        //     LocalDateTime a = LocalDateTime.now();
+                        //        Timestamp timestamp = Timestamp.valueOf(a);
+                        //        System.out.print(timestamp);
 
-                        //todo uncomment these once database is ready
                         Article article = new Article();
                         article.setTitle(rs.getString(1));
                         article.setID(rs.getInt(3));
