@@ -2,7 +2,6 @@ package ictgradschool.project.servlets;
 
 import ictgradschool.project.DAOs.ArticleDAO;
 import ictgradschool.project.JavaBeans.Article;
-import ictgradschool.project.JavaBeans.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 @WebServlet(name = "GetArticlesServlet")
@@ -50,7 +48,15 @@ public class GetArticlesServlet extends HttpServlet {
 
 //        System.out.println("author = " + author);
 //        System.out.println("title = " + title);
-//        System.out.println("date = " + date);
+
+        System.out.println("date = " + date);
+
+        if (date != null) {
+//        LocalDateTime a = LocalDateTime.now();
+//        Timestamp timestamp = Timestamp.valueOf(a);
+//        System.out.print(timestamp);
+                   }
+
 
 
         // if looking for all the articles ie no search parameter were entered....
@@ -61,31 +67,35 @@ public class GetArticlesServlet extends HttpServlet {
 
         } else if(author!=null && title == null && date == null) {
             System.out.println("getting articles  by logged in user " + author);
-            articleList = ArticleDAO.getArticlesByAuthor(offset, author, getServletContext());
+            articleList = ArticleDAO.getArticlesByAuthor(offset, author, sort, getServletContext());
 
         }else  {
                 // if search parameter were entered or user wants to see their own articles...
                 //todo search by other params (title/ date) and by combinations of params
                 if (!author.equals("")) {
                     if (!title.equals("")){
-                        //if (!date.equals(""){
-                        System.out.println("getting articles by title and author :  " + title + author);
-                        articleList = ArticleDAO.getArticlesByTitleAndAuthor(offset, title, author, getServletContext());
+                        if (!date.equals("")){
+                            System.out.println("getting articles by title, author and date: " + title + author + date);
+                            articleList = ArticleDAO.getArticlesByAll(offset, title, author, date, sort, getServletContext());
+                        } else {
+                            System.out.println("getting articles by title and author :  " + title + author);
+                            articleList = ArticleDAO.getArticlesByTitleAndAuthor(offset, title, author, sort, getServletContext());
+                        }
                     } else {
                         System.out.println("getting articles by " + author);
-                        articleList = ArticleDAO.getArticlesByAuthor(offset, author, getServletContext());
-                        // get articles by that author
+                        articleList = ArticleDAO.getArticlesByAuthor(offset, author, sort, getServletContext());
                     }
-                }
-
-                if (!title.equals("")){
+                } else if (!title.equals("")){
                     System.out.println("getting articles by title:  " + title);
-                    articleList = ArticleDAO.getArticlesByTitle(offset, title, getServletContext());
-                    // if (!date.equals(""){
-                }
+                    articleList = ArticleDAO.getArticlesByTitle(offset, title, sort, getServletContext());
+                    if (!date.equals("")){
+                        System.out.println("getting articles by title and date: " + title + date);
+                        articleList = ArticleDAO.getArticlesByTitleAndDate(offset, title, date, sort, getServletContext());
+                    }
+                } else if (!date.equals("")){
+                    System.out.println("getting articles by date: " + date);
+                    articleList = ArticleDAO.getArticlesByDate(offset, date, sort, getServletContext());
 
-                if (!date.equals("")){
-                    //search by datetime
                 }
             }
 request.setAttribute("currentsort", sort);
