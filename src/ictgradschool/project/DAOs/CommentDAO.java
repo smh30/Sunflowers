@@ -16,7 +16,7 @@ import java.util.Properties;
 public class CommentDAO {
     public static List<Comment> getAllComments(int articleId, ServletContext context) {
         List<Comment> comments = new ArrayList<>();
-        
+
         Properties dbProps = DAOCheckProperties.check(context);
         
         if (dbProps != null) {
@@ -30,6 +30,14 @@ public class CommentDAO {
                     ResultSet rs = stmt.executeQuery();
                     
                     while (rs.next()) {
+                    //TODO: include these lines to change to localtimedate timestamp.
+                        //Talk to yaz if needed
+                        //     LocalDateTime a = LocalDateTime.now();
+                        //        Timestamp timestamp = Timestamp.valueOf(a);
+                        //        System.out.print(timestamp);
+
+                  
+
                         
                         Comment comment = new Comment();
                         comment.setCommentContent(rs.getString(3));
@@ -44,9 +52,9 @@ public class CommentDAO {
                         
                         comments.add(comment);
                     }
-                    
+
                 }
-                
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -92,73 +100,75 @@ public class CommentDAO {
     public static boolean newComment(String content, String ArticleId, String user, ServletContext context) {
         
         Properties dbProps = DAOCheckProperties.check(context);
-        
-        if (dbProps != null) {
+
+        if(dbProps!=null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
-                
-                
+
+
                 try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO comments(comments_author,article_id , coments_body)" +
                         "VALUES (?, ?, ?)")) {
                     s2.setString(1, user);
                     s2.setString(2, ArticleId);
                     
                     s2.setString(3, content);
-                    
-                    
+
+
                     s2.execute();
-                    
-                    
+
+
                 } catch (SQLException e) {
                     e.printStackTrace();
                     return false;
                 }
-                
-                
+
+
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
             }
-            
+
             return true;
         }
         return false;
-        
+
     }
-    
-    public static boolean deleteComment(String commentAuthor, String commentContent, int articleID, int commentID, ServletContext context) {
-        
+
+    public static boolean deleteComment(String commentAuthor, String commentContent, int articleID, int commentID ,ServletContext context){
+
         Properties dbProps = DAOCheckProperties.check(context);
-        
-        if (dbProps != null) {
-            
+
+        if(dbProps!=null) {
+
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful - delete comm dao");
-                
-                
+
+
                 try (PreparedStatement s3 = conn.prepareStatement("UPDATE comments SET comments_author = ? WHERE comments_id = ?")) {
                     System.out.println("maybe delete it ");
                     s3.setString(1, "deleted");
                     s3.setInt(2, commentID);
-                    
+
                     s3.execute();
-                    
+
                 } catch (SQLException e) {
                     e.printStackTrace();
                     return false;
                 }
-                
-                
+
+
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
             }
-            
+
             return true;
         }
         return false;
-        
+
     }
-    
-    
+
+
+
+
 }
