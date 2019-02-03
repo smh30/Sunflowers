@@ -68,4 +68,5 @@ UPDATE user SET date_of_birth = 06121996, country='Australia', real_name='Pork C
 
 UPDATE user SET date_of_birth = 09121995, country='NZ', real_name='Tulip', description='I am tired' WHERE username = 'y';
 
+UPDATE user SET date_of_birth = 09121995, country='NZ', real_name='Tulip', description='I am tired' WHERE username = 'steph';
 
