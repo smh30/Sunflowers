@@ -9,17 +9,21 @@ import javax.servlet.ServletContext;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 import java.util.*;
 
 public class ArticleDAO {
-    
+
     public static List<Article> getAllArticles(int offset, String sort, ServletContext context) {
         List<Article> articles = new ArrayList<>();
-        
+
         Properties dbProps = DAOCheckProperties.check(context);
-        
+
         if (dbProps != null) {
-            
+
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
                 //it seems that the only way to do this without having to write an unreasonable
@@ -48,23 +52,23 @@ public class ArticleDAO {
                     default:
                         orderBy = " article_timestamp DESC ";
                         break;
-                    
+
                 }
-                
+
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article WHERE " +
                         "NOT (article_author = 'deleted') ORDER BY" + orderBy + "LIMIT 10 " +
                         "OFFSET ?")) {
 //                    stmt.setString(1, "article_author");
                     stmt.setInt(1, offset);
                     ResultSet rs = stmt.executeQuery();
-                    
+
                     while (rs.next()) {
                         //TODO: include these lines to change to localtimedate timestamp.
                         //Talk to yaz if needed
                         //     LocalDateTime a = LocalDateTime.now();
                         //        Timestamp timestamp = Timestamp.valueOf(a);
                         //        System.out.print(timestamp);
-                        
+
                         Article article = new Article();
                         article.setTitle(rs.getString(1));
                         article.setID(rs.getInt(3));
@@ -72,12 +76,12 @@ public class ArticleDAO {
                         article.setTimestamp(rs.getTimestamp(5));
                         User articleAuthor = new User(rs.getString(2));
                         article.setAuthor(articleAuthor);
-                        
+
                         articles.add(article);
                     }
-                    
+
                 }
-                
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -85,29 +89,29 @@ public class ArticleDAO {
         }
         return null;
     }
-    
+
     public static List<Article> getArticlesByAuthor(int offset, String author, ServletContext context) {
         List<Article> articles = new ArrayList<>();
-        
+
         Properties dbProps = DAOCheckProperties.check(context);
-        
+
         if (dbProps != null) {
-            
+
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful search by author:" + author);
                 // select the most recent 10 from the articles table??? ordered by timestamp with certain author:
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author LIKE ? ORDER BY article_timestamp DESC LIMIT 10 OFFSET ?")) {
                     //todo some sort of boolean that says wheter we've come here from a user looking for their own articles (ie shouldn't be fuzzy search in that case)
-                    
-                    
+
+
                     stmt.setString(1, author);
                     stmt.setInt(2, offset);
                     ResultSet rs = stmt.executeQuery();
-                    
+
                     while (rs.next()) {
-                        
+
                         //todo uncomment these once database is ready
-                        
+
                         //didn't get the id??
                         Article article = new Article();
                         article.setTitle(rs.getString(1));
@@ -117,45 +121,49 @@ public class ArticleDAO {
                         User articleAuthor = new User(rs.getString(2));
                         article.setAuthor(articleAuthor);
                         //todo another query or add to this one to return the comments as well, and create a list<comment>
-                        
+
                         articles.add(article);
                     }
-                    
+
                 }
-                
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            
+
             return articles;
         }
         return null;
     }
-    
+
     public static Article newArticle(String title, String content, String user, ServletContext context) {
-        
+
         Article article = new Article();
         Properties dbProps = DAOCheckProperties.check(context);
-        
+
         if (dbProps != null) {
-            
+
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
-                
-                
-                try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO article(article_title,article_author , article_body)" +
-                        "VALUES (?, ?, ?)")) {
+
+                LocalDateTime a = LocalDateTime.now();
+                Timestamp timestamp = Timestamp.valueOf(a);
+                System.out.print(timestamp);
+
+                try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO article(article_title,article_author , article_body, article_timestamp)" +
+                        "VALUES (?, ?, ?, ?)")) {
                     s2.setString(1, title);
                     s2.setString(2, user);
                     s2.setString(3, content);
+                    s2.setString(4, timestamp.toString());
                     s2.execute();
-                    
-                    
+
+
                 } catch (SQLException e) {
                     e.printStackTrace();
                     //return false;
                 }
-                
+
                 try (PreparedStatement s3 = conn.prepareStatement("SELECT article_id FROM article WHERE article_author = ? ORDER BY article_timestamp DESC LIMIT 1")) {
                     s3.setString(1, user);
                     try (ResultSet rs = s3.executeQuery()) {
@@ -164,36 +172,36 @@ public class ArticleDAO {
                         }
                     }
                 }
-                
-                
+
+
             } catch (SQLException e) {
                 e.printStackTrace();
                 // return false;
             }
-            
+
             //  return true;
             return article;
         }
         return null;
-        
+
     }
-    
+
     public static Article getSingleArticle(int articleID, ServletContext context) {
         Article article = new Article();
         Properties dbProps = DAOCheckProperties.check(context);
-        
+
         if (dbProps != null) {
-            
+
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
-                
-                
+
+
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_id = ?")) {
                     stmt.setInt(1, articleID);
                     ResultSet rs = stmt.executeQuery();
-                    
+
                     while (rs.next()) {
-                        
+
                         article.setTitle(rs.getString(1));
                         User articleAuthor = new User(rs.getString(2));
                         article.setID(rs.getInt(3));
@@ -201,65 +209,65 @@ public class ArticleDAO {
                         article.setArticleText(rs.getString(4));
                         article.setTimestamp(rs.getTimestamp(5));
                         article.setID(rs.getInt(3));
-                        
-                        
+
+
                     }
-                    
+
                 } catch (SQLException e) {
                     e.printStackTrace();
-                    
+
                 }
-                
-                
+
+
             } catch (SQLException e) {
                 e.printStackTrace();
-                
+
             }
-            
-            
+
+
             return article;
         }
         return null;
     }
-    
+
     public static boolean deleteArticle(String username, String title, String content, int id, ServletContext context) {
         Properties dbProps = DAOCheckProperties.check(context);
-        
+
         if (dbProps != null) {
-            
+
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
-                
-                
+
+
                 try (PreparedStatement s3 = conn.prepareStatement("UPDATE article SET article_author = ? WHERE article_id = ?")) {
                     s3.setString(1, "deleted");
                     s3.setInt(2, id);
-                    
+
                     s3.execute();
-                    
+
                 } catch (SQLException e) {
                     e.printStackTrace();
                     return false;
                 }
-                
-                
+
+
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
             }
-            
+
             return true;
         }
         return false;
-        
+
     }
-    
+
     public static List<Article> getArticlesByTitle(int offset, String title, ServletContext context) {
         List<Article> articles = new ArrayList<>();
         Properties dbProps = DAOCheckProperties.check(context);
-        
+
         if (dbProps != null) {
-            
+
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
                 // select the most recent 6 the articles table??? ordered by timestamp with certain author:
@@ -268,9 +276,9 @@ public class ArticleDAO {
                     stmt.setString(1, "%" + title + "%");
                     stmt.setInt(2, offset);
                     ResultSet rs = stmt.executeQuery();
-                    
+
                     while (rs.next()) {
-                        
+
                         Article article = new Article();
                         article.setTitle(rs.getString(1));
                         article.setID(rs.getInt(3));
@@ -278,28 +286,28 @@ public class ArticleDAO {
                         article.setTimestamp(rs.getTimestamp(5));
                         User articleAuthor = new User(rs.getString(2));
                         article.setAuthor(articleAuthor);
-                        
-                        
+
+
                         articles.add(article);
                     }
-                    
+
                 }
-                
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            
+
             return articles;
         }
         return null;
     }
-    
+
     public static List<Article> getArticlesByTitleAndAuthor(int offset, String title, String author, ServletContext context) {
         List<Article> articles = new ArrayList<>();
         Properties dbProps = DAOCheckProperties.check(context);
-        
+
         if (dbProps != null) {
-            
+
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
                 // select the most recent 6 the articles table??? ordered by timestamp with certain author:
@@ -309,9 +317,9 @@ public class ArticleDAO {
                     stmt.setString(2, author);
                     stmt.setInt(3, offset);
                     ResultSet rs = stmt.executeQuery();
-                    
+
                     while (rs.next()) {
-                        
+
                         Article article = new Article();
                         article.setTitle(rs.getString(1));
                         article.setID(rs.getInt(3));
@@ -319,36 +327,36 @@ public class ArticleDAO {
                         article.setTimestamp(rs.getTimestamp(5));
                         User articleAuthor = new User(rs.getString(2));
                         article.setAuthor(articleAuthor);
-                        
-                        
+
+
                         articles.add(article);
                     }
-                    
+
                 }
-                
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            
+
             return articles;
         }
         return null;
     }
-    
+
     public static Article getArticleByID(int id, ServletContext context) {
         Article article = new Article();
         Properties dbProps = DAOCheckProperties.check(context);
-        
+
         if (dbProps != null) {
-            
+
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 //System.out.println("connection successful");
-                
-                
+
+
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_id = ?")) {
                     stmt.setInt(1, id);
                     ResultSet rs = stmt.executeQuery();
-                    
+
                     while (rs.next()) {
                         System.out.println("title found from query = " + rs.getString(1));
                         article.setTitle(rs.getString(1));
@@ -357,62 +365,62 @@ public class ArticleDAO {
                         article.setArticleText(rs.getString(4));
                         article.setTimestamp(rs.getTimestamp(5));
                         article.setID(rs.getInt(3));
-                        
-                        
+
+
                     }
-                    
+
                 } catch (SQLException e) {
                     e.printStackTrace();
-                    
+
                 }
-                
-                
+
+
             } catch (SQLException e) {
                 e.printStackTrace();
-                
+
             }
-            
-            
+
+
             return article;
         }
         return null;
     }
-    
+
     public static Article editArticle(int id, String title, String content, ServletContext context) {
         Article article = new Article();
         Properties dbProps = DAOCheckProperties.check(context);
-        
+
         if (dbProps != null) {
-            
+
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
-                
-                
+
+
                 try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.article SET article_title =?, article_body = ? WHERE ysy.article.article_id = ?")) {
                     s2.setString(1, title);
                     s2.setString(2, content);
                     s2.setInt(3, id);
-                    
+
                     s2.execute();
-                    
-                    
+
+
                 } catch (SQLException e) {
                     e.printStackTrace();
                     //return false;
                 }
-                
-                
+
+
                 //  return true;
                 return article;
-                
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            
+
             return article;
         }
         return null;
     }
-    
-    
+
+
 }
