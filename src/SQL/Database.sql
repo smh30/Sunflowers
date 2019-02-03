@@ -29,6 +29,7 @@ article_body VARCHAR (5000),
 article_timestamp TIMESTAMP,
 PRIMARY KEY (article_id, article_author),
 FOREIGN KEY (article_author) REFERENCES user(username)
+ON DELETE CASCADE
 );
 
 
@@ -41,8 +42,10 @@ coments_body VARCHAR (200),
 comments_timestamp TIMESTAMP,
 article_id INT,
 PRIMARY KEY (comments_id, comments_author, article_id),
-FOREIGN KEY (comments_author) REFERENCES user(username),
+FOREIGN KEY (comments_author) REFERENCES user(username)
+  ON DELETE CASCADE,
 FOREIGN KEY (article_id) REFERENCES article(article_id)
+  ON DELETE CASCADE
 );
 
 
@@ -69,4 +72,12 @@ UPDATE user SET date_of_birth = 06121996, country='Australia', real_name='Pork C
 UPDATE user SET date_of_birth = 09121995, country='NZ', real_name='Tulip', description='I am tired' WHERE username = 'y';
 
 UPDATE user SET date_of_birth = 09121995, country='NZ', real_name='Tulip', description='I am tired' WHERE username = 'steph';
+
+# ALTER TABLE article DROP FOREIGN KEY article_ibfk_1;
+# ALTER TABLE comments DROP FOREIGN KEY comments_ibfk_1;
+# ALTER TABLE comments DROP FOREIGN KEY comments_ibfk_2;
+#
+# ALTER TABLE article ADD FOREIGN KEY (article_author) REFERENCES user(username) ON DELETE CASCADE;
+# ALTER TABLE comments ADD FOREIGN KEY (comments_author) REFERENCES user(username) ON DELETE CASCADE;
+# ALTER TABLE comments ADD FOREIGN KEY (article_id) REFERENCES article(article_id) ON DELETE CASCADE;
 
