@@ -46,9 +46,7 @@
 
         <form method="post" action="register">
             <%--Below line for reCAPTCHA--%>
-            <div class="g-recaptcha" data-sitekey="6Lc52o4UAAAAAF2qwLx_jR66r2nUDGMTz9FSM2-N"
-                 data-callback="recaptchaCallback"></div>
-            <button type="submit" class="btn btn-default hidden" id="btnSubmit">Submit</button>
+
 
             <label for="username">username:</label>
             <input type="text" id="username" name="username">
@@ -56,23 +54,19 @@
             <label for="password">password:</label>
             <input type="password" id="password" name="password">
             <br>
-
+            <div class="g-recaptcha" data-sitekey="6Lc52o4UAAAAAF2qwLx_jR66r2nUDGMTz9FSM2-N"
+                 data-callback="recaptchaCallback"></div>
             <%--In here goes reCAPTCHA--%>
 
+            <%--Input button to keep--%>
             <input type="submit" value="submit">
+            <%--Disabled input button--%>
+            <button type="submit" class="btn btn-default hidden" id="btnSubmit">Submit</button>
         </form>
 
 
-
         <script type="text/javascript">
-            function recaptchaCallback() {
-                var btnSubmit = document.getElementById("btnSubmit");
-
-                if (btnSubmit.classList.contains("hidden")) {
-                    btnSubmit.classList.remove("hidden");
-                    btnSubmitclassList.add("show");
-                }
-            }
+                var btnSubmit = document.getElementById("btnSubmit").style.visibility="hidden";
         </script>
     </body>
 </html>

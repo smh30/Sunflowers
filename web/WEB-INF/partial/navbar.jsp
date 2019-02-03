@@ -4,7 +4,7 @@
 <nav class="navbar navbar-expand-md navbar-toggleable-md navbar-dark bg-dark">
     <div class="container-fluid">
         <%--<div class="navbar-header">--%>
-            <a class="navbar-brand" href="#">BLOGIFY</a>
+            <a class="navbar-brand" href="#">Social Sunflowers</a>
         <%--</div>--%>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar-links"
                 aria-controls="navbar-links" aria-expanded="false" aria-label="Toggle navigation">
