@@ -19,14 +19,14 @@ public class AddArticleServlet extends HttpServlet {
         System.out.println("The adding article servlet");
 
         String title = request.getParameter("article_title");
-
-
         String content = request.getParameter("article_content");
-
-
+        String date = request.getParameter("pub-date");
         String user = (String) request.getSession().getAttribute("username");
 
-        Article newArticle = ArticleDAO.newArticle(title,content,user,getServletContext());
+        System.out.println("provided date: " + date);
+
+
+        Article newArticle = ArticleDAO.newArticle(title,content,user,date,getServletContext());
 
         if(newArticle == null){
             System.out.println("article not created??");

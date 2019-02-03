@@ -28,13 +28,16 @@ public class ArticleDAO {
                 System.out.println("connection successful");
 
                 String orderBy = getOrderString(sort);
+                String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
+
 
 // yes, this sql contains a concatenated string, but it can only have the values returned by the method above, so it should be safe
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article WHERE " +
-                        "NOT (article_author = 'deleted') ORDER BY" + orderBy + "LIMIT 10 " +
+                        "NOT (article_author = 'deleted') AND NOT (article_timestamp > ?) ORDER BY" + orderBy + "LIMIT 10 " +
                         "OFFSET ?")) {
 //                    stmt.setString(1, "article_author");
-                    stmt.setInt(1, offset);
+                    stmt.setInt(2, offset);
+                    stmt.setString(1, todaysDate);
                     ResultSet rs = stmt.executeQuery();
 
                     while (rs.next()) {
@@ -100,11 +103,14 @@ public class ArticleDAO {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful search by author:" + author);
                 String orderBy = getOrderString(sort);
+                String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
+
                 // select the most recent 10 from the articles table??? ordered by timestamp with certain author:
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author LIKE ? ORDER BY" + orderBy + "LIMIT 10 OFFSET ?")) {
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author LIKE ?  AND NOT (article_timestamp > ?) ORDER BY" + orderBy + "LIMIT 10 OFFSET ?")) {
 
                     stmt.setString(1, author);
-                    stmt.setInt(2, offset);
+                    stmt.setString(2, todaysDate);
+                    stmt.setInt(3, offset);
                     ResultSet rs = stmt.executeQuery();
 
                     while (rs.next()) {
@@ -132,7 +138,7 @@ public class ArticleDAO {
         return null;
     }
 
-    public static Article newArticle(String title, String content, String user, ServletContext context) {
+    public static Article newArticle(String title, String content, String user, String date, ServletContext context) {
 
         Article article = new Article();
         Properties dbProps = DAOCheckProperties.check(context);
@@ -142,16 +148,25 @@ public class ArticleDAO {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
 
-                LocalDateTime a = LocalDateTime.now();
-                Timestamp timestamp = Timestamp.valueOf(a);
-                System.out.print(timestamp);
+String dbTimestamp = "";
+                if(!date.equals("")){
+                    System.out.println("a date was provided to the DAO: " + date);
+                    dbTimestamp = date + " 00:00:00";
+                    System.out.println("a manually entered date: " + dbTimestamp);
+
+                } else {
+                    LocalDateTime a = LocalDateTime.now();
+                    Timestamp timestamp = Timestamp.valueOf(a);
+                    dbTimestamp = timestamp.toString();
+                    System.out.print("dbTimestamp default = " +dbTimestamp);
+                }
 
                 try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO article(article_title,article_author , article_body, article_timestamp)" +
                         "VALUES (?, ?, ?, ?)")) {
                     s2.setString(1, title);
                     s2.setString(2, user);
                     s2.setString(3, content);
-                    s2.setString(4, timestamp.toString());
+                    s2.setString(4, dbTimestamp);
                     s2.execute();
 
 
@@ -268,9 +283,12 @@ public class ArticleDAO {
                 System.out.println("connection successful");
 
                 String orderBy = getOrderString(sort);
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND NOT (article_author = 'deleted') ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
+                String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
+
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND NOT (article_author = 'deleted')  AND NOT (article_timestamp > ?) ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
                     stmt.setString(1, "%" + title + "%");
-                    stmt.setInt(2, offset);
+                    stmt.setString(2, todaysDate);
+                    stmt.setInt(3, offset);
                     ResultSet rs = stmt.executeQuery();
 
                     while (rs.next()) {
@@ -307,11 +325,13 @@ public class ArticleDAO {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
                 String orderBy = getOrderString(sort);
+                String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
 
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND article_author LIKE ? AND NOT (article_author = 'deleted') ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND article_author LIKE ? AND NOT (article_author = 'deleted')  AND NOT (article_timestamp > ?) ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
                     stmt.setString(1, "%" + title + "%");
                     stmt.setString(2, author);
-                    stmt.setInt(3, offset);
+                    stmt.setString(3, todaysDate);
+                    stmt.setInt(4, offset);
                     ResultSet rs = stmt.executeQuery();
 
                     while (rs.next()) {
@@ -427,9 +447,12 @@ public class ArticleDAO {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
                 String orderBy = getOrderString(sort);
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_timestamp LIKE ? AND NOT (article_author = 'deleted') ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
+                String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
+
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_timestamp LIKE ? AND NOT (article_author = 'deleted')  AND NOT (article_timestamp > ?) ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
                     stmt.setString(1, date + "%");
-                    stmt.setInt(2, offset);
+                    stmt.setString(2, todaysDate);
+                    stmt.setInt(3, offset);
                     ResultSet rs = stmt.executeQuery();
 
                     while (rs.next()) {
@@ -457,7 +480,6 @@ public class ArticleDAO {
         return null;
     }
 
-    //todo finish this
     public static List<Article> getArticlesByAll(int offset, String author, String title, String date, String sort, ServletContext context) {
         List<Article> articles = new ArrayList<>();
         Properties dbProps = DAOCheckProperties.check(context);
@@ -467,11 +489,14 @@ public class ArticleDAO {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
                 String orderBy = getOrderString(sort);
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author LIKE ? AND article_title LIKE ? AND article_timestamp LIKE ? AND NOT (article_author = 'deleted') ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
+                String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
+
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author LIKE ? AND article_title LIKE ? AND article_timestamp LIKE ? AND NOT (article_author = 'deleted')  AND NOT (article_timestamp > ?) ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
                     stmt.setString(1, author);
                     stmt.setString(2, "%"+title+"%");
                     stmt.setString(3, date + "%");
-                    stmt.setInt(4, offset);
+                    stmt.setString(4, todaysDate);
+                    stmt.setInt(5, offset);
                     ResultSet rs = stmt.executeQuery();
 
                     while (rs.next()) {
@@ -508,10 +533,13 @@ public class ArticleDAO {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
                 String orderBy = getOrderString(sort);
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND article_timestamp LIKE ? AND NOT (article_author = 'deleted') ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
+                String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
+
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND article_timestamp LIKE ? AND NOT (article_author = 'deleted')  AND NOT (article_timestamp > ?) ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
                     stmt.setString(1, "%"+title+"%");
                     stmt.setString(2, date + "%");
-                    stmt.setInt(3, offset);
+                    stmt.setString(3, todaysDate);
+                    stmt.setInt(4, offset);
                     ResultSet rs = stmt.executeQuery();
 
                     while (rs.next()) {
