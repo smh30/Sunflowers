@@ -26,35 +26,10 @@ public class ArticleDAO {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
-                //it seems that the only way to do this without having to write an unreasonable
-                // number of statements/DAO methods is to concatenate it. owasp says to use a
-                // whitelist, so I'm gonna try.
-                String orderBy;
-                switch (sort) {
-                    case "newest":
-                        orderBy = " article_timestamp DESC ";
-                        break;
-                    case "oldest":
-                        orderBy = " article_timestamp ASC ";
-                        break;
-                    case "author-a":
-                        orderBy = " article_author ASC ";
-                        break;
-                    case "author-z":
-                        orderBy = " article_author DESC ";
-                        break;
-                    case "title-a":
-                        orderBy = " article_title ASC ";
-                        break;
-                    case "title-z":
-                        orderBy = " article_title DESC ";
-                        break;
-                    default:
-                        orderBy = " article_timestamp DESC ";
-                        break;
 
-                }
+                String orderBy = getOrderString(sort);
 
+// yes, this sql contains a concatenated string, but it can only have the values returned by the method above, so it should be safe
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article WHERE " +
                         "NOT (article_author = 'deleted') ORDER BY" + orderBy + "LIMIT 10 " +
                         "OFFSET ?")) {
@@ -63,11 +38,6 @@ public class ArticleDAO {
                     ResultSet rs = stmt.executeQuery();
 
                     while (rs.next()) {
-                        //TODO: include these lines to change to localtimedate timestamp.
-                        //Talk to yaz if needed
-                        //     LocalDateTime a = LocalDateTime.now();
-                        //        Timestamp timestamp = Timestamp.valueOf(a);
-                        //        System.out.print(timestamp);
 
                         Article article = new Article();
                         article.setTitle(rs.getString(1));
@@ -90,7 +60,37 @@ public class ArticleDAO {
         return null;
     }
 
-    public static List<Article> getArticlesByAuthor(int offset, String author, ServletContext context) {
+    private static String getOrderString(String sort) {
+        String orderBy;
+
+        switch (sort) {
+            case "newest":
+                orderBy = " article_timestamp DESC ";
+                break;
+            case "oldest":
+                orderBy = " article_timestamp ASC ";
+                break;
+            case "author-a":
+                orderBy = " article_author ASC ";
+                break;
+            case "author-z":
+                orderBy = " article_author DESC ";
+                break;
+            case "title-a":
+                orderBy = " article_title ASC ";
+                break;
+            case "title-z":
+                orderBy = " article_title DESC ";
+                break;
+            default:
+                orderBy = " article_timestamp DESC ";
+                break;
+
+        }
+        return orderBy;
+    }
+
+    public static List<Article> getArticlesByAuthor(int offset, String author, String sort, ServletContext context) {
         List<Article> articles = new ArrayList<>();
 
         Properties dbProps = DAOCheckProperties.check(context);
@@ -99,10 +99,9 @@ public class ArticleDAO {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful search by author:" + author);
+                String orderBy = getOrderString(sort);
                 // select the most recent 10 from the articles table??? ordered by timestamp with certain author:
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author LIKE ? ORDER BY article_timestamp DESC LIMIT 10 OFFSET ?")) {
-                    //todo some sort of boolean that says wheter we've come here from a user looking for their own articles (ie shouldn't be fuzzy search in that case)
-
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author LIKE ? ORDER BY" + orderBy + "LIMIT 10 OFFSET ?")) {
 
                     stmt.setString(1, author);
                     stmt.setInt(2, offset);
@@ -110,9 +109,6 @@ public class ArticleDAO {
 
                     while (rs.next()) {
 
-                        //todo uncomment these once database is ready
-
-                        //didn't get the id??
                         Article article = new Article();
                         article.setTitle(rs.getString(1));
                         article.setID(rs.getInt(3));
@@ -262,7 +258,7 @@ public class ArticleDAO {
 
     }
 
-    public static List<Article> getArticlesByTitle(int offset, String title, ServletContext context) {
+    public static List<Article> getArticlesByTitle(int offset, String title, String sort, ServletContext context) {
         List<Article> articles = new ArrayList<>();
         Properties dbProps = DAOCheckProperties.check(context);
 
@@ -270,9 +266,9 @@ public class ArticleDAO {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
-                // select the most recent 6 the articles table??? ordered by timestamp with certain author:
-                //todo will this bring newest first or oldest first???
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND NOT (article_author = 'deleted') ORDER BY article_timestamp DESC  LIMIT 10 OFFSET ?")) {
+
+                String orderBy = getOrderString(sort);
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND NOT (article_author = 'deleted') ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
                     stmt.setString(1, "%" + title + "%");
                     stmt.setInt(2, offset);
                     ResultSet rs = stmt.executeQuery();
@@ -302,7 +298,7 @@ public class ArticleDAO {
         return null;
     }
 
-    public static List<Article> getArticlesByTitleAndAuthor(int offset, String title, String author, ServletContext context) {
+    public static List<Article> getArticlesByTitleAndAuthor(int offset, String title, String author, String sort, ServletContext context) {
         List<Article> articles = new ArrayList<>();
         Properties dbProps = DAOCheckProperties.check(context);
 
@@ -310,9 +306,9 @@ public class ArticleDAO {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
-                // select the most recent 6 the articles table??? ordered by timestamp with certain author:
-                //todo will this bring newest first or oldest first???
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND article_author LIKE ? AND NOT (article_author = 'deleted') ORDER BY article_timestamp DESC  LIMIT 10 OFFSET ?")) {
+                String orderBy = getOrderString(sort);
+
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND article_author LIKE ? AND NOT (article_author = 'deleted') ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
                     stmt.setString(1, "%" + title + "%");
                     stmt.setString(2, author);
                     stmt.setInt(3, offset);
@@ -422,5 +418,125 @@ public class ArticleDAO {
         return null;
     }
 
+    public static List<Article> getArticlesByDate(int offset, String date, String sort, ServletContext context) {
+        List<Article> articles = new ArrayList<>();
+        Properties dbProps = DAOCheckProperties.check(context);
+
+        if (dbProps != null) {
+
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+                System.out.println("connection successful");
+                String orderBy = getOrderString(sort);
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_timestamp LIKE ? AND NOT (article_author = 'deleted') ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
+                    stmt.setString(1, date + "%");
+                    stmt.setInt(2, offset);
+                    ResultSet rs = stmt.executeQuery();
+
+                    while (rs.next()) {
+
+                        Article article = new Article();
+                        article.setTitle(rs.getString(1));
+                        article.setID(rs.getInt(3));
+                        article.setArticleText(rs.getString(4));
+                        article.setTimestamp(rs.getTimestamp(5));
+                        User articleAuthor = new User(rs.getString(2));
+                        article.setAuthor(articleAuthor);
+
+
+                        articles.add(article);
+                    }
+
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            return articles;
+        }
+        return null;
+    }
+
+    //todo finish this
+    public static List<Article> getArticlesByAll(int offset, String author, String title, String date, String sort, ServletContext context) {
+        List<Article> articles = new ArrayList<>();
+        Properties dbProps = DAOCheckProperties.check(context);
+
+        if (dbProps != null) {
+
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+                System.out.println("connection successful");
+                String orderBy = getOrderString(sort);
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author LIKE ? AND article_title LIKE ? AND article_timestamp LIKE ? AND NOT (article_author = 'deleted') ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
+                    stmt.setString(1, author);
+                    stmt.setString(2, "%"+title+"%");
+                    stmt.setString(3, date + "%");
+                    stmt.setInt(4, offset);
+                    ResultSet rs = stmt.executeQuery();
+
+                    while (rs.next()) {
+
+                        Article article = new Article();
+                        article.setTitle(rs.getString(1));
+                        article.setID(rs.getInt(3));
+                        article.setArticleText(rs.getString(4));
+                        article.setTimestamp(rs.getTimestamp(5));
+                        User articleAuthor = new User(rs.getString(2));
+                        article.setAuthor(articleAuthor);
+
+
+                        articles.add(article);
+                    }
+
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            return articles;
+        }
+        return null;
+    }
+
+    public static List<Article> getArticlesByTitleAndDate(int offset, String title, String date, String sort, ServletContext context) {
+        List<Article> articles = new ArrayList<>();
+        Properties dbProps = DAOCheckProperties.check(context);
+
+        if (dbProps != null) {
+
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+                System.out.println("connection successful");
+                String orderBy = getOrderString(sort);
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND article_timestamp LIKE ? AND NOT (article_author = 'deleted') ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
+                    stmt.setString(1, "%"+title+"%");
+                    stmt.setString(2, date + "%");
+                    stmt.setInt(3, offset);
+                    ResultSet rs = stmt.executeQuery();
+
+                    while (rs.next()) {
+
+                        Article article = new Article();
+                        article.setTitle(rs.getString(1));
+                        article.setID(rs.getInt(3));
+                        article.setArticleText(rs.getString(4));
+                        article.setTimestamp(rs.getTimestamp(5));
+                        User articleAuthor = new User(rs.getString(2));
+                        article.setAuthor(articleAuthor);
+
+
+                        articles.add(article);
+                    }
+
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            return articles;
+        }
+        return null;
+    }
 
 }
