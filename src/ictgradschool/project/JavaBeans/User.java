@@ -11,6 +11,8 @@ public class User implements Serializable {
     String pictureURL;
     String DOB;
 
+    public User(){ }
+
     public String getCountry() {
         return country;
     }
@@ -23,9 +25,7 @@ public class User implements Serializable {
         return realName;
     }
 
-    public void setRealName(String realName) {
-        this.realName = realName;
-    }
+    public void setRealName(String realName) { this.realName = realName;}
 
     public String getDescription() {
         return description;
@@ -43,20 +43,14 @@ public class User implements Serializable {
         this.pictureURL = pictureURL;
     }
 
-    public String getDOB() {
-        return DOB;
-    }
+    public String getDOB() { return DOB;}
 
     public void setDOB(String DOB) {
         this.DOB = DOB;
     }
 
-    // no argument constructor needed for JavaBean
-    public User(){
-    
-    }
 
-    //
+
     public User (String username){
         this.username = username;
     }

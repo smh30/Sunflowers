@@ -39,7 +39,7 @@
 
     <servlet>
         <servlet-name>Homepage</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.GetArticlesServlet</servlet-class>
+        <servlet-class>ictgradschool.project.servlets.article.GetArticlesServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -49,7 +49,7 @@
 
     <servlet>
         <servlet-name>Search</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.SearchServlet</servlet-class>
+        <servlet-class>ictgradschool.project.servlets.searching.SearchServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -59,7 +59,7 @@
 
     <servlet>
         <servlet-name>UploadProfilePictureServlet</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.UploadProfilePictureServlet</servlet-class>
+        <servlet-class>ictgradschool.project.servlets.user.UploadProfilePictureServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -78,7 +78,7 @@
 
     <servlet>
         <servlet-name>ViewArticle</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.GetSingleArticleServlet</servlet-class>
+        <servlet-class>ictgradschool.project.servlets.article.GetSingleArticleServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -88,7 +88,7 @@
 
     <servlet>
         <servlet-name>Upload</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.UploadProfilePictureServlet</servlet-class>
+        <servlet-class>ictgradschool.project.servlets.user.UploadProfilePictureServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -108,7 +108,7 @@
 
     <servlet>
         <servlet-name>AddComment</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.AddCommentServlet</servlet-class>
+        <servlet-class>ictgradschool.project.servlets.comments.AddCommentServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -150,7 +150,7 @@
 
     <servlet>
         <servlet-name>DeleteComment</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.DeleteCommentServlet</servlet-class>
+        <servlet-class>ictgradschool.project.servlets.comments.DeleteCommentServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

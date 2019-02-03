@@ -26,17 +26,17 @@ public class AddArticleServlet extends HttpServlet {
 
         String user = (String) request.getSession().getAttribute("username");
 
-        Article newArticle = ArticleDAO.newArticle(title,content,user,getServletContext());
+        Article newArticle = ArticleDAO.newArticle(title, content, user, getServletContext());
 
-        if(newArticle == null){
+        if (newArticle == null) {
             System.out.println("article not created??");
             String message = "Some trouble with uploading your article. Please try again.";
-            request.setAttribute("message",message);
+            request.setAttribute("message", message);
 
-            request.getRequestDispatcher("web-pages/new-article.jsp").forward(request,response);
+            request.getRequestDispatcher("web-pages/new-article.jsp").forward(request, response);
 
 
-        }else{
+        } else {
             System.out.println("article created!!!!!!!");
             request.setAttribute("new", true);
             request.setAttribute("article", newArticle);
@@ -44,14 +44,14 @@ public class AddArticleServlet extends HttpServlet {
             System.out.println("new aartic's id" + id);
             request.setAttribute("articleID", id);
             // TODO to finish the single-article.jsp. It is the page after user submit their new article.  add attribute
-            request.getRequestDispatcher("/article").forward(request,response);
+            request.getRequestDispatcher("/article").forward(request, response);
         }
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("newarticle", true);
-request.getRequestDispatcher("web-pages/new-article.jsp").forward(request, response);
+        request.getRequestDispatcher("web-pages/new-article.jsp").forward(request, response);
 
     }
 }

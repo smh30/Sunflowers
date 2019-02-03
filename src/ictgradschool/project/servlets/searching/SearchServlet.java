@@ -1,4 +1,4 @@
-package ictgradschool.project.servlets;
+package ictgradschool.project.servlets.searching;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

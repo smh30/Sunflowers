@@ -13,20 +13,18 @@ import javax.servlet.ServletContext;
 
 
 public class ProfileDetailsDAO {
-
-    public static User checkDetails(String username, String country, String realName, String desc, String dateOfBirth, String imageURL,ServletContext context) {
+    //TODO: Access if still need a lot of these parameters: most aren't active
+    public static User checkDetails(String username, String country, String realName, String desc, String dateOfBirth, String imageURL, ServletContext context) {
         User user = new User();
         Properties dbProps = DAOCheckProperties.check(context);
 
-        if(dbProps!=null) {
+        if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE username= ?")) {
                     stmt.setString(1, username);
                     try (ResultSet r = stmt.executeQuery()) {
                         if (r.next()) {
-                            //todo see if these are working
-                            //
                             String USERNAME = r.getString(4);
                             String COUNTRY = r.getString(6);
                             String REALNAME = r.getString(7);
@@ -59,13 +57,11 @@ public class ProfileDetailsDAO {
         User user = new User();
         Properties dbProps = DAOCheckProperties.check(context);
 
-        if(dbProps!=null) {
+        if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
 
-
-                // we need a id
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM ysy.user AS a WHERE username = ?")) {
                     stmt.setString(1, username);
                     ResultSet rs = stmt.executeQuery();
@@ -105,49 +101,10 @@ public class ProfileDetailsDAO {
         return null;
     }
 
-//    public static User editUser(String username, String country, String realName, String desc, String dateOfBirth, String imageURL,ServletContext context) {
-//        User user = new User();
-//        Properties dbProps = DAOCheckProperties.check(context);
-//
-//        if(dbProps!=null) {
-//
-//            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-//                System.out.println("connection successful");
-//
-//
-//                try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.user SET country = ? ,real_name=?, description = ?, image = ?,date_of_birth = ? WHERE username= ?")) {
-//                    s2.setString(1, country);
-//                    s2.setString(2, realName);
-//                    s2.setString(3, desc);
-//                    s2.setString(4, imageURL);
-//                    s2.setString(5, dateOfBirth);
-//                    s2.setString(6, username);
-//
-//                    s2.execute();
-//
-//
-//                } catch (SQLException e) {
-//                    e.printStackTrace();
-//                    //return false;
-//                }
-//
-//
-//                //  return true;
-//                return user;
-//
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//
-//            return user;
-//        }
-//        return null;
-//    }
-
     public static boolean deleteUser(String username, ServletContext context) {
         Properties dbProps = DAOCheckProperties.check(context);
 
-        if(dbProps!=null) {
+        if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
