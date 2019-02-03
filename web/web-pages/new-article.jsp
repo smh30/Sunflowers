@@ -49,6 +49,9 @@
         <form action="/edit-article" method="post">
             <input type="hidden" name="articleID" value="${article.ID}">
                 <%}%>
+            <div class="choose-date">
+                <label for="date">Optionally, select a publication date for your post:</label>
+                <input type="date" id="date" name="pub-date">
 
                 <div class="container text-center">
                     <label for="exampleFormControlInput1">Article Title Here:</label>
