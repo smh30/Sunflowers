@@ -30,6 +30,11 @@ public class CommentDAO {
                 ResultSet rs = stmt.executeQuery();
 
                     while (rs.next()) {
+                    //TODO: include these lines to change to localtimedate timestamp.
+                        //Talk to yaz if needed
+                        //     LocalDateTime a = LocalDateTime.now();
+                        //        Timestamp timestamp = Timestamp.valueOf(a);
+                        //        System.out.print(timestamp);
 
                     Comment comment = new Comment();
                     comment.setCommentContent(rs.getString(3));
@@ -65,7 +70,6 @@ public class CommentDAO {
                         "VALUES (?, ?, ?)")) {
                     s2.setString(1, user);
                     s2.setString(2, ArticleId);
-
                     s2.setString(3, content);
 
 
