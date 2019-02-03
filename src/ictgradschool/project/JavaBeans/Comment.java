@@ -12,6 +12,18 @@ public class Comment implements Serializable {
     private int commentID;
     private List<Comment> children;
 
+    private List Children;
+
+
+
+    public List getChildren() {
+        return Children;
+    }
+
+    public void setChildren(List children) {
+        Children = children;
+    }
+
     public int getCommentID() {
         return commentID;
     }
