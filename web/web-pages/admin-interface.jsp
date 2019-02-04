@@ -10,10 +10,32 @@
     <head>
         <title>Admin Interface</title>
 
-        <%@include file="../WEB-INF/partial/_partial_header.jsp"%>
+        <%@include file="../WEB-INF/partial/_partial_header.jsp" %>
     </head>
 
     <body>
-        <%@include file="../WEB-INF/partial/navbar.jsp"%>
+        <%@include file="../WEB-INF/partial/navbar.jsp" %>
+        <div class="container">
+            <form method=post>
+                <table border="2">
+                    <thead>
+                        <tr>
+                            <td>Username:</td>
+                            <td>Remove Option:</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%--Not sure if can put EL in without brackets???--%>
+                        <tr>
+                            <%--Need to link this up from database--%>
+                            <td>${user.username} </td>
+                        </tr>
+                            <tr>
+                                <td><button type="button" onclick="">Remove</button></td>
+                            </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
     </body>
 </html>
