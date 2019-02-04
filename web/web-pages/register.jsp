@@ -56,17 +56,21 @@
             <br>
             <div class="g-recaptcha" data-sitekey="6Lc52o4UAAAAAF2qwLx_jR66r2nUDGMTz9FSM2-N"
                  data-callback="recaptchaCallback"></div>
-            <%--In here goes reCAPTCHA--%>
 
-            <%--Input button to keep--%>
-            <input type="submit" value="submit">
             <%--Disabled input button--%>
-            <button type="submit" class="btn btn-default hidden" id="btnSubmit">Submit</button>
+
+            <button type="submit" class="btn btn-default disabled" id="btnSubmit">Submit</button>
         </form>
 
-
         <script type="text/javascript">
-                var btnSubmit = document.getElementById("btnSubmit").style.visibility="hidden";
+            function recaptchaCallback() {
+                var btnSubmit = document.getElementById("btnSubmit");
+                //TODO: Play with classes to get border back
+                if ( btnSubmit.classList.contains("disabled") ) {
+                    btnSubmit.classList.remove("disabled");
+                    btnSubmitclassList.add("show");
+                }
+            }
         </script>
     </body>
 </html>
