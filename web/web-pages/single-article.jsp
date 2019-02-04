@@ -161,7 +161,9 @@
 
                             <div class="form-popup" id="myForm-${comment.commentID}">
                                 <form method="post" action="/addNestedComment" class="form-container">
+                                    <input type="hidden" name="articleID" value="${article.ID}">
                                     <input type="hidden" name="commentID" value="${comment.commentID}">
+
                                     <%--the commentID is coming from /JavaBean/Comment.java--%>
                                     <%-- the commentID is set in CommentDAO.java line 75--%>
                                     <%--the CommentID is coming from 'comments' table column 1--%>
