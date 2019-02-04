@@ -112,7 +112,15 @@
             <%--todo make the 'author' link or popup the user info box/page--%>
             </c:choose>
         <p>Author: ${article.author.username}</p>
-        <p>${article.timestamp}</p>
+
+            <%--this block converts the timestamp to a nicer format for viewing on the page--%>
+            <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+            <c:if test="${not empty article.timestamp}">
+    <span title="${article.timestamp}"><fmt:formatDate value="${article.timestamp}"
+                                               pattern="MM/dd/yyyy HH:mm" /></span>
+            </c:if>
+        <%--<p>${article.timestamp}</p>--%>
+
         <p>${article.articleText}</p>
             <%--todo add readmore--%>
             <%--todo add "see comments" and maybe a counter of how many comments there are--%>
