@@ -121,14 +121,13 @@ public class UserDAO {
                     stmt.setString(1, username);
                     try (ResultSet r = stmt.executeQuery()) {
                         if (r.next()) {
-                            String USERNAME = r.getString(4);
-                            String COUNTRY = r.getString(6);
-                            String REALNAME = r.getString(7);
-                            String DESC = r.getString(8);
-                            String DOB = r.getString(3);
-                            String IMAGEURL = r.getString(9);
-                            String DEFAULTIMG = r.getString(11);
-                            
+                            String USERNAME = r.getString(3);
+                            String COUNTRY = r.getString(5);
+                            String REALNAME = r.getString(6);
+                            String DESC = r.getString(7);
+                            String IMAGEURL = r.getString(8);
+                            String DEFAULTIMG = r.getString(9);
+                            String DOB = r.getString(11);
                             
                             user.setUsername(USERNAME);
                             user.setCountry(COUNTRY);
@@ -163,18 +162,13 @@ public class UserDAO {
                 
                 //todo pretty unsure about using int for the date of birth - surely should be a
                 // date??? currently throws exception if no value is given but works in a way
-                int dobint = 0;
-                try {
-                    dobint = Integer.valueOf(dateOfBirth);
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
+
                 
                 try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.user SET country = ? ,real_name=?, description = ?, date_of_birth = ? WHERE ysy.user.username= ?")) {
                     s2.setString(1, country);
                     s2.setString(2, realName);
                     s2.setString(3, description);
-                    s2.setInt(4, dobint);
+                    s2.setString(4, dateOfBirth);
                     s2.setString(5, username);
                     
                     s2.execute();
