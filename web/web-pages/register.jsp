@@ -9,29 +9,36 @@
 <html>
     <head>
         <title>Title</title>
+
+        <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
+
+        <%--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>--%>
+
         <%--Script below is for reCAPTCHA--%>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-
-
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
         <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
                 async defer>
         </script>
-<%--this lst jquery import is probably not needed, playing with it while testing ajax--%>
+
+
+<%--this last jquery import is the non-slim version, need for ajax--%>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"
                 integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-                crossorigin="anonymous"></script>
+                crossorigin="anonymous" type="text/javascript"></script>
 
-        <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
+
+        <style>
+            .red {
+                border: 2px solid red;
+            }
+        </style>
+
 
         <script type="text/javascript">
 
                 function checkName(nameCheck) {
-                    // var toCheck = nameCheck;
-                    // console.log("toCheck =" + toCheck);
-                    //
-                    // function ajaxCall() {
+
                         $.ajax({
                             url: "checkname",
                             type: "POST",
@@ -41,14 +48,19 @@
                                 //do the thing to show if it's good or not
                                 if(msg ==="true"){
                                     console.log("the message was true");
-                                    $("#username").css({border: "2px solid red"});
+                                    // $("#username").css({border: "2px solid red"});
+                                    $('#nameFail').addClass("red");
+                                    $('#nameFail').text("Please choose a different username");
+                                    //$('#nameFail').toggle(true);
+                                } else {
+                                    $('#nameFail').removeClass("red");
+                                    $('#nameFail').text("");
                                 }
                             }
-                        });
+                        })
                     }
-
-
         </script>
+
 
 
 
@@ -64,6 +76,9 @@
         ${message}
         <%
             } %>
+
+        <div id="nameFail">
+        </div>
 
         <form method="post" action="register">
             <%--Below line for reCAPTCHA--%>
