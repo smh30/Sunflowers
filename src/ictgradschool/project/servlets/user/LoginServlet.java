@@ -1,5 +1,6 @@
 package ictgradschool.project.servlets.user;
 
+import ictgradschool.project.DAOs.AdminDAO;
 import ictgradschool.project.DAOs.UserDAO;
 import ictgradschool.project.utilities.Passwords;
 
@@ -32,6 +33,16 @@ System.out.println(request.getParameter("articleID"));
             System.out.println("creating session");
             HttpSession session = request.getSession(true);
             session.setAttribute("username", username);
+
+            boolean adminOK;
+
+            adminOK = AdminDAO.checkAdminStatus(username, getServletContext());
+            if (adminOK) {
+                //TODO: Ask Steph if I need to make a session
+                System.out.println("creating session");
+               session = request.getSession(true);
+                session.setAttribute("admin", "admin");
+            }
 
             if (request.getAttribute("new")!= null) {
                 System.out.println("logged in new user, attemting redirect to profile edit");
