@@ -22,7 +22,7 @@ public class AddNestedCommentServlet extends HttpServlet {
 
 
         String user = (String) request.getSession().getAttribute("username");
-//
+
 //        List nestedcomment = CommentDAO.getChildren(commentID, )
     }
 
