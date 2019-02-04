@@ -188,8 +188,8 @@
                             <%--</div>--%>
 
                         <%--this form will pop up when the button is pressed--%>
-                        <a href="#hiddenreply" class="btn btn-default" data-toggle="collapse">show reply box</a>
-                                <div id="hiddenreply" class="collapse">
+                        <a href="#hiddenreply${comment.commentID}" class="btn btn-default" data-toggle="collapse">show reply box</a>
+                                <div id="hiddenreply${comment.commentID}" class="collapse">
                                     <form>
                                         <label for="nested-reply">reply: </label>
                                         <textarea id="nested-reply" rows="5" cols="30"></textarea>

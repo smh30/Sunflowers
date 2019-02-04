@@ -91,4 +91,7 @@ ALTER TABLE user ADD COLUMN admin TINYINT;
 
 UPDATE user SET ysy.user.admin=1 WHERE username='z';
 
+ALTER TABLE ysy.user ADD COLUMN default_image VARCHAR (40) DEFAULT 'Default.jpg';
+
+
 
