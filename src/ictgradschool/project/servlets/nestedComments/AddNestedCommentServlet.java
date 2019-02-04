@@ -15,15 +15,22 @@ public class AddNestedCommentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("The adding nested comment servlet");
 
-        String commentID = request.getParameter("commentID");
-
+        String articleID = request.getParameter("articleID");
 
         String content = request.getParameter("content");
 
-
         String user = (String) request.getSession().getAttribute("username");
 
-//        List nestedcomment = CommentDAO.getChildren(commentID, )
+        String parentID = request.getParameter("commentID");
+
+        boolean addnestedcomment = CommentDAO.addNestedComments(parentID,content,articleID,user,getServletContext());
+
+        if(!addnestedcomment){
+            request.getRequestDispatcher("article?articleID="+Integer.parseInt(articleID)).forward(request,response);
+        }else{
+            request.setAttribute("articleID", articleID);
+            request.getRequestDispatcher("/article").forward(request,response);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -26,7 +26,7 @@ public class CommentDAO {
                 System.out.println("connection successful");
                 //todo get the top-level comments (those without a parent)
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM comments WHERE " +
-                        "article_id =? ORDER BY comments_timestamp ")) {
+                        "article_id =? AND comments_author!='deleted' ORDER BY comments_timestamp ")) {
                     stmt.setInt(1, articleId);
                     ResultSet rs = stmt.executeQuery();
 
@@ -166,5 +166,47 @@ public class CommentDAO {
 
     }
 
+    //TODO Add nested comment by comment_id as parent_id, article_id, content and ServletContext
+
+    public static boolean addNestedComments(String parentid, String content, String ArticleId, String user, ServletContext context){
+        Properties dbProps = DAOCheckProperties.check(context);
+
+        if (dbProps != null) {
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+                System.out.println("connection successful");
+
+                LocalDateTime a = LocalDateTime.now();
+                Timestamp timestamp = Timestamp.valueOf(a);
+                System.out.print(timestamp);
+
+                try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO comments(comments_author,article_id , coments_body, comments_timestamp, parent_comment)" +
+                        "VALUES (?, ?, ?, ?,?)")) {
+                    s2.setString(1, user);
+                    s2.setString(2, ArticleId);
+
+                    s2.setString(3, content);
+                    s2.setString(4, timestamp.toString());
+                    s2.setString(5,parentid);
+
+
+                    s2.execute();
+
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+
+            return true;
+        }
+        return false;
+
+    }
 
 }
