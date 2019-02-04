@@ -37,5 +37,6 @@
                 </table>
             </form>
         </div>
+        <%--Add "Add User" button--%>
     </body>
 </html>
