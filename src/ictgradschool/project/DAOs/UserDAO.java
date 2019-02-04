@@ -124,6 +124,7 @@ public class UserDAO {
                             String DESC = r.getString(8);
                             String DOB = r.getString(3);
                             String IMAGEURL = r.getString(9);
+                            String DEFAULTIMG = r.getString(11);
 
 
                             user.setUsername(USERNAME);
@@ -132,6 +133,7 @@ public class UserDAO {
                             user.setDescription(DESC);
                             user.setDOB(DOB);
                             user.setPictureURL(IMAGEURL);
+                            user.setDefaultImage(DEFAULTIMG);
 
                         }
                     }

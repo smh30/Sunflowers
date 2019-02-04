@@ -9,6 +9,7 @@ public class User implements Serializable {
     String realName;
     String description;
     String pictureURL;
+    String defaultImage;
     String DOB;
 
     public User(){ }
@@ -61,5 +62,13 @@ public class User implements Serializable {
     
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getDefaultImage() {
+        return defaultImage;
+    }
+
+    public void setDefaultImage(String defaultImage) {
+        this.defaultImage = defaultImage;
     }
 }
