@@ -157,9 +157,9 @@
 
                             <%-- the popup form for replying the comment --%>
 
-                            <button class="open-button" onclick="openForm()">Reply</button>
+                            <button id="reply-btn-${comment.commentID}" class="open-button" onclick="openForm(${comment.commentID})">Reply</button>
 
-                            <div class="form-popup" id="myForm">
+                            <div class="form-popup" id="myForm-${comment.commentID}">
                                 <form method="post" action="/addNestedComment" class="form-container">
                                     <input type="hidden" name="commentID" value="${comment.commentID}">
                                     <%--the commentID is coming from /JavaBean/Comment.java--%>
@@ -170,7 +170,7 @@
                                     <input type="text" id="content" placeholder="comment here..." name="content" >
 
                                     <button type="submit" class="btn">Submit</button>
-                                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                                    <button type="button" class="btn cancel" onclick="closeForm(${comment.commentID})">Close</button>
                                 </form>
                             </div>
 
@@ -229,12 +229,14 @@
             </c:if>
 
             <script>
-                function openForm() {
-                    document.getElementById("myForm").style.display = "block";
+                function openForm(id) {
+                    var className = "myForm-"+id;
+                    document.getElementById(className).style.display = "block";
                 }
 
-                function closeForm() {
-                    document.getElementById("myForm").style.display = "none";
+                function closeForm(id) {
+                    var className = "myForm-"+id;
+                    document.getElementById(className).style.display = "none";
                 }
             </script>
 
