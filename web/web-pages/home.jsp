@@ -140,7 +140,7 @@
        getURL=request.getQueryString();
        backParam = request.getParameter("back");
     %>
-URL = <%=getURL%>
+
     <% int back = 0;
     if (backParam!= null) {
         back = Integer.parseInt(backParam);

@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS user;
 CREATE TABLE user(
 iteration INT,
 salt binary (32),
-date_of_birth INT,
+date_of_birth VARCHAR (100),
 username VARCHAR (20),
 password binary (64),
 country VARCHAR (20),
@@ -90,11 +90,10 @@ ALTER TABLE comments ADD FOREIGN KEY (parent_comment) REFERENCES comments (comme
 
 ALTER TABLE user ADD COLUMN admin BOOLEAN;
 
-ALTER TABLE user DROP COLUMN admin;
+ALTER TABLE ysy.user DROP COLUMN date_of_birth;
+ALTER TABLE ysy.user ADD COLUMN date_of_birth VARCHAR (40);
 
-UPDATE user SET ysy.user.admin=TRUE WHERE username='z';
 
-ALTER TABLE ysy.user ADD COLUMN default_image VARCHAR (40) DEFAULT 'Default.jpg';
 
 
 
