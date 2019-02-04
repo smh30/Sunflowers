@@ -38,7 +38,6 @@ System.out.println(request.getParameter("articleID"));
 
             adminOK = AdminDAO.checkAdminStatus(username, getServletContext());
             if (adminOK) {
-                //TODO: Ask Steph if I need to make a session
                 System.out.println("creating session");
                session = request.getSession(true);
                 session.setAttribute("admin", "admin");
