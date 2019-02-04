@@ -33,7 +33,7 @@ public class CommentDAO {
                     while (rs.next()) {
                         //TODO fix children attachment logic
                         //TODO 1. Check comments whether contains a same comment by distinctive comment id
-                        
+
 
                         Comment comment = new Comment();
                         comment.setCommentContent(rs.getString(3));
