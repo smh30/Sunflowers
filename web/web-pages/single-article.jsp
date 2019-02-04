@@ -168,7 +168,7 @@
                                 <div id="hiddenreply" class="collapse">
                                     <form>
                                         <label for="nested-reply">reply: </label>
-                                        <textarea id="nested-reply" rows="5" cols="30">a reply box</textarea>
+                                        <textarea id="nested-reply" rows="5" cols="30"></textarea>
                                     </form>
 
                         </c:if>
