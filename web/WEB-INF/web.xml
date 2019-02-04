@@ -168,7 +168,15 @@
         <servlet-name>AdminInterface</servlet-name>
         <url-pattern>/admininterface</url-pattern>
     </servlet-mapping>
-
+    
+    <servlet>
+        <servlet-name>CheckName</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.user.CheckNameServlet</servlet-class>
+    </servlet>
+<servlet-mapping>
+    <servlet-name>CheckName</servlet-name>
+    <url-pattern>/checkname</url-pattern>
+</servlet-mapping>
 
 
 </web-app>
