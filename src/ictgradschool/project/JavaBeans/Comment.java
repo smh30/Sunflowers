@@ -12,15 +12,15 @@ public class Comment implements Serializable {
     private int commentID;
     private List<Comment> children;
 
-    private List Children;
 
-    public List getChildren() {
-        return Children;
+    public List<Comment> getChildren() {
+        return children;
     }
 
-    public void setChildren(List children) {
-        Children = children;
+    public void setChildren(List<Comment> children) {
+        this.children = children;
     }
+
 
     public int getCommentID() {
         return commentID;

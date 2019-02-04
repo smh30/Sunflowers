@@ -167,5 +167,24 @@
         <servlet-name>DeleteProfile</servlet-name>
         <url-pattern>/deleteprofile</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AddNestedComment</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.nestedComments.AddNestedCommentServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>AddNestedComment</servlet-name>
+        <url-pattern>/addNestedComment</url-pattern>
+    </servlet-mapping>
 
+    <servlet>
+        <servlet-name>DeleteNestedComment</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.nestedComments.DeleteNestedCommentServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>DeleteNestedComment</servlet-name>
+        <url-pattern>/deleteNestedComment</url-pattern>
+    </servlet-mapping>
 </web-app>
