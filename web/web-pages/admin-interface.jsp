@@ -20,20 +20,17 @@
                 <table border="2">
                     <thead>
                         <tr>
-                            <td>Username:</td>
-                            <td>Remove Option:</td>
+                            <th>Username:</th>
+                            <th>Remove Option:</th>
                         </tr>
                     </thead>
                     <tbody>
                         <%--Not sure if can put EL in without brackets???--%>
-                        <c:forEach var="user" items="">
+                        <c:forEach var="user" items="${users}">
                             <tr>
-                                    <%--Need to link this up from database--%>
                                 <td>${user.username} </td>
-                            </tr>
-                            <tr>
                                 <td>
-                                    <button type="button" onclick="">Remove</button>
+                                    <button type="button" onclick="">Remove User</button>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -43,5 +40,8 @@
             </form>
         </div>
         <%--Add "Add User" button--%>
+        <div class="container">
+            <button type="button" onclick="">Add User</button>
+        </div>
     </body>
 </html>

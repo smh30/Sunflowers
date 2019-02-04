@@ -19,7 +19,7 @@ public class UserDAO {
         
         if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
+                System.out.println("connection successful in the UserDAO");
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE username = ?")) {
                     stmt.setString(1, username);
                     try (ResultSet r = stmt.executeQuery()) {
@@ -39,13 +39,16 @@ public class UserDAO {
                             if (Passwords.isExpectedPassword(password.toCharArray(), salt, iterations,
                                     hash)) {
                                 /* If the password did match, return true.*/
+                                System.out.println("the password was correct");
                                 return true;
                             } else {
+                                System.out.println("the password was wrong");
                                 /* If they do not match,  return false.*/
                                 return false;
                             }
                         } else {
                             //if no such user, return false;
+                            System.out.println("no such user was found");
                             return false;
                         }
                     }

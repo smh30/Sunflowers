@@ -46,14 +46,13 @@ public class AdminDAO {
         if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE ysy.user.username = ?")) {
-                    stmt.setString(1, username);
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT username FROM user")) {
 
                     ResultSet rs = stmt.executeQuery();
 
                     while(rs.next()) {
                         User user = new User();
-                        user.setUsername(rs.getString(4));
+                        user.setUsername(rs.getString(1));
 
                         users.add(user);
                     }
