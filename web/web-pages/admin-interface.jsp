@@ -26,14 +26,14 @@
                     </thead>
                     <tbody>
                         <%--Not sure if can put EL in without brackets???--%>
-                        <c:forEach var="user" items="">
+                        <c:forEach var="user" items="${users}">
                             <tr>
                                     <%--Need to link this up from database--%>
                                 <td>${user.username} </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <button type="button" onclick="">Remove</button>
+                                    <button type="button" onclick="">Remove User</button>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -43,5 +43,6 @@
             </form>
         </div>
         <%--Add "Add User" button--%>
+        <button type="button" onclick="">Add User</button>
     </body>
 </html>
