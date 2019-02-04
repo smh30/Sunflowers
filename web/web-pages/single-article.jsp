@@ -162,11 +162,24 @@
                                     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
                                 </form>
                             </div>
+
+                        <%--this form will pop up when the button is pressed--%>
+                        <a href="#hiddenreply" class="btn btn-default" data-toggle="collapse">show reply box</a>
+                                <div id="hiddenreply" class="collapse">
+                                    <form>
+                                        <label for="nested-reply">reply: </label>
+                                        <textarea id="nested-reply" rows="5" cols="30">a reply box</textarea>
+                                    </form>
+
                         </c:if>
 
             </div>
+
+
                  </c:if>
 
+
+</div>
 
 
             </c:forEach>
