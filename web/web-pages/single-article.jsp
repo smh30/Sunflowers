@@ -151,22 +151,35 @@
                             </form>
 
                             <%-- the popup form for replying the comment --%>
-                            <button class="open-button" onclick="openForm()">Reply</button>
-                            <div class="form-popup" id="myForm">
-                                <form action="/action_page.php" class="form-container">
+                            <%--<button class="open-button" onclick="openForm()">Reply</button>--%>
+                            <%--<div class="form-popup" id="myForm">--%>
+                                <%--<form action="/action_page.php" class="form-container">--%>
 
-                                    <label for="reply"><b>Reply</b></label>
-                                    <input type="textarea" placeholder="Enter Reply" id="reply" name="reply" required>
+                                    <%--<label for="reply"><b>Reply</b></label>--%>
+                                    <%--<input type="textarea" placeholder="Enter Reply" id="reply" name="reply" required>--%>
 
-                                    <button type="submit" class="btn">Submit</button>
-                                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-                                </form>
-                            </div>
+                                    <%--<button type="submit" class="btn">Submit</button>--%>
+                                    <%--<button type="button" class="btn cancel" onclick="closeForm()">Close</button>--%>
+                                <%--</form>--%>
+                            <%--</div>--%>
+
+                        <%--this form will pop up when the button is pressed--%>
+                        <a href="#hiddenreply${comment.commentID}" class="btn btn-default" data-toggle="collapse">show reply box</a>
+                                <div id="hiddenreply${comment.commentID}" class="collapse">
+                                    <form>
+                                        <label for="nested-reply">reply: </label>
+                                        <textarea id="nested-reply" rows="5" cols="30"></textarea>
+                                    </form>
+
                         </c:if>
 
             </div>
+
+
                  </c:if>
 
+
+</div>
 
 
             </c:forEach>
