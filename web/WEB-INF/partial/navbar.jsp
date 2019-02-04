@@ -4,7 +4,7 @@
 <nav class="navbar navbar-expand-md navbar-toggleable-md navbar-dark bg-dark">
     <div class="container-fluid">
         <%--<div class="navbar-header">--%>
-            <a class="navbar-brand" href="#">BLOGIFY</a>
+            <a class="navbar-brand" href="#">Social Sunflowers</a>
         <%--</div>--%>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar-links"
                 aria-controls="navbar-links" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +26,7 @@
                     </a>
                     <div class="dropdown-menu px-2">
                             <%--todo get the dropdown form to have proper padding/margins --%>
-                        <form class="px-4" method="post" action="/login">
+                        <form class="px-2" method="post" action="/login">
                             <div class="form-group">
                                 <input type="text" class="form-control" id="username" placeholder="username"
                                        name="username">
@@ -46,6 +46,8 @@
 
             </c:if>
 
+
+
             <c:if test="${sessionScope.username != null}">
             <!-- show the profile, 'look at your own entries' and logout only if logged in -->
 
@@ -61,6 +63,26 @@
         <ul class="nav navbar-nav navbar-right">
             <li class="navbar-text">welcome, ${sessionScope.username}</li>
             </c:if>
+
+            <%--Yasmin figuring out how only admin users assigned to admin interface page--%>
+
+            <c:if test="${sessionScope.admin != null}">
+            <!-- show the profile, 'look at your own entries', logout only if logged in AND see Admin Interface page-->
+
+
+            <li class="nav-item"><a class="nav-link" href="/new-article">New Article</a></li>
+
+            <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
+
+
+            <li class="nav-item"><a class="nav-link" href="/home?author=${sessionScope.admin}">Admin Interface</a></li>
+
+            <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+        </ul>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="navbar-text">welcome, ${sessionScope.username}</li>
+        </c:if>
 
         </ul>
 

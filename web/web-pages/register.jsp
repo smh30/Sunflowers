@@ -20,29 +20,57 @@
         <%--<!-- Latest compiled JavaScript -->--%>
         <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>--%>
 
+        <%--Script below is for reCAPTCHA--%>
+
+
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+        <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+                async defer>
+        </script>
+
         <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
+
     </head>
 
     <body>
-    <!-- i've included the navbar here so that i can have links to test the login etc with - steph -->
-    <%@ include file="../WEB-INF/partial/navbar.jsp" %>
-    <!--just a basic form so i can test the servlet -->
-    <!-- if the username is already taken, print a message/or show a popup??-->
-<% if (request.getAttribute("message") != null){
-    %>
-${message}
-    <%
-} %>
+        <!-- i've included the navbar here so that i can have links to test the login etc with - steph -->
+        <%@ include file="../WEB-INF/partial/navbar.jsp" %>
+        <!--just a basic form so i can test the servlet -->
+        <!-- if the username is already taken, print a message/or show a popup??-->
+        <% if (request.getAttribute("message") != null) {
+        %>
+        ${message}
+        <%
+            } %>
 
-    <form method="post" action="register">
-        <label for="username">username:</label>
-        <input type="text" id="username" name="username"><br>
-        <label for="password">password:</label>
-        <input type="password" id="password" name="password"><br>
+        <form method="post" action="register">
+            <%--Below line for reCAPTCHA--%>
 
 
-        <input type="submit" value="submit">
-    </form>
-        
+            <label for="username">username:</label>
+            <input type="text" id="username" name="username">
+            <br>
+            <label for="password">password:</label>
+            <input type="password" id="password" name="password">
+            <br>
+            <div class="g-recaptcha" data-sitekey="6Lc52o4UAAAAAF2qwLx_jR66r2nUDGMTz9FSM2-N"
+                 data-callback="recaptchaCallback"></div>
+
+            <%--Disabled input button--%>
+
+            <button type="submit" class="btn btn-default disabled" id="btnSubmit">Submit</button>
+        </form>
+
+        <script type="text/javascript">
+            function recaptchaCallback() {
+                var btnSubmit = document.getElementById("btnSubmit");
+                //TODO: Play with classes to get border back
+                if ( btnSubmit.classList.contains("disabled") ) {
+                    btnSubmit.classList.remove("disabled");
+                    btnSubmitclassList.add("show");
+                }
+            }
+        </script>
     </body>
 </html>
