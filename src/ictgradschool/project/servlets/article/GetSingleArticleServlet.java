@@ -45,6 +45,9 @@ public class GetSingleArticleServlet extends HttpServlet {
 
         comments = CommentDAO.getAllComments(articleId, getServletContext());
 
+        //TODO Build Comments Tree from comments list
+
+
         request.setAttribute("comment", comments);
 
 
