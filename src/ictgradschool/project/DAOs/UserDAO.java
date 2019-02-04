@@ -19,18 +19,18 @@ public class UserDAO {
         
         if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
+                System.out.println("connection successful in the UserDAO");
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE username = ?")) {
                     stmt.setString(1, username);
                     try (ResultSet r = stmt.executeQuery()) {
                         if (r.next()) {
-                            System.out.println("username found! " + r.getString(4));
+                            System.out.println("username found! " + r.getString(3));
                         /* If a matching row was found, hash the provided password with the retrieved salt and
         repetitions and compare it against the hash from the database.*/
                             // first column is name, already have
                             //todo see if these are working
                             // second column is binary hash, what data type to save it as??
-                            byte[] hash = r.getBytes(5);
+                            byte[] hash = r.getBytes(4);
                             // third column is salt, also binary
                             byte[] salt = r.getBytes(2);
                             int iterations = r.getInt(1);
@@ -39,13 +39,16 @@ public class UserDAO {
                             if (Passwords.isExpectedPassword(password.toCharArray(), salt, iterations,
                                     hash)) {
                                 /* If the password did match, return true.*/
+                                System.out.println("the password was correct");
                                 return true;
                             } else {
+                                System.out.println("the password was wrong");
                                 /* If they do not match,  return false.*/
                                 return false;
                             }
                         } else {
                             //if no such user, return false;
+                            System.out.println("no such user was found");
                             return false;
                         }
                     }
