@@ -46,6 +46,8 @@
 
             </c:if>
 
+
+
             <c:if test="${sessionScope.username != null}">
             <!-- show the profile, 'look at your own entries' and logout only if logged in -->
 
@@ -61,6 +63,26 @@
         <ul class="nav navbar-nav navbar-right">
             <li class="navbar-text">welcome, ${sessionScope.username}</li>
             </c:if>
+
+            <%--Yasmin figuring out how only admin users assigned to admin interface page--%>
+
+            <c:if test="${sessionScope.admin != null}">
+            <!-- show the profile, 'look at your own entries', logout only if logged in AND see Admin Interface page-->
+
+
+            <li class="nav-item"><a class="nav-link" href="/new-article">New Article</a></li>
+
+            <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
+
+
+            <li class="nav-item"><a class="nav-link" href="/home?author=${sessionScope.admin}">Admin Interface</a></li>
+
+            <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+        </ul>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="navbar-text">welcome, ${sessionScope.username}</li>
+        </c:if>
 
         </ul>
 

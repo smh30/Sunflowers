@@ -15,7 +15,7 @@ public class CustomProfilePicDAO {
 
         Properties dbProps = DAOCheckProperties.check(context);
 
-        if(dbProps!=null) {
+        if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE image= ?")) {
@@ -30,7 +30,6 @@ public class CustomProfilePicDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            //TODO: Check whether this is correct!!
             return profilePicURL;
         }
         return null;
@@ -39,7 +38,7 @@ public class CustomProfilePicDAO {
     public static boolean addImage(String image, String user, ServletContext context) {
         Properties dbProps = DAOCheckProperties.check(context);
 
-        if(dbProps!=null) {
+        if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
