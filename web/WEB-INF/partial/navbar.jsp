@@ -26,7 +26,7 @@
                     </a>
                     <div class="dropdown-menu px-2">
                             <%--todo get the dropdown form to have proper padding/margins --%>
-                        <form class="px-4" method="post" action="/login">
+                        <form class="px-2" method="post" action="/login">
                             <div class="form-group">
                                 <input type="text" class="form-control" id="username" placeholder="username"
                                        name="username">

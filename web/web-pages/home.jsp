@@ -123,15 +123,19 @@
 
     <%--begin forward/ back block --%>
     <%--todo see if this can be done with jstl/el instead for correctness' sake--%>
-    <%
-        String getURL=request.getQueryString();
-        String param = request.getParameter("back");
+    <%!
+        String getURL;
+        String backParam;
     %>
 
+    <%
+       getURL=request.getQueryString();
+       backParam = request.getParameter("back");
+    %>
+URL = <%=getURL%>
     <% int back = 0;
-    if (param!= null) {
-        back = Integer.parseInt(param);
-
+    if (backParam!= null) {
+        back = Integer.parseInt(backParam);
     }
     back += 10;
     %>
@@ -140,7 +144,10 @@
     <%--todo get this so it works in search resuls as well (ie with other params)--%>
 <c:if test="${fn:length(articles) == 10}">
     <%--<div id="goback">--%>
+    <%--do an "if geturl is null (ie there are no search params do this--%>
     <a href="?back=<%=back%>">older articles</a>
+    <%--else if not null and no back concat onto the geturl &back= ? --%>
+    <%--else if there's a back already, increase it by 10--%>
 
     <% if(back>=11){
         int forward = back -=20;

@@ -49,11 +49,14 @@
         <form action="/edit-article" method="post">
             <input type="hidden" name="articleID" value="${article.ID}">
                 <%}%>
-            <div class="choose-date">
+            <div class="container" id="choose-date">
                 <label for="date">Optionally, select a publication date for your post:</label>
                 <input type="date" id="date" name="pub-date">
+            </div>
 
                 <div class="container text-center">
+
+
                     <label for="exampleFormControlInput1">Article Title Here:</label>
                     <% if (request.getAttribute("title") != null){
                     %>
@@ -67,6 +70,8 @@
 
 
                 <div class="container text-center">
+
+
                     <label for="exampleFormControlTextarea1">Article Content Here:</label>
 
                     <% if (request.getAttribute("content") != null){
