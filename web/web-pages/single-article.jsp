@@ -102,6 +102,7 @@
                 <h2>${article.title}</h2>
 
                 <p>Author: ${article.author.username}</p>
+                <%--todo make a message show up if viewing a new post-dated article--%>
                 <p>${article.timestamp}</p>
                 <p>${article.articleText}</p>
 
