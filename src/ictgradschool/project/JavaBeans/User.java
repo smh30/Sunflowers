@@ -71,4 +71,5 @@ public class User implements Serializable {
     public void setDefaultImage(String defaultImage) {
         this.defaultImage = defaultImage;
     }
+    
 }
