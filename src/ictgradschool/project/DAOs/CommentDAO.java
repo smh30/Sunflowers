@@ -47,8 +47,10 @@ public class CommentDAO {
                         comment.setCommentAuthor(commentAuthor);
                         
                         //todo get a list of all of the children comments of those comments.
-                        List<Comment> children = getChildren(comment.getCommentID(), dbProps);
-                        comment.setChildren(children);
+                        //maybe something like this? probably needs recursion though
+                        
+//                        List<Comment> children = getChildren(comment.getCommentID(), dbProps);
+//                        comment.setChildren(children);
                         
                         comments.add(comment);
                     }
