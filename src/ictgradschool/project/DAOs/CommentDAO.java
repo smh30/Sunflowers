@@ -31,7 +31,9 @@ public class CommentDAO {
                     ResultSet rs = stmt.executeQuery();
 
                     while (rs.next()) {
-
+                        //TODO fix children attachment logic
+                        //TODO 1. Check comments whether contains a same comment by distinctive comment id
+                        
 
                         Comment comment = new Comment();
                         comment.setCommentContent(rs.getString(3));
@@ -46,6 +48,9 @@ public class CommentDAO {
 
                         comments.add(comment);
                     }
+
+                    //Before return, remove all comments that do not contain any children
+
 
                 }
 
@@ -68,6 +73,7 @@ public class CommentDAO {
                 stmt.setInt(1, parentID);
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
+                    //TODO To attach all its children into the root comment by recursion
                     Comment comment = new Comment();
                     comment.setCommentContent(rs.getString(3));
                     comment.setCommentID(rs.getInt(1));

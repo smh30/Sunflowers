@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 @WebServlet(name = "GetSingleArticleServlet")
 public class GetSingleArticleServlet extends HttpServlet {
@@ -44,8 +45,6 @@ public class GetSingleArticleServlet extends HttpServlet {
         int articleId = article.getID();
 
         comments = CommentDAO.getAllComments(articleId, getServletContext());
-
-        //TODO Build Comments Tree from comments list
 
 
         request.setAttribute("comment", comments);
@@ -79,4 +78,5 @@ public class GetSingleArticleServlet extends HttpServlet {
         request.getRequestDispatcher("web-pages/single-article.jsp").forward(request, response);
 
     }
+
 }
