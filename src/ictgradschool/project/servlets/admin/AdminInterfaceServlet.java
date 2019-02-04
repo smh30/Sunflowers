@@ -10,15 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "AdminInterfaceServlet")
 public class AdminInterfaceServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("in the admin interface servlet do post");
-        }
-
-
+    }
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
@@ -35,9 +34,23 @@ public class AdminInterfaceServlet extends HttpServlet {
         //TODO: Ask Steph what new equals????? Want this to be true OR false
         System.out.println("logged in admin user, attemting redirect to admin page");
 
-        List<User> users;
 
-        users = AdminDAO.adminTable(username, getServletContext());
+
+        List <User> userList = new ArrayList <>();
+
+        //Here do an alphabetical String sort
+
+        //What is an offset??
+
+        //Search param time!
+        String username1 = request.getParameter("username");
+
+
+        userList = AdminDAO.getAllUsers(username, getServletContext());
+        System.out.println("Attempting processing: " + username);
+
+        request.setAttribute("users", userList);
+
 
 
         request.getRequestDispatcher("web-pages/admin-interface.jsp").forward(request, response);

@@ -5,7 +5,9 @@ import ictgradschool.project.JavaBeans.User;
 import ictgradschool.project.utilities.Passwords;
 
 import javax.servlet.ServletContext;
+import javax.xml.transform.Result;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -36,7 +38,9 @@ public class AdminDAO {
         return false;
     }
 
-    public static List<User> users (String username, ServletContext context) {
+    public static List <User> getAllUsers (String username, ServletContext context) {
+        List <User> users = new ArrayList <>();
+
         Properties dbProps = DAOCheckProperties.check(context);
 
         if (dbProps != null) {
@@ -45,7 +49,14 @@ public class AdminDAO {
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE ysy.user.username = ?")) {
                     stmt.setString(1, username);
 
-                    stmt.executeQuery();
+                    ResultSet rs = stmt.executeQuery();
+
+                    while(rs.next()) {
+                        User user = new User();
+                        user.setUsername(rs.getString(4));
+
+                        users.add(user);
+                    }
 
                 }
             } catch (SQLException e) {
@@ -53,6 +64,7 @@ public class AdminDAO {
             }
         }
         //Change to different return type!!
-       return null;
+       return users;
     }
+
 }
