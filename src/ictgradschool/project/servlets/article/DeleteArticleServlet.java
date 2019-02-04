@@ -26,7 +26,7 @@ public class DeleteArticleServlet extends HttpServlet {
 
         String user = (String) request.getSession().getAttribute("username");
 
-        boolean articeDeleted = ArticleDAO.deleteArticle(username, title, content, id, getServletContext());
+        boolean articeDeleted = ArticleDAO.deleteArticle(id, getServletContext());
 
         if (!articeDeleted) {
             String message = "Some trouble with deleting your article. Please try again.";

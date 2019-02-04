@@ -49,8 +49,12 @@
                                 if(msg ==="true"){
                                     console.log("the message was true");
                                     // $("#username").css({border: "2px solid red"});
-                                    $('#nameFail').addClass("red");
-                                    $('#nameFail').text("Please choose a different username");
+                                    // $('#nameFail').addClass("red");
+                                    // $('#nameFail').text("Please choose a different username");
+
+                                    $('#nameFail').html("<div class=\"alert alert-warning alert-dismissible\" id=\"error-message\" >"+
+                                        "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>Please choose a different username</div>")
+
                                     //$('#nameFail').toggle(true);
                                 } else {
                                     $('#nameFail').removeClass("red");
