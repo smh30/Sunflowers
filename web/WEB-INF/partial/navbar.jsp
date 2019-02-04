@@ -59,7 +59,7 @@
                 <li class="nav-item"><a class="nav-link" href="/home?author=${sessionScope.username}">My Blog</a></li>
                 <c:if test="${sessionScope.admin!=null}">
 
-                    <li class="nav-item"><a class="nav-link" href="/home?author=${sessionScope.admin}">Admin Interface</a>
+                    <li class="nav-item"><a class="nav-link" href="/admininterface">Admin Interface</a>
                     </li>
                 </c:if>
 
