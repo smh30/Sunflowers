@@ -17,11 +17,10 @@ public class AddCommentServlet extends HttpServlet {
 
         String articleID = request.getParameter("articleID");
 
-
         String content = request.getParameter("comment");
 
-
         String user = (String) request.getSession().getAttribute("username");
+
 
         boolean commentAdded = CommentDAO.newComment(content,articleID,user,getServletContext());
 

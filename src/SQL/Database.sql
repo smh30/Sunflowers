@@ -93,4 +93,7 @@ ALTER TABLE user DROP COLUMN admin;
 
 UPDATE user SET ysy.user.admin=TRUE WHERE username='z';
 
+ALTER TABLE ysy.user ADD COLUMN default_image VARCHAR (40) DEFAULT 'Default.jpg';
+
+
 

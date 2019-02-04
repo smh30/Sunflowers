@@ -9,27 +9,60 @@
 <html>
     <head>
         <title>Title</title>
-        <!-- I've linked in the Bootstrap things so that the nav will work -->
-        <!-- NOTE: i got these from the w3 website rather than the ones from our lab, so if there's a problem they might need to be changed. The navbar didn't work properly if I used the other ones.
-        <!-- Latest compiled and minified CSS -->
-        <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">--%>
 
-        <%--<!-- jQuery library -->--%>
-        <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--%>
+        <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
 
-        <%--<!-- Latest compiled JavaScript -->--%>
-        <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>--%>
+        <%--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>--%>
 
         <%--Script below is for reCAPTCHA--%>
-
-
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
         <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
                 async defer>
         </script>
 
-        <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
+
+<%--this last jquery import is the non-slim version, need for ajax--%>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+                integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+                crossorigin="anonymous" type="text/javascript"></script>
+
+
+        <style>
+            .red {
+                border: 2px solid red;
+            }
+        </style>
+
+
+        <script type="text/javascript">
+
+                function checkName(nameCheck) {
+
+                        $.ajax({
+                            url: "checkname",
+                            type: "POST",
+                            data: {name: nameCheck},
+                            success: function (msg) {
+                                console.log(msg);
+                                //do the thing to show if it's good or not
+                                if(msg ==="true"){
+                                    console.log("the message was true");
+                                    // $("#username").css({border: "2px solid red"});
+                                    $('#nameFail').addClass("red");
+                                    $('#nameFail').text("Please choose a different username");
+                                    //$('#nameFail').toggle(true);
+                                } else {
+                                    $('#nameFail').removeClass("red");
+                                    $('#nameFail').text("");
+                                }
+                            }
+                        })
+                    }
+        </script>
+
+
+
 
     </head>
 
@@ -44,12 +77,17 @@
         <%
             } %>
 
+        <div id="nameFail">
+        </div>
+
         <form method="post" action="register">
             <%--Below line for reCAPTCHA--%>
 
 
             <label for="username">username:</label>
-            <input type="text" id="username" name="username">
+                <%--the onchange means that when the box loses focus it does the thing --%>
+            <input type="text" id="username" name="username" onchange="checkName(this.value)">
+
             <br>
             <label for="password">password:</label>
             <input type="password" id="password" name="password">
@@ -72,5 +110,6 @@
                 }
             }
         </script>
+
     </body>
 </html>

@@ -79,6 +79,8 @@ public class UploadProfilePictureServlet extends HttpServlet {
             String image = fullsizeImageFile.getName();
             String user = (String) request.getSession().getAttribute("username");
             CustomProfilePicDAO.addImage(image, user, getServletContext());
+            
+            
             request.getRequestDispatcher("/profile").forward(request, response);
 
 

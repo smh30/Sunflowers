@@ -12,12 +12,12 @@ import java.sql.*;
 import java.util.Properties;
 
 public class UserDAO {
-
+    
     public static boolean checkPassword(String username, String password, ServletContext context) {
-
+        
         Properties dbProps = DAOCheckProperties.check(context);
-
-        if(dbProps!=null) {
+        
+        if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE username = ?")) {
@@ -34,8 +34,8 @@ public class UserDAO {
                             // third column is salt, also binary
                             byte[] salt = r.getBytes(2);
                             int iterations = r.getInt(1);
-
-
+                            
+                            
                             if (Passwords.isExpectedPassword(password.toCharArray(), salt, iterations,
                                     hash)) {
                                 /* If the password did match, return true.*/
@@ -50,7 +50,7 @@ public class UserDAO {
                         }
                     }
                 }
-
+                
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -58,27 +58,27 @@ public class UserDAO {
         }
         return false;
     }
-
+    
     public static boolean newUser(String username, String password, ServletContext context) {
-
+        
         Properties dbProps = DAOCheckProperties.check(context);
-
-        if(dbProps!=null) {
-
+        
+        if (dbProps != null) {
+            
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE username = ?")) {
                     stmt.setString(1, username);
                     ResultSet rs = stmt.executeQuery();
-
+                    
                     //this will be true if data was returned, ie the user exists already
                     if (rs.isBeforeFirst()) {
                         System.out.println("user exists already");
                         /*If it does, redirect the client back to the ​register.html document.*/
                         return false;
-
+                        
                     } else {
-
+                        
                         System.out.println("create new user");
                         byte[] salt = Passwords.getNextSalt(32);
                         byte[] hash = Passwords.hash(password.toCharArray(), salt);
@@ -89,13 +89,13 @@ public class UserDAO {
                             s2.setBytes(2, salt);
                             s2.setString(3, username);
                             s2.setBytes(4, hash);
-
-
+                            
+                            
                             s2.execute();
                         }
-
+                        
                         return true;
-
+                        
                     }
                 }
             } catch (SQLException e) {
@@ -105,13 +105,13 @@ public class UserDAO {
         }
         return false;
     }
-
+    
     public static User getUserDetails(String username, ServletContext context) {
         User user = new User();
-
+        
         Properties dbProps = DAOCheckProperties.check(context);
-
-        if(dbProps!=null) {
+        
+        if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE username = ?")) {
@@ -124,15 +124,17 @@ public class UserDAO {
                             String DESC = r.getString(8);
                             String DOB = r.getString(3);
                             String IMAGEURL = r.getString(9);
-
-
+                            String DEFAULTIMG = r.getString(11);
+                            
+                            
                             user.setUsername(USERNAME);
                             user.setCountry(COUNTRY);
                             user.setRealName(REALNAME);
                             user.setDescription(DESC);
                             user.setDOB(DOB);
                             user.setPictureURL(IMAGEURL);
-
+                            user.setDefaultImage(DEFAULTIMG);
+                            
                         }
                     }
                 }
@@ -143,50 +145,121 @@ public class UserDAO {
         }
         return null;
     }
-
-
-
-    public static User editUser(String username, String country, String realName, String description, String dateOfBirth, String imageURL,ServletContext context) {
-
+    
+    
+    public static User editUser(String username, String country, String realName,
+                                String description, String dateOfBirth, ServletContext context) {
+        
         User user = new User();
         Properties dbProps = DAOCheckProperties.check(context);
-
-        if(dbProps!=null) {
-
+        
+        if (dbProps != null) {
+            
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
-
-
-                try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.user SET country = ? ,real_name=?, description = ?, image = ?,date_of_birth = ? WHERE ysy.user.username= ?")) {
+                
+                //todo pretty unsure about using int for the date of birth - surely should be a
+                // date??? currently throws exception if no value is given but works in a way
+                int dobint = 0;
+                try {
+                    dobint = Integer.valueOf(dateOfBirth);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+                
+                try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.user SET country = ? ,real_name=?, description = ?, date_of_birth = ? WHERE ysy.user.username= ?")) {
                     s2.setString(1, country);
                     s2.setString(2, realName);
                     s2.setString(3, description);
-                    s2.setString(4, imageURL);
-                    s2.setString(5, dateOfBirth);
-                    s2.setString(6, username);
-
+                    s2.setInt(4, dobint);
+                    s2.setString(5, username);
+                    
                     s2.execute();
-
-
+                    
+                    
                 } catch (SQLException e) {
                     e.printStackTrace();
                     //return false;
                 }
-
-
+                
+                
                 //  return true;
                 return user;
-
+                
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
+            
             return user;
         }
         return null;
     }
-
-
-
-
+    
+    public static void changeDefaultImage(String selectedImage, String username,
+                                          ServletContext context) {
+        User user = new User();
+        
+        Properties dbProps = DAOCheckProperties.check(context);
+        
+        if (dbProps != null) {
+            
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+                System.out.println("connection successful");
+                
+                
+                try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.user SET default_image = ? WHERE " +
+                        "ysy.user.username= ?")) {
+                    s2.setString(1, selectedImage);
+                    s2.setString(2, username);
+                    s2.execute();
+                    
+                    
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            
+        }
+    }
+    
+    public static boolean isNameTaken(String toCheck, ServletContext context){
+        boolean taken = true;
+    
+        Properties dbProps = DAOCheckProperties.check(context);
+    
+        if (dbProps != null) {
+        
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+                System.out.println("connection successful");
+            
+            
+                try (PreparedStatement s2 = conn.prepareStatement("SELECT * FROM user WHERE " +
+                        "username = ?")) {
+                    s2.setString(1, toCheck);
+                    try(ResultSet rs = s2.executeQuery()) {
+    
+                        if (rs.next()){
+                            taken = true;
+                        } else {
+                            taken = false;
+                        }
+                    }
+                
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        
+        }
+        
+        return taken;
+    }
+    
+    
 }
