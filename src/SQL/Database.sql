@@ -87,4 +87,8 @@ ALTER TABLE comments ADD FOREIGN KEY (parent_comment) REFERENCES comments (comme
 -- # ALTER TABLE comments ADD FOREIGN KEY (comments_author) REFERENCES user(username) ON DELETE CASCADE;
 -- # ALTER TABLE comments ADD FOREIGN KEY (article_id) REFERENCES article(article_id) ON DELETE CASCADE;
 
+ALTER TABLE user ADD COLUMN admin TINYINT;
+
+UPDATE user SET ysy.user.admin=1 WHERE username='z';
+
 
