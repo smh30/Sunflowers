@@ -103,6 +103,7 @@
         <%@ include file="../WEB-INF/partial/navbar.jsp" %>
         <div class="container">
 
+
             <div class="article">
                 <h2>${article.title}</h2>
 
