@@ -36,9 +36,10 @@
 
 
         <% if (request.getAttribute("message") != null){
-        %>
+        %><div class="alert alert-warning alert-dismissible" id="error-message" >
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         ${message}
-
+</div>
         <%
             } %>
 

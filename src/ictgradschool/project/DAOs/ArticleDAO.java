@@ -159,6 +159,7 @@ String dbTimestamp = "";
                     Timestamp timestamp = Timestamp.valueOf(a);
                     dbTimestamp = timestamp.toString();
                     System.out.print("dbTimestamp default = " +dbTimestamp);
+
                 }
 
                 try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO article(article_title,article_author , article_body, article_timestamp)" +
@@ -172,11 +173,13 @@ String dbTimestamp = "";
 
                 } catch (SQLException e) {
                     e.printStackTrace();
-                    //return false;
+                    //return the article here with no id set
+                    return article;
                 }
 
-                try (PreparedStatement s3 = conn.prepareStatement("SELECT article_id FROM article WHERE article_author = ? ORDER BY article_timestamp DESC LIMIT 1")) {
+                try (PreparedStatement s3 = conn.prepareStatement("SELECT article_id FROM article WHERE article_author = ? AND NOT (article_timestamp > ?)  ORDER BY article_timestamp DESC LIMIT 1")) {
                     s3.setString(1, user);
+                    s3.setString(2, dbTimestamp);
                     try (ResultSet rs = s3.executeQuery()) {
                         if (rs.next()) {
                             article.setID(rs.getInt(1));
@@ -241,7 +244,7 @@ String dbTimestamp = "";
         return null;
     }
 
-    public static boolean deleteArticle(String username, String title, String content, int id, ServletContext context) {
+    public static boolean deleteArticle(int id, ServletContext context) {
         Properties dbProps = DAOCheckProperties.check(context);
 
         if (dbProps != null) {

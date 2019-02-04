@@ -27,11 +27,12 @@ public class AddArticleServlet extends HttpServlet {
         System.out.println("provided date: " + date);
 
 
-        newArticle = ArticleDAO.newArticle(title,content,user,date,getServletContext());
+        //newArticle = ArticleDAO.newArticle(title,content,user,date,getServletContext());
 
-        if (newArticle == null) {
+        if (newArticle == null || newArticle.getID()==0) {
+
             System.out.println("article not created??");
-            String message = "Some trouble with uploading your article. Please try again.";
+            String message = "<p>An error occurred while uploading your article. Please try again.</p><p>Your title or article may have been too long</p>";
             request.setAttribute("message", message);
 
             request.getRequestDispatcher("web-pages/new-article.jsp").forward(request, response);
@@ -44,7 +45,7 @@ public class AddArticleServlet extends HttpServlet {
             int id = newArticle.getID();
             System.out.println("new aartic's id" + id);
             request.setAttribute("articleID", id);
-            // TODO to finish the single-article.jsp. It is the page after user submit their new article.  add attribute
+
             request.getRequestDispatcher("/article").forward(request, response);
         }
 
