@@ -21,27 +21,37 @@ public class EditProfileServlet extends HttpServlet {
         //get parameters in forms
         //Check if set to database variables or form variables
 
-        if (request.getParameter("default-img")!=null){
+        //the user which will be returned to populate the form
+        User user;
+        String username = request.getSession().getAttribute("username").toString();
+        System.out.println("username from session:  "+username);
+        
+        //if they're trying to change their default image
+        if (request.getParameter("default-img") !=null){
             //do a DAO to set the users preferred default
+            System.out.println("changing default image");
+            String chosenImg = request.getParameter("default-img");
+            UserDAO.changeDefaultImage(chosenImg, username, getServletContext());
+            
+            
+        } else {
+            System.out.println("Edit account details");
+            String country = request.getParameter("country");
+            String realName = request.getParameter("realname");
+            String description = request.getParameter("description");
+            String dateOfBirth = request.getParameter("dateofbirth");
+           // String pictureURL = request.getParameter("image");
+            
+            System.out.print(username);
+            System.out.println(realName);
+    
+            UserDAO.editUser(username, country, realName, description, dateOfBirth, getServletContext());
         }
-        System.out.println("Edit account.");
-        String username = request.getParameter("username");
-        String country = request.getParameter("country");
-        String realName = request.getParameter("realname");
-        String description = request.getParameter("description");
-        String dateOfBirth = request.getParameter("dateofbirth");
-        String pictureURL = request.getParameter("image");
+        //request.setAttribute("user", user);
 
-        System.out.print(username);
-        System.out.println(realName);
-
-        User user = UserDAO.editUser(username, country, realName, description, dateOfBirth, pictureURL, getServletContext());
-
-        request.setAttribute("user", user);
-
-        request.setAttribute("username", username);
+        //request.setAttribute("username", username);
 //        request.getRequestDispatcher("home").forward(request, response);
-        response.sendRedirect("/home");
+        response.sendRedirect("/profile");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,7 +60,8 @@ public class EditProfileServlet extends HttpServlet {
         //Call DAO method to use details, return user id here
         //Here would request.setAttribute - set user onto it so send back to jsp - (profile) - forward req and res
 //        request.setAttribute("user", user);
-        System.out.println("edit get");
+        //todo figure out if we ever actually end up in this part
+        System.out.println("edit get ?????????????????????????????");
         User temp = UserDAO.getUserDetails(request.getParameter("username"), getServletContext());
 
         request.setAttribute("country", temp.getCountry());
