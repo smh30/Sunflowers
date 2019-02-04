@@ -16,7 +16,6 @@ public class AdminInterfaceServlet extends HttpServlet {
         System.out.println("in the admin interface servlet do post");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        //TODO: Check if TINYINT and boolean are compatible
         Boolean admin = Boolean.valueOf(request.getParameter("admin"));
         System.out.println("Attempting processing: " + username + password + admin);
 
