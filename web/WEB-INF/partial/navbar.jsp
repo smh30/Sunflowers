@@ -4,7 +4,7 @@
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
     <div class="container-fluid">
         <%--<div class="navbar-header">--%>
-        <a class="navbar-brand" href="#">Social Sunflowers</a>
+        <a class="navbar-brand" href="/home">Social Sunflowers</a>
         <%--</div>--%>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbar-links"

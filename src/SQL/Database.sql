@@ -14,6 +14,7 @@ country VARCHAR (20),
 real_name VARCHAR (50),
 description VARCHAR (500),
 image VARCHAR(80),
+default_image VARCHAR (40) DEFAULT 'Default.jpg';
 PRIMARY KEY (username)
 );
 
@@ -22,10 +23,10 @@ PRIMARY KEY (username)
 DROP TABLE IF EXISTS article;
 
 CREATE TABLE article(
-article_title VARCHAR (100),
+article_title VARCHAR (200),
 article_author VARCHAR (30),
 article_id INT AUTO_INCREMENT,
-article_body VARCHAR (5000),
+article_body VARCHAR (10000),
 article_timestamp VARCHAR(100),
 PRIMARY KEY (article_id, article_author),
 FOREIGN KEY (article_author) REFERENCES user(username)
