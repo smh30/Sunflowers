@@ -225,5 +225,41 @@ public class UserDAO {
         }
     }
     
+    public static boolean isNameTaken(String toCheck, ServletContext context){
+        boolean taken = true;
+    
+        Properties dbProps = DAOCheckProperties.check(context);
+    
+        if (dbProps != null) {
+        
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+                System.out.println("connection successful");
+            
+            
+                try (PreparedStatement s2 = conn.prepareStatement("SELECT * FROM user WHERE " +
+                        "username = ?")) {
+                    s2.setString(1, toCheck);
+                    try(ResultSet rs = s2.executeQuery()) {
+    
+                        if (rs.next()){
+                            taken = true;
+                        } else {
+                            taken = false;
+                        }
+                    }
+                
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        
+        }
+        
+        return taken;
+    }
+    
     
 }

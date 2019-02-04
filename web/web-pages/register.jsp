@@ -23,6 +23,8 @@
                 integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
                 crossorigin="anonymous"></script>
 
+        <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
+
         <script type="text/javascript">
 
                 function checkName(nameCheck) {
@@ -37,6 +39,10 @@
                             success: function (msg) {
                                 console.log(msg);
                                 //do the thing to show if it's good or not
+                                if(msg ==="true"){
+                                    console.log("the message was true");
+                                    $("#username").css({border: "2px solid red"});
+                                }
                             }
                         });
                     }
@@ -44,7 +50,7 @@
 
         </script>
 
-        <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
+
 
     </head>
 
