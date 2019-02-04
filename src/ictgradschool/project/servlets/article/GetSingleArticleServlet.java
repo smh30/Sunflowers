@@ -1,4 +1,4 @@
-package ictgradschool.project.servlets;
+package ictgradschool.project.servlets.article;
 
 import ictgradschool.project.DAOs.ArticleDAO;
 import ictgradschool.project.DAOs.CommentDAO;
@@ -19,11 +19,11 @@ public class GetSingleArticleServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("in the single article servlet post");
         System.out.println("id param = " + request.getAttribute("articleID"));
-        int articleID= 0;
+        int articleID = 0;
 
         Article article = new Article();
 
-        if(request.getAttribute("new")!=null){
+        if (request.getAttribute("new") != null) {
             //if we have reached this page from creating a new article...
             System.out.println("came from a new article");
             articleID = Integer.parseInt(request.getAttribute("articleID").toString());
@@ -39,14 +39,13 @@ public class GetSingleArticleServlet extends HttpServlet {
         article = ArticleDAO.getSingleArticle(articleID, getServletContext());
         // get articles by that author
 
-        List<Comment> comments = new ArrayList<Comment>();
+        List <Comment> comments = new ArrayList <Comment>();
 
-       int articleId = article.getID();
+        int articleId = article.getID();
 
-        comments = CommentDAO.getAllComments(articleId,getServletContext());
+        comments = CommentDAO.getAllComments(articleId, getServletContext());
 
-        request.setAttribute("comment",comments);
-
+        request.setAttribute("comment", comments);
 
 
         request.setAttribute("article", article);
@@ -54,26 +53,23 @@ public class GetSingleArticleServlet extends HttpServlet {
         request.getRequestDispatcher("web-pages/single-article.jsp").forward(request, response);
 
 
-
-
     }
-
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("in the single article doget");
         String param = (request.getParameter("articleID"));
         System.out.println("get param = " + param);
-int articleID = Integer.parseInt(request.getParameter("articleID"));
+        int articleID = Integer.parseInt(request.getParameter("articleID"));
 
 
         Article article = new Article();
 
         article = ArticleDAO.getArticleByID(articleID, getServletContext());
         // get articles by that author
-        List<Comment> comment = CommentDAO.getAllComments(articleID,getServletContext());
+        List <Comment> comment = CommentDAO.getAllComments(articleID, getServletContext());
 
-        request.setAttribute("comment",comment);
+        request.setAttribute("comment", comment);
 
         request.setAttribute("article", article);
 

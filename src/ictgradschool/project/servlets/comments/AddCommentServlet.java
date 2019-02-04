@@ -1,4 +1,4 @@
-package ictgradschool.project.servlets;
+package ictgradschool.project.servlets.comments;
 
 import ictgradschool.project.DAOs.ArticleDAO;
 import ictgradschool.project.DAOs.CommentDAO;

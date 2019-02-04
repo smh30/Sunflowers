@@ -9,18 +9,19 @@ import javax.servlet.ServletContext;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 public class CommentDAO {
-    public static List<Comment> getAllComments(int articleId, ServletContext context) {
-        List<Comment> comments = new ArrayList<>();
+    public static List <Comment> getAllComments(int articleId, ServletContext context) {
+        List <Comment> comments = new ArrayList <>();
 
         Properties dbProps = DAOCheckProperties.check(context);
-        
+
         if (dbProps != null) {
-            
+
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
                 //todo get the top-level comments (those without a parent)
@@ -28,30 +29,21 @@ public class CommentDAO {
                         "article_id =? ORDER BY comments_timestamp ")) {
                     stmt.setInt(1, articleId);
                     ResultSet rs = stmt.executeQuery();
-                    
+
                     while (rs.next()) {
-                    //TODO: include these lines to change to localtimedate timestamp.
-                        //Talk to yaz if needed
-                        //     LocalDateTime a = LocalDateTime.now();
-                        //        Timestamp timestamp = Timestamp.valueOf(a);
-                        //        System.out.print(timestamp);
 
-                  
 
-                        
                         Comment comment = new Comment();
                         comment.setCommentContent(rs.getString(3));
                         comment.setCommentID(rs.getInt(1));
                         comment.setTimestamp(rs.getTimestamp(5));
                         User commentAuthor = new User(rs.getString(2));
                         comment.setCommentAuthor(commentAuthor);
-                        
+
                         //todo get a list of all of the children comments of those comments.
-                        //maybe something like this? probably needs recursion though
-                        
-//                        List<Comment> children = getChildren(comment.getCommentID(), dbProps);
-//                        comment.setChildren(children);
-                        
+                        List <Comment> children = getChildren(comment.getCommentID(), dbProps);
+                        comment.setChildren(children);
+
                         comments.add(comment);
                     }
 
@@ -64,10 +56,10 @@ public class CommentDAO {
         }
         return null;
     }
-    
-    public static List<Comment> getChildren(int parentID, Properties dbProps) {
-        List<Comment> children = new ArrayList<>();
-        
+
+    public static List <Comment> getChildren(int parentID, Properties dbProps) {
+        List <Comment> children = new ArrayList <>();
+
         try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
             System.out.println("connection successful");
             //get the children of the given parent (those without a parent)
@@ -82,11 +74,11 @@ public class CommentDAO {
                     comment.setTimestamp(rs.getTimestamp(5));
                     User commentAuthor = new User(rs.getString(2));
                     comment.setCommentAuthor(commentAuthor);
-                    
+
                     // this part for sure isn't right;
-                    List<Comment> childrenList = getChildren(comment.getCommentID(), dbProps);
+                    List <Comment> childrenList = getChildren(comment.getCommentID(), dbProps);
                     if (childrenList.size() == 0) {
-                    
+
                     }
                     comment.setChildren(childrenList);
                 }
@@ -94,26 +86,30 @@ public class CommentDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
-        
+
+
         return children;
     }
-    
+
     public static boolean newComment(String content, String ArticleId, String user, ServletContext context) {
-        
+
         Properties dbProps = DAOCheckProperties.check(context);
 
-        if(dbProps!=null) {
+        if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
 
+                LocalDateTime a = LocalDateTime.now();
+                Timestamp timestamp = Timestamp.valueOf(a);
+                System.out.print(timestamp);
 
-                try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO comments(comments_author,article_id , coments_body)" +
-                        "VALUES (?, ?, ?)")) {
+                try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO comments(comments_author,article_id , coments_body, comments_timestamp)" +
+                        "VALUES (?, ?, ?, ?)")) {
                     s2.setString(1, user);
                     s2.setString(2, ArticleId);
-                    
+
                     s2.setString(3, content);
+                    s2.setString(4, timestamp.toString());
 
 
                     s2.execute();
@@ -136,11 +132,11 @@ public class CommentDAO {
 
     }
 
-    public static boolean deleteComment(String commentAuthor, String commentContent, int articleID, int commentID ,ServletContext context){
+    public static boolean deleteComment(String commentAuthor, String commentContent, int articleID, int commentID, ServletContext context) {
 
         Properties dbProps = DAOCheckProperties.check(context);
 
-        if(dbProps!=null) {
+        if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful - delete comm dao");
@@ -169,8 +165,6 @@ public class CommentDAO {
         return false;
 
     }
-
-
 
 
 }

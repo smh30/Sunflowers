@@ -16,7 +16,7 @@
         function switchImage() {
             var image = document.getElementById("imageToSwap");
             var dropdown = document.getElementById("dlist");
-            image.src = dropdown.value;
+            image.src = "../default-photos-for-profile-page/"+dropdown.value;
         }
     </script>
     <body>
@@ -31,17 +31,28 @@
             <%--Adding form for uploading default user pic (the one the user sees when they click on the profile webpage)--%>
             <%--Below is the default user pic link --%>
 
-            <img id="imageToSwap" src="../default-photos-for-profile-page/Default.jpg" width="225">
+            <img id="imageToSwap" src="../default-photos-for-profile-page/${user.defaultImage}" width="225">
+
+            <%--Instead of default jpeg, need EL that gets image--%>
+            <%-- Where folder is where things are saved /whatever URL is--%>
+            <%--Default pics stored in one location; customer in another, so might need an if x location else y location--%>
+
 
             <div style="margin-left: 250px">
                 <h4>Choose default picture: </h4>
 
-                <form method="POST" action="/Upload" enctype="multipart/form-data">
-                    <select id="dlist" onchange="switchImage()">
-                        <option value="../default-photos-for-profile-page/CloneTrooper.jpg">Clone Trooper</option>
-                        <option value="../default-photos-for-profile-page/Jigglypuff.jpg">Jigglypuff</option>
-                        <option value="../default-photos-for-profile-page/Yoda.jpg">Yoda</option>
+                <form method="POST" action="/" enctype="multipart/form-data">
+                    <select id="dlist" name="default-img" onchange="switchImage()">
+                        <option value="Default.jpg">Default</option>
+                        <option value="CloneTrooper.jpg">Clone Trooper</option>
+                        <option value="Jigglypuff.jpg">Jigglypuff</option>
+                        <option value="Yoda.jpg">Yoda</option>
                     </select>
+                    <input type="submit" value="Choose this image">
+                </form>
+
+
+<form method="POST" action="/Upload" enctype="multipart/form-data">
                     <h4>Choose your own picture to upload: </h4>
                     <input type="file" id="userPicture" name="userPicture" size="50" accept="image/png, image/jpeg">
                     <br>

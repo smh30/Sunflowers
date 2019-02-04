@@ -20,6 +20,10 @@ public class EditProfileServlet extends HttpServlet {
         //TODO: if do post, actually filled in/change in form
         //get parameters in forms
         //Check if set to database variables or form variables
+
+        if (request.getParameter("default-img")!=null){
+            //do a DAO to set the users preferred default
+        }
         System.out.println("Edit account.");
         String username = request.getParameter("username");
         String country = request.getParameter("country");

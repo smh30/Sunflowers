@@ -26,7 +26,7 @@ article_title VARCHAR (100),
 article_author VARCHAR (30),
 article_id INT AUTO_INCREMENT,
 article_body VARCHAR (5000),
-article_timestamp TIMESTAMP,
+article_timestamp VARCHAR(100),
 PRIMARY KEY (article_id, article_author),
 FOREIGN KEY (article_author) REFERENCES user(username)
 ON DELETE CASCADE
@@ -39,7 +39,7 @@ CREATE TABLE comments(
 comments_id INT AUTO_INCREMENT,
 comments_author VARCHAR (30),
 coments_body VARCHAR (200),
-comments_timestamp TIMESTAMP,
+comments_timestamp varchar(100),
 article_id INT,
 PRIMARY KEY (comments_id, comments_author, article_id),
 FOREIGN KEY (comments_author) REFERENCES user(username)
@@ -86,5 +86,11 @@ ALTER TABLE comments ADD FOREIGN KEY (parent_comment) REFERENCES comments (comme
 -- # ALTER TABLE article ADD FOREIGN KEY (article_author) REFERENCES user(username) ON DELETE CASCADE;
 -- # ALTER TABLE comments ADD FOREIGN KEY (comments_author) REFERENCES user(username) ON DELETE CASCADE;
 -- # ALTER TABLE comments ADD FOREIGN KEY (article_id) REFERENCES article(article_id) ON DELETE CASCADE;
+
+ALTER TABLE user ADD COLUMN admin TINYINT;
+
+UPDATE user SET ysy.user.admin=1 WHERE username='z';
+
+ALTER TABLE ysy.user ADD COLUMN default_image VARCHAR (40) DEFAULT 'Default.jpg';
 
 
