@@ -34,10 +34,11 @@ public class CommentDAO {
 
 
                         Comment comment = new Comment();
-                        comment.setCommentContent(rs.getString(3));
                         comment.setCommentID(rs.getInt(1));
-                        comment.setTimestamp(rs.getTimestamp(5));
                         User commentAuthor = new User(rs.getString(2));
+                        comment.setCommentContent(rs.getString(3));
+                        comment.setTimestamp(rs.getTimestamp(4));
+
                         comment.setCommentAuthor(commentAuthor);
 
                         //todo get a list of all of the children comments of those comments.
