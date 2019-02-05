@@ -36,7 +36,7 @@ public class AddCommentServlet extends HttpServlet {
         }else{
             System.out.println("commetn created!!!!!!!");
             request.setAttribute("articleID", articleID);
-            // TODO to finish the single-article.jsp. It is the page after user submit their new article.  add attribute
+
             request.getRequestDispatcher("/article").forward(request,response);
         }
 
