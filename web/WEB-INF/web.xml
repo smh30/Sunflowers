@@ -188,7 +188,14 @@
         <url-pattern>/addNestedComment</url-pattern>
     </servlet-mapping>
 
-
+<servlet>
+    <servlet-name>GetUserInfo</servlet-name>
+    <servlet-class>ictgradschool.project.servlets.user.GetUserInfoServlet</servlet-class>
+</servlet>
+    <servlet-mapping>
+        <servlet-name>GetUserInfo</servlet-name>
+        <url-pattern>/userInfo</url-pattern>
+    </servlet-mapping>
 
 
 
