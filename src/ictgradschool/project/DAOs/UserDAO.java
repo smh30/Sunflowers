@@ -30,7 +30,7 @@ public class UserDAO {
                             byte[] hash = r.getBytes(4);
                             byte[] salt = r.getBytes(2);
                             int iterations = r.getInt(1);
-
+                            
                             if (Passwords.isExpectedPassword(password.toCharArray(), salt, iterations,
                                     hash)) {
                                 /* If the password did match, return true.*/
@@ -161,7 +161,7 @@ public class UserDAO {
                 
                 //todo pretty unsure about using int for the date of birth - surely should be a
                 // date??? currently throws exception if no value is given but works in a way
-
+                
                 
                 try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.user SET country = ? ,real_name=?, description = ?, date_of_birth = ? WHERE ysy.user.username= ?")) {
                     s2.setString(1, country);
@@ -221,41 +221,74 @@ public class UserDAO {
         }
     }
     
-    public static boolean isNameTaken(String toCheck, ServletContext context){
+    public static boolean isNameTaken(String toCheck, ServletContext context) {
         boolean taken = true;
-    
-        Properties dbProps = DAOCheckProperties.check(context);
-    
-        if (dbProps != null) {
         
+        Properties dbProps = DAOCheckProperties.check(context);
+        
+        if (dbProps != null) {
+            
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
-            
-            
+                
+                
                 try (PreparedStatement s2 = conn.prepareStatement("SELECT * FROM user WHERE " +
                         "username = ?")) {
                     s2.setString(1, toCheck);
-                    try(ResultSet rs = s2.executeQuery()) {
-    
-                        if (rs.next()){
+                    try (ResultSet rs = s2.executeQuery()) {
+                        
+                        if (rs.next()) {
                             taken = true;
                         } else {
                             taken = false;
                         }
                     }
-                
+                    
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-            
+                
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        
+            
         }
         
         return taken;
     }
     
-    
+    public static boolean changePassword(String username, String password, ServletContext context) {
+        Properties dbProps = DAOCheckProperties.check(context);
+        
+        if (dbProps != null) {
+            
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+                System.out.println("connection successful");
+                
+                System.out.println("changing PW in dao");
+                byte[] salt = Passwords.getNextSalt(32);
+                byte[] hash = Passwords.hash(password.toCharArray(), salt);
+                System.out.println("done hash");
+                try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.user SET salt = ? ," +
+                        "password=? WHERE ysy.user.username= " +
+                        "?")) {
+                    s2.setBytes(1, salt);
+                    s2.setBytes(2, hash);
+                    s2.setString(3, username);
+                    
+                    s2.execute();
+                }
+                
+                return true;
+                
+                
+            } catch (
+                    SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+            
+        }
+        return false;
+    }
 }
