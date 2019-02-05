@@ -21,6 +21,7 @@ public class AddCommentServlet extends HttpServlet {
 
         String user = (String) request.getSession().getAttribute("username");
 
+        content = content.replaceAll("(\r\n|\n\r|\r|\n)", "<br />");
 
         boolean commentAdded = CommentDAO.newComment(content,articleID,user,getServletContext());
 

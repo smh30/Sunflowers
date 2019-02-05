@@ -19,33 +19,31 @@ public class UserDAO {
         
         if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
+                System.out.println("connection successful in the UserDAO");
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE username = ?")) {
                     stmt.setString(1, username);
                     try (ResultSet r = stmt.executeQuery()) {
                         if (r.next()) {
-                            System.out.println("username found! " + r.getString(4));
+                            System.out.println("username found! " + r.getString(3));
                         /* If a matching row was found, hash the provided password with the retrieved salt and
         repetitions and compare it against the hash from the database.*/
-                            // first column is name, already have
-                            //todo see if these are working
-                            // second column is binary hash, what data type to save it as??
-                            byte[] hash = r.getBytes(5);
-                            // third column is salt, also binary
+                            byte[] hash = r.getBytes(4);
                             byte[] salt = r.getBytes(2);
                             int iterations = r.getInt(1);
-                            
-                            
+
                             if (Passwords.isExpectedPassword(password.toCharArray(), salt, iterations,
                                     hash)) {
                                 /* If the password did match, return true.*/
+                                System.out.println("the password was correct");
                                 return true;
                             } else {
+                                System.out.println("the password was wrong");
                                 /* If they do not match,  return false.*/
                                 return false;
                             }
                         } else {
                             //if no such user, return false;
+                            System.out.println("no such user was found");
                             return false;
                         }
                     }
@@ -118,14 +116,14 @@ public class UserDAO {
                     stmt.setString(1, username);
                     try (ResultSet r = stmt.executeQuery()) {
                         if (r.next()) {
-                            String USERNAME = r.getString(4);
-                            String COUNTRY = r.getString(6);
-                            String REALNAME = r.getString(7);
-                            String DESC = r.getString(8);
-                            String DOB = r.getString(3);
-                            String IMAGEURL = r.getString(9);
-                            String DEFAULTIMG = r.getString(11);
-                            
+                            String USERNAME = r.getString(3);
+                            String COUNTRY = r.getString(5);
+                            String REALNAME = r.getString(6);
+                            String DESC = r.getString(7);
+                            String IMAGEURL = r.getString(8);
+                            String DEFAULTIMG = r.getString(9);
+                            String DOB = r.getString(11);
+                            boolean useDefaultImg = r.getBoolean(12);
                             
                             user.setUsername(USERNAME);
                             user.setCountry(COUNTRY);
@@ -134,6 +132,7 @@ public class UserDAO {
                             user.setDOB(DOB);
                             user.setPictureURL(IMAGEURL);
                             user.setDefaultImage(DEFAULTIMG);
+                            user.setUseDefaultImage(useDefaultImg);
                             
                         }
                     }
@@ -160,18 +159,13 @@ public class UserDAO {
                 
                 //todo pretty unsure about using int for the date of birth - surely should be a
                 // date??? currently throws exception if no value is given but works in a way
-                int dobint = 0;
-                try {
-                    dobint = Integer.valueOf(dateOfBirth);
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
+
                 
                 try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.user SET country = ? ,real_name=?, description = ?, date_of_birth = ? WHERE ysy.user.username= ?")) {
                     s2.setString(1, country);
                     s2.setString(2, realName);
                     s2.setString(3, description);
-                    s2.setInt(4, dobint);
+                    s2.setString(4, dateOfBirth);
                     s2.setString(5, username);
                     
                     s2.execute();
@@ -207,7 +201,7 @@ public class UserDAO {
                 System.out.println("connection successful");
                 
                 
-                try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.user SET default_image = ? WHERE " +
+                try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.user SET default_image = ?, use_default_image = true WHERE " +
                         "ysy.user.username= ?")) {
                     s2.setString(1, selectedImage);
                     s2.setString(2, username);

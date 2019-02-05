@@ -11,8 +11,7 @@
     <title>Login</title>
 </head>
 <body>
- THIS PAGE WILL STOP BEING A THING EVENTUALLY
-    BUT FOR NOW: YOUR USERNAME OR PASSWORD WAS INCORRECT
+    <h1>IF YOU SEE THIS PAGE FROM NOW ON IT"S A PROBLEM, PLEASE SEE STEPH</h1>
 
  <% if (request.getAttribute("message") != null){
  %>

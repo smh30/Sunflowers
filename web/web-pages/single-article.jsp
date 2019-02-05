@@ -103,12 +103,33 @@
         <%@ include file="../WEB-INF/partial/navbar.jsp" %>
         <div class="container">
 
+
             <div class="article">
-                <h2>${article.title}</h2>
+                <c:choose>
+                    <c:when test="${article.title == null}">
+                        <h2><a href="/article?articleID=${article.ID}">Untitled</a></h2>
+                    </c:when>
+                    <c:otherwise>
+                        <h2><a href="/article?articleID=${article.ID}">${article.title}</a></h2>
+                    </c:otherwise>
+                </c:choose>
 
                 <p>Author: ${article.author.username}</p>
-                <%--todo make a message show up if viewing a new post-dated article--%>
-                <p>${article.timestamp}</p>
+
+                <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+                <c:if test="${not empty article.timestamp}">
+    <span title="${article.timestamp}"><fmt:formatDate value="${article.timestamp}"
+                                                       pattern="MM/dd/yyyy HH:mm" /></span>
+                </c:if>
+                <%--<p>${article.timestamp}</p>--%>
+
+                    <c:if test="${postdated}">
+                <div class="alert alert-warning alert-dismissible" id="error-message">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    This article is postdated: it will appear on the site on the date you selected</div>
+
+                    </c:if>
+
                 <p>${article.articleText}</p>
 
 

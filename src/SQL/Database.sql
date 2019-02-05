@@ -7,13 +7,14 @@ DROP TABLE IF EXISTS user;
 CREATE TABLE user(
 iteration INT,
 salt binary (32),
-date_of_birth INT,
+date_of_birth VARCHAR (100),
 username VARCHAR (20),
 password binary (64),
 country VARCHAR (20),
 real_name VARCHAR (50),
 description VARCHAR (500),
 image VARCHAR(80),
+default_image VARCHAR (40) DEFAULT 'Default.jpg';
 PRIMARY KEY (username)
 );
 
@@ -22,10 +23,10 @@ PRIMARY KEY (username)
 DROP TABLE IF EXISTS article;
 
 CREATE TABLE article(
-article_title VARCHAR (100),
+article_title VARCHAR (200),
 article_author VARCHAR (30),
 article_id INT AUTO_INCREMENT,
-article_body VARCHAR (5000),
+article_body VARCHAR (10000),
 article_timestamp VARCHAR(100),
 PRIMARY KEY (article_id, article_author),
 FOREIGN KEY (article_author) REFERENCES user(username)
@@ -87,11 +88,13 @@ ALTER TABLE comments ADD FOREIGN KEY (parent_comment) REFERENCES comments (comme
 -- # ALTER TABLE comments ADD FOREIGN KEY (comments_author) REFERENCES user(username) ON DELETE CASCADE;
 -- # ALTER TABLE comments ADD FOREIGN KEY (article_id) REFERENCES article(article_id) ON DELETE CASCADE;
 
-ALTER TABLE user ADD COLUMN admin TINYINT;
+ALTER TABLE user ADD COLUMN admin BOOLEAN;
 
-UPDATE user SET ysy.user.admin=1 WHERE username='z';
+ALTER TABLE ysy.user DROP COLUMN date_of_birth;
 
-ALTER TABLE ysy.user ADD COLUMN default_image VARCHAR (40) DEFAULT 'Default.jpg';
+ALTER TABLE ysy.user ADD COLUMN use_default_image BOOLEAN;
+
+
 
 
 

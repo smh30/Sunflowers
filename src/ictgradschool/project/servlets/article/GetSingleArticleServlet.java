@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
@@ -39,6 +41,15 @@ public class GetSingleArticleServlet extends HttpServlet {
         System.out.println("article id is = " + articleID);
         article = ArticleDAO.getSingleArticle(articleID, getServletContext());
         // get articles by that author
+        LocalDateTime a = LocalDateTime.now();
+        Timestamp currentTime = Timestamp.valueOf(a);
+
+        if ((article.getTimestamp()).after(currentTime)){
+            System.out.println("the article is postdated");
+            request.setAttribute("postdated", true);
+        }else{
+            System.out.println("a normal article");
+        }
 
         List <Comment> comments = new ArrayList <Comment>();
 

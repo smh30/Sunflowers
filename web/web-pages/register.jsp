@@ -46,16 +46,21 @@
                             success: function (msg) {
                                 console.log(msg);
                                 //do the thing to show if it's good or not
-                                if(msg ==="true"){
+                                if(msg ==="true") {
                                     console.log("the message was true");
                                     // $("#username").css({border: "2px solid red"});
-                                    $('#nameFail').addClass("red");
-                                    $('#nameFail').text("Please choose a different username");
+                                    // $('#nameFail').addClass("red");
+                                    // $('#nameFail').text("Please choose a different username");
+
+                                    $('#nameFail').html("<div class=\"alert alert-warning alert-dismissible\" id=\"error-message\" >" +
+                                        "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>Please choose a different username</div>")
+
                                     //$('#nameFail').toggle(true);
-                                } else {
-                                    $('#nameFail').removeClass("red");
-                                    $('#nameFail').text("");
                                 }
+                                // } else {
+                                //     $('#nameFail').removeClass("red");
+                                //     $('#nameFail').text("");
+                                // }
                             }
                         })
                     }
@@ -71,11 +76,11 @@
         <%@ include file="../WEB-INF/partial/navbar.jsp" %>
         <!--just a basic form so i can test the servlet -->
         <!-- if the username is already taken, print a message/or show a popup??-->
-        <% if (request.getAttribute("message") != null) {
-        %>
-        ${message}
-        <%
-            } %>
+        <%--<% if (request.getAttribute("message") != null) {--%>
+        <%--%>--%>
+        <%--${message}--%>
+        <%--<%--%>
+            <%--} %>--%>
 
         <div id="nameFail">
         </div>

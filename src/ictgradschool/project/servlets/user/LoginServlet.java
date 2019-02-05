@@ -23,8 +23,8 @@ public class LoginServlet extends HttpServlet {
         System.out.println("in the login servlet doPost");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        System.out.println("attempting login: " + username + " : " + password);   //successfully " +
-System.out.println(request.getParameter("articleID"));
+        //System.out.println("attempting login: " + username + " : " + password);
+//System.out.println(request.getParameter("articleID"));
 
         boolean passwordOK;
 
@@ -38,9 +38,8 @@ System.out.println(request.getParameter("articleID"));
 
             adminOK = AdminDAO.checkAdminStatus(username, getServletContext());
             if (adminOK) {
-                //TODO: Ask Steph if I need to make a session
                 System.out.println("creating session");
-               session = request.getSession(true);
+               //session = request.getSession(true);
                 session.setAttribute("admin", "admin");
             }
 
@@ -61,11 +60,11 @@ System.out.println(request.getParameter("articleID"));
 
             return;
         } else {
-            System.out.println("password didn't match");
-            String message = "The username or password was incorrect (password)";
+            System.out.println("problem with login didn't match");
+            String message = "The username or password was incorrect";
             request.setAttribute("message", message);
-            request.getRequestDispatcher("web-pages/login.jsp").forward(request, response);
-            return;
+//            request.getRequestDispatcher("web-pages/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/home").forward(request, response);
         }
 
 //request.getRequestDispatcher("home").forward(request, response); apparently doesn't work
