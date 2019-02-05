@@ -122,49 +122,50 @@
 
     <%--begin forward/ back block --%>
     <%--todo see if this can be done with jstl/el instead for correctness' sake--%>
-    <%!
-        String getURL;
-        String backParam;
-    %>
+    <%--<%!--%>
+        <%--String getURL;--%>
+        <%--String backParam;--%>
+    <%--%>--%>
 
-    <%
-       getURL=request.getQueryString();
-       backParam = request.getParameter("back");
-    %>
+    <%--<%--%>
+       <%--getURL=request.getQueryString();--%>
+       <%--backParam = request.getParameter("back");--%>
+    <%--%>--%>
 
-    <% int back = 0;
-    if (backParam!= null) {
-        back = Integer.parseInt(backParam);
-    }
-    back += 10;
-    %>
+    <%--<% int back = 0;--%>
+    <%--if (backParam!= null) {--%>
+        <%--back = Integer.parseInt(backParam);--%>
+    <%--}--%>
+    <%--back += 10;--%>
+    <%--%>--%>
 
-  
-    <%--todo get this so it works in search resuls as well (ie with other params)--%>
-<c:if test="${fn:length(articles) == 10}">
-    <%--<div id="goback">--%>
-    <%--do an "if geturl is null (ie there are no search params do this--%>
-    <a href="?back=<%=back%>">older articles</a>
-    <%--else if not null and no back concat onto the geturl &back= ? --%>
-    <%--else if there's a back already, increase it by 10--%>
+  <%----%>
+    <%--&lt;%&ndash;todo get this so it works in search resuls as well (ie with other params)&ndash;%&gt;--%>
+<%--<c:if test="${fn:length(articles) == 10}">--%>
+    <%--&lt;%&ndash;<div id="goback">&ndash;%&gt;--%>
+    <%--&lt;%&ndash;do an "if geturl is null (ie there are no search params do this&ndash;%&gt;--%>
+    <%--<a href="?back=<%=back%>">older articles</a>--%>
+    <%--&lt;%&ndash;else if not null and no back concat onto the geturl &back= ? &ndash;%&gt;--%>
+    <%--&lt;%&ndash;else if there's a back already, increase it by 10&ndash;%&gt;--%>
 
-    <% if(back>=11){
-        int forward = back -=20;
-        %>
+    <%--<% if(back>=11){--%>
+        <%--int forward = back -=20;--%>
+        <%--%>--%>
 
-   || <a href="?back=<%=forward%>">newer articles</a>
-    <%
-    }%>
+   <%--|| <a href="?back=<%=forward%>">newer articles</a>--%>
+    <%--<%--%>
+    <%--}%>--%>
 
-    <%--</div>--%>
-    </c:if>
+    <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+    <%--</c:if>--%>
 
     Another try at the back function
-    <form method="post" action="/home">
+    <form method="get" action="/home">
         <input type="hidden" name="sort" value="${currentsort}">
-        <input type="hidden" name="searchAuthor" value="${searchParams.searchAuthor}">
-        <input type="hidden" name="searchTitle" value="${searchParams.searchTitle}">
-        <input type="hidden" name="searchDate" value="${searchParams.searchDate}">
+        <input type="hidden" name="author" value="${searchParams.searchAuthor}">
+        <input type="hidden" name="title" value="${searchParams.searchTitle}">
+        <input type="hidden" name="date" value="${searchParams.searchDate}">
+        <input type="hidden" name="currentBack" value="${currentback}">
         <input type="submit" value="back" name="back" id="back"><input type="submit" value="forward" name="forward" id="forward">
     </form>
 

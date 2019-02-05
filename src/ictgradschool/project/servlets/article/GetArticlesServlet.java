@@ -39,11 +39,22 @@ public class GetArticlesServlet extends HttpServlet {
             sort = (request.getSession().getAttribute("sort")).toString();
         }
 
-        // also, get offset. does this need a try/catch for numberformat exception??
+        // also, get offset. this part will get the curretly set offset if doing sort or w/e
         int offset = 0;
-        if (request.getParameter("back") != null) {
-            offset = Integer.parseInt(request.getParameter("back"));
+        if (request.getParameter("currentback") != null) {
+            offset = Integer.parseInt(request.getParameter("currentback"));
             System.out.println("offset = " + offset);
+        }
+        if (request.getParameter("back")!=null){
+            System.out.println("back=back ie clicked the back button");
+            offset += 10;
+        }
+        if (request.getParameter("forward")!=null){
+            System.out.println("forward was pressed");
+            offset -= 10;
+            if (offset<0){
+                offset=0;
+            }
         }
 
         // then, get search params
@@ -98,7 +109,6 @@ public class GetArticlesServlet extends HttpServlet {
                 searchDate = date;
                 System.out.println("getting articles by date: " + date);
                 articleList = ArticleDAO.getArticlesByDate(offset, date, sort, getServletContext());
-
             }
         }
 //creating a list to hold the current params so they can pass back for the sake of sort etc
@@ -107,6 +117,8 @@ public class GetArticlesServlet extends HttpServlet {
         searchParams.setSearchTitle(searchTitle);
         searchParams.setSearchDate(searchDate);
 
+
+request.setAttribute("currentback", offset);
         request.setAttribute("searchParams", searchParams);
         request.setAttribute("currentsort", sort);
         request.setAttribute("articles", articleList);
