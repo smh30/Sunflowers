@@ -1,4 +1,5 @@
-<%--
+<%@ page import="ictgradschool.project.JavaBeans.Comment" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: yab2
   Date: 25/01/2019
@@ -174,23 +175,12 @@
 
         <p>${comment.commentContent}</p>
 
-            <%--<%--%>
-            <%--List<Comment> comments = (List<Comment>) request.getAttribute("comment");--%>
-            <%--for(Comment c: comments){--%>
-            <%--out.println("<p>"+c.getCommentContent()+"</p>");--%>
-            <%--}--%>
-            <%----%>
-            <%----%>
-            <%--//                            List<Comment> tailList = new ArrayList<>(comment);--%>
-            <%--//                            List<Comment> preTailList;--%>
-            <%--//                            while(tailList.size()!=0){--%>
-            <%--//                                preTailList = new ArrayList<>(tailList);--%>
-            <%--//                                for(Comment c:preTailList){--%>
-            <%--//--%>
-            <%--//                                }--%>
-            <%--//                            }--%>
+                <c:if test="${comment.children.size()!=0}">
+                    <c:forEach var="currentComment" items="${comment.children}" varStatus="">
 
-            <%--%>--%>
+                    </c:forEach>
+                </c:if>
+
             <%--<c:forEach items="${comment.children}" var="children">--%>
 
             <%--<div class="red">${children.commentAuthor.username}</div>--%>
