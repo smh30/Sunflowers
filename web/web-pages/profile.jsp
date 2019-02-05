@@ -25,6 +25,13 @@
 
 <div class="container-fluid">
 
+    <c:if test="${message!=null}">
+        <div class="alert alert-warning alert-dismissible" id="error-message">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                ${message}
+        </div>
+    </c:if>
+
     <h1>${user.username}'s Account:</h1>
     <br>
     <br>
@@ -98,6 +105,8 @@
 
         <%--a form to edit the other aspects of the user profile--%>
         <form action="/editprofile" method="post">
+            <fieldset>
+                <legend>Update user info: </legend>
 
             <%--shouldn't need a choose here, there is always a username and it can't be edited--%>
             <label for="unameID">Username:</label>
@@ -139,7 +148,6 @@
             </c:choose>
             <br>
 
-            <br>
             <label for="descID">Description:</label>
             <c:choose>
                 <c:when test="${user.description!=null}">
@@ -151,31 +159,34 @@
                     <%--<input type="text" id="descID" name="description">--%>
                 </c:otherwise>
             </c:choose>
-            <br>
+            <br><br>
 
 
-
-            <%--<div class="user">--%>
-                <%--&lt;%&ndash;All of these are showing up on the profile webpage&ndash;%&gt;--%>
-                <%--<p></p>--%>
 
                 <input type="hidden" name="username" value="${user.username}">
                 <input type="submit" value="Edit User">
+            </fieldset>
         </form>
 
-        <%--todo complete this form. may need its own servlet--%>
+
         <%--a separate form for changing the password--%>
-        <form method="post" action="">
-            <%--TODO: link up password in more secure way - talk to Steph re hashing--%>
-            <label for="pwordID">Password:</label>
-            <input type="text" id="pwordID" name="password">
+        <form method="post" action="/changePW">
+            <fieldset><legend>Update Password:</legend>
+                <input type="hidden" name="username" value="${user.username}">
+            <label for="oldPassword">Current Password:</label>
+            <input type="password" id="oldPassword" name="oldPassword"><br>
+                <label for="newPassword">New Password:</label>
+                <input type="password" id="newPassword" name="newPassword"><br>
             <input type="submit" value="submit">
+            </fieldset>
         </form>
 
-
+<%--todo add an "are you sure???" pop-up to this button--%>
         <form method="post" action="/deleteprofile">
+            <fieldset><legend>Delete Account</legend>
             <input type="hidden" name="username" value="${user.username}">
             <input type="submit" value="Delete User">
+            </fieldset>
         </form>
     </div>
 </div>

@@ -197,7 +197,14 @@
         <url-pattern>/userInfo</url-pattern>
     </servlet-mapping>
 
-
+    <servlet>
+        <servlet-name>ChangePW</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.user.ChangePasswordServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangePW</servlet-name>
+        <url-pattern>/changePW</url-pattern>
+    </servlet-mapping>
 
 
 
