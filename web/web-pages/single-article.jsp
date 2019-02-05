@@ -177,7 +177,7 @@
 
                 <c:if test="${comment.children.size()!=0}">
                     <c:forEach var="currentComment" items="${comment.children}" varStatus="">
-
+                        <%-- TODO show the children comment for each root comment --%>
                     </c:forEach>
                 </c:if>
 
