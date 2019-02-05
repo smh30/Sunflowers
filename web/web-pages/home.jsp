@@ -12,10 +12,11 @@
 <head>
     <title>Home</title>
     <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 </head>
 
 <body>
-<!-- i've included the navbar here so that i can have links to test the login etc with - steph -->
+
 <%@ include file="../WEB-INF/partial/navbar.jsp" %>
 <div class="container">
 <%--a message will display if a user has tried to login but had a wrong username or password--%>
@@ -34,16 +35,19 @@
     <%--begin dropdown for selecting sort order for articles--%>
     <p id="sort_options">
     <form action="home" method="GET">
+    <input type="hidden" name="author" value="${searchParams.searchAuthor}">
+    <input type="hidden" name="title" value="${searchParams.searchTitle}">
+    <input type="hidden" name="date" value="${searchParams.searchDate}">
     <label for="sort-options">Sort articles by: </label>
         <select name="sort-options" id="sort-options" onchange="this.form.submit()">
             <c:choose>
-            <c:when test="${currentsort == 'title-z'}">
-            <option value="newest">Newest First</option>
-            <option value="oldest">Oldest First</option>
-            <option value="author-a">Author</option>
-            <option value="author-z">Author (reversed)</option>
-            <option value="title-a">Title</option>
-            <option value="title-z" selected="selected">Title (reversed)</option></c:when>
+                <c:when test="${currentsort == 'title-z'}">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="author-a">Author</option>
+                    <option value="author-z">Author (reversed)</option>
+                    <option value="title-a">Title</option>
+                    <option value="title-z" selected="selected">Title (reversed)</option></c:when>
                 <c:when test="${currentsort == 'oldest'}">
                     <option value="newest">Newest First</option>
                     <option value="oldest" selected="selected">Oldest First</option>
@@ -89,29 +93,28 @@
 
 <%--  begin showing articles    --%>
     <c:forEach items="${articles}" var="article">
+        <%--todo maybe format the page so that these divs have a border or something to separate the articles?? or are cards? or whatever?--%>
         <div class="article">
             <c:choose>
-            <c:when test="${article.title == null}">
-                <h2><a href="/article?articleID=${article.ID}">Untitled</a></h2>
-            </c:when>
+                <c:when test="${article.title == null}">
+                    <h2><a href="/article?articleID=${article.ID}">Untitled</a></h2>
+                </c:when>
                 <c:otherwise>
-            <h2><a href="/article?articleID=${article.ID}">${article.title}</a></h2>
+                    <h2><a href="/article?articleID=${article.ID}">${article.title}</a></h2>
                 </c:otherwise>
             <%--todo make the 'author' link or popup the user info box/page--%>
             </c:choose>
-        <p>Author: ${article.author.username}</p>
+
+            <p>Author: ${article.author.username}</p>
 
             <%--this block converts the timestamp to a nicer format for viewing on the page--%>
-            <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
             <c:if test="${not empty article.timestamp}">
-    <span title="${article.timestamp}"><fmt:formatDate value="${article.timestamp}"
-                                               pattern="MM/dd/yyyy HH:mm" /></span>
+                <span title="${article.timestamp}">
+                <fmt:formatDate value="${article.timestamp}" pattern="MM/dd/yyyy HH:mm" /></span>
             </c:if>
 
-
-        <p>${article.articleText}</p>
-            <%--todo add readmore--%>
-            <%--todo add "see comments" and maybe a counter of how many comments there are--%>
+            <p>${article.articleText}</p>
+            <%--todo add readmore for long articles?--%>
             <hr>
         </div>
     </c:forEach>
@@ -155,6 +158,15 @@
 
     <%--</div>--%>
     </c:if>
+
+    Another try at the back function
+    <form method="post" action="/home">
+        <input type="hidden" name="sort" value="${currentsort}">
+        <input type="hidden" name="searchAuthor" value="${searchParams.searchAuthor}">
+        <input type="hidden" name="searchTitle" value="${searchParams.searchTitle}">
+        <input type="hidden" name="searchDate" value="${searchParams.searchDate}">
+        <input type="submit" value="back" name="back" id="back"><input type="submit" value="forward" name="forward" id="forward">
+    </form>
 
 
 
