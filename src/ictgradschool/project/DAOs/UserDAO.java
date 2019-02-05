@@ -27,15 +27,10 @@ public class UserDAO {
                             System.out.println("username found! " + r.getString(3));
                         /* If a matching row was found, hash the provided password with the retrieved salt and
         repetitions and compare it against the hash from the database.*/
-                            // first column is name, already have
-                            //todo see if these are working
-                            // second column is binary hash, what data type to save it as??
                             byte[] hash = r.getBytes(4);
-                            // third column is salt, also binary
                             byte[] salt = r.getBytes(2);
                             int iterations = r.getInt(1);
-                            
-                            
+
                             if (Passwords.isExpectedPassword(password.toCharArray(), salt, iterations,
                                     hash)) {
                                 /* If the password did match, return true.*/
@@ -128,6 +123,7 @@ public class UserDAO {
                             String IMAGEURL = r.getString(8);
                             String DEFAULTIMG = r.getString(9);
                             String DOB = r.getString(11);
+                            boolean useDefaultImg = r.getBoolean(12);
                             
                             user.setUsername(USERNAME);
                             user.setCountry(COUNTRY);
@@ -136,6 +132,7 @@ public class UserDAO {
                             user.setDOB(DOB);
                             user.setPictureURL(IMAGEURL);
                             user.setDefaultImage(DEFAULTIMG);
+                            user.setUseDefaultImage(useDefaultImg);
                             
                         }
                     }
@@ -204,7 +201,7 @@ public class UserDAO {
                 System.out.println("connection successful");
                 
                 
-                try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.user SET default_image = ? WHERE " +
+                try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.user SET default_image = ?, use_default_image = true WHERE " +
                         "ysy.user.username= ?")) {
                     s2.setString(1, selectedImage);
                     s2.setString(2, username);

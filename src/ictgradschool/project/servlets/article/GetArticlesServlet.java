@@ -19,6 +19,8 @@ public class GetArticlesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 // this would be a get not a post
         //since no data is being submitted in order to go to the homepage
+        System.out.println("in the home servlet post");
+        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -97,8 +99,17 @@ public class GetArticlesServlet extends HttpServlet {
 
             }
         }
+        System.out.println("in the get articles servlet, about to try get message");
         request.setAttribute("currentsort", sort);
         request.setAttribute("articles", articleList);
+        String message;
+        if (request.getParameter("message")!=null){
+            message=request.getParameter("message");
+            request.setAttribute("message", message);
+            System.out.println("in the home servlet, setting message re login issues");
+        } else {
+            System.out.println("message was null");
+        }
 
         request.getRequestDispatcher("web-pages/home.jsp").forward(request, response);
     }

@@ -76,11 +76,11 @@
         <%@ include file="../WEB-INF/partial/navbar.jsp" %>
         <!--just a basic form so i can test the servlet -->
         <!-- if the username is already taken, print a message/or show a popup??-->
-        <% if (request.getAttribute("message") != null) {
-        %>
-        ${message}
-        <%
-            } %>
+        <%--<% if (request.getAttribute("message") != null) {--%>
+        <%--%>--%>
+        <%--${message}--%>
+        <%--<%--%>
+            <%--} %>--%>
 
         <div id="nameFail">
         </div>

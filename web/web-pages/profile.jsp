@@ -31,7 +31,7 @@
 
     <%--Below shows the user's selected image - either one of the default options, or if they've uploaded one, that one --%>
     <c:choose>
-        <c:when test="${user.pictureURL != null}">
+        <c:when test="${user.pictureURL != null && user.useDefaultImage == false}">
             <img id="imageToSwap" src="../Uploaded-Photos/${user.pictureURL}" width="225">
         </c:when>
     <c:otherwise>
@@ -47,6 +47,13 @@
         <form method="POST" action="/editprofile">
             <select id="dlist" name="default-img" onchange="switchImage()">
                 <c:choose>
+                    <c:when test="${user.pictureURL != null && user.useDefaultImage == false}">
+                        <option value="custom" selected>Custom Image</option>
+                        <option value="Default.jpg">Default</option>
+                        <option value="CloneTrooper.jpg">Clone Trooper</option>
+                        <option value="Jigglypuff.jpg">Jigglypuff</option>
+                        <option value="Yoda.jpg">Yoda</option>
+                </c:when>
                     <c:when test="${user.defaultImage == 'CloneTrooper.jpg'}">
                         <option value="Default.jpg">Default</option>
                         <option value="CloneTrooper.jpg" selected>Clone Trooper</option>
