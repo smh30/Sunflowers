@@ -26,32 +26,33 @@ public class CommentDAO {
                 System.out.println("connection successful");
                 //todo get the top-level comments (those without a parent)
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM comments WHERE " +
-                        "article_id =? AND comments_author!='deleted' ORDER BY comments_timestamp ")) {
+                        "article_id =? AND parent_comment IS NULL AND comments_author!='deleted' ORDER BY comments_timestamp ")) {
                     stmt.setInt(1, articleId);
                     ResultSet rs = stmt.executeQuery();
 
                     while (rs.next()) {
-                        //TODO fix children attachment logic
-                        //TODO 1. Check comments whether contains a same comment by distinctive comment id
-
-
                         Comment comment = new Comment();
                         comment.setCommentID(rs.getInt(1));
                         User commentAuthor = new User(rs.getString(2));
                         comment.setCommentContent(rs.getString(3));
                         comment.setTimestamp(rs.getTimestamp(4));
-
                         comment.setCommentAuthor(commentAuthor);
-
-                        //todo get a list of all of the children comments of those comments.
-                        List <Comment> children = getChildren(comment.getCommentID(), dbProps);
-                        comment.setChildren(children);
 
                         comments.add(comment);
                     }
 
-                    //Before return, remove all comments that do not contain any children
+                    List<Comment> preTailList;
+                    List<Comment> tailList = new ArrayList<>(comments);
 
+                    while(tailList.size()!=0) {
+                        preTailList= new ArrayList<>(tailList);
+                        for (Comment c : preTailList) {
+                            getChildren(c, context);
+                            if(c.getChildren()!=null)
+                                tailList.addAll(c.getChildren());
+                            tailList.remove(c);
+                        }
+                    }
 
                 }
 
@@ -62,6 +63,7 @@ public class CommentDAO {
         }
         return null;
     }
+
 
     public static List <Comment> getChildren(int parentID, Properties dbProps) {
         List <Comment> children = new ArrayList <>();
@@ -96,6 +98,41 @@ public class CommentDAO {
 
 
         return children;
+    }
+
+    public static void getChildren(Comment comment,ServletContext context) {
+        Properties dbProps = DAOCheckProperties.check(context);
+
+        if (dbProps != null) {
+
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+                System.out.println("connection successful");
+
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM comments WHERE " +
+                        "parent_comment = ? AND comments_author!='deleted' ORDER BY comments_timestamp ")) {
+                    stmt.setInt(1, comment.getCommentID());
+
+                    ResultSet rs = stmt.executeQuery();
+
+                    List<Comment> children = new ArrayList<>();
+
+                    while (rs.next()) {
+                        Comment co = new Comment();
+                        co.setCommentID(rs.getInt(1));
+                        User commentAuthor = new User(rs.getString(2));
+                        co.setCommentContent(rs.getString(3));
+                        co.setTimestamp(rs.getTimestamp(4));
+                        co.setCommentAuthor(commentAuthor);
+                        children.add(co);
+                    }
+
+                    comment.setChildren(children);
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public static boolean newComment(String content, String ArticleId, String user, ServletContext context) {

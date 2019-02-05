@@ -1,4 +1,6 @@
-<%--
+<%@ page import="ictgradschool.project.JavaBeans.Comment" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: yab2
   Date: 25/01/2019
@@ -24,6 +26,10 @@
         <style>
             body {font-family: Arial, Helvetica, sans-serif;}
             * {box-sizing: border-box;}
+
+            .red{
+                color: red;
+            }
 
             /* Button used to open the contact form - fixed at the bottom of the page */
             .open-button {
@@ -105,6 +111,7 @@
 
 
             <div class="article">
+
                 <c:choose>
                     <c:when test="${article.title == null}">
                         <h2><a href="/article?articleID=${article.ID}">Untitled</a></h2>
@@ -165,11 +172,33 @@
 
                 <p>${comment.commentContent}</p>
 
+
+                        <%
+                            List<Comment> comment = (List<Comment>) request.getAttribute("comment");
+//                            List<Comment> tailList = new ArrayList<>(comment);
+//                            List<Comment> preTailList;
+//                            while(tailList.size()!=0){
+//                                preTailList = new ArrayList<>(tailList);
+//                                for(Comment c:preTailList){
+//
+//                                }
+//                            }
+
+                        %>
+                        <%--<c:forEach items="${comment.children}" var="children">--%>
+
+                            <%--<div class="red">${children.commentAuthor.username}</div>--%>
+                            <%--<div class="red">${children.commentContent}</div>--%>
+
+
+                        <%--</c:forEach>--%>
+
+
+
                         <c:if test="${article.author.username == sessionScope.username || comment.commentAuthor.username == sessionScope.username}">
                             <form method="GET" action="/deletecomment">
                                 <input type="hidden" name="articleID" value="${article.ID}">
                                 <input type="hidden" name="commentID" value="${comment.commentID}">
-
 
                                 <input type="submit" value="Delete comment">
 
