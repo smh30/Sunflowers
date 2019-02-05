@@ -91,7 +91,8 @@ ALTER TABLE comments ADD FOREIGN KEY (parent_comment) REFERENCES comments (comme
 ALTER TABLE user ADD COLUMN admin BOOLEAN;
 
 ALTER TABLE ysy.user DROP COLUMN date_of_birth;
-ALTER TABLE ysy.user ADD COLUMN date_of_birth VARCHAR (40);
+
+ALTER TABLE ysy.user ADD COLUMN use_default_image BOOLEAN;
 
 
 

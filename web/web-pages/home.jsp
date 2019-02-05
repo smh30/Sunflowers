@@ -11,25 +11,6 @@
 
 <head>
     <title>Home</title>
-
-    <!-- I've linked in the Bootstrap things so that the nav will work -->
-    <!-- NOTE: i got these from the w3 website rather than the ones from our lab, so if there's a problem they might need to be changed. The navbar didn't work properly if I used the other ones.
-
-    <!-- Latest compiled and minified CSS -->
-    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">--%>
-   <%----%>
-    <%--<!-- jQuery library -->--%>
-    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--%>
-
-    <%--<!-- Latest compiled JavaScript -->--%>
-    <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>--%>
-
-    <%--trying these bootstrap links instead, think prev may have been old versiton--%>
-    <%--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">--%>
-    <%--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>--%>
-    <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>--%>
-    <%--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>--%>
-
     <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
 </head>
 
@@ -37,7 +18,15 @@
 <!-- i've included the navbar here so that i can have links to test the login etc with - steph -->
 <%@ include file="../WEB-INF/partial/navbar.jsp" %>
 <div class="container">
-<%--display the articles as appropriate--%>
+<%--a message will display if a user has tried to login but had a wrong username or password--%>
+    <c:if test="${message!=null}">
+        <div class="alert alert-warning alert-dismissible" id="error-message" >
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                ${message}
+        </div>
+    </c:if>
+
+    <%--if there are no articles, this message will appear--%>
 <c:if test="${empty articles}">
     <p>No articles found for your search parameters</p>
 </c:if>
@@ -100,7 +89,6 @@
 
 <%--  begin showing articles    --%>
     <c:forEach items="${articles}" var="article">
-        <%--<c:if test="${article.author.username != 'deleted'}">--%>
         <div class="article">
             <c:choose>
             <c:when test="${article.title == null}">
@@ -119,7 +107,7 @@
     <span title="${article.timestamp}"><fmt:formatDate value="${article.timestamp}"
                                                pattern="MM/dd/yyyy HH:mm" /></span>
             </c:if>
-        <%--<p>${article.timestamp}</p>--%>
+
 
         <p>${article.articleText}</p>
             <%--todo add readmore--%>

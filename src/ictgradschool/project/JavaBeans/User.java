@@ -11,6 +11,7 @@ public class User implements Serializable {
     String pictureURL;
     String defaultImage;
     String DOB;
+    boolean useDefaultImage;
 
     public User(){ }
 
@@ -71,5 +72,12 @@ public class User implements Serializable {
     public void setDefaultImage(String defaultImage) {
         this.defaultImage = defaultImage;
     }
-    
+
+    public boolean isUseDefaultImage() {
+        return useDefaultImage;
+    }
+
+    public void setUseDefaultImage(boolean useDefaultImage) {
+        this.useDefaultImage = useDefaultImage;
+    }
 }
