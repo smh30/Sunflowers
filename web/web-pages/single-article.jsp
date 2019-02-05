@@ -22,7 +22,46 @@
 
     <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
 
-    <style>
+        <script type="text/javascript">
+
+        function getAuthorInfo(authorName) {
+        console.log("name to search:" + authorName);
+        $.ajax({
+        url: "userInfo",
+        type: "POST",
+        data: {username: authorName},
+        success: function (msg) {
+
+        console.log("a message arrived back from userInfo: " + JSON.stringify(msg));
+        console.log("the real name:" + msg.realname);
+        //do the thing to show if it's good or not
+        $('#modal-title').text("Username: " + msg.username);
+        $('#modal-body').text("");
+        $('#modal-body').append("<img src="+ msg.image+"><br>");
+
+        if (msg.realname !== "" && msg.realname !== null){
+        $('#modal-body').append("Real Name: " + msg.realname + "<br>");
+        }
+        if (msg.dob != null) {
+        $('#modal-body').append("Date of Birth: " + msg.dob + "<br>");
+        }
+        if (msg.country !== "" && msg.country !== null) {
+        $('#modal-body').append("Country: " + msg.country + "<br>");
+        }
+        if (msg.bio !== "" && msg.bio !== null) {
+        $('#modal-body').append("Bio: " + msg.bio + "<br>");
+        }
+
+
+        $("#userInfoModal").modal('show');
+
+
+        }
+        })
+        }
+        </script>
+        <style>
+
         body {
             font-family: Arial, Helvetica, sans-serif;
         }
@@ -125,7 +164,7 @@
             </c:otherwise>
         </c:choose>
 
-        <p>Author: ${article.author.username}</p>
+                <p onclick="getAuthorInfo('${article.author.username}')">Author: ${article.author.username}</p>
 
         <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
         <c:if test="${not empty article.timestamp}">
@@ -289,5 +328,30 @@
         }
     </script>
 
-</body>
+<%--this modal pops up if the username is clicked, it shows the user info--%>
+            <div class="modal" id="userInfoModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modal-title">Modal Heading</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body" id="modal-body">
+
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </body>
 </html>

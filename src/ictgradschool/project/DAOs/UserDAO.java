@@ -112,6 +112,7 @@ public class UserDAO {
         if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
+                System.out.println("in dao search for :" + username);
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE username = ?")) {
                     stmt.setString(1, username);
                     try (ResultSet r = stmt.executeQuery()) {
@@ -140,6 +141,7 @@ public class UserDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            System.out.println("about to return from dao");
             return user;
         }
         return null;
