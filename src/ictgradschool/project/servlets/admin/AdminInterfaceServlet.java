@@ -51,13 +51,20 @@ public class AdminInterfaceServlet extends HttpServlet {
 
         request.setAttribute("users", userList);
 
-
-
         request.getRequestDispatcher("web-pages/admin-interface.jsp").forward(request, response);
 
 
-//    }
+        //TODO: Check whether
+        List<User> userPasswordList = new ArrayList <>();
 
+        //Think they are using parameters from above page??
+
+        userPasswordList = AdminDAO.getAllUserPasswords(username, password, getServletContext());
+        System.out.println("Attempting processing getAllUsersPasswords");
+
+        request.setAttribute("users", userPasswordList);
+
+        request.getRequestDispatcher("web-pages/admin-interface.jsp").forward(request, response);
     }
 }
 

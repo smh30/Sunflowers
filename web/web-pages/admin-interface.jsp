@@ -32,13 +32,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%--Not sure if can put EL in without brackets???--%>
                         <c:forEach var="user" items="${users}">
                             <tr>
                                 <td>${user.username} </td>
-                                <td>
-                                    <button type="button" onclick="">Remove User</button>
-                                </td>
+                                <td><button type="button" onclick="">Remove User</button></td>
+
+                                <td>${comments.comments_body}</td>
+                                <td><button type="button" onclick="">Remove User's Comments</button></td>
+
+                                <td>${user.password}</td>
+                                <td><button type="button" onclick="">Reset User's password</button></td>
                             </tr>
                         </c:forEach>
 
@@ -71,6 +74,9 @@
                 <br>
                 <label for="passwordID">Password:</label>
                 <input type="text" id="passwordID" name="password">
+                <br>
+                <label for="emailID"> Email:</label>
+                <input type="text" id="emailID" name="email">
                 <br>
                 <br>
                 <button type="submit" class="btn">Create new user</button>

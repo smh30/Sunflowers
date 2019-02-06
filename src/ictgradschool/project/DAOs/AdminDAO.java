@@ -38,7 +38,7 @@ public class AdminDAO {
         return false;
     }
 
-    public static List <User> getAllUsers (String username, ServletContext context) {
+    public static List <User> getAllUsers(String username, ServletContext context) {
         List <User> users = new ArrayList <>();
 
         Properties dbProps = DAOCheckProperties.check(context);
@@ -50,7 +50,7 @@ public class AdminDAO {
 
                     ResultSet rs = stmt.executeQuery();
 
-                    while(rs.next()) {
+                    while (rs.next()) {
                         User user = new User();
                         user.setUsername(rs.getString(1));
 
@@ -63,7 +63,34 @@ public class AdminDAO {
             }
         }
         //Change to different return type!!
-       return users;
+        return users;
     }
 
+    public static List <User> getAllUserPasswords(String username, String password, ServletContext context) {
+        List <User> users = new ArrayList <>();
+
+        Properties dbProps = DAOCheckProperties.check(context);
+
+        if (dbProps != null) {
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+                System.out.println("connection successful");
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT username FROM user")) {
+
+                    ResultSet rs = stmt.executeQuery();
+
+                    while (rs.next()) {
+                        User user = new User();
+                        user.setUsername(rs.getString(1));
+                        //TODO: What do I do with password????
+                    }
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return users;
+    }
 }

@@ -126,7 +126,7 @@ public class UserDAO {
                             String DOB = r.getString(11);
                             boolean useDefaultImg = r.getBoolean(12);
                             String email = r.getString(13);
-                            
+
                             user.setUsername(USERNAME);
                             user.setCountry(COUNTRY);
                             user.setRealName(REALNAME);
@@ -136,7 +136,7 @@ public class UserDAO {
                             user.setDefaultImage(DEFAULTIMG);
                             user.setUseDefaultImage(useDefaultImg);
                             user.setEmail(email);
-                            
+
                         }
                     }
                 }
@@ -151,8 +151,7 @@ public class UserDAO {
     
     
     public static User editUser(String username, String country, String realName,
-                                String description, String dateOfBirth,
-                                String email, ServletContext context) {
+                                String description, String dateOfBirth, String email, ServletContext context) {
         
         User user = new User();
         Properties dbProps = DAOCheckProperties.check(context);
@@ -176,7 +175,7 @@ public class UserDAO {
                     s2.setString(4, dateOfBirth);
                     s2.setString(5, email);
                     s2.setString(6, username);
-                    
+
                     
                     s2.execute();
                     

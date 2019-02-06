@@ -45,7 +45,8 @@
             <img id="imageToSwap" src="../Uploaded-Photos/${user.pictureURL}" width="225" class="img-thumbnail">
         </c:when>
     <c:otherwise>
-    <img id="imageToSwap" src="../default-photos-for-profile-page/${user.defaultImage}" width="225" class="img-thumbnail">
+    <img id="imageToSwap" src="../default-photos-for-profile-page/${user.defaultImage}" width="225">
+
     </c:otherwise>
     </c:choose>
             </div>
@@ -91,7 +92,7 @@
                         <option value="Yoda.jpg">Yoda</option>
                     </c:otherwise>
                 </c:choose>
-            </select></div>
+            </select> </div>
                 <button class="btn btn-primary" type="submit" value="Use this image">Use this image</button>
 
             </fieldset>
@@ -172,6 +173,19 @@
             </c:choose>
                     </div>
 
+                <label for="emailID">Email:</label>
+                <c:choose>
+                    <c:when test="${user.email!=null}">
+                        <%--<input type="text" id="dateofbirthID" name="dateofbirth" value="${user.DOB}">--%>
+                        <input type="text" id="emailID" name="email" value="${user.email}">
+                    </c:when>
+                    <c:otherwise>
+                        <%--<input type="text" id="dateofbirthID" name="dateofbirth">--%>
+                        <input type="text" name="email" id="emailID">
+                    </c:otherwise>
+                </c:choose>
+                <br>
+
                         <div class="form-group">
             <label for="descID">Description:</label>
             <c:choose>
@@ -185,7 +199,6 @@
                 </c:otherwise>
             </c:choose>
                         </div>
-
 
 
                 <input type="hidden" name="username" value="${user.username}">

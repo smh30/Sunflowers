@@ -81,11 +81,11 @@ public class User implements Serializable {
     public void setUseDefaultImage(boolean useDefaultImage) {
         this.useDefaultImage = useDefaultImage;
     }
-    
+
     public String getEmail() {
         return email;
     }
-    
+
     public void setEmail(String email) {
         this.email = email;
     }
