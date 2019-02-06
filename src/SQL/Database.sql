@@ -7,14 +7,17 @@ DROP TABLE IF EXISTS user;
 CREATE TABLE user(
 iteration INT,
 salt binary (32),
-date_of_birth VARCHAR (100),
 username VARCHAR (20),
 password binary (64),
 country VARCHAR (20),
 real_name VARCHAR (50),
 description VARCHAR (500),
 image VARCHAR(80),
-default_image VARCHAR (40) DEFAULT 'Default.jpg';
+default_image VARCHAR (40) DEFAULT 'Default.jpg',
+admin BOOLEAN,
+date_of_birth VARCHAR (40),
+use_default_image BOOLEAN,
+email VARCHAR (100) NOT NULL DEFAULT 'none',
 PRIMARY KEY (username)
 );
 
@@ -28,8 +31,8 @@ article_author VARCHAR (30),
 article_id INT AUTO_INCREMENT,
 article_body VARCHAR (10000),
 article_timestamp VARCHAR(100),
-PRIMARY KEY (article_id, article_author),
-FOREIGN KEY (article_author) REFERENCES user(username)
+PRIMARY KEY (article_id),
+FOREIGN KEY (article_author) REFERENCES user(username),
 ON DELETE CASCADE
 );
 
@@ -42,11 +45,14 @@ comments_author VARCHAR (30),
 coments_body VARCHAR (200),
 comments_timestamp varchar(100),
 article_id INT,
-PRIMARY KEY (comments_id, comments_author, article_id),
+parent_comment INT,
+PRIMARY KEY (comments_id),
 FOREIGN KEY (comments_author) REFERENCES user(username)
   ON DELETE CASCADE,
 FOREIGN KEY (article_id) REFERENCES article(article_id)
-  ON DELETE CASCADE
+  ON DELETE CASCADE,
+  FOREIGN KEY (parent_comment) REFERENCES comments(comments_id)
+  ON DELETE CASCADE,
 );
 
 
@@ -66,16 +72,11 @@ VALUES  ('y', 'Ron you are so wrong', '2'),
         ('y', 'Little bit', '3'),
         ('y', 'LOL you are so lucky bro', '4');
 
+
+
+
+
 ALTER TABLE user ADD COLUMN image varchar(80);
-
-UPDATE user SET date_of_birth = 06121996, country='Australia', real_name='Pork Chop', description='Testing code is my sole hobby right now.' WHERE username = 'z';
-
-UPDATE user SET date_of_birth = 09121995, country='NZ', real_name='Tulip', description='I am tired' WHERE username = 'y';
-
-UPDATE user SET date_of_birth = 09121995, country='NZ', real_name='Tulip', description='I am tired' WHERE username = 'steph';
-
-
-
 
 ALTER TABLE comments ADD COLUMN parent_comment INT;
 ALTER TABLE comments ADD FOREIGN KEY (parent_comment) REFERENCES comments (comments_id) ON DELETE CASCADE ;
@@ -94,6 +95,7 @@ ALTER TABLE ysy.user DROP COLUMN date_of_birth;
 
 ALTER TABLE ysy.user ADD COLUMN use_default_image BOOLEAN;
 
+ALTER TABLE ysy.user ADD COLUMN email VARCHAR (100) NOT NULL DEFAULT 'none';
 
 
 

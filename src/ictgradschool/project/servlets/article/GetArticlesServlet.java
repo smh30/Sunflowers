@@ -75,6 +75,7 @@ public class GetArticlesServlet extends HttpServlet {
 
         } else if (author != null && title == null && date == null) {
             System.out.println("getting articles  by logged in user " + author);
+            searchAuthor=author;
             articleList = ArticleDAO.getArticlesByAuthor(offset, author, sort, getServletContext());
 
         } else {
