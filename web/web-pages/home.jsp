@@ -28,7 +28,8 @@
                     //do the thing to show if it's good or not
                     $('#modal-title').text("Username: " + msg.username);
                     $('#modal-body').text("");
-                    $('#modal-body').append("<img src="+ msg.image+"><br>");
+
+                    $('#modal-body').append("<div id=\"image\" class=\"text-center\"><img src="+ msg.image+"></div>");
 
                     if (msg.realname !== "" && msg.realname !== null){
                         $('#modal-body').append("Real Name: " + msg.realname + "<br>");
@@ -73,13 +74,13 @@
     </c:if>
 
     <%--begin dropdown for selecting sort order for articles--%>
-    <p id="sort_options">
-    <form action="home" method="GET">
+
+    <form action="home" method="GET" class="form-inline">
         <input type="hidden" name="author" value="${searchParams.searchAuthor}">
         <input type="hidden" name="title" value="${searchParams.searchTitle}">
         <input type="hidden" name="date" value="${searchParams.searchDate}">
-        <label for="sort-options">Sort articles by: </label>
-        <select name="sort-options" id="sort-options" onchange="this.form.submit()">
+        <label for="sort-options">Sort articles by:   </label>
+        <select name="sort-options" id="sort-options" class="form-control"  onchange="this.form.submit()">
             <c:choose>
                 <c:when test="${currentsort == 'title-z'}">
                     <option value="newest">Newest First</option>
@@ -130,9 +131,12 @@
                     <option value="title-z">Title (reversed)</option>
                 </c:otherwise>
             </c:choose>
+
         </select>
+
     </form>
-    </p>
+
+
     <%--      end sort order dropdown     --%>
 
 
@@ -174,9 +178,9 @@
                 <input type="hidden" name="date" value="${searchParams.searchDate}">
                 <input type="hidden" name="currentBack" value="${currentback}">
 
-                <input type="submit" value="back" name="back" id="back">
+                <button class="btn btn-primary" type="submit" value="back" name="back" id="back">Back</button>
                 <c:if test="${currentback != 0}">
-                    <input type="submit" value="forward" name="forward" id="forward">
+                    <button class="btn btn-primary"  type="submit" value="forward" name="forward" id="forward">Forward</button>
                 </c:if>
             </form>
         </div>

@@ -62,28 +62,29 @@
         <form method="post" action="register">
             <%--Below line for reCAPTCHA--%>
 
-
+<div class="form-group">
             <label for="username">username:</label>
                 <%--the onchange means that when the box loses focus it does the thing --%>
-            <input type="text" id="username" name="username" onchange="checkName(this.value)">
-
-            <br>
+            <input type="text" id="username" name="username" onchange="checkName(this.value)"  class="form-control">
+        </div>
+    <div class="form-group">
             <label for="password">password:</label>
-            <input type="password" id="password" name="password">
-            <br>
+            <input type="password" id="password" name="password" minlength="8" class="form-control">
+        <small id="passwordInfo" class="form-text text-muted">Minimum 8 characters</small>
+</div>
             <div class="g-recaptcha" data-sitekey="6Lc52o4UAAAAAF2qwLx_jR66r2nUDGMTz9FSM2-N"
                  data-callback="recaptchaCallback"></div>
 
             <%--Disabled input button--%>
-            <button type="submit" class="btn btn-default disabled d-none" id="btnSubmit">Submit</button>
+            <button type="submit" class="btn btn-primary d-none" id="btnSubmit">Submit</button>
         </form>
 
         <script type="text/javascript">
             function recaptchaCallback() {
                 var btnSubmit = document.getElementById("btnSubmit");
                 //TODO: Play with classes to get border back
-                if ( btnSubmit.classList.contains("disabled") ) {
-                    btnSubmit.classList.remove("disabled");
+                if ( btnSubmit.classList.contains("d-none") ) {
+                    // btnSubmit.classList.remove("disabled");
                     btnSubmit.classList.remove("d-none");
                 }
             }
