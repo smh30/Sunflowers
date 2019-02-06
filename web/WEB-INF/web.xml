@@ -3,15 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
-<welcome-file-list>
-    <welcome-file>home</welcome-file>
-</welcome-file-list>
+
+    <welcome-file-list>
+        <welcome-file>home</welcome-file>
+    </welcome-file-list>
+
+
+    <!-- ~~~~~~~~~~~~~~~-user related servlets ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`-->
 
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>ictgradschool.project.servlets.user.LoginServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -21,7 +24,6 @@
         <servlet-name>Register</servlet-name>
         <servlet-class>ictgradschool.project.servlets.user.RegisterServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -31,167 +33,15 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>ictgradschool.project.servlets.user.LogOutServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>Homepage</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.article.GetArticlesServlet</servlet-class>
+        <servlet-name>GetUserInfo</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.user.GetUserInfoServlet</servlet-class>
     </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Homepage</servlet-name>
-        <url-pattern>/home</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>Search</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.searching.SearchServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Search</servlet-name>
-        <url-pattern>/search</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>UploadProfilePictureServlet</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.user.UploadProfilePictureServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>UploadProfilePictureServlet</servlet-name>
-        <url-pattern>/upload</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>AddArticle</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.article.AddArticleServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>AddArticle</servlet-name>
-        <url-pattern>/new-article</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>ViewArticle</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.article.GetSingleArticleServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>ViewArticle</servlet-name>
-        <url-pattern>/article</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>Upload</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.user.UploadProfilePictureServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Upload</servlet-name>
-        <url-pattern>/Upload</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>DeleteArticle</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.article.DeleteArticleServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>DeleteArticle</servlet-name>
-        <url-pattern>/deleteArticle</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>AddComment</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.comments.AddCommentServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>AddComment</servlet-name>
-        <url-pattern>/addcomment</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-
-        <servlet-name>EditArticle</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.article.EditArticleServlet</servlet-class>
-    </servlet>
-    
-    <servlet-mapping>
-        <servlet-name>EditArticle</servlet-name>
-        <url-pattern>/edit-article</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>LoadProfileServlet</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.user.LoadProfileServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>LoadProfileServlet</servlet-name>
-        <url-pattern>/profile</url-pattern>
-    </servlet-mapping>
-
-
-    <servlet>
-        <servlet-name>EditProfileServlet</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.user.EditProfileServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>EditProfileServlet</servlet-name>
-        <url-pattern>/editprofile</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>DeleteComment</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.comments.DeleteCommentServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>DeleteComment</servlet-name>
-        <url-pattern>/deletecomment</url-pattern>
-    </servlet-mapping>
-
-
-    <servlet>
-        <servlet-name>AdminInterface</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.admin.AdminInterfaceServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>AdminInterface</servlet-name>
-        <url-pattern>/admininterface</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>CheckName</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.user.CheckNameServlet</servlet-class>
-    </servlet>
-<servlet-mapping>
-    <servlet-name>CheckName</servlet-name>
-    <url-pattern>/checkname</url-pattern>
-</servlet-mapping>
-
-    <servlet>
-        <servlet-name>AddNestedComment</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.nestedComments.AddNestedCommentServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>AddNestedComment</servlet-name>
-        <url-pattern>/addNestedComment</url-pattern>
-    </servlet-mapping>
-
-<servlet>
-    <servlet-name>GetUserInfo</servlet-name>
-    <servlet-class>ictgradschool.project.servlets.user.GetUserInfoServlet</servlet-class>
-</servlet>
     <servlet-mapping>
         <servlet-name>GetUserInfo</servlet-name>
         <url-pattern>/userInfo</url-pattern>
@@ -206,6 +56,140 @@
         <url-pattern>/changePW</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>CheckName</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.user.CheckNameServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckName</servlet-name>
+        <url-pattern>/checkname</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LoadProfileServlet</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.user.LoadProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoadProfileServlet</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>EditProfileServlet</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.user.EditProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditProfileServlet</servlet-name>
+        <url-pattern>/editprofile</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Upload</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.user.UploadProfilePictureServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Upload</servlet-name>
+        <url-pattern>/Upload</url-pattern>
+    </servlet-mapping>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~article related servlets~~~~~~~~~~~~~~~~~~~~~~~~~`-->
+    <servlet>
+        <servlet-name>Homepage</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.article.GetArticlesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Homepage</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Search</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.searching.SearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Search</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>AddArticle</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.article.AddArticleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddArticle</servlet-name>
+        <url-pattern>/new-article</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ViewArticle</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.article.GetSingleArticleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewArticle</servlet-name>
+        <url-pattern>/article</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>DeleteArticle</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.article.DeleteArticleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteArticle</servlet-name>
+        <url-pattern>/deleteArticle</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+
+        <servlet-name>EditArticle</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.article.EditArticleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditArticle</servlet-name>
+        <url-pattern>/edit-article</url-pattern>
+    </servlet-mapping>
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~`comment related servlets~~~~~~~~~~~~~~~~~~~~~-->
+    <servlet>
+        <servlet-name>AddComment</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.comments.AddCommentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddComment</servlet-name>
+        <url-pattern>/addcomment</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>DeleteComment</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.comments.DeleteCommentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteComment</servlet-name>
+        <url-pattern>/deletecomment</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddNestedComment</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.nestedComments.AddNestedCommentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddNestedComment</servlet-name>
+        <url-pattern>/addNestedComment</url-pattern>
+    </servlet-mapping>
+
+
+    <!--~~~~~~~~~~~~~~~~~~admin related servlets~~~~~~~~~~~~~~~~~~~~~~~~`-->
+    <servlet>
+        <servlet-name>AdminInterface</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.admin.AdminInterfaceServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminInterface</servlet-name>
+        <url-pattern>/admininterface</url-pattern>
+    </servlet-mapping>
 
 
 </web-app>

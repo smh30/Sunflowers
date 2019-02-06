@@ -37,18 +37,19 @@
     <br>
 
     <%--Below shows the user's selected image - either one of the default options, or if they've uploaded one, that one --%>
+    <div class="row">
+        <div class="col-md-6">
     <c:choose>
         <c:when test="${user.pictureURL != null && user.useDefaultImage == false}">
             <img id="imageToSwap" src="../Uploaded-Photos/${user.pictureURL}" width="225">
         </c:when>
     <c:otherwise>
     <img id="imageToSwap" src="../default-photos-for-profile-page/${user.defaultImage}" width="225">
-
     </c:otherwise>
     </c:choose>
 
     <%--this block is for choosing which of the default images the user prefers. Saves to db when they submit--%>
-    <div style="margin-left: 250px">
+
         <h4>Choose default picture: </h4>
 
         <form method="POST" action="/editprofile">
@@ -100,9 +101,12 @@
             <br>
             <input type="submit" value="Upload">
         </form>
+
+    </div>
         <br>
         <br>
 
+    <div class="form-group col-md-6">
         <%--a form to edit the other aspects of the user profile--%>
         <form action="/editprofile" method="post">
             <fieldset>
@@ -151,11 +155,11 @@
             <label for="descID">Description:</label>
             <c:choose>
                 <c:when test="${user.description!=null}">
-                    <textarea rows="4" cols="80" id="descID" name="description">${user.description}</textarea>
+                    <textarea rows="4" id="descID" name="description" class="form-control">${user.description}</textarea>
                     <%--<input type="text" id="descID" name="description" value="${user.description}">--%>
                 </c:when>
                 <c:otherwise>
-                    <textarea rows="4" cols="80" id="descID" name="description"></textarea>
+                    <textarea rows="4" id="descID" name="description" class="form-control"></textarea>
                     <%--<input type="text" id="descID" name="description">--%>
                 </c:otherwise>
             </c:choose>
@@ -176,7 +180,7 @@
             <label for="oldPassword">Current Password:</label>
             <input type="password" id="oldPassword" name="oldPassword"><br>
                 <label for="newPassword">New Password:</label>
-                <input type="password" id="newPassword" name="newPassword"><br>
+                <input type="password" id="newPassword" name="newPassword"><br><br>
             <input type="submit" value="submit">
             </fieldset>
         </form>
@@ -188,6 +192,7 @@
             <input type="submit" value="Delete User">
             </fieldset>
         </form>
+
     </div>
 </div>
 </body>

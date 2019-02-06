@@ -164,7 +164,8 @@
             </c:otherwise>
         </c:choose>
 
-                <p onclick="getAuthorInfo('${article.author.username}')">Author: ${article.author.username}</p>
+        <p><a href="#" onclick="getAuthorInfo('${article.author.username}')">Author: ${article.author.username}</a>
+        </p>
 
         <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
         <c:if test="${not empty article.timestamp}">
@@ -175,7 +176,7 @@
 
         <c:if test="${postdated}">
             <div class="alert alert-warning alert-dismissible" id="error-message">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 This article is postdated: it will appear on the site on the date you selected
             </div>
 
