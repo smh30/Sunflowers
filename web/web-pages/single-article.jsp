@@ -216,6 +216,7 @@
                     if(canDelete) {
                         //If author can delete comments
                         //Output comment content first
+                        out.print("<div>"+comment.getCommentAuthor().getUsername()+":"+"</div>");
                         out.println("<div>" + comment.getCommentContent() + "</div>");
                         //Show delete button
                         out.println(
@@ -234,7 +235,7 @@
                         //If so, show the reply function
                         //Show Reply Button
                         out.println(
-                                "<button id=\"reply-btn-"+comment.getCommentID()+"\" class=\"open-button\" onclick=\"openForm("+comment.getCommentID()+")\">Reply</button>"
+                                    "<button id=\"reply-btn-"+comment.getCommentID()+"\" class=\"open-button\" onclick=\"openForm("+comment.getCommentID()+")\">Reply</button>"
                         );
                         //Reply area
                         out.println(
