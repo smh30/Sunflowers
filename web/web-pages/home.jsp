@@ -144,7 +144,7 @@
     <c:forEach items="${articles}" var="article">
         <div class="article">
             <c:choose>
-                <c:when test="${article.title == null}">
+                <c:when test="${article.title == null || empty article.title}">
                     <h2><a href="/article?articleID=${article.ID}">Untitled</a></h2>
                 </c:when>
                 <c:otherwise>
