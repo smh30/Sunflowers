@@ -122,6 +122,7 @@ public class CommentDAO {
                         User commentAuthor = new User(rs.getString(2));
                         co.setCommentContent(rs.getString(3));
                         co.setTimestamp(rs.getTimestamp(4));
+                        co.setArticleId(rs.getInt(5));
                         co.setCommentAuthor(commentAuthor);
                         children.add(co);
                     }
