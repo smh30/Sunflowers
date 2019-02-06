@@ -32,9 +32,9 @@ public class DeleteCommentServlet extends HttpServlet {
             String message = "Some trouble with deleting your comment. Please try again.";
             request.setAttribute("message", message);
 
-            request.getRequestDispatcher("article").forward(request,response);
+            request.getRequestDispatcher("/article").forward(request,response);
         }else{
-            request.getRequestDispatcher("article").forward(request,response);
+            request.getRequestDispatcher("/article").forward(request,response);
         }
     }
 }

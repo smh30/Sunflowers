@@ -1,7 +1,7 @@
 <!-- THIS IS A NAVBAR WHICH CAN BE INCLUDED INTO ALL OF THE OTHER PAGES AS NECESSARY -->
 <!--todo navbar expand/collapse seems to be stuck on md no matter what i change this to -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-toggleable-md navbar-dark bg-dark">
     <div class="container-fluid">
         <%--<div class="navbar-header">--%>
         <a class="navbar-brand" href="/home">Social Sunflowers</a>
@@ -30,7 +30,7 @@
                             <form class="px-2" method="post" action="/login">
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="username" placeholder="username"
-                                           name="username">
+                                           name="username"></div><div class="form-group">
                                     <input type="password" class="form-control" id="password" placeholder="password"
                                            name="password">
                                 </div>

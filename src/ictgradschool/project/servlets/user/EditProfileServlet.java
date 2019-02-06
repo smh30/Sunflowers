@@ -47,12 +47,13 @@ public class EditProfileServlet extends HttpServlet {
             String realName = request.getParameter("realname");
             String description = request.getParameter("description");
             String dateOfBirth = request.getParameter("dateofbirth");
-           // String pictureURL = request.getParameter("image");
+            String email = request.getParameter("email");
             
             System.out.print(username);
             System.out.println(realName);
     
-            UserDAO.editUser(username, country, realName, description, dateOfBirth, getServletContext());
+            UserDAO.editUser(username, country, realName, description, dateOfBirth,
+             email, getServletContext());
         }
         //request.setAttribute("user", user);
 

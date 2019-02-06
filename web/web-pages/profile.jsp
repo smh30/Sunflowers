@@ -23,7 +23,7 @@
 <%@ include file="../WEB-INF/partial/navbar.jsp" %>
 
 
-<div class="container-fluid">
+<div class="container">
 
     <c:if test="${message!=null}">
         <div class="alert alert-warning alert-dismissible" id="error-message">
@@ -37,22 +37,28 @@
     <br>
 
     <%--Below shows the user's selected image - either one of the default options, or if they've uploaded one, that one --%>
+    <div class="row">
+        <div class="col-md-6">
+            <div id="image" class="text-center">
     <c:choose>
         <c:when test="${user.pictureURL != null && user.useDefaultImage == false}">
-            <img id="imageToSwap" src="../Uploaded-Photos/${user.pictureURL}" width="225">
+            <img id="imageToSwap" src="../Uploaded-Photos/${user.pictureURL}" width="225" class="img-thumbnail">
         </c:when>
     <c:otherwise>
     <img id="imageToSwap" src="../default-photos-for-profile-page/${user.defaultImage}" width="225">
 
     </c:otherwise>
     </c:choose>
+            </div>
 
     <%--this block is for choosing which of the default images the user prefers. Saves to db when they submit--%>
-    <div style="margin-left: 250px">
-        <h4>Choose default picture: </h4>
+
 
         <form method="POST" action="/editprofile">
-            <select id="dlist" name="default-img" onchange="switchImage()">
+            <fieldset>
+                <legend>Choose default picture: </legend>
+                <div class="form-group">
+            <select id="dlist" name="default-img" class="form-control" onchange="switchImage()">
                 <c:choose>
                     <c:when test="${user.pictureURL != null && user.useDefaultImage == false}">
                         <option value="custom" selected>Custom Image</option>
@@ -86,67 +92,86 @@
                         <option value="Yoda.jpg">Yoda</option>
                     </c:otherwise>
                 </c:choose>
-            </select>
-            <input type="submit" value="Choose this image">
+            </select> </div>
+                <button class="btn btn-primary" type="submit" value="Use this image">Use this image</button>
+
+            </fieldset>
         </form>
 
-        <%--todo at the moment it's not possible to go back to the default images after uploading an image, might have to sort that out--%>
 
         <%--this is the form for uploading a custom avatar--%>
         <form method="POST" action="/Upload" enctype="multipart/form-data">
-            <h4>Choose your own picture to upload: </h4>
-            <input type="file" id="userPicture" name="userPicture" size="50" accept="image/png, image/jpeg">
-            <br>
-            <br>
-            <input type="submit" value="Upload">
-        </form>
-        <br>
-        <br>
+            <fieldset>
+                <legend>Choose your own picture to upload: </legend>
+                <div class="form-group">
+                <div class="custom-file">
+            <input type="file" id="userPicture" name="userPicture" size="50" accept="image/png, image/jpeg" class="custom-file-input">
+<label class="custom-file-label" for="userPicture">Choose File</label>
+                </div></div>
+                <button class="btn btn-primary" type="submit" value="Upload">Upload Image</button>
 
+            </fieldset>
+        </form>
+
+
+            <hr>
+    </div>
+
+
+    <div class="form-group col-md-6">
         <%--a form to edit the other aspects of the user profile--%>
         <form action="/editprofile" method="post">
             <fieldset>
                 <legend>Update user info: </legend>
 
             <%--shouldn't need a choose here, there is always a username and it can't be edited--%>
-            <label for="unameID">Username:</label>
-            <input type="text" id="unameID" name="username" value=${user.username} readonly>
-            <br>
+                <div class="form-group">
+                <label for="unameID">Username:</label>
+            <input type="text" id="unameID" name="username" value=${user.username} readonly class="form-control">
+            </div>
 
+                <div class="form-group">
+                    <label for="email" >Email:</label>
+                    <input type="email" id="email" name="email" value=${user.email} class="form-control">
+                </div>
+
+                <div class="form-group">
                 <label for="rnameID">Real name:</label>
                 <c:choose>
                     <c:when test="${user.realName!=null}">
-                        <input type="text" id="rnameID" name="realname" value="${user.realName}">
+                        <input type="text" id="rnameID" name="realname" value="${user.realName}" class="form-control">
                     </c:when>
                     <c:otherwise>
-                        <input type="text" id="rnameID" name="realname">
+                        <input type="text" id="rnameID" name="realname" class="form-control">
                     </c:otherwise>
                 </c:choose>
-                <br>
+                </div>
 
+                <div class="form-group">
             <label for="countryID">Country:</label>
             <c:choose>
                 <c:when test="${user.country!=null}">
-                    <input type="text" id="countryID" name="country" value=${user.country}>
+                    <input type="text" id="countryID" name="country" value=${user.country} class="form-control">
                 </c:when>
                 <c:otherwise>
-                    <input type="text" id="countryID" name="country">
+                    <input type="text" id="countryID" name="country" class="form-control">
                 </c:otherwise>
             </c:choose>
-            <br>
+                </div>
 
+                    <div class="form-group">
             <label for="dateofbirthID">Date of birth:</label>
             <c:choose>
                 <c:when test="${user.DOB!=null}">
                     <%--<input type="text" id="dateofbirthID" name="dateofbirth" value="${user.DOB}">--%>
-                    <input type="date" id="dateofbirthID" name="dateofbirth" value="${user.DOB}">
+                    <input type="date" id="dateofbirthID" name="dateofbirth" value="${user.DOB}" class="form-control">
                 </c:when>
                 <c:otherwise>
                     <%--<input type="text" id="dateofbirthID" name="dateofbirth">--%>
-                    <input type="date" name="dateofbirth" id="dateofbirthID">
+                    <input type="date" name="dateofbirth" id="dateofbirthID" class="form-control">
                 </c:otherwise>
             </c:choose>
-            <br>
+                    </div>
 
                 <label for="emailID">Email:</label>
                 <c:choose>
@@ -161,45 +186,53 @@
                 </c:choose>
                 <br>
 
+                        <div class="form-group">
             <label for="descID">Description:</label>
             <c:choose>
                 <c:when test="${user.description!=null}">
-                    <textarea rows="4" cols="80" id="descID" name="description">${user.description}</textarea>
+                    <textarea rows="4" id="descID" name="description" class="form-control">${user.description}</textarea>
                     <%--<input type="text" id="descID" name="description" value="${user.description}">--%>
                 </c:when>
                 <c:otherwise>
-                    <textarea rows="4" cols="80" id="descID" name="description"></textarea>
+                    <textarea rows="4" id="descID" name="description" class="form-control"></textarea>
                     <%--<input type="text" id="descID" name="description">--%>
                 </c:otherwise>
             </c:choose>
-            <br><br>
+                        </div>
 
 
                 <input type="hidden" name="username" value="${user.username}">
-                <input type="submit" value="Edit User">
+                <button class="btn btn-primary" type="submit" value="Edit User">Edit User Info</button>
             </fieldset>
-        </form>
+        </form><br>
 
-
+<hr>
         <%--a separate form for changing the password--%>
         <form method="post" action="/changePW">
             <fieldset><legend>Update Password:</legend>
-                <input type="hidden" name="username" value="${user.username}">
-            <label for="oldPassword">Current Password:</label>
-            <input type="password" id="oldPassword" name="oldPassword"><br>
-                <label for="newPassword">New Password:</label>
-                <input type="password" id="newPassword" name="newPassword"><br>
-            <input type="submit" value="submit">
+                <input type="hidden" name="username" value="${user.username}" >
+                <div class="form-group">
+                    <label for="oldPassword">Current Password:</label>
+            <input type="password" id="oldPassword" name="oldPassword" class="form-control">
+                </div>
+                    <div class="form-group">
+                        <label for="newPassword">New Password:</label>
+                <input type="password" id="newPassword" name="newPassword" class="form-control">
+                    </div>
+                <button class="btn btn-primary" type="submit" value="submit">Submit</button>
             </fieldset>
-        </form>
-
+        </form><br>
+<hr>
 <%--todo add an "are you sure???" pop-up to this button--%>
         <form method="post" action="/deleteprofile">
             <fieldset><legend>Delete Account</legend>
-            <input type="hidden" name="username" value="${user.username}">
-            <input type="submit" value="Delete User">
+                <div class="form-group">
+                    <input type="hidden" name="username" value="${user.username}">
+                    <button class="btn btn-primary" type="submit" value="Delete User">Delete User</button>
+                </div>
             </fieldset>
         </form>
+
     </div>
 </div>
 </body>
