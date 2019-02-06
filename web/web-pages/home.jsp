@@ -147,8 +147,8 @@
                 <%--todo make the 'author' link or popup the user info box/page--%>
             </c:choose>
 
-            <p onclick="getAuthorInfo('${article.author.username}')">Author: ${article.author.username}</p>
-
+            <p><a href="#" onclick="getAuthorInfo('${article.author.username}');return false;">Author: ${article.author.username}</a>
+            </p>
                 <%--this block converts the timestamp to a nicer format for viewing on the page--%>
             <c:if test="${not empty article.timestamp}">
                 <span title="${article.timestamp}">
