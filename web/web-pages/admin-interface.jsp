@@ -27,8 +27,10 @@
                         <c:forEach var="user" items="${users}">
                             <tr>
                                 <td>${user.username} </td>
-                                <td><button type="button" onclick="">Remove User</button></td>
-
+                                <td><button onclick="checkRemoveUser()">Remove User</button>
+                                    <p id="remove"></p>
+                                </td>
+                                <%--TODO--%>
                                 <td><button type="button" onclick="">Reset User's Password</button></td>
 
                             </tr>
@@ -43,7 +45,7 @@
 
         <div class="collapse" id="myPopup">
 
-            <form action="#"  class="form-container">
+            <form method="post" action="adminadduser"  class="form-container">
                 <h2>Add user: </h2>
                 <br>
                 <label for="unameID">Username:</label>
@@ -56,20 +58,34 @@
                 <input type="text" id="countryID" name="country">
                 <br>
                 <label for="dateofbirthID">Date of birth:</label>
-                <input type="text" id="dateofbirthID" name="dateofbirth">
+                <input type="date" id="dateofbirthID" name="dateofbirth">
                 <br>
                 <label for="descID">Description:</label>
                 <textarea rows="4" cols="80" id="descID" name="description">Description</textarea>
                 <br>
                 <label for="passwordID">Password:</label>
-                <input type="text" id="passwordID" name="password">
+                <input type="password" id="passwordID" name="password">
                 <br>
                 <label for="emailID"> Email:</label>
-                <input type="text" id="emailID" name="email">
+                <input type="email" id="emailID" name="email">
                 <br>
                 <br>
-                <button type="submit" class="btn">Create new user</button>
+                <%--Here we are adding in a new user--%>
+                <button type="submit" class="btn" value="/adminadduser">Create new user</button>
             </form>
         </div>
+        <script>
+            function checkRemoveUser() {
+                var txt;
+                if (confirm("Are you sure you want to remove this user?")) {
+                    txt = "You pressed OK!";
+                    <%--If press ok, refresh/redirect page, but also tell sql database to delete user--%>
+                } else {
+                    txt = "You pressed Cancel!";
+                    <%--If press cancel, redirect back to admin interface--%>
+                }
+                document.getElementById("remove").innerHTML = txt;
+            }
+        </script>
     </body>
 </html>
