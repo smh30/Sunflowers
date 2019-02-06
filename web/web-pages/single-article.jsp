@@ -222,7 +222,7 @@
                                 "<form method=\"GET\" action=\"/deletecomment\">" +
                                         "<input type=\"hidden\" name=\"articleID\" value=\""+comment.getArticleId()+"\">" +
                                         "<input type=\"hidden\" name=\"commentID\" value=\""+comment.getCommentID()+"\">" +
-                                        "<input type=\"submit\" value=\"Delete Comment\"" +
+                                        "<input type=\"submit\" value=\"Delete Comment\">"+
                                         "</form>"
                         );
                     }else{
@@ -240,8 +240,8 @@
                         out.println(
                                 "<div class=\"form-popup\" id=\"myForm-"+comment.getCommentID()+"\">" +
                                         "<form method=\"POST\" action=\"/addNestedComment\" class=\"form-container\">" +
-                                        "<input type\"hidden\" name=\"articleID\" value=\""+comment.getArticleId()+"\">" +
-                                        "<input type\"hidden\" name=\"commentID\" value=\""+comment.getCommentID()+"\">" +
+                                        "<input type=\"hidden\" name=\"articleID\" value=\""+comment.getArticleId()+"\">" +
+                                        "<input type=\"hidden\" name=\"commentID\" value=\""+comment.getCommentID()+"\">" +
                                         "<label for=\"content\"><b>Reply Comment:</b></label>" +
                                         "<input type=\"text\" id=\"content\" placeholder=\"Comment here...\" name=\"content\">" +
                                         "<button type=\"submit\" class=\"btn\">Submit</button>" +
@@ -266,9 +266,9 @@
             List<Comment> rootComments = (List<Comment>) request.getAttribute("comment");
             for(Comment c:rootComments){
                 //In the case when the author is the article author or the user who left comment, they can delete comment
-                boolean canDelete = article.getAuthor().getUsername() == request.getSession().getAttribute("username") || c.getCommentAuthor().getUsername() == request.getSession().getAttribute("username");
+                boolean canDelete = (article.getAuthor().getUsername() .equals( request.getSession().getAttribute("username"))) || (c.getCommentAuthor().getUsername().equals(request.getSession().getAttribute("username")));
                 //In the case for any signed in users, they can do reply
-                boolean canReply = request.getSession().getAttribute("username") == null;
+                boolean canReply = (request.getSession().getAttribute("username") != null);
                 output(c, out, canDelete, canReply);
             }
         %>
