@@ -27,11 +27,11 @@
                         <c:forEach var="user" items="${users}">
                             <tr>
                                 <td>${user.username} </td>
-                                <td><button onclick="checkRemoveUser()">Remove User</button>
+                                <td><button onclick="checkRemoveUser()" value="/adminadduser">Remove User</button>
                                     <p id="remove"></p>
                                 </td>
-                                <%--TODO--%>
-                                <td><button type="button" onclick="">Reset User's Password</button></td>
+
+                                <td><button type="button" onclick="" >Reset User's Password</button></td>
 
                             </tr>
                         </c:forEach>
@@ -75,6 +75,8 @@
             </form>
         </div>
         <script>
+            <%--Google re this form how the popup works and if it can send info to servlet.--%>
+
             function checkRemoveUser() {
                 var txt;
                 if (confirm("Are you sure you want to remove this user?")) {
