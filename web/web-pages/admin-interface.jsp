@@ -76,7 +76,7 @@
         </div>
         <script>
             <%--Google re this form how the popup works and if it can send info to servlet.--%>
-            
+
             function checkRemoveUser() {
                 var txt;
                 if (confirm("Are you sure you want to remove this user?")) {
