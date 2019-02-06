@@ -125,6 +125,7 @@ public class UserDAO {
                             String DEFAULTIMG = r.getString(9);
                             String DOB = r.getString(11);
                             boolean useDefaultImg = r.getBoolean(12);
+                            String email = r.getString(13);
                             
                             user.setUsername(USERNAME);
                             user.setCountry(COUNTRY);
@@ -134,6 +135,7 @@ public class UserDAO {
                             user.setPictureURL(IMAGEURL);
                             user.setDefaultImage(DEFAULTIMG);
                             user.setUseDefaultImage(useDefaultImg);
+                            user.setEmail(email);
                             
                         }
                     }
@@ -149,7 +151,7 @@ public class UserDAO {
     
     
     public static User editUser(String username, String country, String realName,
-                                String description, String dateOfBirth, ServletContext context) {
+                                String description, String dateOfBirth, String email, ServletContext context) {
         
         User user = new User();
         Properties dbProps = DAOCheckProperties.check(context);
@@ -163,12 +165,13 @@ public class UserDAO {
                 // date??? currently throws exception if no value is given but works in a way
                 
                 
-                try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.user SET country = ? ,real_name=?, description = ?, date_of_birth = ? WHERE ysy.user.username= ?")) {
+                try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.user SET country = ? ,real_name=?, description = ?, date_of_birth = ?, email = ? WHERE ysy.user.username= ?")) {
                     s2.setString(1, country);
                     s2.setString(2, realName);
                     s2.setString(3, description);
                     s2.setString(4, dateOfBirth);
                     s2.setString(5, username);
+                    s2.setString(6, email);
                     
                     s2.execute();
                     

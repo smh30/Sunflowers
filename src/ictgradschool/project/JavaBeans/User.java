@@ -12,6 +12,7 @@ public class User implements Serializable {
     String defaultImage;
     String DOB;
     boolean useDefaultImage;
+    String email;
 
     public User(){ }
 
@@ -51,6 +52,9 @@ public class User implements Serializable {
         this.DOB = DOB;
     }
 
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) { this.email = email; }
 
 
     public User (String username){
@@ -80,4 +84,7 @@ public class User implements Serializable {
     public void setUseDefaultImage(boolean useDefaultImage) {
         this.useDefaultImage = useDefaultImage;
     }
+
+
+
 }

@@ -148,6 +148,19 @@
             </c:choose>
             <br>
 
+                <label for="emailID">Email:</label>
+                <c:choose>
+                    <c:when test="${user.email!=null}">
+                        <%--<input type="text" id="dateofbirthID" name="dateofbirth" value="${user.DOB}">--%>
+                        <input type="text" id="emailID" name="email" value="${user.email}">
+                    </c:when>
+                    <c:otherwise>
+                        <%--<input type="text" id="dateofbirthID" name="dateofbirth">--%>
+                        <input type="text" name="email" id="emailID">
+                    </c:otherwise>
+                </c:choose>
+                <br>
+
             <label for="descID">Description:</label>
             <c:choose>
                 <c:when test="${user.description!=null}">
@@ -160,7 +173,6 @@
                 </c:otherwise>
             </c:choose>
             <br><br>
-
 
 
                 <input type="hidden" name="username" value="${user.username}">
