@@ -57,7 +57,7 @@
             <fieldset>
                 <legend>Choose default picture: </legend>
                 <div class="form-group">
-            <select id="dlist" name="default-img" onchange="switchImage()">
+            <select id="dlist" name="default-img" class="form-control" onchange="switchImage()">
                 <c:choose>
                     <c:when test="${user.pictureURL != null && user.useDefaultImage == false}">
                         <option value="custom" selected>Custom Image</option>
@@ -91,23 +91,24 @@
                         <option value="Yoda.jpg">Yoda</option>
                     </c:otherwise>
                 </c:choose>
-            </select>
-            <input type="submit" value="Choose this image">
-                </div>
+            </select></div>
+                <button class="btn btn-primary" type="submit" value="Use this image">Use this image</button>
+
             </fieldset>
         </form>
 
-        <%--todo at the moment it's not possible to go back to the default images after uploading an image, might have to sort that out--%>
 
         <%--this is the form for uploading a custom avatar--%>
         <form method="POST" action="/Upload" enctype="multipart/form-data">
             <fieldset>
                 <legend>Choose your own picture to upload: </legend>
                 <div class="form-group">
-            <input type="file" id="userPicture" name="userPicture" size="50" accept="image/png, image/jpeg">
+                <div class="custom-file">
+            <input type="file" id="userPicture" name="userPicture" size="50" accept="image/png, image/jpeg" class="custom-file-input">
+<label class="custom-file-label" for="userPicture">Choose File</label>
+                </div></div>
+                <button class="btn btn-primary" type="submit" value="Upload">Upload Image</button>
 
-            <input type="submit" value="Upload">
-                </div>
             </fieldset>
         </form>
 
@@ -125,22 +126,22 @@
             <%--shouldn't need a choose here, there is always a username and it can't be edited--%>
                 <div class="form-group">
                 <label for="unameID">Username:</label>
-            <input type="text" id="unameID" name="username" value=${user.username} readonly>
-                </div>
+            <input type="text" id="unameID" name="username" value=${user.username} readonly class="form-control">
+            </div>
 
                 <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" value=${user.email}>
+                    <label for="email" >Email:</label>
+                    <input type="email" id="email" name="email" value=${user.email} class="form-control">
                 </div>
 
                 <div class="form-group">
                 <label for="rnameID">Real name:</label>
                 <c:choose>
                     <c:when test="${user.realName!=null}">
-                        <input type="text" id="rnameID" name="realname" value="${user.realName}">
+                        <input type="text" id="rnameID" name="realname" value="${user.realName}" class="form-control">
                     </c:when>
                     <c:otherwise>
-                        <input type="text" id="rnameID" name="realname">
+                        <input type="text" id="rnameID" name="realname" class="form-control">
                     </c:otherwise>
                 </c:choose>
                 </div>
@@ -149,10 +150,10 @@
             <label for="countryID">Country:</label>
             <c:choose>
                 <c:when test="${user.country!=null}">
-                    <input type="text" id="countryID" name="country" value=${user.country}>
+                    <input type="text" id="countryID" name="country" value=${user.country} class="form-control">
                 </c:when>
                 <c:otherwise>
-                    <input type="text" id="countryID" name="country">
+                    <input type="text" id="countryID" name="country" class="form-control">
                 </c:otherwise>
             </c:choose>
                 </div>
@@ -162,11 +163,11 @@
             <c:choose>
                 <c:when test="${user.DOB!=null}">
                     <%--<input type="text" id="dateofbirthID" name="dateofbirth" value="${user.DOB}">--%>
-                    <input type="date" id="dateofbirthID" name="dateofbirth" value="${user.DOB}">
+                    <input type="date" id="dateofbirthID" name="dateofbirth" value="${user.DOB}" class="form-control">
                 </c:when>
                 <c:otherwise>
                     <%--<input type="text" id="dateofbirthID" name="dateofbirth">--%>
-                    <input type="date" name="dateofbirth" id="dateofbirthID">
+                    <input type="date" name="dateofbirth" id="dateofbirthID" class="form-control">
                 </c:otherwise>
             </c:choose>
                     </div>
@@ -188,7 +189,7 @@
 
 
                 <input type="hidden" name="username" value="${user.username}">
-                <input type="submit" value="Edit User">
+                <button class="btn btn-primary" type="submit" value="Edit User">Edit User Info</button>
             </fieldset>
         </form><br>
 
@@ -196,16 +197,16 @@
         <%--a separate form for changing the password--%>
         <form method="post" action="/changePW">
             <fieldset><legend>Update Password:</legend>
-                <input type="hidden" name="username" value="${user.username}">
+                <input type="hidden" name="username" value="${user.username}" >
                 <div class="form-group">
                     <label for="oldPassword">Current Password:</label>
-            <input type="password" id="oldPassword" name="oldPassword"><br>
+            <input type="password" id="oldPassword" name="oldPassword" class="form-control">
                 </div>
                     <div class="form-group">
                         <label for="newPassword">New Password:</label>
-                <input type="password" id="newPassword" name="newPassword"><br>
+                <input type="password" id="newPassword" name="newPassword" class="form-control">
                     </div>
-                <input type="submit" value="submit">
+                <button class="btn btn-primary" type="submit" value="submit">Submit</button>
             </fieldset>
         </form><br>
 <hr>
@@ -214,7 +215,7 @@
             <fieldset><legend>Delete Account</legend>
                 <div class="form-group">
                     <input type="hidden" name="username" value="${user.username}">
-            <input type="submit" value="Delete User">
+                    <button class="btn btn-primary" type="submit" value="Delete User">Delete User</button>
                 </div>
             </fieldset>
         </form>

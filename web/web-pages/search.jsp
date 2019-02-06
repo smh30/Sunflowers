@@ -22,20 +22,27 @@
         <%@ include file="../WEB-INF/partial/navbar.jsp" %>
         <div class="container">
 
-            <h3>Search the Articles Database</h3>
+
 
             <form method="get" action="/home">
-                <label for="author">Search by User: </label>
-                <input type="text" id="author" name="author">
-                <br>
-                <label for="title">Search by Title: </label>
-                <input type="text" id="title" name="title">
-                <br>
-                <label for="date">Search by Date: </label>
-                <input type="date" id="date" name="date">
-                <br>
+                <legend>Search the Articles Database</legend>
 
-                <input type="submit" value="Search">
+                <div class="form-group row">
+                <label for="author" class="col-sm-4 col-md-2 col-form-label">Search by User: </label>
+                <div class="col"><input type="text" id="author" name="author" class="form-control">
+                </div></div>
+
+                    <div class="form-group row">
+                <label for="title" class="col-sm-4 col-md-2 col-form-label">Search by Title: </label>
+                        <div class="col"><input type="text" id="title" name="title" class="form-control">
+                        </div></div>
+
+                        <div class="form-group row">
+                <label for="date" class="col-sm-4 col-md-2 col-form-label">Search by Date: </label>
+                            <div class="col"><input type="date" id="date" name="date" class="form-control">
+                            </div></div>
+
+                            <button class="btn btn-primary" type="submit" value="Search">Search</button>
             </form>
 
         </div>

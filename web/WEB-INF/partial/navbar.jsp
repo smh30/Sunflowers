@@ -30,7 +30,7 @@
                             <form class="px-2" method="post" action="/login">
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="username" placeholder="username"
-                                           name="username">
+                                           name="username"></div><div class="form-group">
                                     <input type="password" class="form-control" id="password" placeholder="password"
                                            name="password">
                                 </div>
