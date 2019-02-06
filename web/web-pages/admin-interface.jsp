@@ -9,7 +9,14 @@
 <html>
     <head>
         <title>Admin Interface</title>
+        <script type="text/javascript">function openForm() {
+            alert('Button pressed!');
+        }
 
+        function closeForm() {
+            alert('Button pressed!')
+        }
+        </script>
         <%@include file="../WEB-INF/partial/_partial_header.jsp" %>
     </head>
 
@@ -40,39 +47,51 @@
             </form>
         </div>
         <%--Add "Add User" button--%>
-        <div class="container">
-            <%--Using Yun's pop-up form from single-article.jsp as e.g.--%>
-            <button id="add-user-btn-${comment.commentID}" class="open-button" onclick="openForm(${comment.commentID})">
-                Add User
-            </button>
+        <%--Using Yun's pop-up form from single-article.jsp as e.g.--%>
 
-            <div class="form-popup" id="myForm">
-                <form method="post" action="adminadduser" class="form-container">
-               <h2>Add user: </h2>
-                    <br>
-                    <label for="unameID">Username:</label>
-                    <input type="text" id="unameID" value="username">
-                    <br>
-                    <label for="rnameID">Real Name:</label>
-                    <input type="text" id="rnameID" name=realname">
-                    <br>
-                    <label for="countryID">Country:</label>
-                    <input type="text" id="countryID" name="country">
-                    <br>
-                    <label for="dateofbirthID">Date of birth:</label>
-                    <input type="text" id="dateofbirthID" name="dateofbirth">
-                    <br>
-                    <label for="descID">Description:</label>
-                    <textarea rows="4" cols="80" id="descID" name="description">Description</textarea>
-                    <br>
-                    <label for="passwordID">Password:</label>
-                    <input type="text" id="passwordID" name="password">
-                    <br>
-                    <br>
-                    <button type="submit" class="btn">Create new user</button>
-                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-                </form>
-            </div>
-        </div>
+        <button class="open-button" id=openButton onclick="openForm()">Add User</button>
+        <span class="popuptext" id="myPopup">
+            <form action=""  class="form-container">
+                <h2>Add user: </h2>
+                <br>
+                <label for="unameID">Username:</label>
+                <input type="text" id="unameID" name="username">
+                <br>
+                <label for="rnameID">Real Name:</label>
+                <input type="text" id="rnameID" name="realname">
+                <br>
+                <label for="countryID">Country:</label>
+                <input type="text" id="countryID" name="country">
+                <br>
+                <label for="dateofbirthID">Date of birth:</label>
+                <input type="text" id="dateofbirthID" name="dateofbirth">
+                <br>
+                <label for="descID">Description:</label>
+                <textarea rows="4" cols="80" id="descID" name="description">Description</textarea>
+                <br>
+                <label for="passwordID">Password:</label>
+                <input type="text" id="passwordID" name="password">
+                <br>
+                <br>
+                <button type="submit" class="btn">Create new user</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            </form>
+        </span>
+
+
+
+        <script>
+                function openForm() {
+                var openButton = document.getElementById("myPopup").style.display = "block";
+                    openButton.classList.toggle("show");
+                <%--TODO: Check with Steph. Need some kind of toggle here... I think....--%>
+                <%--openButton.onclick = openForm();--%>
+            }
+
+            function closeForm() {
+                var closeButton = document.getElementById("myPopup").style.display = "none";
+                closeButton.classList.toggle("hide");
+            }
+        </script>
     </body>
 </html>
