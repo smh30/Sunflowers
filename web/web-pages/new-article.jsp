@@ -10,6 +10,24 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
         <script src="../ckeditor/ckeditor.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
+        <style type="text/css">
+            #submitBtn{
+                -webkit-transition-duration: 0.4s;
+                transition-duration: 0.4s;
+                border: 2px solid #3e3e3e;
+                border-radius: 12px;
+                margin-top: 20px;
+            }
+
+            #submitBtn:hover{
+                background-color: #3e3e3e;
+                color: white;
+            }
+
+
+        </style>
 
 
     </head>
@@ -74,7 +92,7 @@
 
 
         <div class="container text-right">
-             <button class="btn btn-primary" type="submit">Submit</button>
+             <button id="submitBtn" class="btn" type="submit">Submit</button>
         </div>
         </form>
 
