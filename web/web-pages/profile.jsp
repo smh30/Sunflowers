@@ -25,31 +25,42 @@
 
 <div class="container-fluid">
 
+    <c:if test="${message!=null}">
+        <div class="alert alert-warning alert-dismissible" id="error-message">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                ${message}
+        </div>
+    </c:if>
+
     <h1>${user.username}'s Account:</h1>
     <br>
     <br>
-    <%--Adding form for uploading default user pic (the one the user sees when they click on the profile webpage)--%>
-    <%--Below is the default user pic link --%>
+
+    <%--Below shows the user's selected image - either one of the default options, or if they've uploaded one, that one --%>
     <c:choose>
-<c:when test="${user.pictureURL != null}">
-    <img id="imageToSwap" src="../Uploaded-Photos/${user.pictureURL}" width="225">
-    </c:when>
+        <c:when test="${user.pictureURL != null && user.useDefaultImage == false}">
+            <img id="imageToSwap" src="../Uploaded-Photos/${user.pictureURL}" width="225">
+        </c:when>
     <c:otherwise>
     <img id="imageToSwap" src="../default-photos-for-profile-page/${user.defaultImage}" width="225">
 
     </c:otherwise>
     </c:choose>
-    <%--Instead of default jpeg, need EL that gets image--%>
-    <%-- Where folder is where things are saved /whatever URL is--%>
-    <%--Default pics stored in one location; customer in another, so might need an if x location else y location--%>
 
-
+    <%--this block is for choosing which of the default images the user prefers. Saves to db when they submit--%>
     <div style="margin-left: 250px">
         <h4>Choose default picture: </h4>
 
         <form method="POST" action="/editprofile">
             <select id="dlist" name="default-img" onchange="switchImage()">
                 <c:choose>
+                    <c:when test="${user.pictureURL != null && user.useDefaultImage == false}">
+                        <option value="custom" selected>Custom Image</option>
+                        <option value="Default.jpg">Default</option>
+                        <option value="CloneTrooper.jpg">Clone Trooper</option>
+                        <option value="Jigglypuff.jpg">Jigglypuff</option>
+                        <option value="Yoda.jpg">Yoda</option>
+                </c:when>
                     <c:when test="${user.defaultImage == 'CloneTrooper.jpg'}">
                         <option value="Default.jpg">Default</option>
                         <option value="CloneTrooper.jpg" selected>Clone Trooper</option>
@@ -79,8 +90,9 @@
             <input type="submit" value="Choose this image">
         </form>
 
-        <%--at the moment it's not possible to go back to the default images after uploading an image, might have to sort that out--%>
+        <%--todo at the moment it's not possible to go back to the default images after uploading an image, might have to sort that out--%>
 
+        <%--this is the form for uploading a custom avatar--%>
         <form method="POST" action="/Upload" enctype="multipart/form-data">
             <h4>Choose your own picture to upload: </h4>
             <input type="file" id="userPicture" name="userPicture" size="50" accept="image/png, image/jpeg">
@@ -90,14 +102,27 @@
         </form>
         <br>
         <br>
-        <%--Image form ends. Edit from here--%>
 
+        <%--a form to edit the other aspects of the user profile--%>
         <form action="/editprofile" method="post">
+            <fieldset>
+                <legend>Update user info: </legend>
 
             <%--shouldn't need a choose here, there is always a username and it can't be edited--%>
             <label for="unameID">Username:</label>
             <input type="text" id="unameID" name="username" value=${user.username} readonly>
             <br>
+
+                <label for="rnameID">Real name:</label>
+                <c:choose>
+                    <c:when test="${user.realName!=null}">
+                        <input type="text" id="rnameID" name="realname" value="${user.realName}">
+                    </c:when>
+                    <c:otherwise>
+                        <input type="text" id="rnameID" name="realname">
+                    </c:otherwise>
+                </c:choose>
+                <br>
 
             <label for="countryID">Country:</label>
             <c:choose>
@@ -109,65 +134,59 @@
                 </c:otherwise>
             </c:choose>
             <br>
-            <label for="rnameID">Real name:</label>
-            <c:choose>
-                <c:when test="${user.realName!=null}">
-                    <input type="text" id="rnameID" name="realname" value="${user.realName}">
-                </c:when>
-                <c:otherwise>
-                    <input type="text" id="rnameID" name="realname">
-                </c:otherwise>
-            </c:choose>
-            <br>
+
             <label for="dateofbirthID">Date of birth:</label>
             <c:choose>
                 <c:when test="${user.DOB!=null}">
-                    <input type="text" id="dateofbirthID" name="dateofbirth" value="${user.DOB}">
+                    <%--<input type="text" id="dateofbirthID" name="dateofbirth" value="${user.DOB}">--%>
+                    <input type="date" id="dateofbirthID" name="dateofbirth" value="${user.DOB}">
                 </c:when>
                 <c:otherwise>
-                    <input type="text" id="dateofbirthID" name="dateofbirth">
+                    <%--<input type="text" id="dateofbirthID" name="dateofbirth">--%>
+                    <input type="date" name="dateofbirth" id="dateofbirthID">
                 </c:otherwise>
             </c:choose>
             <br>
-            <%--<label for="pictureurlID">Picture URL:</label>--%>
-            <%--<c:choose>--%>
-            <%--<c:when test="${user.pictureURL!=null}">--%>
-            <%--<input type="text" id="pictureurlID" name="pictureurl" value="${user.pictureURL}">--%>
-            <%--</c:when>--%>
-            <%--<c:otherwise>--%>
-            <%--<input type="text" id="pictureurlID" name="pictureurl">--%>
-            <%--</c:otherwise>--%>
-            <%--</c:choose>--%>
-            <br>
+
             <label for="descID">Description:</label>
             <c:choose>
                 <c:when test="${user.description!=null}">
-                    <input type="text" id="descID" name="description" value="${user.description}">
+                    <textarea rows="4" cols="80" id="descID" name="description">${user.description}</textarea>
+                    <%--<input type="text" id="descID" name="description" value="${user.description}">--%>
                 </c:when>
                 <c:otherwise>
-                    <input type="text" id="descID" name="description">
+                    <textarea rows="4" cols="80" id="descID" name="description"></textarea>
+                    <%--<input type="text" id="descID" name="description">--%>
                 </c:otherwise>
             </c:choose>
-            <br>
-            <%--TODO: link up password in more secure way - talk to Steph re hashing--%>
-            <label for="pwordID">Password:</label>
-            <input type="text" id="pwordID" name="password">
-            <br>
+            <br><br>
 
-
-            <div class="user">
-                <%--All of these are showing up on the profile webpage--%>
-                <p></p>
 
 
                 <input type="hidden" name="username" value="${user.username}">
                 <input type="submit" value="Edit User">
+            </fieldset>
         </form>
 
 
+        <%--a separate form for changing the password--%>
+        <form method="post" action="/changePW">
+            <fieldset><legend>Update Password:</legend>
+                <input type="hidden" name="username" value="${user.username}">
+            <label for="oldPassword">Current Password:</label>
+            <input type="password" id="oldPassword" name="oldPassword"><br>
+                <label for="newPassword">New Password:</label>
+                <input type="password" id="newPassword" name="newPassword"><br>
+            <input type="submit" value="submit">
+            </fieldset>
+        </form>
+
+<%--todo add an "are you sure???" pop-up to this button--%>
         <form method="post" action="/deleteprofile">
+            <fieldset><legend>Delete Account</legend>
             <input type="hidden" name="username" value="${user.username}">
             <input type="submit" value="Delete User">
+            </fieldset>
         </form>
     </div>
 </div>

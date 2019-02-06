@@ -25,13 +25,12 @@ public class ProfileDetailsDAO {
                     stmt.setString(1, username);
                     try (ResultSet r = stmt.executeQuery()) {
                         if (r.next()) {
-                            String USERNAME = r.getString(4);
-                            String COUNTRY = r.getString(6);
-                            String REALNAME = r.getString(7);
-                            String DESC = r.getString(8);
-                            String DOB = r.getString(3);
-                            String IMAGEURL = r.getString(9);
-
+                            String USERNAME = r.getString(3);
+                            String COUNTRY = r.getString(5);
+                            String REALNAME = r.getString(6);
+                            String DESC = r.getString(7);
+                            String IMAGEURL = r.getString(8);
+                            String DOB = r.getString(11);
 
                             user.setUsername(USERNAME);
                             user.setCountry(COUNTRY);
@@ -67,12 +66,12 @@ public class ProfileDetailsDAO {
                     ResultSet rs = stmt.executeQuery();
 
                     while (rs.next()) {
-                        String USERNAME = rs.getString(4);
-                        String COUNTRY = rs.getString(6);
-                        String REALNAME = rs.getString(7);
-                        String DESCRIPTION = rs.getString(8);
-                        String DOB = rs.getString(3);
-                        String PICTUREURL = rs.getString(9);
+                        String USERNAME = rs.getString(3);
+                        String COUNTRY = rs.getString(5);
+                        String REALNAME = rs.getString(6);
+                        String DESCRIPTION = rs.getString(7);
+                        String DOB = rs.getString(11);
+                        String PICTUREURL = rs.getString(8);
 
                         user.setUsername(USERNAME);
                         user.setCountry(COUNTRY);

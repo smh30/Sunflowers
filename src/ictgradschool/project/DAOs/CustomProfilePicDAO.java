@@ -44,7 +44,9 @@ public class CustomProfilePicDAO {
                 System.out.println("connection successful");
 
 
-                try (PreparedStatement s2 = conn.prepareStatement("UPDATE user SET image = ? WHERE username = ?")) {
+                try (PreparedStatement s2 = conn.prepareStatement("UPDATE user SET image = ? , " +
+                        "use_default_image = false " +
+                        "WHERE username = ?")) {
                     s2.setString(1, image);
                     s2.setString(2, user);
                     s2.execute();

@@ -28,10 +28,17 @@ public class EditProfileServlet extends HttpServlet {
         
         //if they're trying to change their default image
         if (request.getParameter("default-img") !=null){
+
             //do a DAO to set the users preferred default
-            System.out.println("changing default image");
             String chosenImg = request.getParameter("default-img");
-            UserDAO.changeDefaultImage(chosenImg, username, getServletContext());
+
+            if (chosenImg.equals("custom")){
+                // do nothing
+                System.out.println("chose to remain with custom image");
+            }else {
+                System.out.println("changing default image");
+                UserDAO.changeDefaultImage(chosenImg, username, getServletContext());
+            }
             
             
         } else {

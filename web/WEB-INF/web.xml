@@ -188,15 +188,22 @@
         <url-pattern>/addNestedComment</url-pattern>
     </servlet-mapping>
 
+<servlet>
+    <servlet-name>GetUserInfo</servlet-name>
+    <servlet-class>ictgradschool.project.servlets.user.GetUserInfoServlet</servlet-class>
+</servlet>
+    <servlet-mapping>
+        <servlet-name>GetUserInfo</servlet-name>
+        <url-pattern>/userInfo</url-pattern>
+    </servlet-mapping>
 
     <servlet>
-        <servlet-name>DeleteNestedComment</servlet-name>
-        <servlet-class>ictgradschool.project.servlets.nestedComments.DeleteNestedCommentServlet</servlet-class>
+        <servlet-name>ChangePW</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.user.ChangePasswordServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
-        <servlet-name>DeleteNestedComment</servlet-name>
-        <url-pattern>/deleteNestedComment</url-pattern>
+        <servlet-name>ChangePW</servlet-name>
+        <url-pattern>/changePW</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -208,7 +215,6 @@
         <servlet-name>AdminAddUser</servlet-name>
         <url-pattern>/adminadduser</url-pattern>
     </servlet-mapping>
-
 
 
 
