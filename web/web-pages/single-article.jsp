@@ -221,7 +221,7 @@
                         //Output comment content first
 
                         out.print("<div>"+comment.getCommentAuthor().getUsername()+":"+"</div>");
-                        out.println("<div>" + comment.getCommentContent() + "</div>");
+//                        out.println("<div>" + comment.getCommentContent() + "</div>");
 
                         out.println("<div style=\"margin-left: 20px;\">" + comment.getCommentContent());
 
@@ -243,7 +243,7 @@
                         //Show Reply Button
                         out.println(
 
-                                    "<button id=\"reply-btn-"+comment.getCommentID()+"\" class=\"open-button\" onclick=\"openForm("+comment.getCommentID()+")\">Reply</button>"+
+//                                    "<button id=\"reply-btn-"+comment.getCommentID()+"\" class=\"open-button\" onclick=\"openForm("+comment.getCommentID()+")\">Reply</button>"+
 
                                 "<button id=\"reply-btn-"+comment.getCommentID()+"\" class=\"open-button btn btn-primary btn-sm\" onclick=\"openForm("+comment.getCommentID()+")\">Reply</button>"
 

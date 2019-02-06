@@ -10,6 +10,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
         <script src="../ckeditor/ckeditor.js"></script>
+
+
     </head>
     <body>
         <%@ include file="../WEB-INF/partial/navbar.jsp" %>
