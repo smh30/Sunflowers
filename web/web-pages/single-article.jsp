@@ -222,7 +222,7 @@
                                 "<form method=\"GET\" action=\"/deletecomment\">" +
                                         "<input type=\"hidden\" name=\"articleID\" value=\""+comment.getArticleId()+"\">" +
                                         "<input type=\"hidden\" name=\"commentID\" value=\""+comment.getCommentID()+"\">" +
-                                        "<input type=\"submit\" value=\"Delete Comment\"" +
+                                        "<input type=\"submit\" value=\"Delete Comment\">"+
                                         "</form>"
                         );
                     }else{
@@ -240,8 +240,8 @@
                         out.println(
                                 "<div class=\"form-popup\" id=\"myForm-"+comment.getCommentID()+"\">" +
                                         "<form method=\"POST\" action=\"/addNestedComment\" class=\"form-container\">" +
-                                        "<input type\"hidden\" name=\"articleID\" value=\""+comment.getArticleId()+"\">" +
-                                        "<input type\"hidden\" name=\"commentID\" value=\""+comment.getCommentID()+"\">" +
+                                        "<input type=\"hidden\" name=\"articleID\" value=\""+comment.getArticleId()+"\">" +
+                                        "<input type=\"hidden\" name=\"commentID\" value=\""+comment.getCommentID()+"\">" +
                                         "<label for=\"content\"><b>Reply Comment:</b></label>" +
                                         "<input type=\"text\" id=\"content\" placeholder=\"Comment here...\" name=\"content\">" +
                                         "<button type=\"submit\" class=\"btn\">Submit</button>" +

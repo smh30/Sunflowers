@@ -37,7 +37,7 @@ public class CommentDAO {
                         comment.setCommentContent(rs.getString(3));
                         comment.setTimestamp(rs.getTimestamp(4));
                         comment.setCommentAuthor(commentAuthor);
-
+                        comment.setArticleId(rs.getInt(5));
                         comments.add(comment);
                     }
 
