@@ -57,6 +57,8 @@
 
 <%@ include file="../WEB-INF/partial/navbar.jsp" %>
 <div class="container">
+
+
     <%--a message will display if a user has tried to login but had a wrong username or password--%>
     <c:if test="${message!=null}">
         <div class="alert alert-warning alert-dismissible" id="error-message">
