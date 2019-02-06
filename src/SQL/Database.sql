@@ -32,7 +32,7 @@ article_id INT AUTO_INCREMENT,
 article_body VARCHAR (10000),
 article_timestamp VARCHAR(100),
 PRIMARY KEY (article_id),
-FOREIGN KEY (article_author) REFERENCES user(username),
+FOREIGN KEY (article_author) REFERENCES user(username)
 ON DELETE CASCADE
 );
 
@@ -52,7 +52,7 @@ FOREIGN KEY (comments_author) REFERENCES user(username)
 FOREIGN KEY (article_id) REFERENCES article(article_id)
   ON DELETE CASCADE,
   FOREIGN KEY (parent_comment) REFERENCES comments(comments_id)
-  ON DELETE CASCADE,
+  ON DELETE CASCADE
 );
 
 
