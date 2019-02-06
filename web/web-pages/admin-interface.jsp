@@ -83,7 +83,7 @@
                 function openForm() {
                 var openButton = document.getElementById("myForm").style.display = "block";
                 <%--How to toggle form????--%>
-                    
+
             }
 
             function closeForm() {
