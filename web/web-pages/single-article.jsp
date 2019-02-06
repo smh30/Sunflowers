@@ -265,9 +265,9 @@
             List<Comment> rootComments = (List<Comment>) request.getAttribute("comment");
             for(Comment c:rootComments){
                 //In the case when the author is the article author or the user who left comment, they can delete comment
-                boolean canDelete = article.getAuthor().getUsername() == request.getSession().getAttribute("username") || c.getCommentAuthor().getUsername() == request.getSession().getAttribute("username");
+                boolean canDelete = (article.getAuthor().getUsername() .equals( request.getSession().getAttribute("username"))) || (c.getCommentAuthor().getUsername().equals(request.getSession().getAttribute("username")));
                 //In the case for any signed in users, they can do reply
-                boolean canReply = request.getSession().getAttribute("username") == null;
+                boolean canReply = (request.getSession().getAttribute("username") != null);
                 output(c, out, canDelete, canReply);
             }
         %>
