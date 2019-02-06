@@ -41,11 +41,38 @@
         </div>
         <%--Add "Add User" button--%>
         <div class="container">
-            <%--Have followed example of button in register.jsp--%>
-            <%--Am I able to put just a button in a form????--%>
-            <form method="post" action="register">
-            <button type="button" value="Submit" id="btn submit">Add User</button>
-            </form>
+            <%--Using Yun's pop-up form from single-article.jsp as e.g.--%>
+            <button id="add-user-btn-${comment.commentID}" class="open-button" onclick="openForm(${comment.commentID})">
+                Add User
+            </button>
+
+            <div class="form-popup" id="myForm">
+                <form method="post" action="adminadduser" class="form-container">
+               <h2>Add user: </h2>
+                    <br>
+                    <label for="unameID">Username:</label>
+                    <input type="text" id="unameID" value="username">
+                    <br>
+                    <label for="rnameID">Real Name:</label>
+                    <input type="text" id="rnameID" name=realname">
+                    <br>
+                    <label for="countryID">Country:</label>
+                    <input type="text" id="countryID" name="country">
+                    <br>
+                    <label for="dateofbirthID">Date of birth:</label>
+                    <input type="text" id="dateofbirthID" name="dateofbirth">
+                    <br>
+                    <label for="descID">Description:</label>
+                    <textarea rows="4" cols="80" id="descID" name="description">Description</textarea>
+                    <br>
+                    <label for="passwordID">Password:</label>
+                    <input type="text" id="passwordID" name="password">
+                    <br>
+                    <br>
+                    <button type="submit" class="btn">Create new user</button>
+                    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                </form>
+            </div>
         </div>
     </body>
 </html>
