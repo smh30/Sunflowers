@@ -4,7 +4,7 @@
 <nav class="navbar navbar-expand-md navbar-toggleable-md navbar-dark bg-dark">
     <div class="container-fluid">
         <%--<div class="navbar-header">--%>
-        <a class="navbar-brand" href="/home">Social Sunflowers</a>
+        <a class="navbar-brand" href="home">Social Sunflowers</a>
         <%--</div>--%>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbar-links"
@@ -17,8 +17,8 @@
         <div class="collapse navbar-collapse" id="navbar-links">
             <ul class="nav navbar-nav">
 
-                <li class="nav-item active"><a class="nav-link" href="/home">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="/web-pages/search.jsp">Search</a></li>
+                <li class="nav-item active"><a class="nav-link" href="home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="web-pages/search.jsp">Search</a></li>
                 <c:if test="${sessionScope.username == null}">
                     <!-- show only the login and register if nobody is logged in -->
                     <li class="dropdown">
@@ -27,7 +27,7 @@
                         </a>
                         <div class="dropdown-menu px-2">
                                 <%--todo get the dropdown form to have proper padding/margins --%>
-                            <form class="px-2" method="post" action="/login">
+                            <form class="px-2" method="post" action="login">
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="username" placeholder="username"
                                            name="username"></div><div class="form-group">
@@ -52,18 +52,18 @@
                 <!-- show the profile, 'look at your own entries' and logout only if logged in -->
 
 
-                <li class="nav-item"><a class="nav-link" href="/new-article">New Article</a></li>
+                <li class="nav-item"><a class="nav-link" href="new-article">New Article</a></li>
 
-                <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="profile">Profile</a></li>
 
-                <li class="nav-item"><a class="nav-link" href="/home?author=${sessionScope.username}">My Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="home?author=${sessionScope.username}">My Blog</a></li>
                 <c:if test="${sessionScope.admin!=null}">
 
-                    <li class="nav-item"><a class="nav-link" href="/admininterface">Admin Interface</a>
+                    <li class="nav-item"><a class="nav-link" href="admininterface">Admin Interface</a>
                     </li>
                 </c:if>
 
-                <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                <li class="nav-item"><a class="nav-link" href="logout">Logout</a></li>
             </ul>
         </div>
         <ul class="nav navbar-nav navbar-right">
