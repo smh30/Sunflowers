@@ -190,17 +190,20 @@
 
         <%--the 'edit' and 'delete' buttons will only appear if the logged in user wrote the article --%>
         <c:if test="${article.author.username == sessionScope.username}">
-            <form method="get" action=/edit-article>
+            <div class="d-flex flex-row-reverse">
+            <form method="get" action=/edit-article class="px-2">
                 <input type="hidden" name="articleID" value="${article.ID}">
-                <input type="submit" value="Edit Article">
+                <button class="btn btn-primary" type="submit" value="Edit Article">Edit Article</button>
             </form>
 
 
-            <form method="post" action="/deleteArticle">
+            <form method="post" action="/deleteArticle" class="px-2">
                 <input type="hidden" name="articleID" value="${article.ID}">
-                <input type="submit" value="Delete Article">
+                <button class="btn btn-primary" type="submit" value="Delete Article">Delete Article</button>
             </form>
+            </div>
         </c:if>
+        <hr>
     </div>
 
 
@@ -216,25 +219,25 @@
                     if(canDelete) {
                         //If author can delete comments
                         //Output comment content first
-                        out.println("<div>" + comment.getCommentContent() + "</div>");
+                        out.println("<div style=\"margin-left: 20px;\">" + comment.getCommentContent());
                         //Show delete button
                         out.println(
-                                "<form method=\"GET\" action=\"/deletecomment\">" +
+                                "<div class=\"d-flex flex-row-reverse\"><form method=\"GET\" action=\"/deletecomment\">" +
                                         "<input type=\"hidden\" name=\"articleID\" value=\""+comment.getArticleId()+"\">" +
                                         "<input type=\"hidden\" name=\"commentID\" value=\""+comment.getCommentID()+"\">" +
-                                        "<input type=\"submit\" value=\"Delete Comment\">"+
-                                        "</form>"
+                                        "<button class=\"btn btn-primary btn-sm\"  type=\"submit\" value=\"Delete Comment\">Delete Comment</button>"+
+                                        "</form></div>"
                         );
                     }else{
                         //Otherwise just output comment
-                        out.println("<div>" + comment.getCommentContent() + "</div>");
+                        out.println("<div style=\"margin-left: 20px;\">" + comment.getCommentContent());
                     }
                     //Check if can reply comment
                     if(canReply){
                         //If so, show the reply function
                         //Show Reply Button
                         out.println(
-                                "<button id=\"reply-btn-"+comment.getCommentID()+"\" class=\"open-button\" onclick=\"openForm("+comment.getCommentID()+")\">Reply</button>"
+                                "<button id=\"reply-btn-"+comment.getCommentID()+"\" class=\"open-button btn btn-primary btn-sm\" onclick=\"openForm("+comment.getCommentID()+")\">Reply</button>"
                         );
                         //Reply area
                         out.println(
@@ -256,6 +259,7 @@
                             output(c, out, canDelete, canReply);
                         }
                     }
+                    out.println("</div>");
                 }catch (IOException e){
                     System.err.println(e.fillInStackTrace());
                 }
@@ -279,7 +283,7 @@
         <%--another form which posts to /addcomment
                  text field for writing comment
                  submit button--%>
-    <div class="comments">
+    <div class="add-comment">
         <div class="form-group">
             <form method="post" action="/addcomment">
                 <input type="hidden" name="articleID" value="${article.ID}">
@@ -287,7 +291,7 @@
                 <textarea class="form-control" name="comment" rows="5" id="comment"
                           placeholder="Comment here:"></textarea>
                 <br>
-                <input type="submit" value="Add Comment">
+                <button class="btn btn-primary" type="submit" value="Add Comment">Add Comment</button>
             </form>
 
         </div>
@@ -448,3 +452,4 @@
 
 </body>
 </html>
+
