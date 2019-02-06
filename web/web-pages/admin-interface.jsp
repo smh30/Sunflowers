@@ -41,7 +41,11 @@
         </div>
         <%--Add "Add User" button--%>
         <div class="container">
-            <button type="button" onclick="">Add User</button>
+            <%--Have followed example of button in register.jsp--%>
+            <%--Am I able to put just a button in a form????--%>
+            <form method="post" action="register">
+            <button type="button" value="Submit" id="btn submit">Add User</button>
+            </form>
         </div>
     </body>
 </html>
