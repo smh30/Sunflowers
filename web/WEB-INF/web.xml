@@ -206,6 +206,16 @@
         <url-pattern>/changePW</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>AdminAddUser</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.admin.AdminAddUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminAddUser</servlet-name>
+        <url-pattern>/adminadduser</url-pattern>
+    </servlet-mapping>
+
 
 
 </web-app>
