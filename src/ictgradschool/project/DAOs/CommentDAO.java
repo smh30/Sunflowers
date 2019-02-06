@@ -65,40 +65,40 @@ public class CommentDAO {
     }
 
 
-    public static List <Comment> getChildren(int parentID, Properties dbProps) {
-        List <Comment> children = new ArrayList <>();
-
-        try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-            System.out.println("connection successful");
-            //get the children of the given parent (those without a parent)
-            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM comments WHERE " +
-                    "parent_comment = ? ORDER BY comments_timestamp ")) {
-                stmt.setInt(1, parentID);
-                ResultSet rs = stmt.executeQuery();
-                while (rs.next()) {
-                    //TODO To attach all its children into the root comment by recursion
-                    Comment comment = new Comment();
-                    comment.setCommentContent(rs.getString(3));
-                    comment.setCommentID(rs.getInt(1));
-                    comment.setTimestamp(rs.getTimestamp(5));
-                    User commentAuthor = new User(rs.getString(2));
-                    comment.setCommentAuthor(commentAuthor);
-
-                    // this part for sure isn't right;
-                    List <Comment> childrenList = getChildren(comment.getCommentID(), dbProps);
-                    if (childrenList.size() == 0) {
-
-                    }
-                    comment.setChildren(childrenList);
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
-        return children;
-    }
+//    public static List <Comment> getChildren(int parentID, Properties dbProps) {
+//        List <Comment> children = new ArrayList <>();
+//
+//        try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+//            System.out.println("connection successful");
+//            //get the children of the given parent (those without a parent)
+//            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM comments WHERE " +
+//                    "parent_comment = ? ORDER BY comments_timestamp ")) {
+//                stmt.setInt(1, parentID);
+//                ResultSet rs = stmt.executeQuery();
+//                while (rs.next()) {
+//                    //TODO To attach all its children into the root comment by recursion
+//                    Comment comment = new Comment();
+//                    comment.setCommentContent(rs.getString(3));
+//                    comment.setCommentID(rs.getInt(1));
+//                    comment.setTimestamp(rs.getTimestamp(5));
+//                    User commentAuthor = new User(rs.getString(2));
+//                    comment.setCommentAuthor(commentAuthor);
+//
+//                    // this part for sure isn't right;
+//                    List <Comment> childrenList = getChildren(comment.getCommentID(), dbProps);
+//                    if (childrenList.size() == 0) {
+//
+//                    }
+//                    comment.setChildren(childrenList);
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//        return children;
+//    }
 
     public static void getChildren(Comment comment,ServletContext context) {
         Properties dbProps = DAOCheckProperties.check(context);

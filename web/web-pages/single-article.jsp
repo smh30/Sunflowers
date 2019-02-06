@@ -1,5 +1,8 @@
 <%@ page import="ictgradschool.project.JavaBeans.Comment" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="ictgradschool.project.JavaBeans.Article" %>
+<%@ page import="java.io.PrintWriter" %>
+<%@ page import="java.io.IOException" %><%--
   Created by IntelliJ IDEA.
   User: yab2
   Date: 25/01/2019
@@ -22,45 +25,45 @@
 
     <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
 
-        <script type="text/javascript">
+    <script type="text/javascript">
 
         function getAuthorInfo(authorName) {
-        console.log("name to search:" + authorName);
-        $.ajax({
-        url: "userInfo",
-        type: "POST",
-        data: {username: authorName},
-        success: function (msg) {
+            console.log("name to search:" + authorName);
+            $.ajax({
+                url: "userInfo",
+                type: "POST",
+                data: {username: authorName},
+                success: function (msg) {
 
-        console.log("a message arrived back from userInfo: " + JSON.stringify(msg));
-        console.log("the real name:" + msg.realname);
-        //do the thing to show if it's good or not
-        $('#modal-title').text("Username: " + msg.username);
-        $('#modal-body').text("");
-        $('#modal-body').append("<img src="+ msg.image+"><br>");
+                    console.log("a message arrived back from userInfo: " + JSON.stringify(msg));
+                    console.log("the real name:" + msg.realname);
+                    //do the thing to show if it's good or not
+                    $('#modal-title').text("Username: " + msg.username);
+                    $('#modal-body').text("");
+                    $('#modal-body').append("<img src=" + msg.image + "><br>");
 
-        if (msg.realname !== "" && msg.realname !== null){
-        $('#modal-body').append("Real Name: " + msg.realname + "<br>");
-        }
-        if (msg.dob != null) {
-        $('#modal-body').append("Date of Birth: " + msg.dob + "<br>");
-        }
-        if (msg.country !== "" && msg.country !== null) {
-        $('#modal-body').append("Country: " + msg.country + "<br>");
-        }
-        if (msg.bio !== "" && msg.bio !== null) {
-        $('#modal-body').append("Bio: " + msg.bio + "<br>");
-        }
-
-
-        $("#userInfoModal").modal('show');
+                    if (msg.realname !== "" && msg.realname !== null) {
+                        $('#modal-body').append("Real Name: " + msg.realname + "<br>");
+                    }
+                    if (msg.dob != null) {
+                        $('#modal-body').append("Date of Birth: " + msg.dob + "<br>");
+                    }
+                    if (msg.country !== "" && msg.country !== null) {
+                        $('#modal-body').append("Country: " + msg.country + "<br>");
+                    }
+                    if (msg.bio !== "" && msg.bio !== null) {
+                        $('#modal-body').append("Bio: " + msg.bio + "<br>");
+                    }
 
 
+                    $("#userInfoModal").modal('show');
+
+
+                }
+            })
         }
-        })
-        }
-        </script>
-        <style>
+    </script>
+    <style>
 
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -152,7 +155,7 @@
 <%@ include file="../WEB-INF/partial/navbar.jsp" %>
 <div class="container">
 
-
+    <%--Article Display--%>
     <div class="article">
 
         <c:choose>
@@ -176,7 +179,7 @@
 
         <c:if test="${postdated}">
             <div class="alert alert-warning alert-dismissible" id="error-message">
-                <a href="" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 This article is postdated: it will appear on the site on the date you selected
             </div>
 
@@ -201,102 +204,77 @@
     </div>
 
 
-    <%--wtf is this empty 'if' meant to be doing?????--%>
-    <c:if test="${empty articles}">
-    </c:if>
 
 
-    <c:forEach items="${comment}" var="comment">
-    <c:if test="${comment.commentAuthor.username != 'deleted'}">
-
-    <div class="comment">
-            <%-- use a table to hold the comments --%>
-        <p>${comment.commentAuthor.username} :</p>
-
-        <p>${comment.commentContent}</p>
-
-                <c:if test="${comment.children.size()!=0}">
-                    <c:forEach var="currentComment" items="${comment.children}" varStatus="">
-                        <%-- TODO show the children comment for each root comment --%>
-                    </c:forEach>
-                </c:if>
-
-            <%--<c:forEach items="${comment.children}" var="children">--%>
-
-            <%--<div class="red">${children.commentAuthor.username}</div>--%>
-            <%--<div class="red">${children.commentContent}</div>--%>
-
-
-            <%--</c:forEach>--%>
-
-
-        <c:if test="${article.author.username == sessionScope.username || comment.commentAuthor.username == sessionScope.username}">
-        <form method="GET" action="/deletecomment">
-            <input type="hidden" name="articleID" value="${article.ID}">
-            <input type="hidden" name="commentID" value="${comment.commentID}">
-
-            <input type="submit" value="Delete comment">
-
-
-        </form>
-
-            <%-- the popup form for replying the comment --%>
-
-        <button id="reply-btn-${comment.commentID}" class="open-button" onclick="openForm(${comment.commentID})">Reply
-        </button>
-
-        <div class="form-popup" id="myForm-${comment.commentID}">
-            <form method="post" action="/addNestedComment" class="form-container">
-                <input type="hidden" name="articleID" value="${article.ID}">
-                <input type="hidden" name="commentID" value="${comment.commentID}">
-
-                    <%--the commentID is coming from /JavaBean/Comment.java--%>
-                    <%-- the commentID is set in CommentDAO.java line 75--%>
-                    <%--the CommentID is coming from 'comments' table column 1--%>
-
-                <label for="content"><b>Reply comment:</b></label>
-                <input type="text" id="content" placeholder="comment here..." name="content">
-
-                <button type="submit" class="btn">Submit</button>
-                <button type="button" class="btn cancel" onclick="closeForm(${comment.commentID})">Close</button>
-            </form>
-        </div>
-
-
-            <%--<button class="open-button" onclick="openForm()">Reply</button>--%>
-            <%--<div class="form-popup" id="myForm">--%>
-            <%--<form action="/action_page.php" class="form-container">--%>
-
-            <%--<label for="reply"><b>Reply</b></label>--%>
-            <%--<input type="textarea" placeholder="Enter Reply" id="reply" name="reply" required>--%>
-
-            <%--<button type="submit" class="btn">Submit</button>--%>
-            <%--<button type="button" class="btn cancel" onclick="closeForm()">Close</button>--%>
-            <%--</form>--%>
-            <%--</div>--%>
-
-            <%--this form will pop up when the button is pressed--%>
-        <a href="#hiddenreply${comment.commentID}" class="btn btn-default" data-toggle="collapse">show reply box</a>
-        <div id="hiddenreply${comment.commentID}" class="collapse">
-            <form>
-                <label for="nested-reply">reply: </label>
-                <textarea id="nested-reply" rows="5" cols="30"></textarea>
-            </form>
-
-
-            </c:if>
-
-        </div>
-
-
-        </c:if>
-
-
+    <%--Comments Pool--%>
+    <div class="comments-pool">
+        <%!
+            private void output(Comment comment, JspWriter out, boolean canDelete, boolean canReply){
+                try {
+                    //Comment Output
+                    //Check if comments can be deleted
+                    if(canDelete) {
+                        //If author can delete comments
+                        //Output comment content first
+                        out.println("<div>" + comment.getCommentContent() + "</div>");
+                        //Show delete button
+                        out.println(
+                                "<form method=\"GET\" action=\"/deletecomment\">" +
+                                        "<input type=\"hidden\" name=\"articleID\" value=\""+comment.getArticleId()+"\">" +
+                                        "<input type=\"hidden\" name=\"commentID\" value=\""+comment.getCommentID()+"\">" +
+                                        "<input type=\"submit\" value=\"Delete Comment\"" +
+                                        "</form>"
+                        );
+                    }else{
+                        //Otherwise just output comment
+                        out.println("<div>" + comment.getCommentContent() + "</div>");
+                    }
+                    //Check if can reply comment
+                    if(canReply){
+                        //If so, show the reply function
+                        //Show Reply Button
+                        out.println(
+                                "<button id=\"reply-btn-"+comment.getCommentID()+"\" class=\"open-button\" onclick=\"openForm("+comment.getCommentID()+")\">Reply</button>"
+                        );
+                        //Reply area
+                        out.println(
+                                "<div class=\"form-popup\" id=\"myForm-"+comment.getCommentID()+"\">" +
+                                        "<form method=\"POST\" action=\"/addNestedComment\" class=\"form-container\">" +
+                                        "<input type\"hidden\" name=\"articleID\" value=\""+comment.getArticleId()+"\">" +
+                                        "<input type\"hidden\" name=\"commentID\" value=\""+comment.getCommentID()+"\">" +
+                                        "<label for=\"content\"><b>Reply Comment:</b></label>" +
+                                        "<input type=\"text\" id=\"content\" placeholder=\"Comment here...\" name=\"content\">" +
+                                        "<button type=\"submit\" class=\"btn\">Submit</button>" +
+                                        "<button type=\"button\" class=\"btn cancel\" onclick=\"closeForm("+comment.getCommentID()+")\">Close</button>" +
+                                        "</form>" +
+                                        "</div>"
+                        );
+                    }
+                    //Comment Recursion
+                    if (comment.getChildren()!=null) {
+                        for (Comment c : comment.getChildren()) {
+                            output(c, out, canDelete, canReply);
+                        }
+                    }
+                }catch (IOException e){
+                    System.err.println(e.fillInStackTrace());
+                }
+            }
+        %>
+        <%
+            Article article = (Article) request.getAttribute("article");
+            List<Comment> rootComments = (List<Comment>) request.getAttribute("comment");
+            for(Comment c:rootComments){
+                //In the case when the author is the article author or the user who left comment, they can delete comment
+                boolean canDelete = article.getAuthor().getUsername() == request.getSession().getAttribute("username") || c.getCommentAuthor().getUsername() == request.getSession().getAttribute("username");
+                //In the case for any signed in users, they can do reply
+                boolean canReply = request.getSession().getAttribute("username") == null;
+                output(c, out, canDelete, canReply);
+            }
+        %>
     </div>
 
-
-    </c:forEach>
-
+    <%--Comment Publish Form--%>
     <c:if test="${sessionScope.username != null}">
         <%--another form which posts to /addcomment
                  text field for writing comment
@@ -317,6 +295,120 @@
 
     </c:if>
 
+
+
+                <%-- the previous code for comments --%>
+
+        <%--<c:forEach items="${comment}" var="comment">--%>
+        <%--<c:if test="${comment.commentAuthor.username != 'deleted'}">--%>
+
+        <%--<div class="comment">--%>
+                <%--&lt;%&ndash; use a table to hold the comments &ndash;%&gt;--%>
+            <%--<p>${comment.commentAuthor.username} :</p>--%>
+
+            <%--<p>${comment.commentContent}</p>--%>
+
+            <%--<c:if test="${comment.children.size()!=0}">--%>
+                <%--<c:forEach var="currentComment" items="${comment.children}" varStatus="">--%>
+                    <%--&lt;%&ndash; TODO show the children comment for each root comment &ndash;%&gt;--%>
+                <%--</c:forEach>--%>
+            <%--</c:if>--%>
+
+                <%--&lt;%&ndash;<c:forEach items="${comment.children}" var="children">&ndash;%&gt;--%>
+
+                <%--&lt;%&ndash;<div class="red">${children.commentAuthor.username}</div>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<div class="red">${children.commentContent}</div>&ndash;%&gt;--%>
+
+
+                <%--&lt;%&ndash;</c:forEach>&ndash;%&gt;--%>
+
+
+            <%--<c:if test="${article.author.username == sessionScope.username || comment.commentAuthor.username == sessionScope.username}">--%>
+            <%--<form method="GET" action="/deletecomment">--%>
+                <%--<input type="hidden" name="articleID" value="${article.ID}">--%>
+                <%--<input type="hidden" name="commentID" value="${comment.commentID}">--%>
+
+                <%--<input type="submit" value="Delete comment">--%>
+
+
+            <%--</form>--%>
+
+                <%--&lt;%&ndash; the popup form for replying the comment &ndash;%&gt;--%>
+
+            <%--<button id="reply-btn-${comment.commentID}" class="open-button" onclick="openForm(${comment.commentID})">Reply--%>
+            <%--</button>--%>
+
+            <%--<div class="form-popup" id="myForm-${comment.commentID}">--%>
+                <%--<form method="post" action="/addNestedComment" class="form-container">--%>
+                    <%--<input type="hidden" name="articleID" value="${article.ID}">--%>
+                    <%--<input type="hidden" name="commentID" value="${comment.commentID}">--%>
+
+                    <%--<label for="content"><b>Reply comment:</b></label>--%>
+                    <%--<input type="text" id="content" placeholder="comment here..." name="content">--%>
+
+                    <%--<button type="submit" class="btn">Submit</button>--%>
+                    <%--<button type="button" class="btn cancel" onclick="closeForm(${comment.commentID})">Close</button>--%>
+                <%--</form>--%>
+            <%--</div>--%>
+
+
+                <%--&lt;%&ndash;<button class="open-button" onclick="openForm()">Reply</button>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<div class="form-popup" id="myForm">&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<form action="/action_page.php" class="form-container">&ndash;%&gt;--%>
+
+                <%--&lt;%&ndash;<label for="reply"><b>Reply</b></label>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<input type="textarea" placeholder="Enter Reply" id="reply" name="reply" required>&ndash;%&gt;--%>
+
+                <%--&lt;%&ndash;<button type="submit" class="btn">Submit</button>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<button type="button" class="btn cancel" onclick="closeForm()">Close</button>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;</form>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+
+                <%--&lt;%&ndash;this form will pop up when the button is pressed&ndash;%&gt;--%>
+            <%--<a href="#hiddenreply${comment.commentID}" class="btn btn-default" data-toggle="collapse">show reply box</a>--%>
+            <%--<div id="hiddenreply${comment.commentID}" class="collapse">--%>
+                <%--<form>--%>
+                    <%--<label for="nested-reply">reply: </label>--%>
+                    <%--<textarea id="nested-reply" rows="5" cols="30"></textarea>--%>
+                <%--</form>--%>
+
+
+                <%--</c:if>--%>
+
+            <%--</div>--%>
+
+
+            <%--</c:if>--%>
+
+
+        <%--</div>--%>
+
+
+        <%--</c:forEach>--%>
+
+        <%--<c:if test="${sessionScope.username != null}">--%>
+            <%--&lt;%&ndash;another form which posts to /addcomment--%>
+                     <%--text field for writing comment--%>
+                     <%--submit button&ndash;%&gt;--%>
+        <%--<div class="comments">--%>
+            <%--<div class="form-group">--%>
+                <%--<form method="post" action="/addcomment">--%>
+                    <%--<input type="hidden" name="articleID" value="${article.ID}">--%>
+                    <%--<label for="comment">Comment:</label>--%>
+                    <%--<textarea class="form-control" name="comment" rows="5" id="comment"--%>
+                              <%--placeholder="Comment here:"></textarea>--%>
+                    <%--<br>--%>
+                    <%--<input type="submit" value="Add Comment">--%>
+                <%--</form>--%>
+
+            <%--</div>--%>
+        <%--</div>--%>
+
+        <%--</c:if>--%>
+
+
+
+
     <script>
         function openForm(id) {
             var className = "myForm-" + id;
@@ -329,30 +421,30 @@
         }
     </script>
 
-<%--this modal pops up if the username is clicked, it shows the user info--%>
-            <div class="modal" id="userInfoModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
+    <%--this modal pops up if the username is clicked, it shows the user info--%>
+    <div class="modal" id="userInfoModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="modal-title">Modal Heading</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
 
-                    <!-- Modal body -->
-                    <div class="modal-body" id="modal-body">
-
-                    </div>
-
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
+                <!-- Modal body -->
+                <div class="modal-body" id="modal-body">
 
                 </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
             </div>
         </div>
+    </div>
 
-    </body>
+</body>
 </html>
