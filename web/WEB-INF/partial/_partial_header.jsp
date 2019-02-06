@@ -2,6 +2,7 @@
     <meta charset="UTF-8">
     <title>${title}</title>
     <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+    <%--<base href="https://sporadic.nz/ysy_unnamed">--%>
     <link rel="icon"
           type="image/png"
           href="/images/tinyflower.png">
