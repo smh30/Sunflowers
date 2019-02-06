@@ -9,14 +9,6 @@
 <html>
     <head>
         <title>Admin Interface</title>
-        <script type="text/javascript">function openForm() {
-            alert('Button pressed!');
-        }
-
-        function closeForm() {
-            alert('Button pressed!')
-        }
-        </script>
         <%@include file="../WEB-INF/partial/_partial_header.jsp" %>
     </head>
 
@@ -37,11 +29,8 @@
                                 <td>${user.username} </td>
                                 <td><button type="button" onclick="">Remove User</button></td>
 
-                                <td>${comments.comments_body}</td>
-                                <td><button type="button" onclick="">Remove User's Comments</button></td>
+                                <td><button type="button" onclick="">Reset User's Password</button></td>
 
-                                <td>${user.password}</td>
-                                <td><button type="button" onclick="">Reset User's password</button></td>
                             </tr>
                         </c:forEach>
 
@@ -49,12 +38,12 @@
                 </table>
             </form>
         </div>
-        <%--Add "Add User" button--%>
-        <%--Using Yun's pop-up form from single-article.jsp as e.g.--%>
 
-        <button class="open-button" id=openButton onclick="openForm()">Add User</button>
-        <span class="popuptext" id="myPopup">
-            <form action=""  class="form-container">
+        <a href="#myPopup" class="btn btn-default" data-toggle="collapse">Add new user form</a>
+
+        <div class="collapse" id="myPopup">
+
+            <form action="#"  class="form-container">
                 <h2>Add user: </h2>
                 <br>
                 <label for="unameID">Username:</label>
@@ -80,24 +69,7 @@
                 <br>
                 <br>
                 <button type="submit" class="btn">Create new user</button>
-                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
             </form>
-        </span>
-
-
-
-        <script>
-                function openForm() {
-                var openButton = document.getElementById("myPopup").style.display = "block";
-                    openButton.classList.toggle("show");
-                <%--TODO: Check with Steph. Need some kind of toggle here... I think....--%>
-                <%--openButton.onclick = openForm();--%>
-            }
-
-            function closeForm() {
-                var closeButton = document.getElementById("myPopup").style.display = "none";
-                closeButton.classList.toggle("hide");
-            }
-        </script>
+        </div>
     </body>
 </html>
