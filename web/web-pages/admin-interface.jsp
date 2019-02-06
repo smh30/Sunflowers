@@ -49,10 +49,9 @@
         <%--Add "Add User" button--%>
         <%--Using Yun's pop-up form from single-article.jsp as e.g.--%>
 
-        <button class="open-button" onclick="openForm()">Add User</button>
-
-        <div class="form-popup" id="myForm">
-            <form method="post" action="adminadduser" class="form-container">
+        <button class="open-button" id=openButton onclick="openForm()">Add User</button>
+        <span class="popuptext" id="myPopup">
+            <form action=""  class="form-container">
                 <h2>Add user: </h2>
                 <br>
                 <label for="unameID">Username:</label>
@@ -74,21 +73,24 @@
                 <input type="text" id="passwordID" name="password">
                 <br>
                 <br>
-                <button type="submit" class="btn" id="openButton">Create new user</button>
-                <button type="button" class="btn cancel" id="closeButton" onclick="closeForm()">Close</button>
+                <button type="submit" class="btn">Create new user</button>
+                <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
             </form>
-        </div>
+        </span>
+
+
 
         <script>
                 function openForm() {
-                var openButton = document.getElementById("myForm").style.display = "block";
-                <%--How to toggle form????--%>
-
+                var openButton = document.getElementById("myPopup").style.display = "block";
+                    openButton.classList.toggle("show");
+                <%--TODO: Check with Steph. Need some kind of toggle here... I think....--%>
+                <%--openButton.onclick = openForm();--%>
             }
 
             function closeForm() {
-                var closeButton = document.getElementById("myForm").style.display = "none";
-                closeButton.onclick = openForm;
+                var closeButton = document.getElementById("myPopup").style.display = "none";
+                closeButton.classList.toggle("hide");
             }
         </script>
     </body>
