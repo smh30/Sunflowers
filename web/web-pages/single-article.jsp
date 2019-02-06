@@ -167,7 +167,8 @@
             </c:otherwise>
         </c:choose>
 
-        <p onclick="getAuthorInfo('${article.author.username}')">Author: ${article.author.username}</p>
+        <p><a href="#" onclick="getAuthorInfo('${article.author.username}')">Author: ${article.author.username}</a>
+        </p>
 
         <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
         <c:if test="${not empty article.timestamp}">
