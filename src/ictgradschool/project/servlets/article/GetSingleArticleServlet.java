@@ -35,7 +35,7 @@ public class GetSingleArticleServlet extends HttpServlet {
         } else {
             // if we have reached this page from clicking an article link in the main page or from adding a commnt
             System.out.println("came from a link");
-            articleID = Integer.parseInt(request.getAttribute("articleID").toString());
+            articleID = Integer.parseInt(request.getParameter("articleID").toString());
         }
 
         System.out.println("article id is = " + articleID);
