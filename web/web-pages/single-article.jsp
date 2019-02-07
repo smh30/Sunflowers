@@ -26,6 +26,13 @@
     <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>--%>
 
     <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <%--library for icon--%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
     <script type="text/javascript">
 
@@ -125,7 +132,7 @@
             outline: none;
         }
 
-        /* Set a style for the submit/login button */
+        /* Set a style for the submit button */
         .form-container .btn {
             background-color: #4CAF50;
             color: white;
@@ -195,13 +202,13 @@
             <div class="d-flex flex-row-reverse">
             <form method="get" action="edit-article" class="px-2">
                 <input type="hidden" name="articleID" value="${article.ID}">
-                <button class="btn btn-primary" type="submit" value="Edit Article">Edit Article</button>
+                <button class="btn btn-primary" type="submit" value="Edit Article"><i class='fas fa-edit'></i> Edit Article</button>
             </form>
 
 
             <form method="post" action="deleteArticle" class="px-2">
                 <input type="hidden" name="articleID" value="${article.ID}">
-                <button class="btn btn-primary" type="submit" value="Delete Article">Delete Article</button>
+                <button class="btn btn-primary" type="submit" value="Delete Article"><i class='fas fa-meh'></i> Delete Article</button>
             </form>
             </div>
         </c:if>
@@ -212,6 +219,113 @@
 
 
     <%--Comments Pool--%>
+
+    <%--<div class="comments-pool">--%>
+        <%--<%!--%>
+            <%--private void output(Comment comment, JspWriter out, boolean canDelete, boolean canReply){--%>
+                <%--try {--%>
+                    <%--//Comment Output--%>
+                    <%--//Check if comments can be deleted--%>
+                    <%--if(canDelete) {--%>
+                        <%--//If author can delete comments--%>
+                        <%--//Output comment content first--%>
+
+                        <%--out.println("<div class=\"container\">");--%>
+                        <%--out.println(" <div class=\"col-sm-10 col-sm-offset-1\" id=\"logout\">");--%>
+
+                        <%--out.println("<div class=\"page-header\">");--%>
+                        <%--out.println(" <h3 class=\"reviews\">Comments</h3>");--%>
+                        <%--out.println("</div>");--%>
+
+
+                        <%--// show the image of comment author--%>
+                        <%--out.println("<div class=\"tab-pane active\" id=\"comments-logout\">"+--%>
+                        <%--"<ul class=\"media-list\">"+--%>
+                        <%--" <li class=\"media\">"+--%>
+                        <%--"<a class=\"pull-left\" href=\"#\">"+--%>
+                        <%--"<img class=\"media-object img-circle\" src=\"" +  "\" alt=\"profile\">"+--%>
+                        <%--" </a>");--%>
+
+                        <%--//show the comment's author-name--%>
+                        <%--//show the comment--%>
+                        <%--out.println("<div class=\"media-body\">"+--%>
+                        <%--" <div class=\"well well-lg\">"+--%>
+                        <%--"<h4 class=\"media-heading text-uppercase ßreviews\">"+comment.getCommentAuthor().getUsername()+"</h4>"+--%>
+                        <%--"<ul class=\"media-date text-uppercase reviews list-inline\">"+--%>
+                        <%--" <li class=\"dd\">22</li>"+--%>
+                        <%--"<li class=\"mm\">09</li>"+--%>
+                        <%--"<li class=\"yyyy\">2014</li>"+--%>
+                        <%--"</ul>"+--%>
+                        <%--"<p class=\"media-comment\">"+comment.getCommentContent()+--%>
+                        <%--"</p>");--%>
+
+
+
+                        <%----%>
+                        <%----%>
+                    <%--}else{--%>
+                        <%--//Otherwise just output comment--%>
+                        <%--out.println("<div style=\"margin-left: 20px;\">" + comment.getCommentContent());--%>
+                    <%--}--%>
+                    <%--//Check if can reply comment--%>
+                    <%--if(canReply){--%>
+                        <%--//If so, show the reply function--%>
+                        <%--//Show Reply Button--%>
+                        <%--out.println(--%>
+                                <%--"<a class=\"btn btn-info btn-circle text-uppercase\" href=\"#\" id=\"reply-"+comment.getCommentID()+"\" ><span class=\"glyphicon glyphicon-share-alt\"></span>"+--%>
+                                        <%--"Reply</a>"+--%>
+                                <%--""--%>
+<%--//                                "<button id=\"reply-btn-"+comment.getCommentID()+"\" class=\"open-button btn btn-primary btn-sm\" onclick=\"openForm("+comment.getCommentID()+")\">Reply</button>"--%>
+                        <%--);--%>
+                        <%--//delete botton--%>
+                        <%--out.println(--%>
+                                <%--"<div class=\"d-flex flex-row-reverse\"><form method=\"GET\" action=\"/deletecomment\">" +--%>
+                                        <%--"<input type=\"hidden\" name=\"articleID\" value=\""+comment.getArticleId()+"\">" +--%>
+                                        <%--"<input type=\"hidden\" name=\"commentID\" value=\""+comment.getCommentID()+"\">" +--%>
+                                        <%--"<button class=\"btn btn-primary btn-sm\"  type=\"submit\" value=\"Delete Comment\">Delete Comment</button>"+--%>
+                                        <%--"</form></div>"--%>
+                        <%--);--%>
+                        <%--//Reply area--%>
+                        <%--out.println(--%>
+                                <%--"<div class=\"form-popup\" id=\"myForm-"+comment.getCommentID()+"\">" +--%>
+                                        <%--"<form method=\"POST\" action=\"/addNestedComment\" class=\"form-container\">" +--%>
+                                        <%--"<input type=\"hidden\" name=\"articleID\" value=\""+comment.getArticleId()+"\">" +--%>
+                                        <%--"<input type=\"hidden\" name=\"commentID\" value=\""+comment.getCommentID()+"\">" +--%>
+                                        <%--"<label for=\"content\"><b>Reply Comment:</b></label>" +--%>
+                                        <%--"<input type=\"text\" id=\"content\" placeholder=\"Comment here...\" name=\"content\">" +--%>
+                                        <%--"<button type=\"submit\" class=\"btn\">Submit</button>" +--%>
+                                        <%--"<button type=\"button\" class=\"btn cancel\" onclick=\"closeForm("+comment.getCommentID()+")\">Close</button>" +--%>
+                                        <%--"</form>" +--%>
+                                        <%--"</div>"--%>
+                        <%--);--%>
+                    <%--}--%>
+                    <%--//Comment Recursion--%>
+                    <%--if (comment.getChildren()!=null) {--%>
+                        <%--for (Comment c : comment.getChildren()) {--%>
+                            <%--output(c, out, canDelete, canReply);--%>
+                        <%--}--%>
+                    <%--}--%>
+                    <%--out.println("</div>");--%>
+                <%--}catch (IOException e){--%>
+                    <%--System.err.println(e.fillInStackTrace());--%>
+                <%--}--%>
+            <%--}--%>
+        <%--%>--%>
+        <%--<%--%>
+            <%--Article article = (Article) request.getAttribute("article");--%>
+            <%--List<Comment> rootComments = (List<Comment>) request.getAttribute("comment");--%>
+            <%--for(Comment c:rootComments){--%>
+                <%--//In the case when the author is the article author or the user who left comment, they can delete comment--%>
+                <%--boolean canDelete = (article.getAuthor().getUsername() .equals( request.getSession().getAttribute("username"))) || (c.getCommentAuthor().getUsername().equals(request.getSession().getAttribute("username")));--%>
+                <%--//In the case for any signed in users, they can do reply--%>
+                <%--boolean canReply = (request.getSession().getAttribute("username") != null);--%>
+                <%--output(c, out, canDelete, canReply);--%>
+            <%--}--%>
+        <%--%>--%>
+    <%--</div>--%>
+
+
+
     <div class="comments-pool">
         <%!
             private void output(Comment comment, JspWriter out, boolean canDelete, boolean canReply){
@@ -289,6 +403,7 @@
         %>
     </div>
 
+
     <%--Comment Publish Form--%>
     <c:if test="${sessionScope.username != null}">
         <%--another form which posts to /addcomment
@@ -311,9 +426,6 @@
     </c:if>
 
 
-
-                <%-- the previous code for comments --%>
-
         <%--<c:forEach items="${comment}" var="comment">--%>
         <%--<c:if test="${comment.commentAuthor.username != 'deleted'}">--%>
 
@@ -329,24 +441,26 @@
                 <%--</c:forEach>--%>
             <%--</c:if>--%>
 
-                <%--&lt;%&ndash;<c:forEach items="${comment.children}" var="children">&ndash;%&gt;--%>
+                <%--<c:forEach items="${comment.children}" var="children">--%>
 
-                <%--&lt;%&ndash;<div class="red">${children.commentAuthor.username}</div>&ndash;%&gt;--%>
-                <%--&lt;%&ndash;<div class="red">${children.commentContent}</div>&ndash;%&gt;--%>
+                <%--<div style="margin-left: 20px" class="red">${children.commentAuthor.username}</div>--%>
+                <%--<div style="margin-left: 20px" class="red">${children.commentContent}</div>--%>
 
+                    <%--<button id="reply-btn-${comment.commentID}" class="open-button" onclick="openForm(${comment.commentID})">Reply--%>
+                    <%--</button>--%>
+                    <%--<c:if test="${article.author.username == sessionScope.username || comment.commentAuthor.username == sessionScope.username}">--%>
+                    <%--<form method="GET" action="/deletecomment">--%>
+                        <%--<input type="hidden" name="articleID" value="${article.ID}">--%>
+                        <%--<input type="hidden" name="commentID" value="${comment.commentID}">--%>
 
-                <%--&lt;%&ndash;</c:forEach>&ndash;%&gt;--%>
-
-
-            <%--<c:if test="${article.author.username == sessionScope.username || comment.commentAuthor.username == sessionScope.username}">--%>
-            <%--<form method="GET" action="/deletecomment">--%>
-                <%--<input type="hidden" name="articleID" value="${article.ID}">--%>
-                <%--<input type="hidden" name="commentID" value="${comment.commentID}">--%>
-
-                <%--<input type="submit" value="Delete comment">--%>
+                        <%--<input type="submit" value="Delete comment">--%>
 
 
-            <%--</form>--%>
+                    <%--</form>--%>
+                <%--</c:if>--%>
+                <%--</c:forEach>--%>
+
+
 
                 <%--&lt;%&ndash; the popup form for replying the comment &ndash;%&gt;--%>
 
@@ -380,20 +494,20 @@
                 <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
 
                 <%--&lt;%&ndash;this form will pop up when the button is pressed&ndash;%&gt;--%>
-            <%--<a href="#hiddenreply${comment.commentID}" class="btn btn-default" data-toggle="collapse">show reply box</a>--%>
-            <%--<div id="hiddenreply${comment.commentID}" class="collapse">--%>
-                <%--<form>--%>
-                    <%--<label for="nested-reply">reply: </label>--%>
-                    <%--<textarea id="nested-reply" rows="5" cols="30"></textarea>--%>
-                <%--</form>--%>
+            <%--&lt;%&ndash;<a href="#hiddenreply${comment.commentID}" class="btn btn-default" data-toggle="collapse">show reply box</a>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;<div id="hiddenreply${comment.commentID}" class="collapse">&ndash;%&gt;--%>
+                <%--&lt;%&ndash;<form>&ndash;%&gt;--%>
+                    <%--&lt;%&ndash;<label for="nested-reply">reply: </label>&ndash;%&gt;--%>
+                    <%--&lt;%&ndash;<textarea id="nested-reply" rows="5" cols="30"></textarea>&ndash;%&gt;--%>
+                <%--&lt;%&ndash;</form>&ndash;%&gt;--%>
 
 
-                <%--</c:if>--%>
+                <%--&lt;%&ndash;&ndash;%&gt;--%>
 
-            <%--</div>--%>
+            <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+                    <%--</c:if>--%>
 
 
-            <%--</c:if>--%>
 
 
         <%--</div>--%>
@@ -401,25 +515,25 @@
 
         <%--</c:forEach>--%>
 
-        <%--<c:if test="${sessionScope.username != null}">--%>
-            <%--&lt;%&ndash;another form which posts to /addcomment--%>
-                     <%--text field for writing comment--%>
-                     <%--submit button&ndash;%&gt;--%>
-        <%--<div class="comments">--%>
-            <%--<div class="form-group">--%>
-                <%--<form method="post" action="/addcomment">--%>
-                    <%--<input type="hidden" name="articleID" value="${article.ID}">--%>
-                    <%--<label for="comment">Comment:</label>--%>
-                    <%--<textarea class="form-control" name="comment" rows="5" id="comment"--%>
-                              <%--placeholder="Comment here:"></textarea>--%>
-                    <%--<br>--%>
-                    <%--<input type="submit" value="Add Comment">--%>
-                <%--</form>--%>
+        <c:if test="${sessionScope.username != null}">
+            <%--another form which posts to /addcomment
+                     text field for writing comment
+                     submit button--%>
+        <div class="comments">
+            <div class="form-group">
+                <form method="post" action="/addcomment">
+                    <input type="hidden" name="articleID" value="${article.ID}">
+                    <label for="comment">Comment:</label>
+                    <textarea class="form-control" name="comment" rows="5" id="comment"
+                              placeholder="Comment here:"></textarea>
+                    <br>
+                    <input type="submit" value="Add Comment">
+                </form>
 
-            <%--</div>--%>
-        <%--</div>--%>
+            </div>
+        </div>
 
-        <%--</c:if>--%>
+        </c:if>
 
 
 
