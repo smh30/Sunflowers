@@ -34,6 +34,11 @@
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
+    <%--library for comments pool--%>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script type="text/javascript">
 
         function getAuthorInfo(authorName) {
@@ -73,6 +78,12 @@
         }
     </script>
     <style>
+
+        body{
+            background-image: url("/web-pages/images/final333333.jpg") ;
+            background-repeat: repeat,repeat;
+            background-color: #cccccc;
+        }
 
         /*body {*/
             /*font-family: Arial, Helvetica, sans-serif;*/
@@ -159,6 +170,8 @@
             /*opacity: 1;*/
         /*}*/
     </style>
+
+
 </head>
 <body>
 <%@ include file="../WEB-INF/partial/navbar.jsp" %>
@@ -218,9 +231,14 @@
 
 
 
-    <%--Comments Pool--%>
+
 
     <%--<div class="comments-pool">--%>
+        <%--<div class="container">--%>
+            <%--<div class="col-sm-10 col-sm-offset-1" id="logout">--%>
+                <%--<div class="page-header">--%>
+                    <%--<h3 class="reviews">Comments</h3>--%>
+                <%--</div>--%>
         <%--<%!--%>
             <%--private void output(Comment comment, JspWriter out, boolean canDelete, boolean canReply){--%>
                 <%--try {--%>
@@ -229,14 +247,6 @@
                     <%--if(canDelete) {--%>
                         <%--//If author can delete comments--%>
                         <%--//Output comment content first--%>
-
-                        <%--out.println("<div class=\"container\">");--%>
-                        <%--out.println(" <div class=\"col-sm-10 col-sm-offset-1\" id=\"logout\">");--%>
-
-                        <%--out.println("<div class=\"page-header\">");--%>
-                        <%--out.println(" <h3 class=\"reviews\">Comments</h3>");--%>
-                        <%--out.println("</div>");--%>
-
 
                         <%--// show the image of comment author--%>
                         <%--out.println("<div class=\"tab-pane active\" id=\"comments-logout\">"+--%>
@@ -261,8 +271,8 @@
 
 
 
-                        <%----%>
-                        <%----%>
+
+
                     <%--}else{--%>
                         <%--//Otherwise just output comment--%>
                         <%--out.println("<div style=\"margin-left: 20px;\">" + comment.getCommentContent());--%>
@@ -272,17 +282,19 @@
                         <%--//If so, show the reply function--%>
                         <%--//Show Reply Button--%>
                         <%--out.println(--%>
-                                <%--"<a class=\"btn btn-info btn-circle text-uppercase\" href=\"#\" id=\"reply-"+comment.getCommentID()+"\" ><span class=\"glyphicon glyphicon-share-alt\"></span>"+--%>
+                                <%--"<a class=\"btn btn-info btn-circle text-uppercase\" href=\"#\" id=\"reply-"+comment.getCommentID()+"\" ><span class=\"glyphicon glyphicon-share-alt\" onclick=\"openForm("+comment.getCommentID()+")\"></span>"+--%>
                                         <%--"Reply</a>"+--%>
-                                <%--""--%>
+                                <%--"<a class=\"btn btn-warning btn-circle text-uppercase\" data-toggle=\"collapse\" href=\"#replyOne\" data-target=\"#replyOne\"><span class=\"glyphicon glyphicon-comment\"></span>"+comment.getChildren().size() +"comments</a>"--%>
+                                    <%--// 7/02 6:08 不能点reply 也不能点deletecomment--%>
+
 <%--//                                "<button id=\"reply-btn-"+comment.getCommentID()+"\" class=\"open-button btn btn-primary btn-sm\" onclick=\"openForm("+comment.getCommentID()+")\">Reply</button>"--%>
                         <%--);--%>
-                        <%--//delete botton--%>
+                        <%--//delete comment botton--%>
                         <%--out.println(--%>
                                 <%--"<div class=\"d-flex flex-row-reverse\"><form method=\"GET\" action=\"/deletecomment\">" +--%>
                                         <%--"<input type=\"hidden\" name=\"articleID\" value=\""+comment.getArticleId()+"\">" +--%>
                                         <%--"<input type=\"hidden\" name=\"commentID\" value=\""+comment.getCommentID()+"\">" +--%>
-                                        <%--"<button class=\"btn btn-primary btn-sm\"  type=\"submit\" value=\"Delete Comment\">Delete Comment</button>"+--%>
+                                        <%--"<button class=\"btn btn-primary btn-sm\"  type=\"submit\" value=\"Delete \">Delete Comment</button>"+--%>
                                         <%--"</form></div>"--%>
                         <%--);--%>
                         <%--//Reply area--%>
@@ -501,18 +513,12 @@
                     <%--<textarea id="nested-reply" rows="5" cols="30"></textarea>--%>
                 <%--</form>--%>
 
-
                 <%--&lt;%&ndash;&ndash;%&gt;--%>
 
             <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
                     <%--</c:if>--%>
 
-
-
-
         <%--</div>--%>
-
-
         <%--</c:forEach>--%>
 
         <%--<c:if test="${sessionScope.username != null}">--%>

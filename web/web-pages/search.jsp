@@ -24,6 +24,23 @@
         <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
         <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
+
+        <style type="text/css">
+            body{
+                background-image: url("/web-pages/images/final333333.jpg") ;
+                background-repeat: repeat,repeat;
+                background-color: #cccccc;
+            }
+
+            .container{
+                margin-top: 12%;
+                padding: 15px;
+               border: 2px solid #666666;
+                border-radius: 12px;
+                background-color: white;
+            }
+
+        </style>
     </head>
     <body>
         <%@ include file="../WEB-INF/partial/navbarSearch.jsp" %>

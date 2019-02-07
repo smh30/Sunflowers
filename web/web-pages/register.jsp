@@ -8,7 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
-        <title>Title</title>
+        <title>Register</title>
+
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
 
         <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
 
@@ -19,6 +22,12 @@
                 async defer>
         </script>
 
+        <%--library for icon--%>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
 
 <%--this last jquery import is the non-slim version, need for ajax--%>
@@ -47,8 +56,37 @@
                     }
         </script>
 
+        <style>
+
+            body{
+                background-image: url("/web-pages/images/final333333.jpg") ;
+                background-repeat: repeat,repeat;
+                background-color: #cccccc;
+            }
+
+            .container{
+                position: center;
+                margin-top: 8%;
+                padding: 5px;
+                background-color: whitesmoke;
+            }
+
+            .theRform{
+                font-family: 'Microsoft Sans Serif', Tahoma, Arial, Verdana, Sans-Serif;
+                margin: 20px 15px 25px 15px;
+                padding: 20px;
+                border:2px solid #666666;
+                border-radius: 12px;
+                background-color: whitesmoke;
+            }
+
+            .form-control:hover{
+                background-color: #8a8a8a;
+                color: black;
+            }
 
 
+        </style>
 
     </head>
 
@@ -60,18 +98,21 @@
         <div id="nameFail">
         </div>
 
+    <h1>REGISTER</h1>
+
+
     <div id="reg-form">
-        <form method="post" action="register">
+        <form class="theRform" method="post" action="register">
             <%--Below line for reCAPTCHA--%>
 
 <div class="form-group">
-            <label class="label-txt" for="username">username:</label>
+            <label class="label-txt" for="username">USERNAME:</label>
                 <%--the onchange means that when the box loses focus it does the thing --%>
             <input type="text" id="username" name="username" onchange="checkName(this.value)"  class="form-control">
         </div>
 
     <div class="form-group">
-            <label for="password">password:</label>
+            <label for="password">PASSWORD:</label>
             <input type="password" id="password" name="password" minlength="8" class="form-control">
         <small id="passwordInfo" class="form-text text-muted">Minimum 8 characters</small>
 </div>
