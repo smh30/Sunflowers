@@ -19,12 +19,12 @@
         <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
     </head>
     <body>
-        <%@ include file="../WEB-INF/partial/navbar.jsp" %>
+        <%@ include file="../WEB-INF/partial/navbarSearch.jsp" %>
         <div class="container">
 
 
 
-            <form method="get" action="/home">
+            <form method="get" action="../home">
                 <legend>Search the Articles Database</legend>
 
                 <div class="form-group row">

@@ -19,6 +19,6 @@ public class LogOutServlet extends HttpServlet {
         HttpSession session = request.getSession();
         session.invalidate();
         System.out.println("logged out");
-        response.sendRedirect("/home");
+        response.sendRedirect("home");
     }
 }

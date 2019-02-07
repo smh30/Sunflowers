@@ -28,10 +28,10 @@ public class GetUserInfoServlet extends HttpServlet {
         String image = "";
         if (user.getPictureURL() == null||user.isUseDefaultImage()){
             System.out.println("use the default image");
-            image = "../default-photos-for-profile-page/" +user.getDefaultImage();
+            image = "images/default-photos-for-profile-page/" +user.getDefaultImage();
         } else {
             System.out.println("use custom image");
-            image = "../Uploaded-Photos/"+user.getPictureURL();
+            image = "Uploaded-Photos/"+user.getPictureURL();
         }
         System.out.println(username +"s picture is " + image);
         JSONObject userJson = new JSONObject();
