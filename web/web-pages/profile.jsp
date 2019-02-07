@@ -235,6 +235,7 @@
             <fieldset><legend>Delete Account</legend>
                 <div class="form-group">
                     <input type="hidden" name="username" value="${user.username}">
+                    <input type="hidden" name="admin" value="user">
                     <button class="btn btn-primary" type="submit" value="Delete User">Delete User</button>
                 </div>
             </fieldset>
