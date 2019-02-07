@@ -32,8 +32,8 @@ public class ArticleDAO {
 
 
 // yes, this sql contains a concatenated string, but it can only have the values returned by the method above, so it should be safe
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article WHERE " +
-                        "NOT (article_author = 'deleted') AND NOT (article_timestamp > ?) ORDER BY" + orderBy + "LIMIT 10 " +
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article WHERE (hidden=0)" +
+                        "AND NOT (article_author = 'deleted') AND NOT (article_timestamp > ?) ORDER BY" + orderBy + "LIMIT 10 " +
                         "OFFSET ?")) {
 //                    stmt.setString(1, "article_author");
                     stmt.setInt(2, offset);
@@ -106,7 +106,7 @@ public class ArticleDAO {
                 String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
 
                 // select the most recent 10 from the articles table??? ordered by timestamp with certain author:
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author LIKE ?  AND NOT (article_timestamp > ?) ORDER BY" + orderBy + "LIMIT 10 OFFSET ?")) {
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author LIKE ?  AND NOT (article_timestamp > ?) AND (hidden=0) ORDER BY" + orderBy + "LIMIT 10 OFFSET ?")) {
 
                     stmt.setString(1, author);
                     stmt.setString(2, todaysDate);
@@ -288,7 +288,7 @@ String dbTimestamp = "";
                 String orderBy = getOrderString(sort);
                 String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
 
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND NOT (article_author = 'deleted')  AND NOT (article_timestamp > ?) ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND NOT (article_author = 'deleted')   AND (hidden=0) AND NOT (article_timestamp > ?) ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
                     stmt.setString(1, "%" + title + "%");
                     stmt.setString(2, todaysDate);
                     stmt.setInt(3, offset);
@@ -330,7 +330,7 @@ String dbTimestamp = "";
                 String orderBy = getOrderString(sort);
                 String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
 
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND article_author LIKE ? AND NOT (article_author = 'deleted')  AND NOT (article_timestamp > ?) ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND article_author LIKE ? AND NOT (article_author = 'deleted')  AND (hidden=0)  AND NOT (article_timestamp > ?) ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
                     stmt.setString(1, "%" + title + "%");
                     stmt.setString(2, author);
                     stmt.setString(3, todaysDate);
@@ -450,7 +450,7 @@ String dbTimestamp = "";
                 String orderBy = getOrderString(sort);
                 String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
 
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_timestamp LIKE ? AND NOT (article_author = 'deleted')  AND NOT (article_timestamp > ?) ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_timestamp LIKE ? AND NOT (article_author = 'deleted')  AND (hidden=0)  AND NOT (article_timestamp > ?) ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
                     stmt.setString(1, date + "%");
                     stmt.setString(2, todaysDate);
                     stmt.setInt(3, offset);
@@ -492,7 +492,7 @@ String dbTimestamp = "";
                 String orderBy = getOrderString(sort);
                 String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
 
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author LIKE ? AND article_title LIKE ? AND article_timestamp LIKE ? AND NOT (article_author = 'deleted')  AND NOT (article_timestamp > ?) ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author LIKE ? AND article_title LIKE ? AND article_timestamp LIKE ?  AND (hidden=0) AND NOT (article_author = 'deleted')  AND NOT (article_timestamp > ?) ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
                     stmt.setString(1, author);
                     stmt.setString(2, "%" + title + "%");
                     stmt.setString(3, date + "%");
@@ -536,7 +536,7 @@ String dbTimestamp = "";
                 String orderBy = getOrderString(sort);
                 String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
 
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND article_timestamp LIKE ? AND NOT (article_author = 'deleted')  AND NOT (article_timestamp > ?) ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND article_timestamp LIKE ? AND NOT (article_author = 'deleted')  AND (hidden=0)  AND NOT (article_timestamp > ?) ORDER BY" + orderBy +  "LIMIT 10 OFFSET ?")) {
                     stmt.setString(1, "%"+title+"%");
                     stmt.setString(2, date + "%");
                     stmt.setString(3, todaysDate);
