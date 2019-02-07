@@ -55,4 +55,7 @@ public class Article implements Serializable {
     public void setID(int ID) {
         this.ID = ID;
     }
+
+    public void setAuthor(String string) {
+    }
 }

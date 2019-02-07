@@ -127,7 +127,7 @@ public class AdminDAO {
         return false;
     }
 
-    public static List <Article> getAllArticles(String title, String author, ServletContext context) {
+    public static List <Article> getAllArticles(ServletContext context) {
         List <Article> articles = new ArrayList <>();
 
         Properties dbProps = DAOCheckProperties.check(context);
@@ -143,18 +143,15 @@ public class AdminDAO {
 
 // yes, this sql contains a concatenated string, but it can only have the values returned by the method above, so it should be safe
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article WHERE " +
-                        "NOT (article_author = 'deleted') AND NOT (article_timestamp > ?)" +
-                        "OFFSET ?")) {
-                    stmt.setString(1, "title");
-                    stmt.setString(2, "article_author");
+                        "NOT (article_author = 'deleted'")) {
+
                     ResultSet rs = stmt.executeQuery();
 
                     while (rs.next()) {
 
                         Article article = new Article();
                         article.setTitle(rs.getString(1));
-                        User articleAuthor = new User(rs.getString(2));
-                        article.setAuthor(articleAuthor);
+                        article.setAuthor(rs.getString(2));
 
                         articles.add(article);
                     }
