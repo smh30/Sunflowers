@@ -1,12 +1,14 @@
 package ictgradschool.project.DAOs;
 
 import ictgradschool.project.DAOs.CheckProperties.DAOCheckProperties;
+import ictgradschool.project.JavaBeans.Article;
 import ictgradschool.project.JavaBeans.User;
 import ictgradschool.project.utilities.Passwords;
 
 import javax.servlet.ServletContext;
 import javax.xml.transform.Result;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -123,6 +125,46 @@ public class AdminDAO {
             return true;
         }
         return false;
+    }
 
+    public static List <Article> getAllArticles(String title, String author, ServletContext context) {
+        List <Article> articles = new ArrayList <>();
+
+        Properties dbProps = DAOCheckProperties.check(context);
+
+        if (dbProps != null) {
+
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+                System.out.println("connection successful");
+//
+//                String orderBy = getOrderString(sort);
+//                String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
+
+
+// yes, this sql contains a concatenated string, but it can only have the values returned by the method above, so it should be safe
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article WHERE " +
+                        "NOT (article_author = 'deleted') AND NOT (article_timestamp > ?)" +
+                        "OFFSET ?")) {
+                    stmt.setString(1, "title");
+                    stmt.setString(2, "article_author");
+                    ResultSet rs = stmt.executeQuery();
+
+                    while (rs.next()) {
+
+                        Article article = new Article();
+                        article.setTitle(rs.getString(1));
+                        User articleAuthor = new User(rs.getString(2));
+                        article.setAuthor(articleAuthor);
+
+                        articles.add(article);
+                    }
+
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return articles;
     }
 }
