@@ -79,6 +79,12 @@
     </script>
     <style>
 
+        body{
+            background-image: url("/web-pages/images/final333333.jpg") ;
+            background-repeat: repeat,repeat;
+            background-color: #cccccc;
+        }
+
         /*body {*/
             /*font-family: Arial, Helvetica, sans-serif;*/
         /*}*/
@@ -164,6 +170,8 @@
             /*opacity: 1;*/
         /*}*/
     </style>
+
+
 </head>
 <body>
 <%@ include file="../WEB-INF/partial/navbar.jsp" %>
