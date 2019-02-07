@@ -81,9 +81,7 @@ public class GetSingleArticleServlet extends HttpServlet {
         article = ArticleDAO.getArticleByID(articleID, getServletContext());
         // get articles by that author
         List <Comment> comment = CommentDAO.getAllComments(articleID, getServletContext());
-        System.out.println("comments size = " + comment.size());
-        System.out.println("chilren of coomment 1 = " + comment.get(0).getChildren().size());
-        System.out.println("chilren of coomment 2 = " + comment.get(1).getChildren().size());
+       
 
         request.setAttribute("comment", comment);
 
