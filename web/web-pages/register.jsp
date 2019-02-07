@@ -19,6 +19,8 @@
                 async defer>
         </script>
 
+
+
 <%--this last jquery import is the non-slim version, need for ajax--%>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"
                 integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -63,10 +65,11 @@
             <%--Below line for reCAPTCHA--%>
 
 <div class="form-group">
-            <label for="username">username:</label>
+            <label class="label-txt" for="username">username:</label>
                 <%--the onchange means that when the box loses focus it does the thing --%>
             <input type="text" id="username" name="username" onchange="checkName(this.value)"  class="form-control">
         </div>
+
     <div class="form-group">
             <label for="password">password:</label>
             <input type="password" id="password" name="password" minlength="8" class="form-control">

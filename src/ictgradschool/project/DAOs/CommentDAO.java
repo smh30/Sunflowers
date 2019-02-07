@@ -177,7 +177,7 @@ public class CommentDAO {
 
     }
 
-    public static boolean deleteComment(String commentAuthor, String commentContent, int articleID, int commentID, ServletContext context) {
+    public static boolean deleteComment(int commentID, ServletContext context) {
 
         Properties dbProps = DAOCheckProperties.check(context);
 

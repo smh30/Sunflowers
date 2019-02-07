@@ -10,6 +10,40 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
         <script src="../ckeditor/ckeditor.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+        <%--library for icon--%>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+
+
+        <style type="text/css">
+            #label1{
+                font-family: "Arial Black", arial-black ;
+            }
+            #label2{
+                font-family: "Arial Black", arial-black ;
+            }
+
+            #submitBtn{
+                -webkit-transition-duration: 0.4s;
+                transition-duration: 0.4s;
+                border: 2px solid #3e3e3e;
+                border-radius: 12px;
+                margin-top: 20px;
+            }
+
+            #submitBtn:hover{
+                background-color: #3e3e3e;
+                color: white;
+            }
+
+
+        </style>
+
+
     </head>
     <body>
         <%@ include file="../WEB-INF/partial/navbar.jsp" %>
@@ -20,14 +54,14 @@
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> ${message}
             </div>
         </c:if>
-
+<div class="container">
 <%--submits to a different servlet depending on whether it's a new article or an edit--%>
         <c:choose>
             <c:when test="${newarticle != null}">
-                <form action="/new-article" method="post">
+                <form action="new-article" method="post">
             </c:when>
             <c:otherwise>
-                <form action="/edit-article" method="post">
+                <form action="edit-article" method="post">
                 <input type="hidden" name="articleID" value="${article.ID}"> <%--<%}%>--%>
             </c:otherwise>
         </c:choose>
@@ -40,7 +74,7 @@
 
         <div class="container text-center">
             <br>
-            <label for="exampleFormControlInput1">Article Title Here:</label>
+            <label id="label1" for="exampleFormControlInput1">Article Title Here:</label>
             <c:choose>
                 <c:when test="${title !=null}">
                     <input type="text" name="article_title" class="form-control" id="exampleFormControlInput1"
@@ -57,7 +91,7 @@
 
         <div class="container text-center">
             <br>
-            <label for="exampleFormControlTextarea1">Article Content Here:</label>
+            <label id="label2" for="exampleFormControlTextarea1">Article Content Here:</label>
             <c:choose>
                 <c:when test="${content != null}">
                 <textarea class="form-control" name="article_content" id="exampleFormControlTextarea1"
@@ -72,14 +106,14 @@
 
 
         <div class="container text-right">
-             <button class="btn btn-primary" type="submit">Submit</button>
+             <button id="submitBtn" class="btn" type="submit">Submit</button>
         </div>
         </form>
 
             <script>
                 CKEDITOR.replace('exampleFormControlTextarea1');
             </script>
-
+                </div>
     </body>
 </html>
 

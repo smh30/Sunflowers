@@ -13,6 +13,13 @@
     <title>Home</title>
     <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+    <%--library for icon--%>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+
     <script type="text/javascript">
 
         function getAuthorInfo(authorName) {
@@ -145,10 +152,10 @@
         <div class="article">
             <c:choose>
                 <c:when test="${article.title == null || empty article.title}">
-                    <h2><a href="/article?articleID=${article.ID}">Untitled</a></h2>
+                    <h2><a href="article?articleID=${article.ID}">Untitled</a></h2>
                 </c:when>
                 <c:otherwise>
-                    <h2><a href="/article?articleID=${article.ID}">${article.title}</a></h2>
+                    <h2><a href="article?articleID=${article.ID}">${article.title}</a></h2>
                 </c:otherwise>
                 <%--todo make the 'author' link or popup the user info box/page--%>
             </c:choose>
@@ -171,7 +178,7 @@
     <%--if there are more than 10 articles for the current search, show the back button to see more--%>
     <c:if test="${fn:length(articles) == 10}">
         <div class="mx-auto" style="width: 200px;">
-            <form method="get" action="/home">
+            <form method="get" action="home">
                 <input type="hidden" name="sort" value="${currentsort}">
                 <input type="hidden" name="author" value="${searchParams.searchAuthor}">
                 <input type="hidden" name="title" value="${searchParams.searchTitle}">
