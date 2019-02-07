@@ -53,7 +53,7 @@ public class AdminInterfaceServlet extends HttpServlet {
 
         request.setAttribute("users", userList);
 
-        request.getRequestDispatcher("web-pages/admin-interface.jsp").forward(request, response);
+        //request.getRequestDispatcher("web-pages/admin-interface.jsp").forward(request, response);
 
 
         //TODO: Check whether
@@ -61,12 +61,12 @@ public class AdminInterfaceServlet extends HttpServlet {
 
         //Think they are using parameters from above page??
 
-        userPasswordList = AdminDAO.getAllUserPasswords(username, password, getServletContext());
-        System.out.println("Attempting processing getAllUsersPasswords");
-
-        request.setAttribute("users", userPasswordList);
-
-        request.getRequestDispatcher("web-pages/admin-interface.jsp").forward(request, response);
+//        userPasswordList = AdminDAO.getAllUserPasswords(username, password, getServletContext());
+//        System.out.println("Attempting processing getAllUsersPasswords");
+//
+//        request.setAttribute("users", userPasswordList);
+//
+//        request.getRequestDispatcher("web-pages/admin-interface.jsp").forward(request, response);
 
 
         List <Article> articles = new ArrayList <>();
@@ -75,41 +75,14 @@ public class AdminInterfaceServlet extends HttpServlet {
         String title = request.getParameter("title");
         String author = request.getParameter("author");
 
-        articles = AdminDAO.getAllArticles(title, author, getServletContext());
+        articles = AdminDAO.getAllArticles(getServletContext());
         System.out.println("Attempting processing "+ title + author);
 
         request.setAttribute("articles", articles);
 
-        request.getRequestDispatcher("web-pages/admin-interface.jsp").forward(request, response);
+        //request.getRequestDispatcher("web-pages/admin-interface.jsp").forward(request, response);
 
-
-
-        List<Comment> comments = new ArrayList <>();
-
-
-        String articleID = request.getParameter("articleID");
-
-        String content = request.getParameter("comment");
-
-        String user = (String) request.getSession().getAttribute("username");
-
-        content = content.replaceAll("(\r\n|\n\r|\r|\n)", "<br />");
-
-        boolean commentAdded = CommentDAO.newComment(content,articleID,user,getServletContext());
-
-        if(!commentAdded){
-            System.out.println("comment not added??");
-            String message = "Some trouble with adding your comment. Please try again.";
-            request.setAttribute("message",message);
-
-
-
-        }else{
-            request.setAttribute("comments", comments);
-
-            request.getRequestDispatcher("/admin-interface.jsp").forward(request,response);
-        }
-
+        request.getRequestDispatcher("web-pages/admin-interface.jsp").forward(request,response);
     }
 }
 

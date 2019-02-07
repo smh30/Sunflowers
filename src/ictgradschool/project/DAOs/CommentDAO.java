@@ -152,7 +152,6 @@ public class CommentDAO {
                         "VALUES (?, ?, ?, ?)")) {
                     s2.setString(1, user);
                     s2.setString(2, ArticleId);
-
                     s2.setString(3, content);
                     s2.setString(4, timestamp.toString());
 
