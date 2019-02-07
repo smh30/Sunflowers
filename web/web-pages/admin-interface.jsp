@@ -29,8 +29,13 @@
                             <tr>
                                 <td>${user.username} </td>
                                 <td>
-                                    <button onclick="checkRemoveUser()" value="deleteuser">Remove User</button>
+                                    <form method="post" action="deleteuser">
+                                        <input type="hidden" name="username" value="${user.username}">
+                                        <input type="hidden" name="admin" value="admin">
+                                    <%--<button onclick="checkRemoveUser()">Remove User</button>--%>
+                                        <input type="submit" value="Delete User" onclick="return confirm('Are you sure?')"/>
                                     <p id="remove"></p>
+                                    </form>
                                 </td>
                                 <td>
                                     <button type="button" onclick="">Reset User's Password</button>
