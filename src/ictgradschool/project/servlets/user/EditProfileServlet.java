@@ -59,7 +59,7 @@ public class EditProfileServlet extends HttpServlet {
 
         //request.setAttribute("username", username);
 //        request.getRequestDispatcher("home").forward(request, response);
-        response.sendRedirect("/profile");
+        response.sendRedirect("profile");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -83,6 +83,7 @@ public class EditProfileServlet extends HttpServlet {
 
         request.getRequestDispatcher("web-pages/profile.jsp").forward(request,
                 response);
+        // acomment so mi can do a comit
 
     }
 }

@@ -23,7 +23,7 @@
     function switchImage() {
         var image = document.getElementById("imageToSwap");
         var dropdown = document.getElementById("dlist");
-        image.src = "../default-photos-for-profile-page/" + dropdown.value;
+        image.src = "images/default-photos-for-profile-page/" + dropdown.value;
     }
 </script>
 <body>
@@ -49,10 +49,10 @@
             <div id="image" class="text-center">
     <c:choose>
         <c:when test="${user.pictureURL != null && user.useDefaultImage == false}">
-            <img id="imageToSwap" src="../Uploaded-Photos/${user.pictureURL}" width="225" class="img-thumbnail">
+            <img id="imageToSwap" src="Uploaded-Photos/${user.pictureURL}" width="225" class="img-thumbnail">
         </c:when>
     <c:otherwise>
-    <img id="imageToSwap" src="../default-photos-for-profile-page/${user.defaultImage}" width="225">
+    <img id="imageToSwap" src="images/default-photos-for-profile-page/${user.defaultImage}" width="225">
 
     </c:otherwise>
     </c:choose>
@@ -61,7 +61,7 @@
     <%--this block is for choosing which of the default images the user prefers. Saves to db when they submit--%>
 
 
-        <form method="POST" action="/editprofile">
+        <form method="POST" action="editprofile">
             <fieldset>
                 <legend>Choose default picture: </legend>
                 <div class="form-group">
@@ -107,7 +107,7 @@
 
 
         <%--this is the form for uploading a custom avatar--%>
-        <form method="POST" action="/Upload" enctype="multipart/form-data">
+        <form method="POST" action="Upload" enctype="multipart/form-data">
             <fieldset>
                 <legend>Choose your own picture to upload: </legend>
                 <div class="form-group">
@@ -127,7 +127,7 @@
 
     <div class="form-group col-md-6">
         <%--a form to edit the other aspects of the user profile--%>
-        <form action="/editprofile" method="post">
+        <form action="editprofile" method="post">
             <fieldset>
                 <legend>Update user info: </legend>
 
@@ -215,7 +215,7 @@
 
 <hr>
         <%--a separate form for changing the password--%>
-        <form method="post" action="/changePW">
+        <form method="post" action="changePW">
             <fieldset><legend>Update Password:</legend>
                 <input type="hidden" name="username" value="${user.username}" >
                 <div class="form-group">
@@ -231,7 +231,7 @@
         </form><br>
 <hr>
 <%--todo add an "are you sure???" pop-up to this button--%>
-        <form method="post" action="/deleteprofile">
+        <form method="post" action="deleteprofile">
             <fieldset><legend>Delete Account</legend>
                 <div class="form-group">
                     <input type="hidden" name="username" value="${user.username}">

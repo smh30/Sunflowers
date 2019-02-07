@@ -50,14 +50,11 @@
                 <table border="2">
                     <thead>
                         <tr>
+                            <%--WILL NEED TO BE TWO SEPARATE LISTS???--%>
                             <th>Article Title:</th>
                             <th>Article Author:</th>
                             <th>Hide Article:</th>
                             <th>Show Article:</th>
-                            <th>Comment Author:</th>
-                            <th>Comment Content:</th>
-                            <th>Hide Comment:</th>
-                            <th>Show Comment:</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,6 +70,33 @@
                                     <button onclick="" value="/adminadduser">Show Article</button>
                                     <p id="showarticle"></p>
                                 </td>
+                                <td>
+                                    <button type="button" onclick="">Reset User's Password</button>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="comments_table">
+            <form method=post>
+                <table border="2">
+                    <thead>
+                        <tr>
+                            <%--WILL NEED TO BE TWO SEPARATE LISTS???--%>
+                            <th>Comment Author:</th>
+                            <th>Comment Content:</th>
+                            <th>Hide Comment:</th>
+                            <th>Show Comment:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="comment" items="${comments}">
+                            <tr>
                                 <td>${comment.author} </td>
                                 <td>${comment.body}</td>
                                 <td>
@@ -92,9 +116,6 @@
                 </table>
             </form>
         </div>
-        <br>
-        <br>
-        <br>
         <a href="#myPopup" class="btn btn-default" data-toggle="collapse">Add new user form</a>
 
         <div class="collapse" id="myPopup">

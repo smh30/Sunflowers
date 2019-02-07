@@ -50,12 +50,11 @@ public class LoginServlet extends HttpServlet {
                //redirects to the previous page if it was an article page
                 if(request.getParameter("from").equals("/web-pages/single-article.jsp")){
                     request.setAttribute("articleID", request.getParameter("articleID"));
-                    request.getRequestDispatcher("/article").forward(request,response);
+                    request.getRequestDispatcher("article").forward(request,response);
                 } else {
-                    response.sendRedirect("/home");
+                    response.sendRedirect("home");
                 }
-               // System.out.println(request.getParameter("from"));
-                //response.sendRedirect(request.getParameter("/home"));
+               
             }
 
             return;
@@ -63,16 +62,13 @@ public class LoginServlet extends HttpServlet {
             System.out.println("problem with login didn't match");
             String message = "The username or password was incorrect";
             request.setAttribute("message", message);
-//            request.getRequestDispatcher("web-pages/login.jsp").forward(request, response);
-            request.getRequestDispatcher("/home").forward(request, response);
+            request.getRequestDispatcher("home").forward(request, response);
         }
 
-//request.getRequestDispatcher("home").forward(request, response); apparently doesn't work
-        //response.sendRedirect("home");
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("in the login servlet doGet");
-        request.getRequestDispatcher("web-pages/login.jsp").forward(request, response);
+    
     }
 }

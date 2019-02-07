@@ -167,10 +167,10 @@
 
         <c:choose>
             <c:when test="${article.title == null}">
-                <h2><a href="/article?articleID=${article.ID}">Untitled</a></h2>
+                <h2><a href="article?articleID=${article.ID}">Untitled</a></h2>
             </c:when>
             <c:otherwise>
-                <h2><a href="/article?articleID=${article.ID}">${article.title}</a></h2>
+                <h2><a href="article?articleID=${article.ID}">${article.title}</a></h2>
             </c:otherwise>
         </c:choose>
 
@@ -198,13 +198,13 @@
         <%--the 'edit' and 'delete' buttons will only appear if the logged in user wrote the article --%>
         <c:if test="${article.author.username == sessionScope.username}">
             <div class="d-flex flex-row-reverse">
-            <form method="get" action=/edit-article class="px-2">
+            <form method="get" action="edit-article" class="px-2">
                 <input type="hidden" name="articleID" value="${article.ID}">
                 <button class="btn btn-primary" type="submit" value="Edit Article"><i class='fas fa-edit'></i> Edit Article</button>
             </form>
 
 
-            <form method="post" action="/deleteArticle" class="px-2">
+            <form method="post" action="deleteArticle" class="px-2">
                 <input type="hidden" name="articleID" value="${article.ID}">
                 <button class="btn btn-primary" type="submit" value="Delete Article"><i class='fas fa-meh'></i> Delete Article</button>
             </form>
@@ -217,6 +217,7 @@
 
 
     <%--Comments Pool--%>
+
     <%--<div class="comments-pool">--%>
         <%--<%!--%>
             <%--private void output(Comment comment, JspWriter out, boolean canDelete, boolean canReply){--%>
@@ -323,6 +324,84 @@
 
 
 
+    <div class="comments-pool">
+        <%!
+            private void output(Comment comment, JspWriter out, boolean canDelete, boolean canReply){
+                try {
+                    //Comment Output
+                    //Check if comments can be deleted
+                    if(canDelete) {
+                        //If author can delete comments
+                        //Output comment content first
+
+                        out.print("<div>"+comment.getCommentAuthor().getUsername()+":"+"</div>");
+                        out.println("<div>" + comment.getCommentContent() + "</div>");
+
+                        out.println("<div style=\"margin-left: 20px;\">" + comment.getCommentContent());
+
+                        //Show delete button
+                        out.println(
+                                "<div class=\"d-flex flex-row-reverse\"><form method=\"GET\" action=\"deletecomment\">" +
+                                        "<input type=\"hidden\" name=\"articleID\" value=\""+comment.getArticleId()+"\">" +
+                                        "<input type=\"hidden\" name=\"commentID\" value=\""+comment.getCommentID()+"\">" +
+                                        "<button class=\"btn btn-primary btn-sm\"  type=\"submit\" value=\"Delete Comment\">Delete Comment</button>"+
+                                        "</form></div>"
+                        );
+                    }else{
+                        //Otherwise just output comment
+                        out.println("<div style=\"margin-left: 20px;\">" + comment.getCommentContent());
+                    }
+                    //Check if can reply comment
+                    if(canReply){
+                        //If so, show the reply function
+                        //Show Reply Button
+                        out.println(
+
+                                    "<button id=\"reply-btn-"+comment.getCommentID()+"\" class=\"open-button\" onclick=\"openForm("+comment.getCommentID()+")\">Reply</button>"+
+
+                                "<button id=\"reply-btn-"+comment.getCommentID()+"\" class=\"open-button btn btn-primary btn-sm\" onclick=\"openForm("+comment.getCommentID()+")\">Reply</button>"
+
+                        );
+                        //Reply area
+                        out.println(
+                                "<div class=\"form-popup\" id=\"myForm-"+comment.getCommentID()+"\">" +
+                                        "<form method=\"POST\" action=\"addNestedComment\" class=\"form-container\">" +
+                                        "<input type=\"hidden\" name=\"articleID\" value=\""+comment.getArticleId()+"\">" +
+                                        "<input type=\"hidden\" name=\"commentID\" value=\""+comment.getCommentID()+"\">" +
+                                        "<label for=\"content\"><b>Reply Comment:</b></label>" +
+                                        "<input type=\"text\" id=\"content\" placeholder=\"Comment here...\" name=\"content\">" +
+                                        "<button type=\"submit\" class=\"btn\">Submit</button>" +
+                                        "<button type=\"button\" class=\"btn cancel\" onclick=\"closeForm("+comment.getCommentID()+")\">Close</button>" +
+                                        "</form>" +
+                                        "</div>"
+                        );
+                    }
+                    //Comment Recursion
+                    if (comment.getChildren()!=null) {
+                        for (Comment c : comment.getChildren()) {
+                            output(c, out, canDelete, canReply);
+                        }
+                    }
+                    out.println("</div>");
+                }catch (IOException e){
+                    System.err.println(e.fillInStackTrace());
+                }
+            }
+        %>
+        <%
+            Article article = (Article) request.getAttribute("article");
+            List<Comment> rootComments = (List<Comment>) request.getAttribute("comment");
+            for(Comment c:rootComments){
+                //In the case when the author is the article author or the user who left comment, they can delete comment
+                boolean canDelete = (article.getAuthor().getUsername() .equals( request.getSession().getAttribute("username"))) || (c.getCommentAuthor().getUsername().equals(request.getSession().getAttribute("username")));
+                //In the case for any signed in users, they can do reply
+                boolean canReply = (request.getSession().getAttribute("username") != null);
+                output(c, out, canDelete, canReply);
+            }
+        %>
+    </div>
+
+
     <%--Comment Publish Form--%>
     <c:if test="${sessionScope.username != null}">
         <%--another form which posts to /addcomment
@@ -330,7 +409,7 @@
                  submit button--%>
     <div class="add-comment">
         <div class="form-group">
-            <form method="post" action="/addcomment">
+            <form method="post" action="addcomment">
                 <input type="hidden" name="articleID" value="${article.ID}">
                 <label for="comment">Comment:</label>
                 <textarea class="form-control" name="comment" rows="5" id="comment"
