@@ -72,6 +72,7 @@
             }
 
             .theRform{
+                font-family: 'Microsoft Sans Serif', Tahoma, Arial, Verdana, Sans-Serif;
                 margin: 20px 15px 25px 15px;
                 padding: 20px;
                 border:2px solid #666666;
@@ -79,7 +80,10 @@
                 background-color: whitesmoke;
             }
 
-
+            .form-control:hover{
+                background-color: #8a8a8a;
+                color: black;
+            }
 
 
         </style>
@@ -102,13 +106,13 @@
             <%--Below line for reCAPTCHA--%>
 
 <div class="form-group">
-            <label class="label-txt" for="username">username:</label>
+            <label class="label-txt" for="username">USERNAME:</label>
                 <%--the onchange means that when the box loses focus it does the thing --%>
             <input type="text" id="username" name="username" onchange="checkName(this.value)"  class="form-control">
         </div>
 
     <div class="form-group">
-            <label for="password">password:</label>
+            <label for="password">PASSWORD:</label>
             <input type="password" id="password" name="password" minlength="8" class="form-control">
         <small id="passwordInfo" class="form-text text-muted">Minimum 8 characters</small>
 </div>
