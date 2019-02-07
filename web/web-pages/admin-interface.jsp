@@ -21,31 +21,85 @@
                         <tr>
                             <th>Username:</th>
                             <th>Remove Option:</th>
+                            <%--Actually to do this here--%>
+                            <th>To Do:</th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach var="user" items="${users}">
                             <tr>
                                 <td>${user.username} </td>
-                                <td><button onclick="checkRemoveUser()" value="/adminadduser">Remove User</button>
+                                <td>
+                                    <button onclick="checkRemoveUser()" value="/adminadduser">Remove User</button>
                                     <p id="remove"></p>
                                 </td>
-
-                                <td><button type="button" onclick="" >Reset User's Password</button></td>
-
+                                <td>
+                                    <button type="button" onclick="">Reset User's Password</button>
+                                </td>
                             </tr>
                         </c:forEach>
-
                     </tbody>
                 </table>
             </form>
         </div>
-
+        <br>
+        <br>
+        <br>
+        <div class="article_table">
+            <form method=post>
+                <table border="2">
+                    <thead>
+                        <tr>
+                            <th>Article Title:</th>
+                            <th>Article Author:</th>
+                            <th>Hide Article:</th>
+                            <th>Show Article:</th>
+                            <th>Comment Author:</th>
+                            <th>Comment Content:</th>
+                            <th>Hide Comment:</th>
+                            <th>Show Comment:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="article" items="${articles}">
+                            <tr>
+                                <td>${article.title} </td>
+                                <td>${article.author} </td>
+                                <td>
+                                    <button onclick="" value="/adminadduser">Hide Article</button>
+                                    <p id="hidearticle"></p>
+                                </td>
+                                <td>
+                                    <button onclick="" value="/adminadduser">Show Article</button>
+                                    <p id="showarticle"></p>
+                                </td>
+                                <td>${comment.author} </td>
+                                <td>${comment.body}</td>
+                                <td>
+                                    <button onclick="" value="/adminadduser">Hide Comment</button>
+                                    <p id="hidecomment"></p>
+                                </td>
+                                <td>
+                                    <button onclick="" value="/adminadduser">Show Comment</button>
+                                    <p id="showcomment"></p>
+                                </td>
+                                <td>
+                                    <button type="button" onclick="">Reset User's Password</button>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <br>
+        <br>
+        <br>
         <a href="#myPopup" class="btn btn-default" data-toggle="collapse">Add new user form</a>
 
         <div class="collapse" id="myPopup">
 
-            <form method="post" action="adminadduser"  class="form-container">
+            <form method="post" action="adminadduser" class="form-container">
                 <h2>Add user: </h2>
                 <br>
                 <label for="unameID">Username:</label>
@@ -88,6 +142,8 @@
                 }
                 document.getElementById("remove").innerHTML = txt;
             }
+
+            <%--End of checkRemoveUser function--%>
         </script>
     </body>
 </html>
