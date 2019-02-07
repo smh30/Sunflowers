@@ -93,6 +93,16 @@
         <url-pattern>/Upload</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>DeleteUser</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.user.DeleteProfileServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteUser</servlet-name>
+        <url-pattern>/deleteuser</url-pattern>
+    </servlet-mapping>
+
     <!-- ~~~~~~~~~~~~~~~~~~~~~article related servlets~~~~~~~~~~~~~~~~~~~~~~~~~`-->
     <servlet>
         <servlet-name>Homepage</servlet-name>

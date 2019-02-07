@@ -21,8 +21,7 @@
                         <tr>
                             <th>Username:</th>
                             <th>Remove Option:</th>
-                            <%--Actually to do this here--%>
-                            <th>To Do:</th>
+                            <th>Reset User's Password:</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,7 +29,7 @@
                             <tr>
                                 <td>${user.username} </td>
                                 <td>
-                                    <button onclick="checkRemoveUser()" value="/adminadduser">Remove User</button>
+                                    <button onclick="checkRemoveUser()" value="deleteuser">Remove User</button>
                                     <p id="remove"></p>
                                 </td>
                                 <td>

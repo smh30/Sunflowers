@@ -231,7 +231,7 @@
         </form><br>
 <hr>
 <%--todo add an "are you sure???" pop-up to this button--%>
-        <form method="post" action="deleteprofile">
+        <form method="post" action="deleteuser">
             <fieldset><legend>Delete Account</legend>
                 <div class="form-group">
                     <input type="hidden" name="username" value="${user.username}">
