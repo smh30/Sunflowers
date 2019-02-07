@@ -2,7 +2,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="ictgradschool.project.JavaBeans.Article" %>
 <%@ page import="java.io.PrintWriter" %>
-<%@ page import="java.io.IOException" %><%--
+<%@ page import="java.io.IOException" %>
+<%@ taglib prefix="myTags" tagdir="/WEB-INF/tags" %>
+<%--
   Created by IntelliJ IDEA.
   User: yab2
   Date: 25/01/2019
@@ -459,6 +461,67 @@
         </div>
     </div>
 
+
+    <%--steph's testing zone!!!!!!--%>
+    Steph's testing zone! Ignore whatever's down here :)
+<%--<c:forEach var="c" items="${comment}">--%>
+
+    <%--<c:set var="recurse_message" value="${c}" scope="request"></c:set>--%>
+    <%--<c:import url="comments.jsp"></c:import>--%>
+    <%--<c:remove var="recurse_message" scope="request"></c:remove>--%>
+
+        <%--</c:forEach>--%>
+    <%----%>
+<p>has the basic structure but obvs not correct, needs to be recursive.</p>
+
+    <%--<% List<Comment> comments = (List<Comment>)request.getAttribute("comment");--%>
+    <%--for(Comment comment: (List<Comment>)request.getAttribute("comment")){%>--%>
+        <%---a top level comment exists: <%=comment.getCommentContent()%><br>--%>
+        <%--<% for(Comment child: comment.getChildren()){%>--%>
+<%--a child comment exists: <%=child.getCommentContent()%><br>--%>
+            <%--<% for(Comment grandchild: child.getChildren()){%>--%>
+        <%--a grandchild comment exists: <%=grandchild.getCommentContent()%><br>--%>
+
+<%--<%}}%>--%>
+
+        <%--<%}%>--%>
+
+        <%--<p>another solution from online</p>--%>
+    <%--<ul>--%>
+        <%--<c:forEach var="topcomment" items="${comment}">--%>
+        <%--<li>--%>
+            <%--<c:set var="comment" value="${topcomment}" scope="request"/>--%>
+            <%--<jsp:include page="comments.jsp"/>--%>
+        <%--</li>--%>
+            <%--</c:forEach>--%>
+    <%--</ul>--%>
+
+    <%--yet another try--%>
+<%--<div class="topcomments">--%>
+    <%--<c:forEach var="comment" items="${comment}">--%>
+        <%--<p>Comment: ${comment.commentContent}</p>--%>
+        <%--<c:set var="comment" value="${comment}" scope="request"/>--%>
+        <%--before include: comment = ${comment.commentContent}--%>
+<%--<jsp:include page="comments.jsp"/>--%>
+    <%--</c:forEach>--%>
+<%--</div>--%>
+
+
+
+        <p>onee lasssst timmme</p>
+
+
+    <myTags:childComments list="${comment}"/>
 </body>
 </html>
 
+
+
+<%--<c:import url="comments.jsp"></c:import>--%>
+
+<%--<c:forEach var="childComment" items="${comment.children}">--%>
+<%--- achild comment exists: ${childComment.commentContent}<br>--%>
+<%--<c:forEach var="childComment" items="${childComment.children}">--%>
+<%--- a level 3 comment exists<br>--%>
+<%--</c:forEach>--%>
+<%--</c:forEach>--%>
