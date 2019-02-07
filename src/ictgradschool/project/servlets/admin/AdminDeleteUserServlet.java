@@ -23,12 +23,12 @@ public class AdminDeleteUserServlet extends HttpServlet {
             String message = "Hello Admin. There is some trouble with deleting the user's account. Please try again.";
             request.setAttribute("message", message);
 
-            request.getRequestDispatcher("web-pages/admininterface").forward(request, response);
+            request.getRequestDispatcher("admininterface").forward(request, response);
             System.out.println("returned to admin interface");
 
         } else {
 
-            response.sendRedirect("/admininterface");
+            response.sendRedirect("admininterface");
             System.out.println("deleted user from admin interface");
         }
     }

@@ -18,9 +18,7 @@ public class DeleteProfileServlet extends HttpServlet {
 
         String username = request.getParameter("username");
 
-
-        //TODO: Check what on earth below line means
-        String username1 = (String) request.getSession().getAttribute("username");
+//        String username1 = (String) request.getSession().getAttribute("username");
 
         boolean userDeleted = ProfileDetailsDAO.deleteUser(username, getServletContext());
 
@@ -28,7 +26,7 @@ public class DeleteProfileServlet extends HttpServlet {
             String message = "Some trouble with deleting your profile. Please try again.";
             request.setAttribute("message", message);
 
-            request.getRequestDispatcher("web-pages/profile.jsp").forward(request,response);
+            request.getRequestDispatcher("profile").forward(request,response);
             System.out.println("profile");
         }else{
             request.getSession().invalidate();
