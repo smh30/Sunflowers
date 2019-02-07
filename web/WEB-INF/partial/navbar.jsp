@@ -19,9 +19,8 @@
             <ul class="nav navbar-nav">
 
 
-                <li class="nav-item active"><a class="nav-link" href="../home"><i class="fa fa-fw fa-home"></i>Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="../web-pages/search.jsp"><i class="fa fa-fw fa-search"></i>Search</a></li>
-
+                <li class="nav-item active"><a class="nav-link" href="home"><i class="fa fa-fw fa-home"></i>Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="web-pages/search.jsp"><i class="fa fa-fw fa-search"></i>Search</a></li>
 
                 <c:if test="${sessionScope.username == null}">
                     <!-- show only the login and register if nobody is logged in -->
@@ -48,9 +47,7 @@
                     </li>
 
 
-                    <li class="nav-item"><a class="nav-link" href="../register"><i class='fas fa-plus'></i> Register</a></li>
-
-
+                    <li class="nav-item"><a class="nav-link" href="register"><i class='fas fa-plus'></i> Register</a></li>
 
 
                 </c:if>
@@ -61,11 +58,11 @@
 
 
 
-                <li class="nav-item"><a class="nav-link" href="../new-article"><i class='fas fa-file-alt'></i> New Article</a></li>
+                <li class="nav-item"><a class="nav-link" href="new-article"><i class='fas fa-file-alt'></i> New Article</a></li>
 
-                <li class="nav-item"><a class="nav-link" href="../profile"><i class='fas fa-book-reader'></i> Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="profile"><i class='fas fa-book-reader'></i> Profile</a></li>
 
-                <li class="nav-item"><a class="nav-link" href="../home?author=${sessionScope.username}"><i class='far fa-folder'></i> My Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="home?author=${sessionScope.username}"><i class='far fa-folder'></i> My Blog</a></li>
 
                 <c:if test="${sessionScope.admin!=null}">
 

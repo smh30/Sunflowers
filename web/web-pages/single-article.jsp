@@ -2,7 +2,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="ictgradschool.project.JavaBeans.Article" %>
 <%@ page import="java.io.PrintWriter" %>
-<%@ page import="java.io.IOException" %><%--
+<%@ page import="java.io.IOException" %>
+<%@ taglib prefix="myTags" tagdir="/WEB-INF/tags" %>
+<%--
   Created by IntelliJ IDEA.
   User: yab2
   Date: 25/01/2019
@@ -77,90 +79,90 @@
     </script>
     <style>
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-        }
+        /*body {*/
+            /*font-family: Arial, Helvetica, sans-serif;*/
+        /*}*/
 
-        * {
-            box-sizing: border-box;
-        }
+        /** {*/
+            /*box-sizing: border-box;*/
+        /*}*/
 
-        .red {
-            color: red;
-        }
+        /*.red {*/
+            /*color: red;*/
+        /*}*/
 
-        /* Button used to open the contact form - fixed at the bottom of the page */
-        .open-button {
+        /*!* Button used to open the contact form - fixed at the bottom of the page *!*/
+        /*.open-button {*/
 
-            background-color: #555;
-            color: white;
-            padding: 5px 5px;
-            border: none;
-            cursor: pointer;
-            opacity: 0.8;
-            bottom: 23px;
-            right: 28px;
-            width: 90px;
+            /*background-color: #555;*/
+            /*color: white;*/
+            /*padding: 5px 5px;*/
+            /*border: none;*/
+            /*cursor: pointer;*/
+            /*opacity: 0.8;*/
+            /*bottom: 23px;*/
+            /*right: 28px;*/
+            /*width: 90px;*/
 
-        }
+        /*}*/
 
-        /* The popup form - hidden by default */
-        .form-popup {
-            display: none;
-            bottom: 0;
-            right: 15px;
-            border: 3px solid #f1f1f1;
-            z-index: 9;
-        }
+        /*!* The popup form - hidden by default *!*/
+        /*.form-popup {*/
+            /*display: none;*/
+            /*bottom: 0;*/
+            /*right: 15px;*/
+            /*border: 3px solid #f1f1f1;*/
+            /*z-index: 9;*/
+        /*}*/
 
-        /* Add styles to the form container */
-        .form-container {
-            max-width: 100%;
-            padding: 10px;
-            background-color: white;
-        }
+        /*!* Add styles to the form container *!*/
+        /*.form-container {*/
+            /*max-width: 100%;*/
+            /*padding: 10px;*/
+            /*background-color: white;*/
+        /*}*/
 
-        /* Full-width input fields */
-        .form-container input[type=text], .form-container input[type=password] {
-            width: 100%;
-            padding: 15px;
-            margin: 5px 0 22px 0;
-            border: none;
-            background: #f1f1f1;
-        }
+        /*!* Full-width input fields *!*/
+        /*.form-container input[type=text], .form-container input[type=password] {*/
+            /*width: 100%;*/
+            /*padding: 15px;*/
+            /*margin: 5px 0 22px 0;*/
+            /*border: none;*/
+            /*background: #f1f1f1;*/
+        /*}*/
 
-        /* When the inputs get focus, do something */
-        .form-container input[type=text]:focus, .form-container input[type=password]:focus {
-            background-color: #ddd;
-            outline: none;
-        }
+        /*!* When the inputs get focus, do something *!*/
+        /*.form-container input[type=text]:focus, .form-container input[type=password]:focus {*/
+            /*background-color: #ddd;*/
+            /*outline: none;*/
+        /*}*/
 
-        /* Set a style for the submit button */
-        .form-container .btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 5px 5px;
-            border: none;
-            cursor: pointer;
-            width: 45%;
-            margin-bottom: 10px;
-            margin-left: 3%;
-            opacity: 0.8;
-            display: inline-block;
-        }
+        /*!* Set a style for the submit button *!*/
+        /*.form-container .btn {*/
+            /*background-color: #4CAF50;*/
+            /*color: white;*/
+            /*padding: 5px 5px;*/
+            /*border: none;*/
+            /*cursor: pointer;*/
+            /*width: 45%;*/
+            /*margin-bottom: 10px;*/
+            /*margin-left: 3%;*/
+            /*opacity: 0.8;*/
+            /*display: inline-block;*/
+        /*}*/
 
-        /* Add a red background color to the cancel button */
-        .form-container .cancel {
-            width: 45%;
-            display: inline-block;
-            margin-right: 1%;
-            background-color: red;
-        }
+        /*!* Add a red background color to the cancel button *!*/
+        /*.form-container .cancel {*/
+            /*width: 45%;*/
+            /*display: inline-block;*/
+            /*margin-right: 1%;*/
+            /*background-color: red;*/
+        /*}*/
 
-        /* Add some hover effects to buttons */
-        .form-container .btn:hover, .open-button:hover {
-            opacity: 1;
-        }
+        /*!* Add some hover effects to buttons *!*/
+        /*.form-container .btn:hover, .open-button:hover {*/
+            /*opacity: 1;*/
+        /*}*/
     </style>
 </head>
 <body>
@@ -328,7 +330,82 @@
 
 
 
+    <%--<div class="comments-pool">--%>
+        <%--<%!--%>
+            <%--private void output(Comment comment, JspWriter out, boolean canDelete, boolean canReply){--%>
+                <%--try {--%>
+                    <%--//Comment Output--%>
+                    <%--//Check if comments can be deleted--%>
+                    <%--if(canDelete) {--%>
+                        <%--//If author can delete comments--%>
+                        <%--//Output comment content first--%>
 
+                        <%--out.print("<div>"+comment.getCommentAuthor().getUsername()+":"+"</div>");--%>
+                        <%--out.println("<div>" + comment.getCommentContent() + "</div>");--%>
+
+                        <%--out.println("<div style=\"margin-left: 20px;\">" + comment.getCommentContent());--%>
+
+                        <%--//Show delete button--%>
+                        <%--out.println(--%>
+                                <%--"<div class=\"d-flex flex-row-reverse\"><form method=\"GET\" action=\"deletecomment\">" +--%>
+                                        <%--"<input type=\"hidden\" name=\"articleID\" value=\""+comment.getArticleId()+"\">" +--%>
+                                        <%--"<input type=\"hidden\" name=\"commentID\" value=\""+comment.getCommentID()+"\">" +--%>
+                                        <%--"<button class=\"btn btn-primary btn-sm\"  type=\"submit\" value=\"Delete Comment\">Delete Comment</button>"+--%>
+                                        <%--"</form></div>"--%>
+                        <%--);--%>
+                    <%--}else{--%>
+                        <%--//Otherwise just output comment--%>
+                        <%--out.println("<div style=\"margin-left: 20px;\">" + comment.getCommentContent());--%>
+                    <%--}--%>
+                    <%--//Check if can reply comment--%>
+                    <%--if(canReply){--%>
+                        <%--//If so, show the reply function--%>
+                        <%--//Show Reply Button--%>
+                        <%--out.println(--%>
+
+                                    <%--"<button id=\"reply-btn-"+comment.getCommentID()+"\" class=\"open-button\" onclick=\"openForm("+comment.getCommentID()+")\">Reply</button>"+--%>
+
+                                <%--"<button id=\"reply-btn-"+comment.getCommentID()+"\" class=\"open-button btn btn-primary btn-sm\" onclick=\"openForm("+comment.getCommentID()+")\">Reply</button>"--%>
+
+                        <%--);--%>
+                        <%--//Reply area--%>
+                        <%--out.println(--%>
+                                <%--"<div class=\"form-popup\" id=\"myForm-"+comment.getCommentID()+"\">" +--%>
+                                        <%--"<form method=\"POST\" action=\"addNestedComment\" class=\"form-container\">" +--%>
+                                        <%--"<input type=\"hidden\" name=\"articleID\" value=\""+comment.getArticleId()+"\">" +--%>
+                                        <%--"<input type=\"hidden\" name=\"commentID\" value=\""+comment.getCommentID()+"\">" +--%>
+                                        <%--"<label for=\"content\"><b>Reply Comment:</b></label>" +--%>
+                                        <%--"<input type=\"text\" id=\"content\" placeholder=\"Comment here...\" name=\"content\">" +--%>
+                                        <%--"<button type=\"submit\" class=\"btn\">Submit</button>" +--%>
+                                        <%--"<button type=\"button\" class=\"btn cancel\" onclick=\"closeForm("+comment.getCommentID()+")\">Close</button>" +--%>
+                                        <%--"</form>" +--%>
+                                        <%--"</div>"--%>
+                        <%--);--%>
+                    <%--}--%>
+                    <%--//Comment Recursion--%>
+                    <%--if (comment.getChildren()!=null) {--%>
+                        <%--for (Comment c : comment.getChildren()) {--%>
+                            <%--output(c, out, canDelete, canReply);--%>
+                        <%--}--%>
+                    <%--}--%>
+                    <%--out.println("</div>");--%>
+                <%--}catch (IOException e){--%>
+                    <%--System.err.println(e.fillInStackTrace());--%>
+                <%--}--%>
+            <%--}--%>
+        <%--%>--%>
+        <%--<%--%>
+            <%--Article article = (Article) request.getAttribute("article");--%>
+            <%--List<Comment> rootComments = (List<Comment>) request.getAttribute("comment");--%>
+            <%--for(Comment c:rootComments){--%>
+                <%--//In the case when the author is the article author or the user who left comment, they can delete comment--%>
+                <%--boolean canDelete = (article.getAuthor().getUsername() .equals( request.getSession().getAttribute("username"))) || (c.getCommentAuthor().getUsername().equals(request.getSession().getAttribute("username")));--%>
+                <%--//In the case for any signed in users, they can do reply--%>
+                <%--boolean canReply = (request.getSession().getAttribute("username") != null);--%>
+                <%--output(c, out, canDelete, canReply);--%>
+            <%--}--%>
+        <%--%>--%>
+    <%--</div>--%>
 
 
     <%--Comment Publish Form--%>
@@ -340,8 +417,8 @@
         <div class="form-group">
             <form method="post" action="addcomment">
                 <input type="hidden" name="articleID" value="${article.ID}">
-                <label for="comment">Comment:</label>
-                <textarea class="form-control" name="comment" rows="5" id="comment"
+                <label for="addcomment">Comment:</label>
+                <textarea class="form-control" name="comment" rows="5" id="addcomment"
                           placeholder="Comment here:"></textarea>
                 <br>
                 <button class="btn btn-primary" type="submit" value="Add Comment">Add Comment</button>
@@ -420,13 +497,13 @@
                 <%--&lt;%&ndash;</form>&ndash;%&gt;--%>
                 <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
 
-                <%--&lt;%&ndash;this form will pop up when the button is pressed&ndash;%&gt;--%>
-            <%--&lt;%&ndash;<a href="#hiddenreply${comment.commentID}" class="btn btn-default" data-toggle="collapse">show reply box</a>&ndash;%&gt;--%>
-            <%--&lt;%&ndash;<div id="hiddenreply${comment.commentID}" class="collapse">&ndash;%&gt;--%>
-                <%--&lt;%&ndash;<form>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<label for="nested-reply">reply: </label>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<textarea id="nested-reply" rows="5" cols="30"></textarea>&ndash;%&gt;--%>
-                <%--&lt;%&ndash;</form>&ndash;%&gt;--%>
+                <%--this form will pop up when the button is pressed--%>
+            <%--<a href="#hiddenreply${comment.commentID}" class="btn btn-default" data-toggle="collapse">show reply box</a>--%>
+            <%--<div id="hiddenreply${comment.commentID}" class="collapse">--%>
+                <%--<form>--%>
+                    <%--<label for="nested-reply">reply: </label>--%>
+                    <%--<textarea id="nested-reply" rows="5" cols="30"></textarea>--%>
+                <%--</form>--%>
 
                 <%--&lt;%&ndash;&ndash;%&gt;--%>
 
@@ -436,25 +513,25 @@
         <%--</div>--%>
         <%--</c:forEach>--%>
 
-        <c:if test="${sessionScope.username != null}">
-            <%--another form which posts to /addcomment
-                     text field for writing comment
-                     submit button--%>
-        <div class="comments">
-            <div class="form-group">
-                <form method="post" action="/addcomment">
-                    <input type="hidden" name="articleID" value="${article.ID}">
-                    <label for="comment">Comment:</label>
-                    <textarea class="form-control" name="comment" rows="5" id="comment"
-                              placeholder="Comment here:"></textarea>
-                    <br>
-                    <input type="submit" value="Add Comment">
-                </form>
+        <%--<c:if test="${sessionScope.username != null}">--%>
+            <%--&lt;%&ndash;another form which posts to /addcomment--%>
+                     <%--text field for writing comment--%>
+                     <%--submit button&ndash;%&gt;--%>
+        <%--<div class="comments">--%>
+            <%--<div class="form-group">--%>
+                <%--<form method="post" action="/addcomment">--%>
+                    <%--<input type="hidden" name="articleID" value="${article.ID}">--%>
+                    <%--<label for="comment">Comment:</label>--%>
+                    <%--<textarea class="form-control" name="comment" rows="5" id="comment"--%>
+                              <%--placeholder="Comment here:"></textarea>--%>
+                    <%--<br>--%>
+                    <%--<input type="submit" value="Add Comment">--%>
+                <%--</form>--%>
 
-            </div>
-        </div>
+            <%--</div>--%>
+        <%--</div>--%>
 
-        </c:if>
+        <%--</c:if>--%>
 
 
 
@@ -496,6 +573,11 @@
         </div>
     </div>
 
+
+       <%--I'm not sure if doing everything in a tag is cheating????--%>
+
+
+    <myTags:childComments list="${comment}"/>
 </body>
 </html>
 

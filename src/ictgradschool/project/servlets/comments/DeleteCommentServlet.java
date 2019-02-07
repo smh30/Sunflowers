@@ -18,23 +18,24 @@ public class DeleteCommentServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("get-delete comm dao");
-        String commentAuthor = (String) request.getSession().getAttribute("username");
+       // String commentAuthor = (String) request.getSession().getAttribute("username");
 
-        String commentContent = request.getParameter("commentContent");
+       // String commentContent = request.getParameter("commentContent");
 
         int articleID =  Integer.parseInt(request.getParameter("articleID"));
 
         int commentID = Integer.parseInt(request.getParameter("commentID"));
 
-        boolean commentDeleted = CommentDAO.deleteComment(commentAuthor, commentContent, articleID, commentID ,getServletContext());
+        boolean commentDeleted = CommentDAO.deleteComment(commentID ,getServletContext());
 
         if (!commentDeleted) {
             String message = "Some trouble with deleting your comment. Please try again.";
             request.setAttribute("message", message);
 
-            request.getRequestDispatcher("/article").forward(request,response);
+            request.getRequestDispatcher("article").forward(request,response);
         }else{
-            request.getRequestDispatcher("/article").forward(request,response);
+            request.setAttribute("articleID", articleID);
+            request.getRequestDispatcher("article").forward(request,response);
         }
     }
 }
