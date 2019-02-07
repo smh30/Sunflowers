@@ -32,9 +32,10 @@
                                     <form method="post" action="deleteuser">
                                         <input type="hidden" name="username" value="${user.username}">
                                         <input type="hidden" name="admin" value="admin">
-                                    <%--<button onclick="checkRemoveUser()">Remove User</button>--%>
-                                        <input type="submit" value="Delete User" onclick="return confirm('Are you sure?')"/>
-                                    <p id="remove"></p>
+                                            <%--<button onclick="checkRemoveUser()">Remove User</button>--%>
+                                        <input type="submit" value="Delete User"
+                                               onclick="return confirm('Are you sure?')"/>
+                                        <p id="remove"></p>
                                     </form>
                                 </td>
                                 <td>
@@ -64,62 +65,32 @@
                     <tbody>
                         <c:forEach var="article" items="${articles}">
                             <tr>
-                                <td>${article.title} </td>
-                                <td>${article.author} </td>
+                                <td>${article.title}</td>
+                                <td>${article.author.username}</td>
                                 <td>
-                                    <button onclick="" value="/adminadduser">Hide Article</button>
+                                    <button onclick="" value="">Hide Article</button>
                                     <p id="hidearticle"></p>
                                 </td>
                                 <td>
-                                    <button onclick="" value="/adminadduser">Show Article</button>
+                                    <button onclick="" value="">Show Article</button>
                                     <p id="showarticle"></p>
                                 </td>
                                 <td>
-                                    <button type="button" onclick="">Reset User's Password</button>
+                                    <form method="post" action="admincomments">
+                                        <input type="hidden" name="articleID" value="${article.ID}">
+                                        <input type="hidden" name="admin" value="admin">
+                                        <input type="submit" value="Show Comments Table">
+                                    </form>
                                 </td>
                             </tr>
                         </c:forEach>
                     </tbody>
+
                 </table>
             </form>
         </div>
-        <br>
-        <br>
-        <br>
-        <div class="comments_table">
-            <form method=post>
-                <table border="2">
-                    <thead>
-                        <tr>
-                            <%--WILL NEED TO BE TWO SEPARATE LISTS???--%>
-                            <th>Comment Author:</th>
-                            <th>Comment Content:</th>
-                            <th>Hide Comment:</th>
-                            <th>Show Comment:</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach var="comment" items="${comments}">
-                            <tr>
-                                <td>${comment.author} </td>
-                                <td>${comment.body}</td>
-                                <td>
-                                    <button onclick="" value="/adminadduser">Hide Comment</button>
-                                    <p id="hidecomment"></p>
-                                </td>
-                                <td>
-                                    <button onclick="" value="/adminadduser">Show Comment</button>
-                                    <p id="showcomment"></p>
-                                </td>
-                                <td>
-                                    <button type="button" onclick="">Reset User's Password</button>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-            </form>
-        </div>
+
+
         <a href="#myPopup" class="btn btn-default" data-toggle="collapse">Add new user form</a>
 
         <div class="collapse" id="myPopup">

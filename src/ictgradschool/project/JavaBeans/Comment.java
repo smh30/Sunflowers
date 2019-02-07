@@ -12,6 +12,8 @@ public class Comment implements Serializable {
     private int commentID;
     private List<Comment> children;
     private Comment parent;
+    private int parentID;
+
 
     public Comment getParent() {
         return parent;
@@ -69,6 +71,9 @@ public class Comment implements Serializable {
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
     }
-    
+
+    public int getParentID() { return parentID; }
+
+    public void setParentID(int parentID) { this.parentID = parentID; }
     
 }
