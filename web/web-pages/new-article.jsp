@@ -4,9 +4,9 @@
 
 <html>
     <head>
-        <meta charset="UTF-8">
+
         <title>AddNewArticle</title>
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
         <script src="../ckeditor/ckeditor.js"></script>
@@ -40,6 +40,19 @@
                 color: white;
             }
 
+            body{
+                background-image: url("/web-pages/images/final333333.jpg") ;
+                background-repeat: repeat,repeat;
+                background-color: #cccccc;
+            }
+
+            #choose-date{
+                margin-top: 6px;
+                border:2px solid #666666;
+                border-radius: 12px;
+                background-color: whitesmoke;
+            }
+
 
         </style>
 
@@ -67,7 +80,6 @@
         </c:choose>
 
         <div class="container" id="choose-date">
-            <br>
             <label for="date">Optionally, select a publication date for your post:</label>
             <input type="date" id="date" name="pub-date">
         </div>

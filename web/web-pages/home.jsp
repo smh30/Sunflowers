@@ -20,6 +20,8 @@
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
+
+
     <script type="text/javascript">
 
         function getAuthorInfo(authorName) {
@@ -59,6 +61,25 @@
             })
         }
     </script>
+
+    <style type="text/css">
+
+        body{
+            background-image: url("/web-pages/images/final333333.jpg") ;
+            background-repeat: repeat,repeat;
+            background-color: #cccccc;
+        }
+
+        .article{
+            padding: 6px;
+            margin: 7px;
+            border:2px solid #666666;
+            border-radius: 12px;
+            background-color: whitesmoke;
+        }
+
+    </style>
+
 </head>
 
 <body>
@@ -170,7 +191,7 @@
 
             <p>${article.articleText}</p>
                 <%--todo add readmore for long articles?--%>
-            <hr>
+
         </div>
     </c:forEach>
     <%--end articles display--%>
