@@ -45,6 +45,7 @@ request.setAttribute("new", true);
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 // if there was a get request, redirect to the blank form
         System.out.println("in the register servlet doget");
-        request.getRequestDispatcher("web-pages/register.jsp").forward(request, response);
+        //Think this is correct webpage - s
+        request.getRequestDispatcher("web-pages/login.jsp").forward(request, response);
     }
 }

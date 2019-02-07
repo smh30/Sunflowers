@@ -1,6 +1,9 @@
 package ictgradschool.project.servlets.admin;
 
 import ictgradschool.project.DAOs.AdminDAO;
+import ictgradschool.project.DAOs.ProfileDetailsDAO;
+import ictgradschool.project.DAOs.UserDAO;
+import ictgradschool.project.JavaBeans.Article;
 import ictgradschool.project.JavaBeans.User;
 
 import javax.servlet.ServletException;
@@ -30,10 +33,7 @@ public class AdminInterfaceServlet extends HttpServlet {
         Boolean admin = Boolean.valueOf(request.getParameter("admin"));
         System.out.println("Attempting processing: " + username + password + admin);
 
-
-        //TODO: Ask Steph what new equals????? Want this to be true OR false
         System.out.println("logged in admin user, attemting redirect to admin page");
-
 
 
         List <User> userList = new ArrayList <>();
@@ -55,7 +55,7 @@ public class AdminInterfaceServlet extends HttpServlet {
 
 
         //TODO: Check whether
-        List<User> userPasswordList = new ArrayList <>();
+        List <User> userPasswordList = new ArrayList <>();
 
         //Think they are using parameters from above page??
 
@@ -63,6 +63,20 @@ public class AdminInterfaceServlet extends HttpServlet {
         System.out.println("Attempting processing getAllUsersPasswords");
 
         request.setAttribute("users", userPasswordList);
+
+        request.getRequestDispatcher("web-pages/admin-interface.jsp").forward(request, response);
+
+
+        List <Article> articles = new ArrayList <>();
+
+        //TODO: Make sure refactor re variable names!
+        String title = request.getParameter("title");
+        String author = request.getParameter("author");
+
+        articles = AdminDAO.getAllArticles(title, author, getServletContext());
+        System.out.println("Attempting processing "+ title + author);
+
+        request.setAttribute("articles", articles);
 
         request.getRequestDispatcher("web-pages/admin-interface.jsp").forward(request, response);
     }
