@@ -13,6 +13,13 @@
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
 
         <style type="text/css">
+            #label1{
+                font-family: "Arial Black", arial-black ;
+            }
+            #label2{
+                font-family: "Arial Black", arial-black ;
+            }
+
             #submitBtn{
                 -webkit-transition-duration: 0.4s;
                 transition-duration: 0.4s;
@@ -60,7 +67,7 @@
 
         <div class="container text-center">
             <br>
-            <label for="exampleFormControlInput1">Article Title Here:</label>
+            <label id="label1" for="exampleFormControlInput1">Article Title Here:</label>
             <c:choose>
                 <c:when test="${title !=null}">
                     <input type="text" name="article_title" class="form-control" id="exampleFormControlInput1"
@@ -77,7 +84,7 @@
 
         <div class="container text-center">
             <br>
-            <label for="exampleFormControlTextarea1">Article Content Here:</label>
+            <label id="label2" for="exampleFormControlTextarea1">Article Content Here:</label>
             <c:choose>
                 <c:when test="${content != null}">
                 <textarea class="form-control" name="article_content" id="exampleFormControlTextarea1"
