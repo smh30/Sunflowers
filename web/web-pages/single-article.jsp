@@ -160,10 +160,10 @@
 
         <c:choose>
             <c:when test="${article.title == null}">
-                <h2><a href="/article?articleID=${article.ID}">Untitled</a></h2>
+                <h2><a href="article?articleID=${article.ID}">Untitled</a></h2>
             </c:when>
             <c:otherwise>
-                <h2><a href="/article?articleID=${article.ID}">${article.title}</a></h2>
+                <h2><a href="article?articleID=${article.ID}">${article.title}</a></h2>
             </c:otherwise>
         </c:choose>
 
@@ -191,13 +191,13 @@
         <%--the 'edit' and 'delete' buttons will only appear if the logged in user wrote the article --%>
         <c:if test="${article.author.username == sessionScope.username}">
             <div class="d-flex flex-row-reverse">
-            <form method="get" action=/edit-article class="px-2">
+            <form method="get" action="edit-article" class="px-2">
                 <input type="hidden" name="articleID" value="${article.ID}">
                 <button class="btn btn-primary" type="submit" value="Edit Article">Edit Article</button>
             </form>
 
 
-            <form method="post" action="/deleteArticle" class="px-2">
+            <form method="post" action="deleteArticle" class="px-2">
                 <input type="hidden" name="articleID" value="${article.ID}">
                 <button class="btn btn-primary" type="submit" value="Delete Article">Delete Article</button>
             </form>
@@ -227,7 +227,7 @@
 
                         //Show delete button
                         out.println(
-                                "<div class=\"d-flex flex-row-reverse\"><form method=\"GET\" action=\"/deletecomment\">" +
+                                "<div class=\"d-flex flex-row-reverse\"><form method=\"GET\" action=\"deletecomment\">" +
                                         "<input type=\"hidden\" name=\"articleID\" value=\""+comment.getArticleId()+"\">" +
                                         "<input type=\"hidden\" name=\"commentID\" value=\""+comment.getCommentID()+"\">" +
                                         "<button class=\"btn btn-primary btn-sm\"  type=\"submit\" value=\"Delete Comment\">Delete Comment</button>"+
@@ -251,7 +251,7 @@
                         //Reply area
                         out.println(
                                 "<div class=\"form-popup\" id=\"myForm-"+comment.getCommentID()+"\">" +
-                                        "<form method=\"POST\" action=\"/addNestedComment\" class=\"form-container\">" +
+                                        "<form method=\"POST\" action=\"addNestedComment\" class=\"form-container\">" +
                                         "<input type=\"hidden\" name=\"articleID\" value=\""+comment.getArticleId()+"\">" +
                                         "<input type=\"hidden\" name=\"commentID\" value=\""+comment.getCommentID()+"\">" +
                                         "<label for=\"content\"><b>Reply Comment:</b></label>" +
@@ -294,7 +294,7 @@
                  submit button--%>
     <div class="add-comment">
         <div class="form-group">
-            <form method="post" action="/addcomment">
+            <form method="post" action="addcomment">
                 <input type="hidden" name="articleID" value="${article.ID}">
                 <label for="comment">Comment:</label>
                 <textarea class="form-control" name="comment" rows="5" id="comment"

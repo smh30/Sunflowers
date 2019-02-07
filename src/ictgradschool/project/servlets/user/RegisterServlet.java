@@ -46,6 +46,6 @@ request.setAttribute("new", true);
 // if there was a get request, redirect to the blank form
         System.out.println("in the register servlet doget");
         //Think this is correct webpage - s
-        request.getRequestDispatcher("web-pages/login.jsp").forward(request, response);
+        request.getRequestDispatcher("web-pages/register.jsp").forward(request, response);
     }
 }

@@ -20,14 +20,14 @@
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> ${message}
             </div>
         </c:if>
-
+<div class="container">
 <%--submits to a different servlet depending on whether it's a new article or an edit--%>
         <c:choose>
             <c:when test="${newarticle != null}">
-                <form action="/new-article" method="post">
+                <form action="new-article" method="post">
             </c:when>
             <c:otherwise>
-                <form action="/edit-article" method="post">
+                <form action="edit-article" method="post">
                 <input type="hidden" name="articleID" value="${article.ID}"> <%--<%}%>--%>
             </c:otherwise>
         </c:choose>
@@ -79,7 +79,7 @@
             <script>
                 CKEDITOR.replace('exampleFormControlTextarea1');
             </script>
-
+                </div>
     </body>
 </html>
 
