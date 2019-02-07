@@ -1,9 +1,11 @@
 package ictgradschool.project.servlets.admin;
 
 import ictgradschool.project.DAOs.AdminDAO;
+import ictgradschool.project.DAOs.CommentDAO;
 import ictgradschool.project.DAOs.ProfileDetailsDAO;
 import ictgradschool.project.DAOs.UserDAO;
 import ictgradschool.project.JavaBeans.Article;
+import ictgradschool.project.JavaBeans.Comment;
 import ictgradschool.project.JavaBeans.User;
 
 import javax.servlet.ServletException;
@@ -79,6 +81,35 @@ public class AdminInterfaceServlet extends HttpServlet {
         request.setAttribute("articles", articles);
 
         request.getRequestDispatcher("web-pages/admin-interface.jsp").forward(request, response);
+
+
+
+        List<Comment> comments = new ArrayList <>();
+
+
+        String articleID = request.getParameter("articleID");
+
+        String content = request.getParameter("comment");
+
+        String user = (String) request.getSession().getAttribute("username");
+
+        content = content.replaceAll("(\r\n|\n\r|\r|\n)", "<br />");
+
+        boolean commentAdded = CommentDAO.newComment(content,articleID,user,getServletContext());
+
+        if(!commentAdded){
+            System.out.println("comment not added??");
+            String message = "Some trouble with adding your comment. Please try again.";
+            request.setAttribute("message",message);
+
+
+
+        }else{
+            request.setAttribute("comments", comments);
+
+            request.getRequestDispatcher("/admin-interface.jsp").forward(request,response);
+        }
+
     }
 }
 
