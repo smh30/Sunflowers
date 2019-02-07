@@ -2,6 +2,7 @@ package ictgradschool.project.DAOs;
 
 import ictgradschool.project.DAOs.CheckProperties.DAOCheckProperties;
 import ictgradschool.project.JavaBeans.Article;
+import ictgradschool.project.JavaBeans.Comment;
 import ictgradschool.project.JavaBeans.User;
 import ictgradschool.project.utilities.Passwords;
 
@@ -136,14 +137,10 @@ public class AdminDAO {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 System.out.println("connection successful");
-//
-//                String orderBy = getOrderString(sort);
-//                String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
 
 
 // yes, this sql contains a concatenated string, but it can only have the values returned by the method above, so it should be safe
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article WHERE " +
-                        "NOT (article_author = 'deleted'")) {
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article WHERE NOT (article_author = 'deleted')")) {
 
                     ResultSet rs = stmt.executeQuery();
 
@@ -151,7 +148,10 @@ public class AdminDAO {
 
                         Article article = new Article();
                         article.setTitle(rs.getString(1));
-                        article.setAuthor(rs.getString(2));
+                        User author = new User();
+                        author.setUsername(rs.getString(2));
+                        article.setAuthor(author);
+                        article.setID(rs.getInt(3));
 
                         articles.add(article);
                     }
@@ -163,5 +163,41 @@ public class AdminDAO {
             }
         }
         return articles;
+    }
+
+    public static List <Comment> getAllComments(int articleId, ServletContext context) {
+        List <Comment> comments = new ArrayList <>();
+
+        Properties dbProps = DAOCheckProperties.check(context);
+
+        if (dbProps != null) {
+
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+                System.out.println("connection successful");
+                //todo get the top-level comments (those without a parent)
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM comments WHERE " +
+                        "article_id =? AND comments_author!='deleted' ORDER BY comments_timestamp ")) {
+                    stmt.setInt(1, articleId);
+                    ResultSet rs = stmt.executeQuery();
+
+                    while (rs.next()) {
+                        Comment comment = new Comment();
+                        comment.setCommentID(rs.getInt(1));
+                        User commentAuthor = new User(rs.getString(2));
+                        comment.setCommentContent(rs.getString(3));
+                        comment.setTimestamp(rs.getTimestamp(4));
+                        comment.setCommentAuthor(commentAuthor);
+                        comment.setArticleId(rs.getInt(5));
+                        comment.setParentID(rs.getInt(6));
+                        comments.add(comment);
+                    }
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return comments;
+        }
+        return null;
     }
 }

@@ -211,5 +211,15 @@
         <url-pattern>/adminadduser</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>AdminComments</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.admin.AdminCommentsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminComments</servlet-name>
+        <url-pattern>/admincomments</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

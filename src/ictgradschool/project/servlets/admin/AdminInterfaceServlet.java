@@ -82,32 +82,6 @@ public class AdminInterfaceServlet extends HttpServlet {
 
         //request.getRequestDispatcher("web-pages/admin-interface.jsp").forward(request, response);
 
-
-
-        List<Comment> comments = new ArrayList <>();
-
-
-        String articleID = request.getParameter("articleID");
-
-        String content = request.getParameter("comment");
-
-        String user = (String) request.getSession().getAttribute("username");
-
-        boolean commentAdded = CommentDAO.newComment(content,articleID,user,getServletContext());
-
-        if(!commentAdded){
-            System.out.println("comment not added??");
-            String message = "Some trouble with adding your comment. Please try again.";
-            request.setAttribute("message",message);
-
-
-
-        }else{
-            request.setAttribute("comments", comments);
-
-
-        }
-
         request.getRequestDispatcher("web-pages/admin-interface.jsp").forward(request,response);
     }
 }
