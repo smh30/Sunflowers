@@ -22,6 +22,7 @@ public class AdminCommentsServlet extends HttpServlet {
         int articleID = Integer.parseInt(request.getParameter("articleID"));
 
         comments = AdminDAO.getAllComments (articleID, getServletContext());
+        request.setAttribute("articleID", articleID);
 
         request.setAttribute("comments", comments);
 
