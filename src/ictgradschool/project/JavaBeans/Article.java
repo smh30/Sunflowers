@@ -9,6 +9,7 @@ public class Article implements Serializable {
     private String articleText;
     private Timestamp timestamp;
     private int ID;
+    private boolean hidden;
     // this one will depend on how we implement the comments
     //todo getters and setters for comments once
     //private List<Comment> comments;
@@ -55,6 +56,10 @@ public class Article implements Serializable {
     public void setID(int ID) {
         this.ID = ID;
     }
+
+    public boolean isHidden() { return hidden; }
+
+    public void setHidden(boolean hidden) { this.hidden = hidden; }
 
     public void setAuthor(String string) {
     }

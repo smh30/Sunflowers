@@ -55,11 +55,12 @@
                 <table border="2">
                     <thead>
                         <tr>
-                            <%--WILL NEED TO BE TWO SEPARATE LISTS???--%>
                             <th>Article Title:</th>
                             <th>Article Author:</th>
                             <th>Hide Article:</th>
                             <th>Show Article:</th>
+                            <th>Show Related Comments:</th>
+                            <th>Article Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -68,14 +69,18 @@
                                 <td>${article.title}</td>
                                 <td>${article.author.username}</td>
                                 <td>
-                                    <form method="post" action="">
-                                    <button onclick="" value="">Hide Article</button>
-                                    <p id="hidearticle"></p>
+                                    <form method="post" action="adminhideshowarticle">
+                                        <button type="submit">Hide Article</button>
+                                        <input type="hidden" name="articleID" value="${article.ID}">
+                                        <input type="hidden" name="action" value="hide">
                                     </form>
                                 </td>
                                 <td>
-                                    <button onclick="" value="">Show Article</button>
-                                    <p id="showarticle"></p>
+                                    <form method="post" action="adminhideshowarticle">
+                                   <button type="submit">Show Article</button>
+                                        <input type="hidden" name="articleID" value="${article.ID}">
+                                    <input type="hidden" name="action" value="show">
+                                    </form>
                                 </td>
                                 <td>
                                     <form method="post" action="admincomments">
@@ -84,10 +89,19 @@
                                         <input type="submit" value="Show Comments Table">
                                     </form>
                                 </td>
+                                <td>
+                                <c:choose>
+                                    <c:when test="${article.hidden}">
+                                        Hidden
+                                    </c:when>
+                                    <c:otherwise>
+                                        Showing
+                                    </c:otherwise>
+                                </c:choose>
+                                </td>
                             </tr>
                         </c:forEach>
                     </tbody>
-
                 </table>
             </form>
         </div>
@@ -140,8 +154,6 @@
                 }
                 document.getElementById("remove").innerHTML = txt;
             }
-
-            <%--End of checkRemoveUser function--%>
         </script>
     </body>
 </html>
