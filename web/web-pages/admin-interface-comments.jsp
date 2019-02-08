@@ -64,11 +64,8 @@
                         </c:forEach>
                     </tbody>
                 </table>
-            <form method="post" action="admininterface">
-            <button type="submit">Back to Admin Interface Homepage</button>
-                <input type="button">
-            </form>
-
+            <%--TODO: Make this look like a button LATER--%>
+            <a href ="admininterface" class="btn" type="submit">Back to Admin Interface Homepage</a>
         </div>
     </body>
 </html>

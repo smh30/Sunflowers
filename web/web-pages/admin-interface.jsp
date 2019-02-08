@@ -40,7 +40,9 @@
                                     </form>
                                 </td>
                                 <td>
+                                    <form method="post" action="">
                                     <button type="button" class="btn btn-primary" onclick="">Reset User's Password</button>
+                                    </form>
                                 </td>
                             </tr>
                         </c:forEach>
