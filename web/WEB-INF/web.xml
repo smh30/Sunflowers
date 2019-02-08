@@ -221,5 +221,25 @@
         <url-pattern>/admincomments</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>AdminHideShowArticle</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.admin.AdminHideShowArticleServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminHideShowArticle</servlet-name>
+        <url-pattern>/adminhideshowarticle</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminHideShowComment</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.admin.AdminHideShowCommentServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminHideShowComment</servlet-name>
+        <url-pattern>/adminhideshowcomment</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>
