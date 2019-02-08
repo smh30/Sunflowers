@@ -26,6 +26,13 @@
         image.src = "images/default-photos-for-profile-page/" + dropdown.value;
     }
 </script>
+
+<style>
+
+
+
+
+</style>
 <body>
 <%@ include file="../WEB-INF/partial/navbar.jsp" %>
 
