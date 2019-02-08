@@ -44,11 +44,9 @@
         <br>
         <div class="container">
             <a href="#myPopup" class="btn btn-primary" data-toggle="collapse">Show Add New User Form</a>
-
             <div class="collapse" id="myPopup">
-
                 <form method="post" action="adminadduser" class="form-container">
-                    <h2>Add user: </h2>
+                    <h2>Add user:</h2>
                     <br>
                     <label for="unameID">Username:</label>
                     <input type="text" id="unameID" name="username" class="form-control">
@@ -73,7 +71,6 @@
                     <input type="email" id="emailID" name="email" class="form-control">
                     <br>
                     <br>
-                    <%--Here we are adding in a new user--%>
                     <button type="submit" class="btn btn-primary" value="adminadduser">Create new user</button>
                 </form>
             </div>
@@ -81,7 +78,6 @@
         <br>
         <div class="container" id="article-table">
             <h2>Article Admin Table</h2>
-
             <table border="2" class="table">
                 <thead>
                     <tr>
@@ -116,7 +112,7 @@
                                 <form method="post" action="admincomments">
                                     <input type="hidden" name="articleID" value="${article.ID}">
                                     <input type="hidden" name="admin" value="admin">
-                                    <input type="submit" value="Show Comments Table">
+                                    <input type="submit" value="showcommentstable">
                                 </form>
                             </td>
                             <td>
@@ -133,21 +129,14 @@
                     </c:forEach>
                 </tbody>
             </table>
-
         </div>
-
-
         <script>
-            <%--Google re this form how the popup works and if it can send info to servlet.--%>
-
             function checkRemoveUser() {
                 var txt;
                 if (confirm("Are you sure you want to remove this user?")) {
                     txt = "You pressed OK!";
-                    <%--If press ok, refresh/redirect page, but also tell sql database to delete user--%>
                 } else {
                     txt = "You pressed Cancel!";
-                    <%--If press cancel, redirect back to admin interface--%>
                 }
                 document.getElementById("remove").innerHTML = txt;
             }
