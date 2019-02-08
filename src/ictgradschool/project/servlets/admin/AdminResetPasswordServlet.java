@@ -1,5 +1,7 @@
 package ictgradschool.project.servlets.admin;
 
+import ictgradschool.project.DAOs.AdminDAO;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -15,15 +17,20 @@ import java.util.Properties;
 public class AdminResetPasswordServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        System.out.println("In Admin Reset Password servlet");
+
+        String username = request.getParameter("username");
 
         // Details for the sending account
         final String SENDING_ACCOUNT_ADDRESS = "socialsunflowers@gmail.com";
         final String SENDING_ACCOUNT_PASSWORD = "teamsunflowers";
 
         // Details for the message to be sent
-        final String EMAIL_ADDRESS_TO = "a_destination_email@provider.com";
-        final String EMAIL_SUBJECT = "A subject message";
-        final String EMAIL_BODY = "The body of your message";
+        final String EMAIL_ADDRESS_TO = AdminDAO.getUserEmail(username, getServletContext());
+        final String EMAIL_SUBJECT = "Resetting your password";
+        final String EMAIL_BODY = "Your temporary password is: ";
+        //Add in the password
+        //Will be randomised
 
         // Mail server details
         Properties props = new Properties();
@@ -51,6 +58,7 @@ public class AdminResetPasswordServlet extends HttpServlet {
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
+        response.sendRedirect("admininterface");
     }
 
 
