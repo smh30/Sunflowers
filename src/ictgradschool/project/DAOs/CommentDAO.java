@@ -26,7 +26,8 @@ public class CommentDAO {
                 System.out.println("connection successful");
                 //todo get the top-level comments (those without a parent)
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM comments WHERE " +
-                        "article_id =? AND parent_comment IS NULL AND comments_author!='deleted' ORDER BY comments_timestamp ")) {
+                        "article_id =? AND parent_comment IS NULL AND comments_author!='deleted' " +
+                        "AND (hidden = false) ORDER BY comments_timestamp ")) {
                     stmt.setInt(1, articleId);
                     ResultSet rs = stmt.executeQuery();
 
