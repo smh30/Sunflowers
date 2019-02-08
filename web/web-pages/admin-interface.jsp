@@ -68,8 +68,10 @@
                                 <td>${article.title}</td>
                                 <td>${article.author.username}</td>
                                 <td>
+                                    <form method="post" action="">
                                     <button onclick="" value="">Hide Article</button>
                                     <p id="hidearticle"></p>
+                                    </form>
                                 </td>
                                 <td>
                                     <button onclick="" value="">Show Article</button>
