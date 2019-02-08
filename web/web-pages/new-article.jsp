@@ -40,11 +40,6 @@
                 color: white;
             }
 
-            body{
-                background-image: url("/web-pages/images/final333333.jpg") ;
-                background-repeat: repeat,repeat;
-                background-color: #cccccc;
-            }
 
             #choose-date{
                 margin-top: 6px;

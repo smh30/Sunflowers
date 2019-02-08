@@ -13,8 +13,8 @@
     </head>
     <body>
         <%@include file="../WEB-INF/partial/navbar.jsp" %>
-        <div class="comments_table">
-            <form method=post>
+        <div id="comments_table">
+
                 <table border="2">
                     <thead>
                         <tr>
@@ -64,7 +64,7 @@
                         </c:forEach>
                     </tbody>
                 </table>
-            </form>
+
         </div>
     </body>
 </html>

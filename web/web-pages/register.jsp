@@ -58,11 +58,6 @@
 
         <style>
 
-            body{
-                background-image: url("/web-pages/images/final333333.jpg") ;
-                background-repeat: repeat,repeat;
-                background-color: #cccccc;
-            }
 
             .container{
                 position: center;
