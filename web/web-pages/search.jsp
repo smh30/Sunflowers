@@ -26,10 +26,21 @@
 
 
         <style type="text/css">
+            /*body{*/
+                /*background-image: url("/web-pages/images/final333333.jpg") ;*/
+                /*background-repeat: repeat,repeat;*/
+                /*background-color: #cccccc;*/
+            /*}*/
+
             body{
-                background-image: url("/web-pages/images/final333333.jpg") ;
-                background-repeat: repeat,repeat;
+                background-image: url("/web-pages/images/sf-lesssky.jpg") ;
+                background-repeat: no-repeat;
                 background-color: #cccccc;
+                /*background-size: 100% 100%;*/
+                height: 500px; /* You must set a specified height */
+                background-position: center; /* Center the image */
+                /*background-repeat: no-repeat; !* Do not repeat the image *!*/
+                background-size: cover; /
             }
 
             .container{
@@ -44,32 +55,34 @@
     </head>
     <body>
         <%@ include file="../WEB-INF/partial/navbarSearch.jsp" %>
-        <div class="container">
+
+
+        <%--<div class="container">--%>
 
 
 
-            <form method="get" action="../home">
-                <legend>Search the Articles Database</legend>
+            <%--<form method="get" action="../home">--%>
+                <%--<legend>Search the Articles Database</legend>--%>
 
-                <div class="form-group row">
-                <label for="author" class="col-sm-4 col-md-2 col-form-label">Search by User: </label>
-                <div class="col"><input type="text" id="author" name="author" class="form-control">
-                </div></div>
+                <%--<div class="form-group row">--%>
+                <%--<label for="author" class="col-sm-4 col-md-2 col-form-label">Search by User: </label>--%>
+                <%--<div class="col"><input type="text" id="author" name="author" class="form-control">--%>
+                <%--</div></div>--%>
 
-                    <div class="form-group row">
-                <label for="title" class="col-sm-4 col-md-2 col-form-label">Search by Title: </label>
-                        <div class="col"><input type="text" id="title" name="title" class="form-control">
-                        </div></div>
+                    <%--<div class="form-group row">--%>
+                <%--<label for="title" class="col-sm-4 col-md-2 col-form-label">Search by Title: </label>--%>
+                        <%--<div class="col"><input type="text" id="title" name="title" class="form-control">--%>
+                        <%--</div></div>--%>
 
-                        <div class="form-group row">
-                <label for="date" class="col-sm-4 col-md-2 col-form-label">Search by Date: </label>
-                            <div class="col"><input type="date" id="date" name="date" class="form-control">
-                            </div></div>
+                        <%--<div class="form-group row">--%>
+                <%--<label for="date" class="col-sm-4 col-md-2 col-form-label">Search by Date: </label>--%>
+                            <%--<div class="col"><input type="date" id="date" name="date" class="form-control">--%>
+                            <%--</div></div>--%>
 
-                            <button class="btn btn-primary" type="submit" value="Search">Search</button>
-            </form>
+                            <%--<button class="btn btn-primary" type="submit" value="Search">Search</button>--%>
+            <%--</form>--%>
 
-        </div>
+        <%--</div>--%>
         
     </body>
 </html>
