@@ -32,15 +32,15 @@
                 /*background-color: #cccccc;*/
             /*}*/
 
-            body{
-                background-image: url("/web-pages/images/sf-lesssky.jpg") ;
-                background-repeat: no-repeat;
-                background-color: #cccccc;
-                height: 500px;
-                background-position: center;
-                background-size: cover;
-                background-attachment: fixed;
-            }
+            /*body{*/
+                /*background-image: url("/images/sf-lesssky.jpg") ;*/
+                /*background-repeat: no-repeat;*/
+                /*background-color: #cccccc;*/
+                /*height: 500px;*/
+                /*background-position: center;*/
+                /*background-size: cover;*/
+                /*background-attachment: fixed;*/
+            /*}*/
 
             .container{
                 margin-top: 12%;
@@ -53,7 +53,7 @@
         </style>
     </head>
     <body>
-        <%@ include file="../WEB-INF/partial/navbarSearch.jsp" %>
+        <%@ include file="../WEB-INF/partial/navbar.jsp" %>
 
 
         <div class="container">
