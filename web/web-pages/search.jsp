@@ -36,11 +36,10 @@
                 background-image: url("/web-pages/images/sf-lesssky.jpg") ;
                 background-repeat: no-repeat;
                 background-color: #cccccc;
-                /*background-size: 100% 100%;*/
-                height: 500px; /* You must set a specified height */
-                background-position: center; /* Center the image */
-                /*background-repeat: no-repeat; !* Do not repeat the image *!*/
-                background-size: cover; /
+                height: 500px;
+                background-position: center;
+                background-size: cover;
+                background-attachment: fixed;
             }
 
             .container{

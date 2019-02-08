@@ -236,7 +236,8 @@
                 <div class="form-group">
                     <input type="hidden" name="username" value="${user.username}">
                     <input type="hidden" name="admin" value="user">
-                    <button class="btn btn-primary" type="submit" value="Delete User">Delete User</button>
+                    <button class="btn btn-primary" type="submit" value="Delete User" onclick="return confirm('Are you sure you want to delete your account?')">Delete User</button>
+
                 </div>
             </fieldset>
         </form>

@@ -144,5 +144,15 @@
         color: #f8eeac;
         background-color: #5b9b37;
     }
+
+    body{
+        background-image: url("/web-pages/images/sf-lesssky.jpg") ;
+        background-repeat: no-repeat;
+        background-color: #cccccc;
+        height: 500px;
+        background-position: center;
+        background-size: cover;
+        background-attachment: fixed;
+    }
 </style>
 </head>
