@@ -65,9 +65,10 @@
     <style type="text/css">
 
         body{
-            background-image: url("/web-pages/images/final333333.jpg") ;
+            background-image: url("/web-pages/images/sf-q.jpg") ;
             background-repeat: repeat,repeat;
             background-color: #cccccc;
+            background-size:cover;
         }
 
         .article{
@@ -75,8 +76,14 @@
             margin: 7px;
             border:2px solid #666666;
             border-radius: 12px;
-            background-color: whitesmoke;
+            background-color: white;
         }
+
+        a{
+            color: #a94300;
+        }
+
+
 
     </style>
 
