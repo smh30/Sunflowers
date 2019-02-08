@@ -15,8 +15,9 @@
     <body>
         <%@include file="../WEB-INF/partial/navbar.jsp" %>
         <div class="container">
+            <h2>User Admin Table</h2>
             <form method=post>
-                <table border="2">
+                <table class="table" border="2">
                     <thead>
                         <tr>
                             <th>Username:</th>
@@ -33,13 +34,13 @@
                                         <input type="hidden" name="username" value="${user.username}">
                                         <input type="hidden" name="admin" value="admin">
                                             <%--<button onclick="checkRemoveUser()">Remove User</button>--%>
-                                        <input type="submit" value="Delete User"
+                                        <input type="submit" value="Delete User" class="btn btn-primary"
                                                onclick="return confirm('Are you sure?')"/>
                                         <p id="remove"></p>
                                     </form>
                                 </td>
                                 <td>
-                                    <button type="button" onclick="">Reset User's Password</button>
+                                    <button type="button" class="btn btn-primary" onclick="">Reset User's Password</button>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -51,8 +52,9 @@
         <br>
         <br>
         <div class="article_table">
+            <h2>Article Admin Table</h2>
             <form method=post>
-                <table border="2">
+                <table border="2" class="table">
                     <thead>
                         <tr>
                             <th>Article Title:</th>
