@@ -20,7 +20,7 @@
 
 
                 <li class="nav-item active"><a class="nav-link" href="home"><i class="fa fa-fw fa-home"></i>Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="web-pages/search.jsp"><i class="fa fa-fw fa-search"></i>Search</a></li>
+                <li class="nav-item"><a class="nav-link" href="search"><i class="fa fa-fw fa-search"></i>Search</a></li>
 
                 <c:if test="${sessionScope.username == null}">
                     <!-- show only the login and register if nobody is logged in -->

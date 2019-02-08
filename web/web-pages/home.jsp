@@ -73,15 +73,15 @@
             /*background-attachment: fixed;*/
         /*}*/
 
-        body{
-            background-image: url("/web-pages/images/sf-lesssky.jpg") ;
-            background-repeat: no-repeat;
-            background-color: #cccccc;
-            height: 500px;
-            background-position: center;
-            background-size: cover;
-            background-attachment: fixed;
-        }
+        /*body{*/
+            /*background-image: url("images/sf-lesssky.jpg") ;*/
+            /*background-repeat: no-repeat;*/
+            /*background-color: #cccccc;*/
+            /*height: 500px;*/
+            /*background-position: center;*/
+            /*background-size: cover;*/
+            /*background-attachment: fixed;*/
+        /*}*/
 
         .article{
             padding: 6px;

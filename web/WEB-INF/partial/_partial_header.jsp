@@ -146,7 +146,7 @@
     }
 
     body{
-        background-image: url("/web-pages/images/sf-lesssky.jpg") ;
+        background-image: url("images/sf-lesssky.jpg") ;
         background-repeat: no-repeat;
         background-color: #cccccc;
         height: 500px;
