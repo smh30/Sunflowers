@@ -13,6 +13,7 @@ public class Comment implements Serializable {
     private List<Comment> children;
     private Comment parent;
     private int parentID;
+    private boolean hidden;
 
 
     public Comment getParent() {
@@ -75,5 +76,8 @@ public class Comment implements Serializable {
     public int getParentID() { return parentID; }
 
     public void setParentID(int parentID) { this.parentID = parentID; }
-    
+
+    public boolean isHidden() { return hidden; }
+
+    public void setHidden(boolean hidden) { this.hidden = hidden; }
 }

@@ -190,6 +190,7 @@ public class AdminDAO {
                         comment.setCommentAuthor(commentAuthor);
                         comment.setArticleId(rs.getInt(5));
                         comment.setParentID(rs.getInt(6));
+                        comment.setHidden(rs.getBoolean(7));
                         comments.add(comment);
                     }
                 }
@@ -243,6 +244,66 @@ public class AdminDAO {
                 try (PreparedStatement s3 = conn.prepareStatement("UPDATE ysy.article SET hidden = false WHERE article_id = ?")) {
                     System.out.println("working!!!");
                     s3.setInt(1, articleId);
+
+                    s3.execute();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean hideComment(int commentId, ServletContext context) {
+        Properties dbProps = DAOCheckProperties.check(context);
+
+        if (dbProps != null) {
+
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+                System.out.println("connection successful");
+
+                try (PreparedStatement s3 = conn.prepareStatement("UPDATE ysy.comments SET hidden = true WHERE comments_id = ?")) {
+                    System.out.println("working!!!");
+                    s3.setInt(1, commentId);
+
+                    s3.execute();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean showComment(int commentID, ServletContext context) {
+        Properties dbProps = DAOCheckProperties.check(context);
+
+        if (dbProps != null) {
+
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+                System.out.println("connection successful");
+
+                try (PreparedStatement s3 = conn.prepareStatement("UPDATE ysy.comments SET hidden = false WHERE comments_id = ?")) {
+                    System.out.println("working!!!");
+                    s3.setInt(1, commentID);
 
                     s3.execute();
 
