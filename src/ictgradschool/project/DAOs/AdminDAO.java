@@ -322,4 +322,29 @@ public class AdminDAO {
         }
         return false;
     }
+
+    public static String getUserEmail(String username, ServletContext context) {
+        Properties dbProps = DAOCheckProperties.check(context);
+        String email ="";
+        if (dbProps != null) {
+
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+                System.out.println("connection successful");
+
+                try (PreparedStatement s3 = conn.prepareStatement("SELECT ysy.user.email FROM ysy.user WHERE username =?")) {
+                    System.out.println("working!!!");
+                    s3.setString(1, username);
+                    ResultSet rs = s3.executeQuery();
+
+                    if(rs.next()) {
+                        email = rs.getString( 1);
+                    }
+
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return email;
+    }
 }

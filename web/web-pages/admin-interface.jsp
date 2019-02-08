@@ -33,15 +33,15 @@
                                     <form method="post" action="deleteuser">
                                         <input type="hidden" name="username" value="${user.username}">
                                         <input type="hidden" name="admin" value="admin">
-                                            <%--<button onclick="checkRemoveUser()">Remove User</button>--%>
                                         <input type="submit" value="Delete User" class="btn btn-primary"
                                                onclick="return confirm('Are you sure?')"/>
                                         <p id="remove"></p>
                                     </form>
                                 </td>
                                 <td>
-                                    <form method="post" action="">
-                                    <button type="button" class="btn btn-primary" onclick="">Reset User's Password</button>
+                                    <form method="post" action="adminresetpassword">
+                                    <button type="submit" class="btn btn-primary">Reset User's Password</button>
+                                        <input type ="hidden" name="username" value="${user.username}">
                                     </form>
                                 </td>
                             </tr>
@@ -52,7 +52,7 @@
         </div>
         <br>
         <div class="container">
-        <a href="#myPopup" class="btn btn-primary" data-toggle="collapse">Show 'Add new user' form</a>
+        <a href="#myPopup" class="btn btn-primary" data-toggle="collapse">Show Add New User Form</a>
 
         <div class="collapse" id="myPopup">
 
