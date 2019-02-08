@@ -1,6 +1,7 @@
 package ictgradschool.project.servlets.admin;
 
 import ictgradschool.project.DAOs.AdminDAO;
+import ictgradschool.project.DAOs.UserDAO;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -25,12 +26,17 @@ public class AdminResetPasswordServlet extends HttpServlet {
         final String SENDING_ACCOUNT_ADDRESS = "socialsunflowers@gmail.com";
         final String SENDING_ACCOUNT_PASSWORD = "teamsunflowers";
 
+//        todo this will actually generate a random string
+        String tempPw = "temporary";
+        UserDAO.changePassword(username, tempPw, getServletContext());
+
         // Details for the message to be sent
         final String EMAIL_ADDRESS_TO = AdminDAO.getUserEmail(username, getServletContext());
         final String EMAIL_SUBJECT = "Resetting your password";
-        final String EMAIL_BODY = "Your temporary password is: ";
+        final String EMAIL_BODY = "Your temporary password is: " + tempPw;
         //Add in the password
         //Will be randomised
+
 
         // Mail server details
         Properties props = new Properties();
