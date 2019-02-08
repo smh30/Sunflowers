@@ -1,7 +1,7 @@
 <!-- THIS IS A NAVBAR WHICH CAN BE INCLUDED INTO ALL OF THE OTHER PAGES AS NECESSARY -->
 <!--todo navbar expand/collapse seems to be stuck on md no matter what i change this to -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<nav class="navbar navbar-expand-md navbar-toggleable-md navbar-dark bg-dark">
+<nav id="navbar" class="navbar navbar-expand-md navbar-toggleable-md navbar-dark bg-dark">
 
     <div class="container-fluid">
         <%--<div class="navbar-header">--%>
@@ -20,7 +20,7 @@
 
 
                 <li class="nav-item active"><a class="nav-link" href="home"><i class="fa fa-fw fa-home"></i>Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="web-pages/search.jsp"><i class="fa fa-fw fa-search"></i>Search</a></li>
+                <li class="nav-item"><a class="nav-link" href="search"><i class="fa fa-fw fa-search"></i>Search</a></li>
 
                 <c:if test="${sessionScope.username == null}">
                     <!-- show only the login and register if nobody is logged in -->

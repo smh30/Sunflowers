@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class SearchServlet extends HttpServlet {
 
-    //todo decide if this is necessary?? I think I'm getting around using it by using the getarticles servlet instead
+    
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("search servlet dopost");
@@ -16,7 +16,6 @@ public class SearchServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 System.out.println("search servlet doget");
-        request.getRequestDispatcher("web-pages/search.jsp").forward(request, response);
-
+        request.getRequestDispatcher("web-pages/search.jsp").forward(request,response);
     }
 }

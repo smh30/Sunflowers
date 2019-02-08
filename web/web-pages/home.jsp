@@ -64,19 +64,38 @@
 
     <style type="text/css">
 
-        body{
-            background-image: url("/web-pages/images/final333333.jpg") ;
-            background-repeat: repeat,repeat;
-            background-color: #cccccc;
-        }
+
+        /*body{*/
+            /*background-image: url("/web-pages/images/sf-lesssky.jpg") ;*/
+            /*background-repeat: no-repeat;*/
+            /*background-color: #cccccc;*/
+            /*background-size:cover;*/
+            /*background-attachment: fixed;*/
+        /*}*/
+
+        /*body{*/
+            /*background-image: url("images/sf-lesssky.jpg") ;*/
+            /*background-repeat: no-repeat;*/
+            /*background-color: #cccccc;*/
+            /*height: 500px;*/
+            /*background-position: center;*/
+            /*background-size: cover;*/
+            /*background-attachment: fixed;*/
+        /*}*/
 
         .article{
             padding: 6px;
             margin: 7px;
             border:2px solid #666666;
             border-radius: 12px;
-            background-color: whitesmoke;
+            background-color: white;
         }
+
+        a{
+            color: #a94300;
+        }
+
+
 
     </style>
 
@@ -85,6 +104,7 @@
 <body>
 
 <%@ include file="../WEB-INF/partial/navbar.jsp" %>
+<div class="bg">
 <div class="container">
 
 
@@ -98,7 +118,10 @@
 
     <%--if there are no articles, this message will appear--%>
     <c:if test="${empty articles}">
-        <p>No articles found for your search parameters</p>
+            <div class="alert alert-warning alert-dismissible" id="error-message">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                No articles found for your search parameters
+            </div>
     </c:if>
 
     <%--begin dropdown for selecting sort order for articles--%>
@@ -214,7 +237,7 @@
         </div>
     </c:if>
 
-
+</div>
 </div>
 
 <div class="modal" id="userInfoModal">
