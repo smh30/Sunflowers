@@ -152,6 +152,7 @@ public class AdminDAO {
                         author.setUsername(rs.getString(2));
                         article.setAuthor(author);
                         article.setID(rs.getInt(3));
+                        article.setHidden(rs.getBoolean(6));
 
                         articles.add(article);
                     }
@@ -199,5 +200,65 @@ public class AdminDAO {
             return comments;
         }
         return null;
+    }
+
+    public static boolean hideArticle(int articleId, ServletContext context) {
+        Properties dbProps = DAOCheckProperties.check(context);
+
+        if (dbProps != null) {
+
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+                System.out.println("connection successful");
+
+                try (PreparedStatement s3 = conn.prepareStatement("UPDATE ysy.article SET hidden = true WHERE article_id = ?")) {
+                    System.out.println("working!!!");
+                    s3.setInt(1, articleId);
+
+                    s3.execute();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean showArticle(int articleId, ServletContext context) {
+        Properties dbProps = DAOCheckProperties.check(context);
+
+        if (dbProps != null) {
+
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+                System.out.println("connection successful");
+
+                try (PreparedStatement s3 = conn.prepareStatement("UPDATE ysy.article SET hidden = false WHERE article_id = ?")) {
+                    System.out.println("working!!!");
+                    s3.setInt(1, articleId);
+
+                    s3.execute();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+
+            return true;
+        }
+        return false;
     }
 }
