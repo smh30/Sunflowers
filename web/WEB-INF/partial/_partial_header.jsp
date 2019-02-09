@@ -145,8 +145,8 @@
         background-color: #5b9b37;
     }
 
-    body{
-        background-image: url("images/sf-lesssky.jpg") ;
+    body {
+        background-image: url("images/sf-lesssky.jpg");
         background-repeat: no-repeat;
         background-color: #cccccc;
         height: 500px;
@@ -154,5 +154,10 @@
         background-size: cover;
         background-attachment: fixed;
     }
+
+    a:hover {
+        color: #ea8800;
+    }
+
 </style>
 </head>
