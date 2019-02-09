@@ -21,6 +21,7 @@ import java.util.List;
 @WebServlet(name = "AdminInterfaceServlet")
 public class AdminInterfaceServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
     }
 
 

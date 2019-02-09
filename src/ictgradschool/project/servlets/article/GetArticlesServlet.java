@@ -3,6 +3,7 @@ package ictgradschool.project.servlets.article;
 import ictgradschool.project.DAOs.ArticleDAO;
 import ictgradschool.project.JavaBeans.Article;
 import ictgradschool.project.JavaBeans.SearchParams;
+import ictgradschool.project.utilities.RandomPassword;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -105,6 +106,7 @@ public class GetArticlesServlet extends HttpServlet {
             message = request.getParameter("message");
             request.setAttribute("message", message);
         }
+
 
         request.getRequestDispatcher("web-pages/home.jsp").forward(request, response);
     }
