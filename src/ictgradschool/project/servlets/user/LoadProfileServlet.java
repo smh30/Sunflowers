@@ -13,7 +13,6 @@ import java.io.IOException;
 @WebServlet(name = "LoadProfileServlet")
 public class LoadProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("doPost working");
         String username = (String) request.getSession().getAttribute("username");
         User user = UserDAO.getUserDetails(username, getServletContext());
         request.setAttribute("user", user);
@@ -21,7 +20,6 @@ public class LoadProfileServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("doGet working");
         String username = (String) request.getSession().getAttribute("username");
         User user = UserDAO.getUserDetails(username, getServletContext());
         request.setAttribute("user", user);

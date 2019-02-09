@@ -11,17 +11,13 @@ import java.io.IOException;
 public class CheckNameServlet extends HttpServlet {
     
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("checking servlet GET");
     }
     
     
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("checking servlet POST");
         String toCheck = req.getParameter("name");
-        System.out.println("In Checking POST, name to check: " +toCheck);
         boolean taken = true;
         taken = UserDAO.isNameTaken(toCheck, getServletContext());
-        System.out.println("is the username taken: " +taken);
     
         resp.setContentType("text/plain");
         resp.setCharacterEncoding("UTF-8");

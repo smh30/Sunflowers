@@ -15,10 +15,8 @@ public class LogOutServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("in the logout servlet");
         HttpSession session = request.getSession();
         session.invalidate();
-        System.out.println("logged out");
         response.sendRedirect("home");
     }
 }

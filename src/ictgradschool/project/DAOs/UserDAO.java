@@ -19,7 +19,6 @@ public class UserDAO {
         
         if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful in the UserDAO");
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE username = ?")) {
                     stmt.setString(1, username);
                     try (ResultSet r = stmt.executeQuery()) {
@@ -34,16 +33,13 @@ public class UserDAO {
                             if (Passwords.isExpectedPassword(password.toCharArray(), salt, iterations,
                                     hash)) {
                                 /* If the password did match, return true.*/
-                                System.out.println("the password was correct");
                                 return true;
                             } else {
-                                System.out.println("the password was wrong");
                                 /* If they do not match,  return false.*/
                                 return false;
                             }
                         } else {
                             //if no such user, return false;
-                            System.out.println("no such user was found");
                             return false;
                         }
                     }
@@ -64,20 +60,17 @@ public class UserDAO {
         if (dbProps != null) {
             
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE username = ?")) {
                     stmt.setString(1, username);
                     ResultSet rs = stmt.executeQuery();
                     
                     //this will be true if data was returned, ie the user exists already
                     if (rs.isBeforeFirst()) {
-                        System.out.println("user exists already");
                         /*If it does, redirect the client back to the ​register.html document.*/
                         return false;
                         
                     } else {
-                        
-                        System.out.println("create new user");
+
                         byte[] salt = Passwords.getNextSalt(32);
                         byte[] hash = Passwords.hash(password.toCharArray(), salt);
                         System.out.println("done hash");
@@ -111,8 +104,6 @@ public class UserDAO {
         
         if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
-                System.out.println("in dao search for :" + username);
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE username = ?")) {
                     stmt.setString(1, username);
                     try (ResultSet r = stmt.executeQuery()) {
@@ -143,7 +134,6 @@ public class UserDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            System.out.println("about to return from dao");
             return user;
         }
         return null;
@@ -159,7 +149,6 @@ public class UserDAO {
         if (dbProps != null) {
             
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
                 
                 //todo pretty unsure about using int for the date of birth - surely should be a
                 // date??? currently throws exception if no value is given but works in a way
@@ -207,8 +196,6 @@ public class UserDAO {
         if (dbProps != null) {
             
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
-                
                 
                 try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.user SET default_image = ?, use_default_image = true WHERE " +
                         "ysy.user.username= ?")) {
@@ -236,8 +223,6 @@ public class UserDAO {
         if (dbProps != null) {
             
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
-                
                 
                 try (PreparedStatement s2 = conn.prepareStatement("SELECT * FROM user WHERE " +
                         "username = ?")) {
@@ -270,12 +255,8 @@ public class UserDAO {
         if (dbProps != null) {
             
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
-                
-                System.out.println("changing PW in dao");
                 byte[] salt = Passwords.getNextSalt(32);
                 byte[] hash = Passwords.hash(password.toCharArray(), salt);
-                System.out.println("done hash");
                 try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.user SET salt = ? ," +
                         "password=? WHERE ysy.user.username= " +
                         "?")) {
