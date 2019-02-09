@@ -51,6 +51,8 @@ public class ArticleDAO {
                         article.setID(rs.getInt(3));
                         article.setArticleText(rs.getString(4));
                         article.setTimestamp(rs.getTimestamp(5));
+                        Timestamp raw =(rs.getTimestamp(5));
+                        article.setTimeString(getTimeString(raw));
                         User articleAuthor = new User(rs.getString(2));
                         article.setAuthor(articleAuthor);
 
@@ -123,6 +125,8 @@ public class ArticleDAO {
                         article.setID(rs.getInt(3));
                         article.setArticleText(rs.getString(4));
                         article.setTimestamp(rs.getTimestamp(5));
+                        Timestamp raw =(rs.getTimestamp(5));
+                        article.setTimeString(getTimeString(raw));
                         User articleAuthor = new User(rs.getString(2));
                         article.setAuthor(articleAuthor);
                         //todo another query or add to this one to return the comments as well, and create a list<comment>
@@ -200,48 +204,48 @@ Timestamp tempTimestamp = null;
 
     }
 
-    public static Article getSingleArticle(int articleID, ServletContext context) {
-        Article article = new Article();
-        Properties dbProps = DAOCheckProperties.check(context);
-        if (dbProps != null) {
-
-            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-
-
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_id = ?")) {
-                    stmt.setInt(1, articleID);
-                    ResultSet rs = stmt.executeQuery();
-
-                    while (rs.next()) {
-
-                        article.setTitle(rs.getString(1));
-                        User articleAuthor = new User(rs.getString(2));
-                        article.setID(rs.getInt(3));
-                        article.setAuthor(articleAuthor);
-                        article.setArticleText(rs.getString(4));
-                        
-                        article.setTimestamp(rs.getTimestamp(5));
-                        article.setID(rs.getInt(3));
-
-
-                    }
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-
-                }
-
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-
-            }
-
-
-            return article;
-        }
-        return null;
-    }
+//    public static Article getSingleArticle(int articleID, ServletContext context) {
+//        Article article = new Article();
+//        Properties dbProps = DAOCheckProperties.check(context);
+//        if (dbProps != null) {
+//
+//            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+//
+//
+//                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_id = ?")) {
+//                    stmt.setInt(1, articleID);
+//                    ResultSet rs = stmt.executeQuery();
+//
+//                    while (rs.next()) {
+//
+//                        article.setTitle(rs.getString(1));
+//                        User articleAuthor = new User(rs.getString(2));
+//                        article.setID(rs.getInt(3));
+//                        article.setAuthor(articleAuthor);
+//                        article.setArticleText(rs.getString(4));
+//
+//                        article.setTimestamp(rs.getTimestamp(5));
+//                        article.setID(rs.getInt(3));
+//
+//
+//                    }
+//
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//
+//                }
+//
+//
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//
+//            }
+//
+//
+//            return article;
+//        }
+//        return null;
+//    }
 
     public static boolean deleteArticle(int id, ServletContext context) {
         Properties dbProps = DAOCheckProperties.check(context);
@@ -297,6 +301,8 @@ Timestamp tempTimestamp = null;
                         article.setID(rs.getInt(3));
                         article.setArticleText(rs.getString(4));
                         article.setTimestamp(rs.getTimestamp(5));
+                        Timestamp raw =(rs.getTimestamp(5));
+                        article.setTimeString(getTimeString(raw));
                         User articleAuthor = new User(rs.getString(2));
                         article.setAuthor(articleAuthor);
 
@@ -339,6 +345,8 @@ Timestamp tempTimestamp = null;
                         article.setID(rs.getInt(3));
                         article.setArticleText(rs.getString(4));
                         article.setTimestamp(rs.getTimestamp(5));
+                        Timestamp raw =(rs.getTimestamp(5));
+                        article.setTimeString(getTimeString(raw));
                         User articleAuthor = new User(rs.getString(2));
                         article.setAuthor(articleAuthor);
 
@@ -415,7 +423,7 @@ Timestamp tempTimestamp = null;
         ZonedDateTime nzTime = utcTime.withZoneSameInstant(ZoneId.of("Pacific" +
                 "/Auckland"));
         //System.out.println("nz zoned time: " + c);
-        return DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm").format(nzTime);
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss").format(nzTime);
     }
     
     public static Article editArticle(int id, String title, String content, ServletContext context) {
@@ -476,6 +484,8 @@ Timestamp tempTimestamp = null;
                         article.setID(rs.getInt(3));
                         article.setArticleText(rs.getString(4));
                         article.setTimestamp(rs.getTimestamp(5));
+                        Timestamp raw =(rs.getTimestamp(5));
+                        article.setTimeString(getTimeString(raw));
                         User articleAuthor = new User(rs.getString(2));
                         article.setAuthor(articleAuthor);
 
@@ -519,6 +529,8 @@ Timestamp tempTimestamp = null;
                         article.setID(rs.getInt(3));
                         article.setArticleText(rs.getString(4));
                         article.setTimestamp(rs.getTimestamp(5));
+                        Timestamp raw =(rs.getTimestamp(5));
+                        article.setTimeString(getTimeString(raw));
                         User articleAuthor = new User(rs.getString(2));
                         article.setAuthor(articleAuthor);
 
@@ -561,6 +573,8 @@ Timestamp tempTimestamp = null;
                         article.setID(rs.getInt(3));
                         article.setArticleText(rs.getString(4));
                         article.setTimestamp(rs.getTimestamp(5));
+                        Timestamp raw =(rs.getTimestamp(5));
+                        article.setTimeString(getTimeString(raw));
                         User articleAuthor = new User(rs.getString(2));
                         article.setAuthor(articleAuthor);
 

@@ -188,6 +188,7 @@
             <c:if test="${not empty article.timestamp}">
                 <span title="${article.timestamp}">
                 <fmt:formatDate value="${article.timestamp}" pattern="MM/dd/yyyy HH:mm"/></span>
+                <p>Timestring = ${article.timeString}</p>
             </c:if>
 
             <c:set var="wholetext" value="${article.articleText}"/>
