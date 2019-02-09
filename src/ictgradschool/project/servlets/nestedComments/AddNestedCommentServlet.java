@@ -13,7 +13,6 @@ import java.util.List;
 @WebServlet(name = "AddNestedCommentServlet")
 public class AddNestedCommentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("The adding nested comment servlet");
 
         String articleID = request.getParameter("articleID");
 

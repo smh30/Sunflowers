@@ -16,24 +16,16 @@ import java.io.IOException;
 public class GetUserInfoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
-        System.out.println(" in servlet search for: " + username);
         User user = UserDAO.getUserDetails(username, getServletContext());
     
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        System.out.println("wher is it getting stuck??");
-        System.out.println("pictureURL from DAO: " + user.getPictureURL());
-        System.out.println("use default value: " + user.isUseDefaultImage());
-        System.out.println("default url: " +user.getDefaultImage());
         String image = "";
         if (user.getPictureURL() == null||user.isUseDefaultImage()){
-            System.out.println("use the default image");
             image = "images/default-photos-for-profile-page/" +user.getDefaultImage();
         } else {
-            System.out.println("use custom image");
             image = "Uploaded-Photos/"+user.getPictureURL();
         }
-        System.out.println(username +"s picture is " + image);
         JSONObject userJson = new JSONObject();
     
         // Adds a String value to the JSON
@@ -52,6 +44,5 @@ public class GetUserInfoServlet extends HttpServlet {
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       System.out.println("user ajax servlet get");
     }
 }

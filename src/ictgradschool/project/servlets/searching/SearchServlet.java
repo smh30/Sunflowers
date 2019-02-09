@@ -11,11 +11,9 @@ public class SearchServlet extends HttpServlet {
     
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("search servlet dopost");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-System.out.println("search servlet doget");
         request.getRequestDispatcher("web-pages/search.jsp").forward(request,response);
     }
 }
