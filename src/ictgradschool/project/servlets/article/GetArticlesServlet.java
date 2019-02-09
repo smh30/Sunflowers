@@ -106,7 +106,7 @@ public class GetArticlesServlet extends HttpServlet {
             message = request.getParameter("message");
             request.setAttribute("message", message);
         }
-
+        
 
         request.getRequestDispatcher("web-pages/home.jsp").forward(request, response);
     }

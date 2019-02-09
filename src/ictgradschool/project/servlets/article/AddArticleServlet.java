@@ -27,7 +27,8 @@ public class AddArticleServlet extends HttpServlet {
 
             String message = "An error occurred while uploading your article. Please try again.</p><p>Your title or article may have been too long";
             request.setAttribute("message", message);
-
+            request.setAttribute("newarticle", true);
+            request.setAttribute("article_content", content);
             request.getRequestDispatcher("web-pages/new-article.jsp").forward(request, response);
 
 
@@ -37,7 +38,7 @@ public class AddArticleServlet extends HttpServlet {
             int id = newArticle.getID();
             request.setAttribute("articleID", id);
 
-            request.getRequestDispatcher("/article").forward(request, response);
+            request.getRequestDispatcher("article").forward(request, response);
         }
 
     }

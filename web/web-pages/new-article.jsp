@@ -9,7 +9,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
-        <script src="../ckeditor/ckeditor.js"></script>
+        <script src="ckeditor/ckeditor.js"></script>
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
         <%--library for icon--%>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -103,6 +103,10 @@
                 <c:when test="${content != null}">
                 <textarea class="form-control" name="article_content" id="exampleFormControlTextarea1"
                           rows="30">${content}</textarea>
+                </c:when>
+                <c:when test="${article_content != null}">
+                    <textarea class="form-control" name="article_content" id="exampleFormControlTextarea1"
+                              rows="30">${article_content}</textarea>
                 </c:when>
                 <c:otherwise>
                     <textarea class="form-control" name="article_content" id="exampleFormControlTextarea1" rows="30"

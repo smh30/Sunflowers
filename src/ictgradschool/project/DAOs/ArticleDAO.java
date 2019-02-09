@@ -9,8 +9,12 @@ import javax.servlet.ServletContext;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.*;
@@ -151,8 +155,12 @@ String dbTimestamp = "";
 
                 } else {
                     LocalDateTime a = LocalDateTime.now();
+                    ZonedDateTime b = ZonedDateTime.now(ZoneId.of( "UTC" ));
+                    Date blan = Date.from(Instant.now());
+                    Timestamp test = Timestamp.from(b.toInstant());
+                    
                     Timestamp timestamp = Timestamp.valueOf(a);
-                    dbTimestamp = timestamp.toString();
+                    dbTimestamp = test.toString();
                 }
 
                 try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO article(article_title,article_author , article_body, article_timestamp)" +
