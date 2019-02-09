@@ -19,7 +19,7 @@
 
 <style>
     .navbar {
-        background-color: #153d02;
+        background-color: #0e603f;
     }
     .navbar .navbar-brand {
         color: #bed6ac;

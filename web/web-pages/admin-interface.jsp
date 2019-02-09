@@ -10,15 +10,25 @@
     <head>
         <title>Admin Interface</title>
         <%@include file="../WEB-INF/partial/_partial_header.jsp" %>
+        <style>
+            .content{
+                padding: 6px;
+                margin: 7px;
+                border:2px solid #666666;
+                border-radius: 12px;
+                background-color: white;
+            }
+        </style>
     </head>
 
     <body>
         <%@include file="../WEB-INF/partial/navbar.jsp" %>
         <div class="container">
+            <div class="content">
             <h2>User Admin Table</h2>
-
-                <table class="table" border="2">
-                    <thead>
+<div class="table-responsive-md">
+                <table class="table table-sm">
+                    <thead class="thead-light">
                         <tr>
                             <th>Username:</th>
                             <th>Remove Option:</th>
@@ -34,23 +44,25 @@
                                         <input type="hidden" name="username" value="${user.username}">
                                         <input type="hidden" name="admin" value="admin">
                                             <%--<button onclick="checkRemoveUser()">Remove User</button>--%>
-                                        <input type="submit" value="Delete User" class="btn btn-primary"
+                                        <input type="submit" value="Delete User" class="btn btn-primary btn-sm"
                                                onclick="return confirm('Are you sure?')"/>
                                         <p id="remove"></p>
                                     </form>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-primary" onclick="">Reset User's Password</button>
+                                    <button type="button" class="btn btn-primary btn-sm" onclick="">Reset User's Password</button>
                                 </td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
+</div></div>
 
-        </div>
         <br>
-        <div class="container">
-        <a href="#myPopup" class="btn btn-primary" data-toggle="collapse">Show 'Add new user' form</a>
+            <div class="content">
+<div class="row">
+        <a href="#myPopup" class="text-center btn btn-primary " data-toggle="collapse">Show 'Add new user' form</a>
+</div>
 
         <div class="collapse" id="myPopup">
 
@@ -85,9 +97,9 @@
         </div>
         </div>
         <br>
-        <div class="container" id="article-table">
+            <div class="content">
             <h2>Article Admin Table</h2>
-
+                <div class="table-responsive-md">
                 <table border="2" class="table">
                     <thead>
                         <tr>
@@ -106,14 +118,14 @@
                                 <td>${article.author.username}</td>
                                 <td>
                                     <form method="post" action="adminhideshowarticle">
-                                        <button type="submit" class="btn btn-primary">Hide Article</button>
+                                        <button type="submit" class="btn btn-primary btn-sm">Hide Article</button>
                                         <input type="hidden" name="articleID" value="${article.ID}">
                                         <input type="hidden" name="action" value="hide">
                                     </form>
                                 </td>
                                 <td>
                                     <form method="post" action="adminhideshowarticle">
-                                   <button type="submit" class="btn btn-primary">Show Article</button>
+                                   <button type="submit" class="btn btn-primary btn-sm">Show Article</button>
                                         <input type="hidden" name="articleID" value="${article.ID}">
                                     <input type="hidden" name="action" value="show">
                                     </form>
@@ -122,7 +134,7 @@
                                     <form method="post" action="admincomments">
                                         <input type="hidden" name="articleID" value="${article.ID}">
                                         <input type="hidden" name="admin" value="admin">
-                                        <input type="submit" value="Show Comments Table">
+                                        <input type="submit" value="Show Comments Table" class="btn btn-primary btn-sm">
                                     </form>
                                 </td>
                                 <td>
@@ -140,8 +152,8 @@
                     </tbody>
                 </table>
 
+                </div></div>
         </div>
-
 
 
         <script>
