@@ -20,7 +20,6 @@ public class ProfileDetailsDAO {
 
         if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE username= ?")) {
                     stmt.setString(1, username);
                     try (ResultSet r = stmt.executeQuery()) {
@@ -59,7 +58,6 @@ public class ProfileDetailsDAO {
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
 
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM ysy.user AS a WHERE username = ?")) {
                     stmt.setString(1, username);
@@ -106,11 +104,9 @@ public class ProfileDetailsDAO {
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
 
                 //TODO: Change placement re username to userID when linked up on database
                 try (PreparedStatement s3 = conn.prepareStatement("DELETE FROM ysy.user WHERE username = ?")) {
-                    System.out.println("working!!!");
                     s3.setString(1, username);
 
                     s3.execute();

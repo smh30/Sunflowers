@@ -13,9 +13,6 @@ import java.io.IOException;
 @WebServlet(name = "DeleteAccountServlet")
 public class DeleteAccountServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("The deleting account servlet");
-
-        //Line below left over from Yun's code - keep for now
 
         String username = (String) request.getSession().getAttribute("username");
 
@@ -26,12 +23,10 @@ public class DeleteAccountServlet extends HttpServlet {
             request.setAttribute("message", message);
 
             request.getRequestDispatcher("web-pages/profile.jsp").forward(request,response);
-            System.out.println("profile");
 
         }else{
 
             response.sendRedirect("home");
-            System.out.println("home");
         }
     }
 

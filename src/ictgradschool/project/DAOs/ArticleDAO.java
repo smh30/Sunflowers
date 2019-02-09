@@ -25,7 +25,6 @@ public class ArticleDAO {
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
 
                 String orderBy = getOrderString(sort);
                 String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
@@ -101,7 +100,6 @@ public class ArticleDAO {
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful search by author:" + author);
                 String orderBy = getOrderString(sort);
                 String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
 
@@ -146,20 +144,15 @@ public class ArticleDAO {
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
 
 String dbTimestamp = "";
                 if(!date.equals("")){
-                    System.out.println("a date was provided to the DAO: " + date);
                     dbTimestamp = date + " 00:00:00";
-                    System.out.println("a manually entered date: " + dbTimestamp);
 
                 } else {
                     LocalDateTime a = LocalDateTime.now();
                     Timestamp timestamp = Timestamp.valueOf(a);
                     dbTimestamp = timestamp.toString();
-                    System.out.print("dbTimestamp default = " +dbTimestamp);
-
                 }
 
                 try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO article(article_title,article_author , article_body, article_timestamp)" +
@@ -207,7 +200,6 @@ String dbTimestamp = "";
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
 
 
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_id = ?")) {
@@ -250,8 +242,6 @@ String dbTimestamp = "";
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
-
 
                 try (PreparedStatement s3 = conn.prepareStatement("UPDATE article SET article_author = ? WHERE article_id = ?")) {
                     s3.setString(1, "deleted");
@@ -283,7 +273,6 @@ String dbTimestamp = "";
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
 
                 String orderBy = getOrderString(sort);
                 String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
@@ -326,7 +315,6 @@ String dbTimestamp = "";
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
                 String orderBy = getOrderString(sort);
                 String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
 
@@ -375,7 +363,6 @@ String dbTimestamp = "";
                     ResultSet rs = stmt.executeQuery();
 
                     while (rs.next()) {
-                        System.out.println("title found from query = " + rs.getString(1));
                         article.setTitle(rs.getString(1));
                         User articleAuthor = new User(rs.getString(2));
                         article.setAuthor(articleAuthor);
@@ -410,7 +397,6 @@ String dbTimestamp = "";
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
 
 
                 try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.article SET article_title =?, article_body = ? WHERE ysy.article.article_id = ?")) {
@@ -446,7 +432,6 @@ String dbTimestamp = "";
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
                 String orderBy = getOrderString(sort);
                 String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
 
@@ -488,7 +473,6 @@ String dbTimestamp = "";
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
                 String orderBy = getOrderString(sort);
                 String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
 
@@ -532,7 +516,6 @@ String dbTimestamp = "";
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
                 String orderBy = getOrderString(sort);
                 String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
 
