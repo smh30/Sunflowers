@@ -244,5 +244,15 @@
         <url-pattern>/adminhideshowcomment</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>AdminResetPassword</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.admin.AdminResetPasswordServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminResetPassword</servlet-name>
+        <url-pattern>/adminresetpassword</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

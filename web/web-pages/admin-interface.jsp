@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: yab2
-  Date: 4/02/2019
-  Time: 1:57 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
@@ -20,7 +13,6 @@
             }
         </style>
     </head>
-
     <body>
         <%@include file="../WEB-INF/partial/navbar.jsp" %>
         <div class="container">
@@ -49,8 +41,10 @@
                                         <p id="remove"></p>
                                     </form>
                                 </td>
-                                <td>
-                                    <button type="button" class="btn btn-primary btn-sm" onclick="">Reset User's Password</button>
+                                <form method="post" action="adminresetpassword">
+                                    <button type="submit" class="btn btn-primary">Reset User's Password</button>
+                                    <input type="hidden" name="username" value="${user.username}">
+                                </form>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -59,13 +53,9 @@
 </div></div>
 
         <br>
-            <div class="content">
-<div class="row">
-        <a href="#myPopup" class="text-center btn btn-primary " data-toggle="collapse">Show 'Add new user' form</a>
-</div>
-
+        <div class="content">
+        <a href="#myPopup" class="btn btn-primary" data-toggle="collapse">Show 'Add new user' form</a>
         <div class="collapse" id="myPopup">
-
             <form method="post" action="adminadduser" class="form-container">
                 <h2>Add user: </h2>
                 <br>
@@ -91,7 +81,6 @@
                 <input type="email" id="emailID" name="email" class="form-control">
                 <br>
                 <br>
-                <%--Here we are adding in a new user--%>
                 <button type="submit" class="btn btn-primary" value="adminadduser">Create new user</button>
             </form>
         </div>
@@ -99,8 +88,8 @@
         <br>
             <div class="content">
             <h2>Article Admin Table</h2>
-                <div class="table-responsive-md">
-                <table border="2" class="table">
+<div class="table responsive-md">
+                <table class="table">
                     <thead>
                         <tr>
                             <th>Article Title:</th>
@@ -118,26 +107,26 @@
                                 <td>${article.author.username}</td>
                                 <td>
                                     <form method="post" action="adminhideshowarticle">
-                                        <button type="submit" class="btn btn-primary btn-sm">Hide Article</button>
+                                        <button type="submit" class="btn btn-primary">Hide Article</button>
                                         <input type="hidden" name="articleID" value="${article.ID}">
                                         <input type="hidden" name="action" value="hide">
                                     </form>
                                 </td>
                                 <td>
                                     <form method="post" action="adminhideshowarticle">
-                                   <button type="submit" class="btn btn-primary btn-sm">Show Article</button>
+                                   <button type="submit" class="btn btn-primary">Show Article</button>
                                         <input type="hidden" name="articleID" value="${article.ID}">
                                     <input type="hidden" name="action" value="show">
-                                    </form>
-                                </td>
-                                <td>
-                                    <form method="post" action="admincomments">
-                                        <input type="hidden" name="articleID" value="${article.ID}">
-                                        <input type="hidden" name="admin" value="admin">
-                                        <input type="submit" value="Show Comments Table" class="btn btn-primary btn-sm">
-                                    </form>
-                                </td>
-                                <td>
+                                </form>
+                            </td>
+                            <td>
+                                <form method="post" action="admincomments">
+                                    <input type="hidden" name="articleID" value="${article.ID}">
+                                    <input type="hidden" name="admin" value="admin">
+                                    <input type="submit" value="showcommentstable">
+                                </form>
+                            </td>
+                            <td>
                                 <c:choose>
                                     <c:when test="${article.hidden}">
                                         Hidden
@@ -154,19 +143,13 @@
 
                 </div></div>
         </div>
-
-
         <script>
-            <%--Google re this form how the popup works and if it can send info to servlet.--%>
-
             function checkRemoveUser() {
                 var txt;
                 if (confirm("Are you sure you want to remove this user?")) {
                     txt = "You pressed OK!";
-                    <%--If press ok, refresh/redirect page, but also tell sql database to delete user--%>
                 } else {
                     txt = "You pressed Cancel!";
-                    <%--If press cancel, redirect back to admin interface--%>
                 }
                 document.getElementById("remove").innerHTML = txt;
             }

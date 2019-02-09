@@ -35,7 +35,7 @@ public class AdminInterfaceServlet extends HttpServlet {
         Boolean admin = Boolean.valueOf(request.getParameter("admin"));
         System.out.println("Attempting processing: " + username + password + admin);
 
-        System.out.println("logged in admin user, attemting redirect to admin page");
+        System.out.println("logged in admin user, attempting redirect to admin page");
 
 
         List <User> userList = new ArrayList <>();
@@ -53,10 +53,7 @@ public class AdminInterfaceServlet extends HttpServlet {
 
         request.setAttribute("users", userList);
 
-        //request.getRequestDispatcher("web-pages/admin-interface.jsp").forward(request, response);
 
-
-        //TODO: Check whether
         List <User> userPasswordList = new ArrayList <>();
 
         //Think they are using parameters from above page??
@@ -79,8 +76,6 @@ public class AdminInterfaceServlet extends HttpServlet {
         System.out.println("Attempting processing "+ title + author);
 
         request.setAttribute("articles", articles);
-
-        //request.getRequestDispatcher("web-pages/admin-interface.jsp").forward(request, response);
 
         request.getRequestDispatcher("web-pages/admin-interface.jsp").forward(request,response);
     }
