@@ -15,8 +15,6 @@ import java.io.PrintWriter;
 @WebServlet(name = "AddArticleServlet")
 public class AddArticleServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("post!");
-        System.out.println("The adding article servlet");
 
         String title = request.getParameter("article_title");
         String content = request.getParameter("article_content");
@@ -24,26 +22,19 @@ public class AddArticleServlet extends HttpServlet {
         String user = (String) request.getSession().getAttribute("username");
 
         Article newArticle = ArticleDAO.newArticle(title, content, user, date, getServletContext());
-        System.out.println("provided date: " + date);
-
-
-        //newArticle = ArticleDAO.newArticle(title,content,user,date,getServletContext());
 
         if (newArticle == null || newArticle.getID()==0) {
 
-            System.out.println("article not created??");
-            String message = "<p>An error occurred while uploading your article. Please try again.</p><p>Your title or article may have been too long</p>";
+            String message = "An error occurred while uploading your article. Please try again.</p><p>Your title or article may have been too long";
             request.setAttribute("message", message);
 
             request.getRequestDispatcher("web-pages/new-article.jsp").forward(request, response);
 
 
         } else {
-            System.out.println("article created!!!!!!!");
             request.setAttribute("new", true);
             request.setAttribute("article", newArticle);
             int id = newArticle.getID();
-            System.out.println("new aartic's id" + id);
             request.setAttribute("articleID", id);
 
             request.getRequestDispatcher("/article").forward(request, response);

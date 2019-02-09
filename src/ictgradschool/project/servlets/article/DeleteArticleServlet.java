@@ -13,7 +13,6 @@ import java.io.PrintWriter;
 @WebServlet(name = "DeleteArticleServlet")
 public class DeleteArticleServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("The deleting article servlet");
 
         String username = request.getParameter("author");
 
@@ -22,7 +21,6 @@ public class DeleteArticleServlet extends HttpServlet {
         String content = request.getParameter("articleText");
 
         int id = Integer.parseInt(request.getParameter("articleID"));
-
 
         String user = (String) request.getSession().getAttribute("username");
 
@@ -33,10 +31,8 @@ public class DeleteArticleServlet extends HttpServlet {
             request.setAttribute("message", message);
 
             request.getRequestDispatcher("web-pages/single-article.jsp").forward(request, response);
-            System.out.println("single");
         } else {
             response.sendRedirect("home");
-            System.out.println("home");
         }
     }
 
