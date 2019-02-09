@@ -39,17 +39,20 @@ public class GetSingleArticleServlet extends HttpServlet {
         }
 
         System.out.println("article id is = " + articleID);
-        article = ArticleDAO.getSingleArticle(articleID, getServletContext());
+        article = ArticleDAO.getArticleByID(articleID, getServletContext());
         // get articles by that author
         LocalDateTime a = LocalDateTime.now();
         Timestamp currentTime = Timestamp.valueOf(a);
+        System.out.println("currenttime: " + currentTime);
+        Timestamp articleTime = Timestamp.valueOf(article.getTimeString());
+        System.out.println("articletime: " + articleTime);
 
-        if ((article.getTimestamp()).after(currentTime)){
-            System.out.println("the article is postdated");
-            request.setAttribute("postdated", true);
-        }else{
-            System.out.println("a normal article");
-        }
+//        if ((article.getTimestamp()).after(currentTime)){
+//            System.out.println("the article is postdated");
+//            request.setAttribute("postdated", true);
+//        }else{
+//            System.out.println("a normal article");
+//        }
 
         List <Comment> comments = new ArrayList <Comment>();
 

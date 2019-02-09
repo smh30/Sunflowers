@@ -22,7 +22,7 @@ public class GetArticlesServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+System.out.println("in the home servlet");
         List <Article> articleList = new ArrayList <>();
 
         String sort = "newest";
@@ -107,7 +107,7 @@ public class GetArticlesServlet extends HttpServlet {
             request.setAttribute("message", message);
         }
         
-
+System.out.println("redirecting to jsp");
         request.getRequestDispatcher("web-pages/home.jsp").forward(request, response);
     }
 }
