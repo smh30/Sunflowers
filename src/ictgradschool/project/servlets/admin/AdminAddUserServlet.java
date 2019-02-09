@@ -12,11 +12,6 @@ import java.io.IOException;
 @WebServlet(name = "AdminAddUserServlet")
 public class AdminAddUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("in the AdminAddUser servlet POST");
-        System.out.println("Processing username and password");
-
-         /*In the Register servlet POST method, retrieve the username and password parameters
-        supplied.*/
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
