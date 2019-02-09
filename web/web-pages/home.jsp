@@ -216,7 +216,7 @@
                 <input type="hidden" name="author" value="${searchParams.searchAuthor}">
                 <input type="hidden" name="title" value="${searchParams.searchTitle}">
                 <input type="hidden" name="date" value="${searchParams.searchDate}">
-                <input type="hidden" name="currentBack" value="${currentback}">
+                <input type="hidden" name="currentback" value="${currentback}">
 
                 <button class="btn btn-primary" type="submit" value="back" name="back" id="back">Back</button>
                 <c:if test="${currentback != 0}">
