@@ -72,9 +72,7 @@
             background-color: white;
         }
 
-        a{
-            color: #a94300;
-        }
+
 
 
 

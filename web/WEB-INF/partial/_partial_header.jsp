@@ -155,6 +155,10 @@
         background-attachment: fixed;
     }
 
+    a{
+        color: #a94300;
+    }
+
     a:hover {
         color: #ea8800;
     }
