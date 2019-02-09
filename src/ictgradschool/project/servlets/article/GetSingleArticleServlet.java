@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
@@ -40,8 +41,8 @@ public class GetSingleArticleServlet extends HttpServlet {
 
         System.out.println("article id is = " + articleID);
         article = ArticleDAO.getArticleByID(articleID, getServletContext());
-        
-        LocalDateTime a = LocalDateTime.now();
+    
+        LocalDateTime a = LocalDateTime.now(ZoneId.of("Pacific/Auckland"));
         Timestamp currentTime = Timestamp.valueOf(a);
         System.out.println("currenttime: " + currentTime);
         System.out.println("timestring =" +article.getTimeString());

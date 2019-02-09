@@ -153,7 +153,6 @@ public class ArticleDAO {
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-Instant currentInstant = null;
 Timestamp timestamp = null;
 Timestamp tempTimestamp = null;
                 if(!date.equals("")){
