@@ -16,6 +16,12 @@
     <body>
         <%@include file="../WEB-INF/partial/navbar.jsp" %>
         <div class="container">
+            <c:if test="${message!=null}">
+                <div class="alert alert-warning alert-dismissible" id="error-message">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        ${message}
+                </div>
+            </c:if>
             <div class="content">
             <h2>User Admin Table</h2>
 <div class="table-responsive-md">
