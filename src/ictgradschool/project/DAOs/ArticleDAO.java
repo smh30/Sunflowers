@@ -149,18 +149,15 @@ public class ArticleDAO {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
 
-String dbTimestamp = "";
+Timestamp timestamp = null;
+Timestamp tempTimestamp = null;
                 if(!date.equals("")){
-                    dbTimestamp = date + " 00:00:00";
+                    timestamp = Timestamp.valueOf(date + " 00:00:00");
 
                 } else {
-                    LocalDateTime a = LocalDateTime.now();
-                    ZonedDateTime b = ZonedDateTime.now(ZoneId.of( "UTC" ));
-                    Date blan = Date.from(Instant.now());
-                    Timestamp test = Timestamp.from(b.toInstant());
-                    
-                    Timestamp timestamp = Timestamp.valueOf(a);
-                    dbTimestamp = test.toString();
+                    LocalDateTime a = LocalDateTime.now(ZoneId.of("Z"));
+                    tempTimestamp = Timestamp.valueOf(a);
+                    timestamp = tempTimestamp;
                 }
 
                 try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO article(article_title,article_author , article_body, article_timestamp)" +
@@ -168,7 +165,7 @@ String dbTimestamp = "";
                     s2.setString(1, title);
                     s2.setString(2, user);
                     s2.setString(3, content);
-                    s2.setString(4, dbTimestamp);
+                    s2.setTimestamp(4, timestamp);
                     s2.execute();
 
 
@@ -180,7 +177,7 @@ String dbTimestamp = "";
 
                 try (PreparedStatement s3 = conn.prepareStatement("SELECT article_id FROM article WHERE article_author = ? AND NOT (article_timestamp > ?)  ORDER BY article_timestamp DESC LIMIT 1")) {
                     s3.setString(1, user);
-                    s3.setString(2, dbTimestamp);
+                    s3.setTimestamp(2, timestamp);
                     try (ResultSet rs = s3.executeQuery()) {
                         if (rs.next()) {
                             article.setID(rs.getInt(1));
@@ -221,7 +218,9 @@ String dbTimestamp = "";
                         article.setID(rs.getInt(3));
                         article.setAuthor(articleAuthor);
                         article.setArticleText(rs.getString(4));
-                        article.setTimestamp(rs.getTimestamp(5));
+                        Timestamp raw =(rs.getTimestamp(5));
+                        //Timestamp converted=
+                        article.setTimestamp(raw);
                         article.setID(rs.getInt(3));
 
 
