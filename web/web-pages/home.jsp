@@ -64,25 +64,6 @@
 
     <style type="text/css">
 
-
-        /*body{*/
-            /*background-image: url("/web-pages/images/sf-lesssky.jpg") ;*/
-            /*background-repeat: no-repeat;*/
-            /*background-color: #cccccc;*/
-            /*background-size:cover;*/
-            /*background-attachment: fixed;*/
-        /*}*/
-
-        /*body{*/
-            /*background-image: url("images/sf-lesssky.jpg") ;*/
-            /*background-repeat: no-repeat;*/
-            /*background-color: #cccccc;*/
-            /*height: 500px;*/
-            /*background-position: center;*/
-            /*background-size: cover;*/
-            /*background-attachment: fixed;*/
-        /*}*/
-
         .article{
             padding: 6px;
             margin: 7px;
@@ -125,7 +106,7 @@
     </c:if>
 
     <%--begin dropdown for selecting sort order for articles--%>
-
+<div id="sort-dropdown" class="d-flex flex-row-reverse pt-2">
     <form action="home" method="GET" class="form-inline">
         <input type="hidden" name="author" value="${searchParams.searchAuthor}">
         <input type="hidden" name="title" value="${searchParams.searchTitle}">
@@ -182,10 +163,9 @@
                     <option value="title-z">Title (reversed)</option>
                 </c:otherwise>
             </c:choose>
-
         </select>
-
     </form>
+</div>
 
 
     <%--      end sort order dropdown     --%>
@@ -212,8 +192,17 @@
                 <fmt:formatDate value="${article.timestamp}" pattern="MM/dd/yyyy HH:mm"/></span>
             </c:if>
 
-            <p>${article.articleText}</p>
-                <%--todo add readmore for long articles?--%>
+            <c:set var="wholetext" value="${article.articleText}"/>
+                <c:set var="firstpart" value="${fn:substring(wholetext,0, 500 )}"/>
+                <c:set var="therest" value="${fn:substring(wholetext, 500, wholetext.length()-1)}"/>
+                <c:set var="endpara" value="${fn:substringBefore(therest,'</p>')}"/>
+                <c:set var="ismore" value="${fn:substringAfter(therest, '</p>')}"/>
+                ${firstpart}
+                <c:if test="${not empty ismore}">---
+                    ${endpara}</p>
+                    <a href="article?articleID=${article.ID}">read more</a>
+            </c:if>
+
 
         </div>
     </c:forEach>
