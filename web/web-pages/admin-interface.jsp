@@ -41,6 +41,7 @@
                                         <p id="remove"></p>
                                     </form>
                                 </td>
+                                <td>
                                 <form method="post" action="adminresetpassword">
                                     <button type="submit" class="btn btn-primary">Reset User's Password</button>
                                     <input type="hidden" name="username" value="${user.username}">
