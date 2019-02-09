@@ -13,6 +13,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -148,7 +149,7 @@ public class ArticleDAO {
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-
+Instant currentInstant = null;
 Timestamp timestamp = null;
 Timestamp tempTimestamp = null;
                 if(!date.equals("")){
@@ -158,6 +159,7 @@ Timestamp tempTimestamp = null;
                     LocalDateTime a = LocalDateTime.now(ZoneId.of("Z"));
                     tempTimestamp = Timestamp.valueOf(a);
                     timestamp = tempTimestamp;
+                    //currentInstant = Instant.now();
                 }
 
                 try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO article(article_title,article_author , article_body, article_timestamp)" +
@@ -201,7 +203,6 @@ Timestamp tempTimestamp = null;
     public static Article getSingleArticle(int articleID, ServletContext context) {
         Article article = new Article();
         Properties dbProps = DAOCheckProperties.check(context);
-
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
@@ -218,9 +219,8 @@ Timestamp tempTimestamp = null;
                         article.setID(rs.getInt(3));
                         article.setAuthor(articleAuthor);
                         article.setArticleText(rs.getString(4));
-                        Timestamp raw =(rs.getTimestamp(5));
-                        //Timestamp converted=
-                        article.setTimestamp(raw);
+                        
+                        article.setTimestamp(rs.getTimestamp(5));
                         article.setID(rs.getInt(3));
 
 
@@ -374,7 +374,17 @@ Timestamp tempTimestamp = null;
                         User articleAuthor = new User(rs.getString(2));
                         article.setAuthor(articleAuthor);
                         article.setArticleText(rs.getString(4));
-                        article.setTimestamp(rs.getTimestamp(5));
+                        //the db timestamp is in UTC
+                        Timestamp raw =(rs.getTimestamp(5));
+                        article.setTimeString(getTimeString(raw));
+                        //String timeString = getTimeString(raw);
+                        //String timeString = getTimeString(raw);
+    
+    
+                        //Timestamp converted= Timestamp.from(nzTime.toInstant());
+                        //System.out.println("converted to ts:" + converted);
+                        
+                        //article.setTimestamp(converted);
                         article.setID(rs.getInt(3));
 
 
@@ -396,7 +406,18 @@ Timestamp tempTimestamp = null;
         }
         return null;
     }
-
+    
+    private static String getTimeString(Timestamp raw) {
+        String rstring = (raw.toString().replace(' ', 'T').substring(0, 19))+"Z" +
+                "[UTC]";
+        ZonedDateTime utcTime = ZonedDateTime.parse(rstring);
+        //System.out.println("UTC zoned time: " + utcTime);
+        ZonedDateTime nzTime = utcTime.withZoneSameInstant(ZoneId.of("Pacific" +
+                "/Auckland"));
+        //System.out.println("nz zoned time: " + c);
+        return DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm").format(nzTime);
+    }
+    
     public static Article editArticle(int id, String title, String content, ServletContext context) {
         Article article = new Article();
         Properties dbProps = DAOCheckProperties.check(context);
