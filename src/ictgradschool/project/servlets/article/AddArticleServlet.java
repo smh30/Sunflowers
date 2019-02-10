@@ -44,8 +44,12 @@ public class AddArticleServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("newarticle", true);
-        request.getRequestDispatcher("web-pages/new-article.jsp").forward(request, response);
-
+        if (request.getSession().getAttribute("username")==null){
+            request.setAttribute("message", "You do not have permission to access that page");
+            request.getRequestDispatcher("home").forward(request,response);
+        } else {
+            request.setAttribute("newarticle", true);
+            request.getRequestDispatcher("web-pages/new-article.jsp").forward(request, response);
+        }
     }
 }

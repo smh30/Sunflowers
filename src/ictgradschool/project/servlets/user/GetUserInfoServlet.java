@@ -27,17 +27,13 @@ public class GetUserInfoServlet extends HttpServlet {
             image = "Uploaded-Photos/"+user.getPictureURL();
         }
         JSONObject userJson = new JSONObject();
-    
-        // Adds a String value to the JSON
+        
         userJson.put("username", user.getUsername());
         userJson.put("realname", user.getRealName());
         userJson.put("dob", user.getDOB());
         userJson.put("country", user.getCountry());
         userJson.put("bio", user.getDescription());
         userJson.put("image", image);
-        
-    
-        //put only the relevant image, the entire url of it
         
             response.getWriter().print(userJson);
         
