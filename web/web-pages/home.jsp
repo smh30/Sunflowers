@@ -185,21 +185,37 @@
             <p><a href="#" onclick="getAuthorInfo('${article.author.username}');return false;">Author: ${article.author.username}</a>
             </p>
                 <%--this block converts the timestamp to a nicer format for viewing on the page--%>
-            <c:if test="${not empty article.timestamp}">
-                <span title="${article.timestamp}">
-                <fmt:formatDate value="${article.timestamp}" pattern="MM/dd/yyyy HH:mm"/></span>
-                <p>Timestring = ${article.timeString}</p>
+            <c:if test="${not empty article.timeString}">
+                <%--<span title="${article.timestamp}">--%>
+                <%--<fmt:formatDate value="${article.timestamp}" pattern="MM/dd/yyyy HH:mm"/></span>--%>
+
+                <p>${fn:substring(article.timeString,0,16)}</p>
             </c:if>
 
             <c:set var="wholetext" value="${article.articleText}"/>
                 <c:set var="firstpart" value="${fn:substring(wholetext,0, 500 )}"/>
                 <c:set var="therest" value="${fn:substring(wholetext, 500, wholetext.length()-1)}"/>
                 <c:set var="endpara" value="${fn:substringBefore(therest,'</p>')}"/>
+
                 <c:set var="ismore" value="${fn:substringAfter(therest, '</p>')}"/>
                 ${firstpart}
-                <c:if test="${not empty ismore}">---
-                    ${endpara}</p>
-                    <a href="article?articleID=${article.ID}">read more</a>
+
+            <c:if test="${not empty therest}">
+
+
+                        <c:if test="${not empty ismore}">
+                            ${endpara}
+                            <br><a href="article?articleID=${article.ID}">read more</a>
+                        </c:if>
+                    
+
+
+                <c:set var="p" value="${fn:indexOf(therest, '</p>')}"/>
+
+                <c:if test="${p == -1}">
+                    <c:set var="endline" value="${fn:substring(therest, 0, fn:indexOf(therest, '\\\\n'))}"/>
+                    ${endline}
+                </c:if>
             </c:if>
 
 
