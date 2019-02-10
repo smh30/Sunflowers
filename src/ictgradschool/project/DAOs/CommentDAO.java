@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -36,6 +37,8 @@ public class CommentDAO {
                         User commentAuthor = new User(rs.getString(2));
                         comment.setCommentContent(rs.getString(3));
                         comment.setTimestamp(rs.getTimestamp(4));
+                        Timestamp raw =(rs.getTimestamp(4));
+                        comment.setTimeString(ArticleDAO.getTimeString(raw));
                         comment.setCommentAuthor(commentAuthor);
                         comment.setArticleId(rs.getInt(5));
                         comments.add(comment);
@@ -121,6 +124,8 @@ public class CommentDAO {
                         User commentAuthor = new User(rs.getString(2));
                         co.setCommentContent(rs.getString(3));
                         co.setTimestamp(rs.getTimestamp(4));
+                        Timestamp raw =(rs.getTimestamp(4));
+                        co.setTimeString(ArticleDAO.getTimeString(raw));
                         co.setArticleId(rs.getInt(5));
                         co.setCommentAuthor(commentAuthor);
                         children.add(co);
@@ -141,16 +146,17 @@ public class CommentDAO {
 
         if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-
-                LocalDateTime a = LocalDateTime.now();
+    
+                
+                LocalDateTime a = LocalDateTime.now(ZoneId.of("Z"));
                 Timestamp timestamp = Timestamp.valueOf(a);
-
+                
                 try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO comments(comments_author,article_id , coments_body, comments_timestamp)" +
                         "VALUES (?, ?, ?, ?)")) {
                     s2.setString(1, user);
                     s2.setString(2, ArticleId);
                     s2.setString(3, content);
-                    s2.setString(4, timestamp.toString());
+                    s2.setTimestamp(4, timestamp);
 
 
                     s2.execute();
@@ -213,8 +219,8 @@ public class CommentDAO {
 
         if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-
-                LocalDateTime a = LocalDateTime.now();
+    
+                LocalDateTime a = LocalDateTime.now(ZoneId.of("Z"));
                 Timestamp timestamp = Timestamp.valueOf(a);
 
                 try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO comments(comments_author,article_id , coments_body, comments_timestamp, parent_comment)" +
@@ -223,7 +229,7 @@ public class CommentDAO {
                     s2.setString(2, ArticleId);
 
                     s2.setString(3, content);
-                    s2.setString(4, timestamp.toString());
+                    s2.setTimestamp(4, timestamp);
                     s2.setString(5,parentid);
 
 
