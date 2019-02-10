@@ -1,39 +1,22 @@
-<%@ page import="ictgradschool.project.JavaBeans.Comment" %>
-<%@ page import="java.util.List" %>
-<%@ page import="ictgradschool.project.JavaBeans.Article" %>
-<%@ page import="java.io.PrintWriter" %>
-<%@ page import="java.io.IOException" %>
+
 <%@ taglib prefix="myTags" tagdir="/WEB-INF/tags" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: yab2
-  Date: 25/01/2019
-  Time: 3:17 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
 <head>
     <title>Single article</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
 
     <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
-    <%--library for icon--%>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
-    <%--library for the comment pool--%>
-    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <%--library for the comment pool(this is what's wreckong the navbar--%>
+    <%--<link href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">--%>
+    <%--<link rel="stylesheet" href="style.css">--%>
+    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--%>
+    <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>--%>
 
     <script type="text/javascript">
 
@@ -158,7 +141,13 @@
             background-color: #138496;
         }
 
+        a{
+            color: #a94300;
+        }
 
+        a:hover {
+            color: #ea8800;
+        }
 
     </style>
 
@@ -170,7 +159,7 @@
 <div class="container">
 
     <%--Article Display--%>
-    <div class="article">
+    <div class="article pt-5">
 
         <c:choose>
             <c:when test="${article.title == null}">
@@ -248,8 +237,6 @@
 
 
 
-
-
     <script>
         function openForm(id) {
             var className = "myForm-" + id;
@@ -289,6 +276,7 @@
 
         <div class="page-header">
             <h2 class="reviews">Comments</h2>
+            <hr>
         </div>
 
     <myTags:childComments list="${comment}"/>

@@ -44,10 +44,8 @@ public class GetSingleArticleServlet extends HttpServlet {
     
         LocalDateTime a = LocalDateTime.now(ZoneId.of("Pacific/Auckland"));
         Timestamp currentTime = Timestamp.valueOf(a);
-        System.out.println("currenttime: " + currentTime);
-        System.out.println("timestring =" +article.getTimeString());
         Timestamp articleTime = Timestamp.valueOf(article.getTimeString());
-        System.out.println("articletime: " + articleTime);
+        
 
         if (articleTime.after(currentTime)){
             System.out.println("the article is postdated");
