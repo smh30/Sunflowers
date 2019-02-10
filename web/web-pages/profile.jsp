@@ -11,6 +11,7 @@
 <html>
 <%! String title = "Profile"; %>
 <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
+<title>${user.username}'s Profile</title>
 <%--library for icon--%>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
@@ -46,13 +47,14 @@
         </div>
     </c:if>
 
-    <h1>${user.username}'s Account:</h1>
-    <br>
-    <br>
+    <h1 class="py-3">${user.username}'s Account:</h1>
+
+
 
     <%--Below shows the user's selected image - either one of the default options, or if they've uploaded one, that one --%>
     <div class="row">
         <div class="col-md-6">
+            <div class="transparent-white">
             <div id="image" class="text-center">
     <c:choose>
         <c:when test="${user.pictureURL != null && user.useDefaultImage == false}">
@@ -129,10 +131,11 @@
 
 
             <hr>
-    </div>
+            </div></div>
 
 
     <div class="form-group col-md-6">
+        <div class="transparent-white">
         <%--a form to edit the other aspects of the user profile--%>
         <form action="editprofile" method="post">
             <fieldset>
@@ -245,7 +248,7 @@
                 </div>
             </fieldset>
         </form>
-
+        </div>
     </div>
 </div>
 </body>

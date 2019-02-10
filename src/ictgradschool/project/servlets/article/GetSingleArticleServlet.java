@@ -66,6 +66,10 @@ public class GetSingleArticleServlet extends HttpServlet {
 
 
         request.setAttribute("article", article);
+        if (request.getAttribute("message")!=null){
+            System.out.println("a message in single post");
+            request.setAttribute("message", request.getAttribute("message"));
+        }
 
         request.getRequestDispatcher("web-pages/single-article.jsp").forward(request, response);
 

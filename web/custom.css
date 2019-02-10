@@ -130,7 +130,8 @@ body {
     background-image: url("images/sf-lesssky.jpg");
     background-repeat: no-repeat;
     background-color: #cccccc;
-    height: 500px;
+    width:100%;
+    height:100%;
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
@@ -160,7 +161,32 @@ a:hover {
      margin: 7px;
      border:2px solid #666666;
      border-radius: 12px;
-     background-color: rgba(255, 255, 255, .5);
+     background-color: rgba(255, 255, 255, .7);
 
  }
+
+ .profile-white{
+
+     border:2px solid #666666;
+     border-radius: 12px;
+     background-color: rgba(255, 255, 255, .7);
+ }
+
+@media screen and (max-device-aspect-ratio: 3/4) {
+    .body{
+    height: calc(100vw * 1.333 - 9%);}
+}
+@media screen and (max-device-aspect-ratio: 2/3) {
+    .body{
+    height: calc(100vw * 1.5 - 9%);}
+}
+@media screen and (max-device-aspect-ratio: 10/16) {
+    .body{
+
+    height: calc(100vw * 1.6 - 9%);}
+}
+@media screen and (max-device-aspect-ratio: 9/16) {
+    .body{
+    height: calc(100vw * 1.778 - 9%);}
+}
 

@@ -5,8 +5,15 @@
 
 <html>
 <head>
-    <title>Single article</title>
-
+    <title>
+    <c:choose>
+        <c:when test="${article.title == null|| empty article.title}">Untitled Article
+        </c:when>
+        <c:otherwise>
+            ${article.title}
+        </c:otherwise>
+    </c:choose>
+    </title>
 
     <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
@@ -156,6 +163,12 @@
 <body>
 
 <%@ include file="../WEB-INF/partial/navbar.jsp" %>
+<c:if test="${message!=null}">
+    <div class="alert alert-warning alert-dismissible" id="error-message">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            ${message}
+    </div>
+</c:if>
 <div class="container">
 
     <%--Article Display--%>
@@ -227,7 +240,7 @@
                 <input type="hidden" name="articleID" value="${article.ID}">
                 <label for="addcomment">Comment:</label>
                 <textarea class="form-control" name="comment" rows="5" id="addcomment"
-                          placeholder="Comment here:"></textarea>
+                          placeholder="Comment here:" maxlength="1000"></textarea>
                 <br>
                 <button id="addcommentbtn" class="btn btn-primary" type="submit" value="Add Comment">Add Comment</button>
             </form>

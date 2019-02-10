@@ -122,7 +122,7 @@
                                         <form method="post" action="addNestedComment" class="form-container">
                                             <input type="hidden" name="articleID" value="${article.ID}">
                                             <input type="hidden" name="commentID" value="${childComment.commentID}">
-                                            <textarea placeholder="comment here..." name="content" class="form-control" rows="4"
+                                            <textarea placeholder="comment here..." maxlength="1000" name="content" class="form-control" rows="4"
                                                       id="content"></textarea>
                                             <button type="submit" class="btn btn-primary">Submit</button>
                                             <button type="button" class="btn cancel btn-warning"
