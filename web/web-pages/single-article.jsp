@@ -127,25 +127,35 @@
         }
 
         #editarticle{
-            background-color: #17a2b8;
+            background-color: #31b0d5;
             font-weight: bold;
             font-size: 12px;
             padding: 6px 15px;
             border-radius: 20px;
         }
         #deletearticle{
-            background-color: #17a2b8;
+            background-color: #31b0d5;
             font-weight: bold;
             font-size: 12px;
             padding: 6px 15px;
             border-radius: 20px;
         }
         #addcommentbtn{
-            background-color: #17a2b8;
+            background-color: #31b0d5;
             font-weight: bold;
             font-size: 12px;
             padding: 6px 15px;
             border-radius: 20px;
+        }
+
+        #editarticle:hover{
+            background-color: #138496;
+        }
+        #addcommentbtn:hover{
+            background-color: #138496;
+        }
+        #deletearticle:hover{
+            background-color: #138496;
         }
 
 
