@@ -95,7 +95,7 @@
                         <div class="card bg-light p-3">
 
                             <div class="media-heading">
-                            <h4 class="media-heading text-uppercase ßreviews"><strong>${childComment.commentAuthor.username} :</strong></h4>
+                            <h4 class="card-title text-uppercase ßreviews"><strong>${childComment.commentAuthor.username} :</strong></h4>
 
                                <span>
                             <ul class="media-date text-uppercase reviews list-inline">

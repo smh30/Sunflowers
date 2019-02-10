@@ -60,16 +60,30 @@
 
 
             .container{
+
+                padding: 6px;
+                margin: auto;
+                border:2px solid #666666;
+                border-radius: 12px;
+                background-color: white;
+
                 position: center;
                 margin-top: 8%;
-                padding: 5px;
+
+            }
+
+
+            .theRform{
+                margin: 20px 15px 25px 15px;
+                padding: 20px;
+                border:2px solid #666666;
+                border-radius: 12px;
                 background-color: whitesmoke;
             }
 
-            .theRform{
-                font-family: 'Microsoft Sans Serif', Tahoma, Arial, Verdana, Sans-Serif;
-                margin: 20px 15px 25px 15px;
-                padding: 20px;
+            .article{
+                padding: 6px;
+                margin: 7px;
                 border:2px solid #666666;
                 border-radius: 12px;
                 background-color: whitesmoke;
@@ -93,7 +107,7 @@
         <div id="nameFail">
         </div>
 
-    <h1>REGISTER</h1>
+    <h1>Register</h1>
 
 
     <div id="reg-form">
@@ -101,13 +115,13 @@
             <%--Below line for reCAPTCHA--%>
 
 <div class="form-group">
-            <label class="label-txt" for="username">USERNAME:</label>
+            <label class="label-txt" for="username">Username: </label>
                 <%--the onchange means that when the box loses focus it does the thing --%>
             <input type="text" id="username" name="username" onchange="checkName(this.value)"  class="form-control">
         </div>
 
     <div class="form-group">
-            <label for="password">PASSWORD:</label>
+            <label for="password">Password: </label>
             <input type="password" id="password" name="password" minlength="8" class="form-control">
         <small id="passwordInfo" class="form-text text-muted">Minimum 8 characters</small>
 </div>
