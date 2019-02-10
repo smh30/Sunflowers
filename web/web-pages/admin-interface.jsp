@@ -22,6 +22,9 @@
             </div>
         </c:if>
         <div class="container">
+            <div class="content">
+                The admin console is designed for use on a full-sized screen. Using it on mobile may be difficult.
+            </div>
 
             <div class="content">
             <h2>User Admin Table</h2>
@@ -94,11 +97,11 @@
         </div>
         </div>
         <br>
-            <div class="content">
+            <div class="content responsive-md">
             <h2>Article Admin Table</h2>
 <div class="table responsive-md">
-                <table class="table">
-                    <thead>
+                <table class="table table-sm">
+                    <thead class="thead-light">
                         <tr>
                             <th>Article Title:</th>
                             <th>Article Author:</th>
@@ -140,7 +143,7 @@
                                 <form method="post" action="admincomments">
                                     <input type="hidden" name="articleID" value="${article.ID}">
                                     <input type="hidden" name="admin" value="admin">
-                                    <input type="submit" value="showcommentstable">
+                                    <input type="submit" class="btn btn-primary" value="Show Comments Table">
                                 </form>
                             </td>
                             <td>
