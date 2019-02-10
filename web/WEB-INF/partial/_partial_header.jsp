@@ -3,6 +3,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>${title}</title>
     <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
+    <%--library for font family--%>
+    <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
+
     <%--<base href="https://sporadic.nz/ysy_unnamed">--%>
     <link rel="icon"
           type="image/png"
@@ -153,6 +157,8 @@
         background-position: center;
         background-size: cover;
         background-attachment: fixed;
+        font-family: 'Cabin', sans-serif;
+        font-size: 20px;
     }
 
     a{
