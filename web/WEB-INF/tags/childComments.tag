@@ -17,9 +17,8 @@
         width: 100%;
     }
     .media-date {
-        position: absolute;
-        right: 25px;
-        top: 25px;
+        position: relative;
+
     }
     .media-date li { padding: 0; }
     .media-date li:first-child:before { content: ''; }
@@ -90,12 +89,15 @@
                     <div class="media-body" id="commentDiv${childComment.commentID}">
                         <div class="well well-lg">
 
+                            <div class="media-heading">
                             <h4 class="media-heading text-uppercase ßreviews"><strong>${childComment.commentAuthor.username} :</strong></h4>
 
+                               <span>
                             <ul class="media-date text-uppercase reviews list-inline">
                                 <li class="dd">${childComment.timestamp}</li>
                             </ul>
-
+                               </span>
+                            </div>
 
                             <div>
 
