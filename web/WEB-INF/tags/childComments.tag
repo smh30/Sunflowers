@@ -2,47 +2,166 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="myTags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<style>
+
+    .container-comment-pool{
+        width: 100%;
+        height: auto;
+    }
+    .media .media-object { max-width: 120px; }
+    .media-body {
+        position: relative;
+        width: 100% ;
+    }
+    #commentDiv${childComment.commentID}{
+        width: 90%;
+    }
+    .media-date {
+        position: absolute;
+        right: 25px;
+        top: 25px;
+    }
+    .media-date li { padding: 0; }
+    .media-date li:first-child:before { content: ''; }
+    .media-date li:before {
+        content: '.';
+        margin-left: -2px;
+        margin-right: 2px;
+    }
+    .media-comment { margin-bottom: 20px; }
+    .media-replied {
+        margin: 0 0 20px 20px;
+    }
+    .media-replied .media-heading { padding-left: 6px; }
+
+
+
+    .btn-circle {
+        font-weight: bold;
+        font-size: 12px;
+        padding: 6px 15px;
+        border-radius: 20px;
+    }
+    .btn-circle span { padding-right: 6px; }
+
+
+    input[type="file"]{
+        z-index: 999;
+        line-height: 0;
+        font-size: 0;
+        position: absolute;
+        opacity: 0;
+        filter: alpha(opacity = 0);-ms-filter: "alpha(opacity=0)";
+        margin: 0;
+        padding:0;
+        left:0;
+    }
+
+    .well{
+        border:none;
+    }
+
+    #deletecommetnbtn{
+        margin-top: 10px;
+    }
+
+
+
+    .custom-input-file:hover .uploadPhoto { display: block; }
+</style>
+
 <c:if test="${!empty list}">
-        <c:forEach var="childComment" items="${list}">
-            <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+    <c:forEach var="childComment" items="${list}">
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-            <div style="margin-left: 30px;"><c:out value="At ${childComment.timestamp}, ${childComment.commentAuthor.username} wrote:"/><br>
-                    <c:out value="${childComment.commentContent}"/><br>
-
+        <div class="container-comment-pool">
 
 
-                        <c:if test="${childComment.commentAuthor.username == sessionScope.username || article.author.username == sessionScope.username }">
-                            <form method="get" action="deletecomment">
-                                <input type="hidden" name="commentID" value="${childComment.commentID}">
-                                <input type="hidden" name="articleID" value="${article.ID}">
-                                <button class="btn btn-primary" type="submit" value="Delete Comment"><i class='fas fa-meh'></i> Delete Comment</button>
-                            </form>
-                        </c:if>
-                        <c:if test="${sessionScope.username != null}">
+
+        <div class="tab-pane active" id="comments-logout">
+            <ul class="media-list">
+
+                <li class="media">
+
+                    <a class="pull-left" href="#">
+                        <img class="media-object img-circle" src="https://svgsilh.com/svg/1699635.svg" alt="profile">
+                    </a>
+
+                    <div class="media-body" id="commentDiv${childComment.commentID}">
+                        <div class="well well-lg">
+
+                            <h4 class="media-heading text-uppercase ßreviews"><strong>${childComment.commentAuthor.username} :</strong></h4>
+
+                            <ul class="media-date text-uppercase reviews list-inline">
+                                <li class="dd">${childComment.timestamp}</li>
+                            </ul>
 
 
-                            <button id="reply-btn-${childComment.commentID}" class="open-button btn btn-primary" onclick="openForm(${childComment.commentID})">Reply
-                            </button>
-                            <div class="form-popup" id="myForm-${childComment.commentID}" style="display: none">
-                                <form method="post" action="addNestedComment" class="form-container">
-                                    <input type="hidden" name="articleID" value="${article.ID}">
-                                    <input type="hidden" name="commentID" value="${childComment.commentID}">
+                            <div>
 
-                                    <%--<label for="content"><b>Reply comment:</b></label>--%>
-                                    <%--<input type="text" id="content" placeholder="comment here..." name="content">--%>
-                                    <textarea placeholder="comment here..." class="form-control"  rows="4" id="content" name="content"></textarea>
+                                <div class="media-comment" id="comment${childComment.commentID}">
+                                    <c:out value="${childComment.commentContent}"/>
+                                </div>
 
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <button type="button" class="btn cancel btn-warning" onclick="closeForm(${childComment.commentID})">Close</button>
-                                </form>
+                                    <%--show the reply button when the one has login--%>
+                                <c:if test="${sessionScope.username != null}">
+                                    <a class="btn btn-info btn-circle text-uppercase"
+                                       id="reply-btn-${childComment.commentID}"
+                                       onclick="openForm(${childComment.commentID})" href="#commentDiv${childComment.commentID}"><span
+                                            class="glyphicon glyphicon-share-alt"></span>
+                                        Reply</a>
+
+                                    <div class="form-popup" id="myForm-${childComment.commentID}" style="display: none">
+                                        <form method="post" action="addNestedComment" class="form-container">
+                                            <input type="hidden" name="articleID" value="${article.ID}">
+                                            <input type="hidden" name="commentID" value="${childComment.commentID}">
+                                            <textarea placeholder="comment here..." name="content" class="form-control" rows="4"
+                                                      id="content"></textarea>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="button" class="btn cancel btn-warning"
+                                                    onclick="closeForm(${childComment.commentID})">Close
+                                            </button>
+                                        </form>
+                                    </div>
+
+                                </c:if>
+
+
+                                    <%--show delete button when the one can delete it--%>
+                                <c:if test="${childComment.commentAuthor.username == sessionScope.username || article.author.username == sessionScope.username }">
+                                    <form method="get" action="deletecomment">
+                                        <input type="hidden" name="commentID" value="${childComment.commentID}">
+                                        <input type="hidden" name="articleID" value="${article.ID}">
+
+                                        <button id="deletecommetnbtn" class="btn btn-info btn-circle text-uppercase" type="submit"
+                                                value="Delete Comment"><i class='fas fa-meh'></i> Delete Comment
+                                        </button>
+                                    </form>
+                                </c:if>
+
+                                    <%-- collapse button--%>
+                                <a class="btn btn-warning btn-circle text-uppercase" data-toggle="collapse"
+                                   href="#reply${childComment.commentID}"
+                                   data-target="#reply${childComment.commentID}"><span
+                                        class="glyphicon glyphicon-comment"></span> ${childComment.children.size()}
+                                    comments</a>
+
+                                <div class="collapse" id="reply${childComment.commentID}">
+                                    <ul class="media-list">
+
+                                        <li class="media media-replied">
+                                            <myTags:childComments list="${childComment.children}"/>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                        </c:if>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
 
 
-
-
-            <myTags:childComments list="${childComment.children}"/>
-            </div>
-        </c:forEach>
+    </c:forEach>
 
 </c:if>
