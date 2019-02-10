@@ -16,7 +16,6 @@ import java.util.List;
 public class AdminCommentsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Comment> comments = new ArrayList<>();
-        System.out.println(request.getParameter("articleID"));
         int articleID = Integer.parseInt(request.getParameter("articleID"));
 
         comments = AdminDAO.getAllComments (articleID, getServletContext());

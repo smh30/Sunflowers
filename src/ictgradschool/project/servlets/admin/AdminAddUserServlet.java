@@ -25,16 +25,12 @@ public class AdminAddUserServlet extends HttpServlet {
                     response);
         } else {
 
-            System.out.println("Process other account details");
-
             String country = request.getParameter("country");
             String realName = request.getParameter("realname");
             String description = request.getParameter("description");
             String dateOfBirth = request.getParameter("dateofbirth");
             String email = request.getParameter("email");
 
-            System.out.print(username);
-            System.out.println(realName);
 
             UserDAO.editUser(username, country, realName, description, dateOfBirth,
                     email, getServletContext());

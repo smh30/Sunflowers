@@ -28,13 +28,9 @@ public class AdminInterfaceServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
         String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        Boolean admin = Boolean.valueOf(request.getParameter("admin"));
 
         List <User> userList = new ArrayList <>();
 
-        //TODO: Ask Steph if this is necessary
-        String username1 = request.getParameter("username");
 
         userList = AdminDAO.getAllUsers(username, getServletContext());
         System.out.println("Attempting processing: " + username);

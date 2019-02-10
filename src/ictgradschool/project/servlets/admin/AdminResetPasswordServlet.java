@@ -21,7 +21,6 @@ public class AdminResetPasswordServlet extends HttpServlet {
 
         String username = request.getParameter("username");
 
-        // Details for the sending account
         final String SENDING_ACCOUNT_ADDRESS = "socialsunflowers@gmail.com";
         final String SENDING_ACCOUNT_PASSWORD = "teamsunflowers";
 
