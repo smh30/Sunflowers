@@ -12,7 +12,7 @@
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
 
-    <%--library for the comment pool(old style,don't need now--%>
+    <%--library for the comment pool(this is what's wreckong the navbar--%>
     <%--<link href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">--%>
     <%--<link rel="stylesheet" href="style.css">--%>
     <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--%>
@@ -159,7 +159,7 @@
 <div class="container">
 
     <%--Article Display--%>
-    <div class="article">
+    <div class="article pt-5">
 
         <c:choose>
             <c:when test="${article.title == null}">
@@ -276,6 +276,7 @@
 
         <div class="page-header">
             <h2 class="reviews">Comments</h2>
+            <hr>
         </div>
 
     <myTags:childComments list="${comment}"/>

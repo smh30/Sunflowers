@@ -34,13 +34,17 @@
     }
     .media-replied .media-heading { padding-left: 6px; }
 
-
+.card .bg-light{
+    background-color: whitesmoke;
+    border: none;
+}
 
     .btn-circle {
         font-weight: bold;
         font-size: 12px;
         padding: 6px 15px;
         border-radius: 20px;
+        color: white;
     }
     .btn-circle span { padding-right: 6px; }
 
@@ -88,7 +92,7 @@
                     </a>
 
                     <div class="media-body" id="commentDiv${childComment.commentID}">
-                        <div class="well well-lg">
+                        <div class="card bg-light p-3">
 
                             <div class="media-heading">
                             <h4 class="media-heading text-uppercase ßreviews"><strong>${childComment.commentAuthor.username} :</strong></h4>
