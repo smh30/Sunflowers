@@ -1,0 +1,209 @@
+
+.navbar {
+    background-color: #0e603f;
+}
+.navbar .navbar-brand {
+    color: #bed6ac;
+}
+.navbar .navbar-brand:hover,
+.navbar .navbar-brand:focus {
+    color: #f8eeac;
+}
+.navbar .navbar-text {
+    color: #bed6ac;
+}
+.navbar .navbar-text a {
+    color: #f8eeac;
+}
+.navbar .navbar-text a:hover,
+.navbar .navbar-text a:focus {
+    color: #f8eeac;
+}
+.navbar .navbar-nav .nav-link {
+    color: #bed6ac;
+    border-radius: .25rem;
+    margin: 0 0.25em;
+}
+.navbar .navbar-nav .nav-link:not(.disabled):hover,
+.navbar .navbar-nav .nav-link:not(.disabled):focus {
+    color: #f8eeac;
+}
+.navbar .navbar-nav .nav-item.active .nav-link,
+.navbar .navbar-nav .nav-item.active .nav-link:hover,
+.navbar .navbar-nav .nav-item.active .nav-link:focus,
+.navbar .navbar-nav .nav-item.show .nav-link,
+.navbar .navbar-nav .nav-item.show .nav-link:hover,
+.navbar .navbar-nav .nav-item.show .nav-link:focus {
+    color: #f8eeac;
+    background-color: #5b9b37;
+}
+.navbar .navbar-toggle {
+    border-color: #5b9b37;
+}
+.navbar .navbar-toggle:hover,
+.navbar .navbar-toggle:focus {
+    background-color: #5b9b37;
+}
+.navbar .navbar-toggle .navbar-toggler-icon {
+    color: #bed6ac;
+}
+.navbar .navbar-collapse,
+.navbar .navbar-form {
+    border-color: #bed6ac;
+}
+.navbar .navbar-link {
+    color: #bed6ac;
+}
+.navbar .navbar-link:hover {
+    color: #f8eeac;
+}
+
+@media (max-width: 575px) {
+    .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item {
+        color: #bed6ac;
+    }
+    .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+    .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+        color: #f8eeac;
+    }
+    .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item.active {
+        color: #f8eeac;
+        background-color: #5b9b37;
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item {
+        color: #bed6ac;
+    }
+    .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+    .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+        color: #f8eeac;
+    }
+    .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item.active {
+        color: #f8eeac;
+        background-color: #5b9b37;
+    }
+}
+
+@media (max-width: 991px) {
+    .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item {
+        color: #bed6ac;
+    }
+    .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+    .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+        color: #f8eeac;
+    }
+    .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item.active {
+        color: #f8eeac;
+        background-color: #5b9b37;
+    }
+}
+
+@media (max-width: 1199px) {
+    .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item {
+        color: #bed6ac;
+    }
+    .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+    .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+        color: #f8eeac;
+    }
+    .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item.active {
+        color: #f8eeac;
+        background-color: #5b9b37;
+    }
+}
+
+.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item {
+    color: #bed6ac;
+}
+.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+    color: #f8eeac;
+}
+.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item.active {
+    color: #f8eeac;
+    background-color: #5b9b37;
+}
+
+body {
+    background-image: url("images/sf-lesssky.jpg");
+    background-repeat: no-repeat;
+    background-color: #cccccc;
+    width:100%;
+    height:100%;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    font-family: 'Cabin', sans-serif;
+    font-size: 20px;
+}
+
+a{
+    color: #a94300;
+}
+
+a:hover {
+    color: #ea8800;
+}
+
+
+ .content{
+     padding: 6px;
+     margin: 7px;
+     border:2px solid #666666;
+     border-radius: 12px;
+     background-color: white;
+ }
+
+ .transparent-white{
+     padding: 6px;
+     margin: 7px;
+     border:2px solid #666666;
+     border-radius: 12px;
+     background-color: rgba(255, 255, 255, .7);
+
+ }
+
+ .profile-white{
+
+     border:2px solid #666666;
+     border-radius: 12px;
+     background-color: rgba(255, 255, 255, .7);
+ }
+
+ .btn-primary {
+     background-color: #5b9b37;
+     font-weight: bold;
+     /*font-size: 12px;*/
+     padding: 6px 15px;
+     border-radius: 20px;
+     border: #076426;
+     -webkit-transition-duration: 0.4s;
+     transition-duration: 0.4s;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary .btn-primary:active:focus {
+    background-color: #076426;
+
+}
+
+ /*i don't think this part did anything. was trying to fix grey bottom on mobile*/
+@media screen and (max-device-aspect-ratio: 3/4) {
+    .body{
+    height: calc(100vw * 1.333 - 9%);}
+}
+@media screen and (max-device-aspect-ratio: 2/3) {
+    .body{
+    height: calc(100vw * 1.5 - 9%);}
+}
+@media screen and (max-device-aspect-ratio: 10/16) {
+    .body{
+
+    height: calc(100vw * 1.6 - 9%);}
+}
+@media screen and (max-device-aspect-ratio: 9/16) {
+    .body{
+    height: calc(100vw * 1.778 - 9%);}
+}
+

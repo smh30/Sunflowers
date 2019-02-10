@@ -14,7 +14,7 @@ public class Comment implements Serializable {
     private Comment parent;
     private int parentID;
     private boolean hidden;
-
+    private String timeString;
 
     public Comment getParent() {
         return parent;
@@ -80,4 +80,12 @@ public class Comment implements Serializable {
     public boolean isHidden() { return hidden; }
 
     public void setHidden(boolean hidden) { this.hidden = hidden; }
+    
+    public String getTimeString() {
+        return timeString;
+    }
+    
+    public void setTimeString(String timeString) {
+        this.timeString = timeString;
+    }
 }

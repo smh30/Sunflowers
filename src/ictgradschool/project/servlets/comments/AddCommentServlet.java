@@ -25,8 +25,10 @@ public class AddCommentServlet extends HttpServlet {
         boolean commentAdded = CommentDAO.newComment(content, articleID, user, getServletContext());
 
         if (!commentAdded) {
+            
             String message = "Some trouble with adding your comment. Please try again.";
             request.setAttribute("message", message);
+            System.out.println("a message was added");
 
             request.getRequestDispatcher("article?articleID=" + Integer.parseInt(articleID)).forward(request, response);
 

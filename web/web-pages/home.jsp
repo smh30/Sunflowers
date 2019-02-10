@@ -13,12 +13,12 @@
     <title>Home</title>
     <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-    <%--library for icon--%>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <%--library for icon, moved into partial header--%>
+    <%--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">--%>
+    <%--<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>--%>
+    <%--<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>--%>
+    <%--<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>--%>
+    <%--<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>--%>
 
     <script type="text/javascript">
 
@@ -67,7 +67,7 @@
             margin: 7px;
             border:2px solid #666666;
             border-radius: 12px;
-            background-color: white;
+            background-color: whitesmoke;
         }
 
 
@@ -82,16 +82,17 @@
 
 <%@ include file="../WEB-INF/partial/navbar.jsp" %>
 <div class="bg">
-<div class="container">
-
-
-    <%--a message will display if a user has tried to login but had a wrong username or password--%>
     <c:if test="${message!=null}">
         <div class="alert alert-warning alert-dismissible" id="error-message">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 ${message}
         </div>
     </c:if>
+<div class="container">
+
+
+    <%--a message will display if a user has tried to login but had a wrong username or password--%>
+
 
     <%--if there are no articles, this message will appear--%>
     <c:if test="${empty articles}">
@@ -177,7 +178,6 @@
                 <c:otherwise>
                     <h2><a href="article?articleID=${article.ID}">${article.title}</a></h2>
                 </c:otherwise>
-                <%--todo make the 'author' link or popup the user info box/page--%>
             </c:choose>
 
             <p><a href="#" onclick="getAuthorInfo('${article.author.username}');return false;">Author: ${article.author.username}</a>
@@ -196,23 +196,14 @@
                 <c:set var="endpara" value="${fn:substringBefore(therest,'</p>')}"/>
 
                 <c:set var="ismore" value="${fn:substringAfter(therest, '</p>')}"/>
-                ${firstpart}
-
-            <c:if test="${not empty therest}">
-
-
-                        <c:if test="${not empty ismore}">
-                            ${endpara}
+                ${firstpart}<c:if test="${not empty therest}"><c:if test="${not empty ismore}">${endpara}
                             <br><a href="article?articleID=${article.ID}">read more</a>
                         </c:if>
-                    
-
 
                 <c:set var="p" value="${fn:indexOf(therest, '</p>')}"/>
 
                 <c:if test="${p == -1}">
-                    <c:set var="endline" value="${fn:substring(therest, 0, fn:indexOf(therest, '\\\\n'))}"/>
-                    ${endline}
+                    <c:set var="endline" value="${fn:substring(therest, 0, fn:indexOf(therest, '\\\\n'))}"/>..${endline}
                 </c:if>
             </c:if>
 

@@ -1,6 +1,7 @@
 <%@ attribute name="list" type="java.util.List" required="true" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="myTags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <style>
 
@@ -35,15 +36,22 @@
     }
     .media-replied .media-heading { padding-left: 6px; }
 
+ HEAD
     .meidia-list{
 
     }
+
+.card .bg-light{
+    background-color: whitesmoke;
+    border: none;
+}
 
     .btn-circle {
         font-weight: bold;
         font-size: 12px;
         padding: 6px 15px;
         border-radius: 20px;
+        color: white;
     }
     .btn-circle span { padding-right: 6px; }
 
@@ -91,14 +99,14 @@
                     </a>
 
                     <div class="media-body" id="commentDiv${childComment.commentID}">
-                        <div class="well well-lg">
+                        <div class="card bg-light p-3">
 
                             <div class="media-heading">
-                            <h4 class="media-heading text-uppercase ßreviews"><strong>${childComment.commentAuthor.username} :</strong></h4>
+                            <h4 class="card-title text-uppercase ßreviews"><strong>${childComment.commentAuthor.username} :</strong></h4>
 
                                <span>
                             <ul class="media-date text-uppercase reviews list-inline">
-                                <li class="dd">${childComment.timestamp}</li>
+                                <li class="dd">${fn:substring(childComment.timeString,0,16)}</li>
                             </ul>
                                </span>
                             </div>
@@ -121,7 +129,7 @@
                                         <form method="post" action="addNestedComment" class="form-container">
                                             <input type="hidden" name="articleID" value="${article.ID}">
                                             <input type="hidden" name="commentID" value="${childComment.commentID}">
-                                            <textarea placeholder="comment here..." name="content" class="form-control" rows="4"
+                                            <textarea placeholder="comment here..." maxlength="1000" name="content" class="form-control" rows="4"
                                                       id="content"></textarea>
                                             <button type="submit" class="btn btn-primary">Submit</button>
                                             <button type="button" class="btn cancel btn-warning"

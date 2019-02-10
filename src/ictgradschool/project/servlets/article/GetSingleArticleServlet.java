@@ -44,10 +44,8 @@ public class GetSingleArticleServlet extends HttpServlet {
     
         LocalDateTime a = LocalDateTime.now(ZoneId.of("Pacific/Auckland"));
         Timestamp currentTime = Timestamp.valueOf(a);
-        System.out.println("currenttime: " + currentTime);
-        System.out.println("timestring =" +article.getTimeString());
         Timestamp articleTime = Timestamp.valueOf(article.getTimeString());
-        System.out.println("articletime: " + articleTime);
+        
 
         if (articleTime.after(currentTime)){
             System.out.println("the article is postdated");
@@ -61,12 +59,17 @@ public class GetSingleArticleServlet extends HttpServlet {
         int articleId = article.getID();
 
         comments = CommentDAO.getAllComments(articleId, getServletContext());
+        
 
 
         request.setAttribute("comment", comments);
 
 
         request.setAttribute("article", article);
+        if (request.getAttribute("message")!=null){
+            System.out.println("a message in single post");
+            request.setAttribute("message", request.getAttribute("message"));
+        }
 
         request.getRequestDispatcher("web-pages/single-article.jsp").forward(request, response);
 
@@ -84,10 +87,13 @@ public class GetSingleArticleServlet extends HttpServlet {
         Article article = new Article();
 
         article = ArticleDAO.getArticleByID(articleID, getServletContext());
-        List <Comment> comment = CommentDAO.getAllComments(articleID, getServletContext());
-       
-
-        request.setAttribute("comment", comment);
+        List <Comment> comments = CommentDAO.getAllComments(articleID, getServletContext());
+    
+        for (Comment comment : comments) {
+            System.out.println("time:" + comment.getTimeString());
+            System.out.println("content: " + comment.getCommentContent() +"\n");
+        }
+        request.setAttribute("comment", comments);
 
         request.setAttribute("article", article);
 

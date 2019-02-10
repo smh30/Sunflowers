@@ -25,6 +25,8 @@ public class AddNestedCommentServlet extends HttpServlet {
         boolean addnestedcomment = CommentDAO.addNestedComments(parentID,content,articleID,user,getServletContext());
 
         if(!addnestedcomment){
+            String message = "Your comment was not added. It may have been too long.";
+            request.setAttribute("message", message);
             request.getRequestDispatcher("article?articleID="+Integer.parseInt(articleID)).forward(request,response);
         }else{
             request.setAttribute("articleID", articleID);

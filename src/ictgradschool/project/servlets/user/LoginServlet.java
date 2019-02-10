@@ -42,7 +42,8 @@ public class LoginServlet extends HttpServlet {
                 request.getRequestDispatcher("/profile").forward(request, response);
             } else {
                 //redirects to the previous page if it was an article page
-                if (request.getParameter("from").equals("/web-pages/single-article.jsp")) {
+                if (request.getParameter("from").equals("ysy_SocialSunflowers/web-pages/single" +
+                        "-article.jsp")) {
                     request.setAttribute("articleID", request.getParameter("articleID"));
                     request.getRequestDispatcher("article").forward(request, response);
                 } else {

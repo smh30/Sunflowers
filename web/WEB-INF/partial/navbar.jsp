@@ -1,7 +1,7 @@
 <!-- THIS IS A NAVBAR WHICH CAN BE INCLUDED INTO ALL OF THE OTHER PAGES AS NECESSARY -->
 <!--todo navbar expand/collapse seems to be stuck on md no matter what i change this to -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<nav id="navbar" class="navbar navbar-expand-md navbar-toggleable-md">
+<nav id="navbar" class="navbar navbar-expand-lg navbar-toggleable-lg">
 
     <div class="container-fluid">
         <%--<div class="navbar-header">--%>
