@@ -13,7 +13,6 @@ import java.io.IOException;
 @WebServlet(name = "AddCommentServlet")
 public class AddCommentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("The adding comment servlet");
 
         String articleID = request.getParameter("articleID");
 
@@ -23,24 +22,20 @@ public class AddCommentServlet extends HttpServlet {
 
         content = content.replaceAll("(\r\n|\n\r|\r|\n)", "<br />");
 
-        boolean commentAdded = CommentDAO.newComment(content,articleID,user,getServletContext());
+        boolean commentAdded = CommentDAO.newComment(content, articleID, user, getServletContext());
 
-        if(!commentAdded){
-            System.out.println("comment not added??");
+        if (!commentAdded) {
             String message = "Some trouble with adding your comment. Please try again.";
-            request.setAttribute("message",message);
+            request.setAttribute("message", message);
 
-            request.getRequestDispatcher("article?articleID="+Integer.parseInt(articleID)).forward(request,response);
+            request.getRequestDispatcher("article?articleID=" + Integer.parseInt(articleID)).forward(request, response);
 
 
-
-        }else{
-            System.out.println("commetn created!!!!!!!");
+        } else {
             request.setAttribute("articleID", articleID);
 
-            request.getRequestDispatcher("/article").forward(request,response);
+            request.getRequestDispatcher("/article").forward(request, response);
         }
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

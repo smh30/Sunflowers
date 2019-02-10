@@ -23,10 +23,10 @@ public class CommentDAO {
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
                 //todo get the top-level comments (those without a parent)
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM comments WHERE " +
-                        "article_id =? AND parent_comment IS NULL AND comments_author!='deleted' ORDER BY comments_timestamp ")) {
+                        "article_id =? AND parent_comment IS NULL AND comments_author!='deleted' " +
+                        "AND (hidden = false) ORDER BY comments_timestamp ")) {
                     stmt.setInt(1, articleId);
                     ResultSet rs = stmt.executeQuery();
 
@@ -106,7 +106,6 @@ public class CommentDAO {
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
 
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM comments WHERE " +
                         "parent_comment = ? AND comments_author!='deleted' ORDER BY comments_timestamp ")) {
@@ -142,11 +141,9 @@ public class CommentDAO {
 
         if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
 
                 LocalDateTime a = LocalDateTime.now();
                 Timestamp timestamp = Timestamp.valueOf(a);
-                System.out.print(timestamp);
 
                 try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO comments(comments_author,article_id , coments_body, comments_timestamp)" +
                         "VALUES (?, ?, ?, ?)")) {
@@ -183,7 +180,6 @@ public class CommentDAO {
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful - delete comm dao");
 
 
                 try (PreparedStatement s3 = conn.prepareStatement("UPDATE comments SET comments_author = ? WHERE comments_id = ?")) {
@@ -217,11 +213,9 @@ public class CommentDAO {
 
         if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
 
                 LocalDateTime a = LocalDateTime.now();
                 Timestamp timestamp = Timestamp.valueOf(a);
-                System.out.print(timestamp);
 
                 try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO comments(comments_author,article_id , coments_body, comments_timestamp, parent_comment)" +
                         "VALUES (?, ?, ?, ?,?)")) {

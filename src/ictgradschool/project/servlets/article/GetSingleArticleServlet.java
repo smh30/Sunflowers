@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
@@ -39,12 +40,16 @@ public class GetSingleArticleServlet extends HttpServlet {
         }
 
         System.out.println("article id is = " + articleID);
-        article = ArticleDAO.getSingleArticle(articleID, getServletContext());
-        // get articles by that author
-        LocalDateTime a = LocalDateTime.now();
+        article = ArticleDAO.getArticleByID(articleID, getServletContext());
+    
+        LocalDateTime a = LocalDateTime.now(ZoneId.of("Pacific/Auckland"));
         Timestamp currentTime = Timestamp.valueOf(a);
+        System.out.println("currenttime: " + currentTime);
+        System.out.println("timestring =" +article.getTimeString());
+        Timestamp articleTime = Timestamp.valueOf(article.getTimeString());
+        System.out.println("articletime: " + articleTime);
 
-        if ((article.getTimestamp()).after(currentTime)){
+        if (articleTime.after(currentTime)){
             System.out.println("the article is postdated");
             request.setAttribute("postdated", true);
         }else{
@@ -79,7 +84,6 @@ public class GetSingleArticleServlet extends HttpServlet {
         Article article = new Article();
 
         article = ArticleDAO.getArticleByID(articleID, getServletContext());
-        // get articles by that author
         List <Comment> comment = CommentDAO.getAllComments(articleID, getServletContext());
        
 

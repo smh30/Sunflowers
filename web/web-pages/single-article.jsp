@@ -35,10 +35,10 @@
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
     <%--library for comments pool--%>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link rel="stylesheet" href="index.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <%--<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">--%>
+    <%--<link rel="stylesheet" href="index.css">--%>
+    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--%>
+    <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>--%>
     <script type="text/javascript">
 
         function getAuthorInfo(authorName) {
@@ -79,11 +79,6 @@
     </script>
     <style>
 
-        body{
-            background-image: url("/web-pages/images/final333333.jpg") ;
-            background-repeat: repeat,repeat;
-            background-color: #cccccc;
-        }
 
         /*body {*/
             /*font-family: Arial, Helvetica, sans-serif;*/
@@ -174,6 +169,7 @@
 
 </head>
 <body>
+
 <%@ include file="../WEB-INF/partial/navbar.jsp" %>
 <div class="container">
 
@@ -193,9 +189,12 @@
         </p>
 
         <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-        <c:if test="${not empty article.timestamp}">
-    <span title="${article.timestamp}"><fmt:formatDate value="${article.timestamp}"
-                                                       pattern="MM/dd/yyyy HH:mm"/></span>
+        <%--<c:if test="${not empty article.timestamp}">--%>
+    <%--<span title="${article.timestamp}"><fmt:formatDate value="${article.timestamp}"--%>
+                                                       <%--pattern="MM/dd/yyyy HH:mm"/></span>--%>
+        <%--</c:if>--%>
+        <c:if test="${not empty article.timeString}">
+            <p>Time String = ${article.timeString}</p>
         </c:if>
         <%--<p>${article.timestamp}</p>--%>
 
@@ -583,6 +582,10 @@
 
 
        <%--I'm not sure if doing everything in a tag is cheating????--%>
+        <%--if you're looking to do anything involving adding tags (bootstrap or whatever) to the comments,
+        look inside this tag below here--%>
+        <%--it can be found in WEB-INF/tags/childComments --%>
+        <%--but any css applied to this single-article.jsp should automatically work on the comments as well--%>
 
 
     <myTags:childComments list="${comment}"/>

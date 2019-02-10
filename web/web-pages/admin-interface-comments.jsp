@@ -13,8 +13,8 @@
     </head>
     <body>
         <%@include file="../WEB-INF/partial/navbar.jsp" %>
-        <div class="comments_table">
-            <form method=post>
+        <div id="comments_table">
+
                 <table border="2">
                     <thead>
                         <tr>
@@ -24,6 +24,7 @@
                             <th>Comment Parent:</th>
                             <th>Hide Comment:</th>
                             <th>Show Comment:</th>
+                            <th>Comment Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,18 +35,37 @@
                                 <td>${comment.commentID}</td>
                                 <td>${comment.parentID}</td>
                                 <td>
-                                    <button onclick="" value="">Hide Comment</button>
-                                    <p id="hidecomment"></p>
+                                    <form method="post" action="adminhideshowcomment">
+                                        <button type="submit">Hide Comment</button>
+                                        <input type="hidden" name="commentID" value="${comment.commentID}">
+                                        <input type="hidden" name="articleID" value="${articleID}">
+                                        <input type="hidden" name="action" value="hide">
+                                    </form>
                                 </td>
                                 <td>
-                                    <button onclick="" value="">Show Comment</button>
-                                    <p id="showcomment"></p>
+                                    <form method="post" action="adminhideshowcomment">
+                                        <button type="submit">Show Comment</button>
+                                        <input type="hidden" name="commentID" value="${comment.commentID}">
+                                        <input type="hidden" name="articleID" value="${articleID}">
+                                        <input type="hidden" name="action" value="show">
+                                    </form>
+                                </td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${comment.hidden}">
+                                            Hidden
+                                        </c:when>
+                                        <c:otherwise>
+                                            Showing
+                                        </c:otherwise>
+                                    </c:choose>
                                 </td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
-            </form>
+            <%--TODO: Make this look like a button LATER--%>
+            <a href ="admininterface" class="btn" type="submit">Back to Admin Interface Homepage</a>
         </div>
     </body>
 </html>

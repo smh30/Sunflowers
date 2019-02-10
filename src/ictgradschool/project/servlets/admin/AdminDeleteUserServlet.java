@@ -13,7 +13,6 @@ import java.io.IOException;
 @WebServlet(name = "AdminDeleteUserServlet")
 public class AdminDeleteUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("The Admin Deleting User Account Servlet");
 
         String username = request.getParameter("username");
 
@@ -24,12 +23,10 @@ public class AdminDeleteUserServlet extends HttpServlet {
             request.setAttribute("message", message);
 
             request.getRequestDispatcher("admininterface").forward(request, response);
-            System.out.println("returned to admin interface");
 
         } else {
 
             response.sendRedirect("admininterface");
-            System.out.println("deleted user from admin interface");
         }
     }
 

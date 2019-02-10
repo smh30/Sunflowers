@@ -64,19 +64,17 @@
 
     <style type="text/css">
 
-        body{
-            background-image: url("/web-pages/images/final333333.jpg") ;
-            background-repeat: repeat,repeat;
-            background-color: #cccccc;
-        }
-
         .article{
             padding: 6px;
             margin: 7px;
             border:2px solid #666666;
             border-radius: 12px;
-            background-color: whitesmoke;
+            background-color: white;
         }
+
+
+
+
 
     </style>
 
@@ -85,6 +83,7 @@
 <body>
 
 <%@ include file="../WEB-INF/partial/navbar.jsp" %>
+<div class="bg">
 <div class="container">
 
 
@@ -98,11 +97,14 @@
 
     <%--if there are no articles, this message will appear--%>
     <c:if test="${empty articles}">
-        <p>No articles found for your search parameters</p>
+            <div class="alert alert-warning alert-dismissible" id="error-message">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                No articles found for your search parameters
+            </div>
     </c:if>
 
     <%--begin dropdown for selecting sort order for articles--%>
-
+<div id="sort-dropdown" class="d-flex flex-row-reverse pt-2">
     <form action="home" method="GET" class="form-inline">
         <input type="hidden" name="author" value="${searchParams.searchAuthor}">
         <input type="hidden" name="title" value="${searchParams.searchTitle}">
@@ -159,10 +161,9 @@
                     <option value="title-z">Title (reversed)</option>
                 </c:otherwise>
             </c:choose>
-
         </select>
-
     </form>
+</div>
 
 
     <%--      end sort order dropdown     --%>
@@ -187,10 +188,20 @@
             <c:if test="${not empty article.timestamp}">
                 <span title="${article.timestamp}">
                 <fmt:formatDate value="${article.timestamp}" pattern="MM/dd/yyyy HH:mm"/></span>
+                <p>Timestring = ${article.timeString}</p>
             </c:if>
 
-            <p>${article.articleText}</p>
-                <%--todo add readmore for long articles?--%>
+            <c:set var="wholetext" value="${article.articleText}"/>
+                <c:set var="firstpart" value="${fn:substring(wholetext,0, 500 )}"/>
+                <c:set var="therest" value="${fn:substring(wholetext, 500, wholetext.length()-1)}"/>
+                <c:set var="endpara" value="${fn:substringBefore(therest,'</p>')}"/>
+                <c:set var="ismore" value="${fn:substringAfter(therest, '</p>')}"/>
+                ${firstpart}
+                <c:if test="${not empty ismore}">---
+                    ${endpara}</p>
+                    <a href="article?articleID=${article.ID}">read more</a>
+            </c:if>
+
 
         </div>
     </c:forEach>
@@ -204,7 +215,7 @@
                 <input type="hidden" name="author" value="${searchParams.searchAuthor}">
                 <input type="hidden" name="title" value="${searchParams.searchTitle}">
                 <input type="hidden" name="date" value="${searchParams.searchDate}">
-                <input type="hidden" name="currentBack" value="${currentback}">
+                <input type="hidden" name="currentback" value="${currentback}">
 
                 <button class="btn btn-primary" type="submit" value="back" name="back" id="back">Back</button>
                 <c:if test="${currentback != 0}">
@@ -214,7 +225,7 @@
         </div>
     </c:if>
 
-
+</div>
 </div>
 
 <div class="modal" id="userInfoModal">

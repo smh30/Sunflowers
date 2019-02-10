@@ -26,11 +26,21 @@
 
 
         <style type="text/css">
-            body{
-                background-image: url("/web-pages/images/final333333.jpg") ;
-                background-repeat: repeat,repeat;
-                background-color: #cccccc;
-            }
+            /*body{*/
+                /*background-image: url("/web-pages/images/final333333.jpg") ;*/
+                /*background-repeat: repeat,repeat;*/
+                /*background-color: #cccccc;*/
+            /*}*/
+
+            /*body{*/
+                /*background-image: url("/images/sf-lesssky.jpg") ;*/
+                /*background-repeat: no-repeat;*/
+                /*background-color: #cccccc;*/
+                /*height: 500px;*/
+                /*background-position: center;*/
+                /*background-size: cover;*/
+                /*background-attachment: fixed;*/
+            /*}*/
 
             .container{
                 margin-top: 12%;
@@ -43,12 +53,14 @@
         </style>
     </head>
     <body>
-        <%@ include file="../WEB-INF/partial/navbarSearch.jsp" %>
+        <%@ include file="../WEB-INF/partial/navbar.jsp" %>
+
+
         <div class="container">
 
 
 
-            <form method="get" action="../home">
+            <form method="get" action="home">
                 <legend>Search the Articles Database</legend>
 
                 <div class="form-group row">

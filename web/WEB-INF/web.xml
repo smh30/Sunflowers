@@ -161,6 +161,9 @@
         <url-pattern>/edit-article</url-pattern>
     </servlet-mapping>
 
+
+
+
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~`comment related servlets~~~~~~~~~~~~~~~~~~~~~-->
     <servlet>
         <servlet-name>AddComment</servlet-name>
@@ -219,6 +222,36 @@
     <servlet-mapping>
         <servlet-name>AdminComments</servlet-name>
         <url-pattern>/admincomments</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminHideShowArticle</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.admin.AdminHideShowArticleServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminHideShowArticle</servlet-name>
+        <url-pattern>/adminhideshowarticle</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminHideShowComment</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.admin.AdminHideShowCommentServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminHideShowComment</servlet-name>
+        <url-pattern>/adminhideshowcomment</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminResetPassword</servlet-name>
+        <servlet-class>ictgradschool.project.servlets.admin.AdminResetPasswordServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AdminResetPassword</servlet-name>
+        <url-pattern>/adminresetpassword</url-pattern>
     </servlet-mapping>
 
 

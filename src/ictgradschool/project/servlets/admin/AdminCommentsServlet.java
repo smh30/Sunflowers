@@ -15,13 +15,12 @@ import java.util.List;
 @WebServlet(name = "AdminCommentsServlet")
 public class AdminCommentsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("In Admin Comments Servlet");
-
         List<Comment> comments = new ArrayList<>();
         System.out.println(request.getParameter("articleID"));
         int articleID = Integer.parseInt(request.getParameter("articleID"));
 
         comments = AdminDAO.getAllComments (articleID, getServletContext());
+        request.setAttribute("articleID", articleID);
 
         request.setAttribute("comments", comments);
 

@@ -30,7 +30,7 @@
 
                                     <%--<label for="content"><b>Reply comment:</b></label>--%>
                                     <%--<input type="text" id="content" placeholder="comment here..." name="content">--%>
-                                    <textarea placeholder="comment here..." class="form-control"  rows="4" id="content"></textarea>
+                                    <textarea placeholder="comment here..." class="form-control"  rows="4" id="content" name="content"></textarea>
 
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                     <button type="button" class="btn cancel btn-warning" onclick="closeForm(${childComment.commentID})">Close</button>

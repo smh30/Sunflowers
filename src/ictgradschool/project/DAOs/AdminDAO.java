@@ -17,12 +17,11 @@ import java.util.Properties;
 public class AdminDAO {
 
     public static boolean checkAdminStatus(String username, ServletContext context) {
-        //Checking external file of properties
+
         Properties dbProps = DAOCheckProperties.check(context);
 
         if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT ysy.user.admin FROM user WHERE ysy.user.username = ?")) {
                     stmt.setString(1, username);
                     try (ResultSet rs = stmt.executeQuery()) {
@@ -48,7 +47,6 @@ public class AdminDAO {
 
         if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT username FROM user")) {
 
                     ResultSet rs = stmt.executeQuery();
@@ -65,7 +63,6 @@ public class AdminDAO {
                 e.printStackTrace();
             }
         }
-        //Change to different return type!!
         return users;
     }
 
@@ -76,7 +73,6 @@ public class AdminDAO {
 
         if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT username FROM user")) {
 
                     ResultSet rs = stmt.executeQuery();
@@ -84,7 +80,6 @@ public class AdminDAO {
                     while (rs.next()) {
                         User user = new User();
                         user.setUsername(rs.getString(1));
-                        //TODO: What do I do with password????
                     }
 
                 } catch (SQLException e) {
@@ -103,11 +98,7 @@ public class AdminDAO {
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
-
-                //TODO: Change placement re username to userID when linked up on database
                 try (PreparedStatement s3 = conn.prepareStatement("DELETE FROM ysy.user WHERE username = ?")) {
-                    System.out.println("working!!!");
                     s3.setString(1, username);
 
                     s3.execute();
@@ -116,13 +107,10 @@ public class AdminDAO {
                     e.printStackTrace();
                     return false;
                 }
-
-
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
             }
-
             return true;
         }
         return false;
@@ -136,7 +124,6 @@ public class AdminDAO {
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
 
 
 // yes, this sql contains a concatenated string, but it can only have the values returned by the method above, so it should be safe
@@ -152,6 +139,7 @@ public class AdminDAO {
                         author.setUsername(rs.getString(2));
                         article.setAuthor(author);
                         article.setID(rs.getInt(3));
+                        article.setHidden(rs.getBoolean(6));
 
                         articles.add(article);
                     }
@@ -173,7 +161,6 @@ public class AdminDAO {
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
                 //todo get the top-level comments (those without a parent)
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM comments WHERE " +
                         "article_id =? AND comments_author!='deleted' ORDER BY comments_timestamp ")) {
@@ -189,6 +176,7 @@ public class AdminDAO {
                         comment.setCommentAuthor(commentAuthor);
                         comment.setArticleId(rs.getInt(5));
                         comment.setParentID(rs.getInt(6));
+                        comment.setHidden(rs.getBoolean(7));
                         comments.add(comment);
                     }
                 }
@@ -199,5 +187,140 @@ public class AdminDAO {
             return comments;
         }
         return null;
+    }
+
+    public static boolean hideArticle(int articleId, ServletContext context) {
+        Properties dbProps = DAOCheckProperties.check(context);
+
+        if (dbProps != null) {
+
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+
+                try (PreparedStatement s3 = conn.prepareStatement("UPDATE ysy.article SET hidden = true WHERE article_id = ?")) {
+                    s3.setInt(1, articleId);
+
+                    s3.execute();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean showArticle(int articleId, ServletContext context) {
+        Properties dbProps = DAOCheckProperties.check(context);
+
+        if (dbProps != null) {
+
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+
+                try (PreparedStatement s3 = conn.prepareStatement("UPDATE ysy.article SET hidden = false WHERE article_id = ?")) {
+                    s3.setInt(1, articleId);
+
+                    s3.execute();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean hideComment(int commentId, ServletContext context) {
+        Properties dbProps = DAOCheckProperties.check(context);
+
+        if (dbProps != null) {
+
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+
+                try (PreparedStatement s3 = conn.prepareStatement("UPDATE ysy.comments SET hidden = true WHERE comments_id = ?")) {
+                    s3.setInt(1, commentId);
+
+                    s3.execute();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean showComment(int commentID, ServletContext context) {
+        Properties dbProps = DAOCheckProperties.check(context);
+
+        if (dbProps != null) {
+
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+
+                try (PreparedStatement s3 = conn.prepareStatement("UPDATE ysy.comments SET hidden = false WHERE comments_id = ?")) {
+                    s3.setInt(1, commentID);
+
+                    s3.execute();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+
+            return true;
+        }
+        return false;
+    }
+
+    public static String getUserEmail(String username, ServletContext context) {
+        Properties dbProps = DAOCheckProperties.check(context);
+        String email ="";
+        if (dbProps != null) {
+
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+
+                try (PreparedStatement s3 = conn.prepareStatement("SELECT ysy.user.email FROM ysy.user WHERE username =?")) {
+                    s3.setString(1, username);
+                    ResultSet rs = s3.executeQuery();
+
+                    if(rs.next()) {
+                        email = rs.getString( 1);
+                    }
+
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return email;
     }
 }

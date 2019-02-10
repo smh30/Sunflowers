@@ -17,7 +17,6 @@ public class CustomProfilePicDAO {
 
         if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE image= ?")) {
                     stmt.setString(1, profilePicURL);
                     try (ResultSet r = stmt.executeQuery()) {
@@ -41,8 +40,6 @@ public class CustomProfilePicDAO {
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                System.out.println("connection successful");
-
 
                 try (PreparedStatement s2 = conn.prepareStatement("UPDATE user SET image = ? , " +
                         "use_default_image = false " +
