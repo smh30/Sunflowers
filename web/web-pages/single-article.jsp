@@ -162,13 +162,14 @@
     <div class="article pt-5">
 
         <c:choose>
-            <c:when test="${article.title == null}">
+            <c:when test="${article.title == null|| empty article.title}">
                 <h2><a href="article?articleID=${article.ID}">Untitled</a></h2>
             </c:when>
             <c:otherwise>
                 <h2><a href="article?articleID=${article.ID}">${article.title}</a></h2>
             </c:otherwise>
         </c:choose>
+
 
         <p><a href="#" onclick="getAuthorInfo('${article.author.username}')">Author: ${article.author.username}</a>
         </p>

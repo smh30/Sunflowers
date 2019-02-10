@@ -7,12 +7,12 @@ DROP TABLE IF EXISTS user;
 CREATE TABLE user(
 iteration INT,
 salt binary (32),
-username VARCHAR (20),
+username VARCHAR (30),
 password binary (64),
-country VARCHAR (20),
+country VARCHAR (100),
 real_name VARCHAR (50),
-description VARCHAR (500),
-image VARCHAR(80),
+description VARCHAR (200),
+image VARCHAR(200),
 default_image VARCHAR (40) DEFAULT 'Default.jpg',
 admin BOOLEAN,
 date_of_birth VARCHAR (40),
@@ -30,7 +30,8 @@ article_title VARCHAR (200),
 article_author VARCHAR (30),
 article_id INT AUTO_INCREMENT,
 article_body VARCHAR (10000),
-article_timestamp VARCHAR(100),
+article_timestamp TIMESTAMP ,
+hidden BOOLEAN DEFAULT FALSE,
 PRIMARY KEY (article_id),
 FOREIGN KEY (article_author) REFERENCES user(username)
 ON DELETE CASCADE
@@ -42,10 +43,11 @@ DROP TABLE IF EXISTS comments;
 CREATE TABLE comments(
 comments_id INT AUTO_INCREMENT,
 comments_author VARCHAR (30),
-coments_body VARCHAR (200),
-comments_timestamp varchar(100),
+coments_body VARCHAR (1000),
+comments_timestamp TIMESTAMP ,
 article_id INT,
 parent_comment INT,
+hidden BOOLEAN DEFAULT FALSE,
 PRIMARY KEY (comments_id),
 FOREIGN KEY (comments_author) REFERENCES user(username)
   ON DELETE CASCADE,
@@ -100,6 +102,8 @@ ALTER TABLE ysy.user ADD COLUMN email VARCHAR (100) NOT NULL DEFAULT 'none';
 ALTER TABLE ysy.article ADD COLUMN hidden BOOLEAN DEFAULT FALSE;
 
 ALTER TABLE ysy.comments ADD COLUMN hidden BOOLEAN DEFAULT FALSE;
+
+
 
 
 
