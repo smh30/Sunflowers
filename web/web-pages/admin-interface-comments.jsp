@@ -13,10 +13,10 @@
     </head>
     <body>
         <%@include file="../WEB-INF/partial/navbar.jsp" %>
-        <div id="comments_table">
-
-                <table border="2">
-                    <thead>
+        <div id="comments_table" class="table-responsive-md container">
+<div class="content">
+                <table class="table table-sm">
+                    <thead class="thead-light">
                         <tr>
                             <th>Comment Author:</th>
                             <th>Comment Content:</th>
@@ -36,7 +36,7 @@
                                 <td>${comment.parentID}</td>
                                 <td>
                                     <form method="post" action="adminhideshowcomment">
-                                        <button type="submit">Hide Comment</button>
+                                        <button type="submit" class="btn btn-primary">Hide Comment</button>
                                         <input type="hidden" name="commentID" value="${comment.commentID}">
                                         <input type="hidden" name="articleID" value="${articleID}">
                                         <input type="hidden" name="action" value="hide">
@@ -44,7 +44,7 @@
                                 </td>
                                 <td>
                                     <form method="post" action="adminhideshowcomment">
-                                        <button type="submit">Show Comment</button>
+                                        <button type="submit" class="btn btn-primary">Show Comment</button>
                                         <input type="hidden" name="commentID" value="${comment.commentID}">
                                         <input type="hidden" name="articleID" value="${articleID}">
                                         <input type="hidden" name="action" value="show">
@@ -64,8 +64,9 @@
                         </c:forEach>
                     </tbody>
                 </table>
-            <%--TODO: Make this look like a button LATER--%>
-            <a href ="admininterface" class="btn" type="submit">Back to Admin Interface Homepage</a>
-        </div>
+
+
+            <a href ="admininterface" class="btn btn-primary" type="submit">Back to Admin Interface Homepage</a>
+        </div></div>
     </body>
 </html>
