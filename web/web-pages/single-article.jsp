@@ -176,8 +176,11 @@
 
         <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
+
+        <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
         <c:if test="${not empty article.timeString}">
-            <p>Time String = ${article.timeString}</p>
+            <p>${fn:substring(article.timeString,0,16)}</p>
         </c:if>
 
 
