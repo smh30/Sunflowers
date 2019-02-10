@@ -30,6 +30,11 @@ public class AdminInterfaceServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         Boolean admin = Boolean.valueOf(request.getParameter("admin"));
+        
+        if(request.getSession().getAttribute("admin")==null){
+            request.setAttribute("message", "You do not have permission to access that page");
+            request.getRequestDispatcher("home").forward(request,response);
+        }else{
 
         List <User> userList = new ArrayList <>();
 
@@ -54,6 +59,6 @@ public class AdminInterfaceServlet extends HttpServlet {
         request.setAttribute("articles", articles);
 
         request.getRequestDispatcher("web-pages/admin-interface.jsp").forward(request,response);
-    }
+    }}
 }
 

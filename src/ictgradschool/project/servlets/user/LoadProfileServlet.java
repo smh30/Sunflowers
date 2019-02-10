@@ -13,16 +13,18 @@ import java.io.IOException;
 @WebServlet(name = "LoadProfileServlet")
 public class LoadProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = (String) request.getSession().getAttribute("username");
-        User user = UserDAO.getUserDetails(username, getServletContext());
-        request.setAttribute("user", user);
-        request.getRequestDispatcher("web-pages/profile.jsp").forward(request, response);
+        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = (String) request.getSession().getAttribute("username");
-        User user = UserDAO.getUserDetails(username, getServletContext());
-        request.setAttribute("user", user);
-        request.getRequestDispatcher("web-pages/profile.jsp").forward(request, response);
+        if(username == null){
+            request.setAttribute("message", "You do not have permission to access that page");
+            request.getRequestDispatcher("home").forward(request,response);
+        } else {
+            User user = UserDAO.getUserDetails(username, getServletContext());
+            request.setAttribute("user", user);
+            request.getRequestDispatcher("web-pages/profile.jsp").forward(request, response);
+        }
     }
 }

@@ -34,7 +34,6 @@ public class LoginServlet extends HttpServlet {
 
             adminOK = AdminDAO.checkAdminStatus(username, getServletContext());
             if (adminOK) {
-                //session = request.getSession(true);
                 session.setAttribute("admin", "admin");
             }
 
@@ -42,11 +41,13 @@ public class LoginServlet extends HttpServlet {
                 request.getRequestDispatcher("/profile").forward(request, response);
             } else {
                 //redirects to the previous page if it was an article page
-                if (request.getParameter("from").equals("ysy_SocialSunflowers/web-pages/single" +
-                        "-article.jsp")) {
+                if ((request.getParameter("from").equals("/ysy_SocialSunflowers/web-pages/single" +
+                        "-article.jsp")) || (request.getParameter("from").equals("/web-pages/single" +
+                        "-article.jsp")) ) {
                     request.setAttribute("articleID", request.getParameter("articleID"));
                     request.getRequestDispatcher("article").forward(request, response);
                 } else {
+//                    request.getRequestDispatcher("home").forward(request, response);
                     response.sendRedirect("home");
                 }
 
