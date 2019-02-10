@@ -3,103 +3,136 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<%--<style>--%>
 
-    <%--.container-comment-pool {--%>
-        <%--width: 100%;--%>
-        <%--height: auto;--%>
-    <%--}--%>
+<style>
 
-    <%--.media .media-object {--%>
-        <%--max-width: 120px;--%>
-    <%--}--%>
+    .container-comment-pool{
+        width: 100%;
+        height: auto;
+    }
+    .media .media-object { max-width: 120px; }
+    .media-body {
+        position: relative;
+        width: 100% ;
+    }
+    #commentDiv${childComment.commentID}{
+        width: 100%;
+    }
+    .media-date {
+        position: relative;
 
-    <%--.media-body {--%>
-        <%--position: relative;--%>
-        <%--width: 100%;--%>
-    <%--}--%>
 
-    <%--#commentDiv${childComment.commentID} {--%>
-        <%--width: 100%;--%>
-    <%--}--%>
+    }
+    .media-list{
+        padding-left: 0;
+        margin-left: -2.8em;
+    }
+    .media-date li { padding: 0; }
+    .media-date li:first-child:before { content: ''; }
+    .media-date li:before {
+        content: '.';
+        margin-left: -2px;
+        margin-right: 2px;
+    }
+    .media-comment { margin-bottom: 20px; }
+    .media-replied {
+        margin: 0 0 20px 0px;
+    }
+    .media-replied .media-heading { padding-left: 6px; }
 
-    <%--.media-date {--%>
-        <%--position: relative;--%>
 
-    <%--}--%>
+.card .bg-light{
 
-    <%--.media-date li {--%>
-        <%--padding: 0;--%>
-    <%--}--%>
+    border: none;
+}
+    .card{
+        border:none;
+    }
+    .media{
+        background-color: #f8f9fa;
+    }
 
-    <%--.media-date li:first-child:before {--%>
-        <%--content: '';--%>
-    <%--}--%>
+    .btn-circle {
+        font-weight: bold;
+        font-size: 12px;
+        padding: 6px 15px;
+        border-radius: 20px;
+        color: white;
+    }
+    .btn-circle span { padding-right: 6px; }
 
-    <%--.media-date li:before {--%>
-        <%--content: '.';--%>
-        <%--margin-left: -2px;--%>
-        <%--margin-right: 2px;--%>
-    <%--}--%>
 
-    <%--.media-comment {--%>
-        <%--margin-bottom: 20px;--%>
-    <%--}--%>
+    input[type="file"]{
+        z-index: 999;
+        line-height: 0;
+        font-size: 0;
+        position: absolute;
+        opacity: 0;
+        filter: alpha(opacity = 0);-ms-filter: "alpha(opacity=0)";
+        margin: 0;
+        padding:0;
+        left:0;
+    }
 
-    <%--.media-replied {--%>
-        <%--margin: 0 0 20px 20px;--%>
-    <%--}--%>
+    .well{
+        border:none;
+    }
 
-    <%--.media-replied .media-heading {--%>
-        <%--padding-left: 6px;--%>
-    <%--}--%>
+    #deletecommetnbtn{
+        margin-top: 10px;
+    }
 
-    <%--.card .bg-light {--%>
-        <%--background-color: whitesmoke;--%>
-        <%--border: none;--%>
-    <%--}--%>
+    #reply-btn-${childComment.commentID}{
+        background-color: #5b9b37;
+        padding:6px 15px;
+        border:#076426;
+        border-radius: 20px;
+        transition-duration: 0.4s;
+    }
+    #childcommentsub{
+        background-color: #5b9b37;
+        padding:6px 15px;
+        border:#076426;
+        border-radius: 20px;
+        transition-duration: 0.4s;
+    }
 
-    <%--.btn-circle {--%>
-        <%--font-weight: bold;--%>
-        <%--font-size: 12px;--%>
-        <%--padding: 6px 15px;--%>
-        <%--border-radius: 20px;--%>
-        <%--color: white;--%>
-    <%--}--%>
+    #childrencommentclose{
+        background-color: #5b9b37;
+        padding:6px 15px;
+        border:#076426;
+        border-radius: 20px;
+        transition-duration: 0.4s;
+    }
+    #deletecommetnbtn{
+        background-color: #5b9b37;
+        padding:6px 15px;
+        border:#076426;
+        border-radius: 20px;
+        transition-duration: 0.4s;
+    }
 
-    <%--.btn-circle span {--%>
-        <%--padding-right: 6px;--%>
-    <%--}--%>
+    #reply-btn-${childComment.commentID}:hover{
+        background-color: #076426;
+    }
+    #childcommentsub:hover{
+        background-color: #076426;
+    }
 
-    <%--input[type="file"] {--%>
-        <%--z-index: 999;--%>
-        <%--line-height: 0;--%>
-        <%--font-size: 0;--%>
-        <%--position: absolute;--%>
-        <%--opacity: 0;--%>
-        <%--filter: alpha(opacity=0);--%>
-        <%---ms-filter: "alpha(opacity=0)";--%>
-        <%--margin: 0;--%>
-        <%--padding: 0;--%>
-        <%--left: 0;--%>
-    <%--}--%>
+    #childrencommentclose:hover{
+        background-color: #076426;
+    }
+    #deletecommetnbtn{
+        background-color: #076426;
+    }
 
-    <%--.well {--%>
-        <%--border: none;--%>
-    <%--}--%>
 
-    <%--#deletecommetnbtn {--%>
-        <%--margin-top: 10px;--%>
-    <%--}--%>
 
-    <%--.custom-input-file:hover .uploadPhoto {--%>
-        <%--display: block;--%>
-    <%--}--%>
 
-    <%--.media-list {--%>
-        <%--padding-left: 0px;--%>
-    <%--}--%>
-<%--</style>--%>
+    .custom-input-file:hover .uploadPhoto { display: block; }
+</style>
+
+
 
 <c:if test="${!empty list}">
     <c:forEach var="childComment" items="${list}">
@@ -151,8 +184,8 @@
                                             <textarea placeholder="comment here..." maxlength="1000" name="content"
                                                       class="form-control" rows="4"
                                                       id="content"></textarea>
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                            <button type="button" class="btn cancel btn-warning"
+                                            <button type="submit" id="childcommentsub" class="btn btn-primary">Submit</button>
+                                            <button type="button" id="childrencommentclose" class="btn cancel btn-warning"
                                                     onclick="closeForm(${childComment.commentID})">Close
                                             </button>
                                         </form>
@@ -185,7 +218,9 @@
                                     <ul class="media-list">
 
                                         <li class="media media-replied">
+                                            <hr>
                                             <myTags:childComments list="${childComment.children}"/>
+                                            <hr>
                                         </li>
                                     </ul>
                                 </div>
