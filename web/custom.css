@@ -172,6 +172,7 @@ a:hover {
      background-color: rgba(255, 255, 255, .7);
  }
 
+ /*i don't think this part did anything. was trying to fix grey bottom on mobile*/
 @media screen and (max-device-aspect-ratio: 3/4) {
     .body{
     height: calc(100vw * 1.333 - 9%);}
