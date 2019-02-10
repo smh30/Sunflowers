@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+
 <style>
 
     .container-comment-pool{
@@ -131,12 +132,13 @@
     .custom-input-file:hover .uploadPhoto { display: block; }
 </style>
 
+
+
 <c:if test="${!empty list}">
     <c:forEach var="childComment" items="${list}">
         <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
         <div class="container-comment-pool">
-
 
 
         <div class="tab-pane active" id="comments-logout">
@@ -151,14 +153,13 @@
                     <div class="media-body" id="commentDiv${childComment.commentID}">
                         <div class="card bg-light p-3">
 
-                            <div class="media-heading">
-                            <h4 class="card-title text-uppercase ßreviews"><strong>${childComment.commentAuthor.username} :</strong></h4>
+                            <div id="username" class="media-heading">
+                                <h4 class="card-title text-uppercase ßreviews">
+                                    <strong>${childComment.commentAuthor.username} :</strong></h4>
 
-                               <span>
-                            <ul class="media-date text-uppercase reviews list-inline">
-                                <li class="dd">${fn:substring(childComment.timeString,0,16)}</li>
-                            </ul>
-                               </span>
+
+                            <div id="timestamp" class="media-date text-uppercase reviews list-inline">
+                                <p class="dd">${fn:substring(childComment.timeString,0,16)}</p>
                             </div>
 
                             <div>
@@ -171,7 +172,8 @@
                                 <c:if test="${sessionScope.username != null}">
                                     <a class="btn btn-info btn-circle text-uppercase"
                                        id="reply-btn-${childComment.commentID}"
-                                       onclick="openForm(${childComment.commentID})" href="#commentDiv${childComment.commentID}"><span
+                                       onclick="openForm(${childComment.commentID})"
+                                       href="#commentDiv${childComment.commentID}"><span
                                             class="glyphicon glyphicon-share-alt"></span>
                                         Reply</a>
 
@@ -179,7 +181,8 @@
                                         <form method="post" action="addNestedComment" class="form-container">
                                             <input type="hidden" name="articleID" value="${article.ID}">
                                             <input type="hidden" name="commentID" value="${childComment.commentID}">
-                                            <textarea placeholder="comment here..." maxlength="1000" name="content" class="form-control" rows="4"
+                                            <textarea placeholder="comment here..." maxlength="1000" name="content"
+                                                      class="form-control" rows="4"
                                                       id="content"></textarea>
                                             <button type="submit" id="childcommentsub" class="btn btn-primary">Submit</button>
                                             <button type="button" id="childrencommentclose" class="btn cancel btn-warning"
@@ -197,7 +200,8 @@
                                         <input type="hidden" name="commentID" value="${childComment.commentID}">
                                         <input type="hidden" name="articleID" value="${article.ID}">
 
-                                        <button id="deletecommetnbtn" class="btn btn-info btn-circle text-uppercase" type="submit"
+                                        <button id="deletecommetnbtn" class="btn btn-info btn-circle text-uppercase"
+                                                type="submit"
                                                 value="Delete Comment"><i class='fas fa-meh'></i> Delete Comment
                                         </button>
                                     </form>
@@ -222,6 +226,7 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
                     </div>
                 </li>
             </ul>
