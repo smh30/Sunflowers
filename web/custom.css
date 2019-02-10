@@ -188,22 +188,206 @@ a:hover {
 
 }
 
- /*i don't think this part did anything. was trying to fix grey bottom on mobile*/
-@media screen and (max-device-aspect-ratio: 3/4) {
-    .body{
-    height: calc(100vw * 1.333 - 9%);}
-}
-@media screen and (max-device-aspect-ratio: 2/3) {
-    .body{
-    height: calc(100vw * 1.5 - 9%);}
-}
-@media screen and (max-device-aspect-ratio: 10/16) {
-    .body{
 
-    height: calc(100vw * 1.6 - 9%);}
+ * {
+     box-sizing: border-box;
+ }
+
+body{
+    font-family: 'Cabin', sans-serif;
+    font-size: 20px;
 }
-@media screen and (max-device-aspect-ratio: 9/16) {
-    .body{
-    height: calc(100vw * 1.778 - 9%);}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Set a style for the submit button */
+.form-container .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 5px;
+    border: none;
+    cursor: pointer;
+    width: 45%;
+    margin-bottom: 10px;
+    margin-left: 3%;
+    opacity: 0.8;
+    display: inline-block;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+    width: 45%;
+    display: inline-block;
+    margin-right: 1%;
+    background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+}
+
+#editarticle{
+    background-color: #31b0d5;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 6px 15px;
+    border-radius: 20px;
+}
+#deletearticle{
+    background-color: #31b0d5;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 6px 15px;
+    border-radius: 20px;
+}
+#addcommentbtn{
+    background-color: #31b0d5;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 6px 15px;
+    border-radius: 20px;
+}
+
+#editarticle:hover{
+    background-color: #138496;
+}
+#addcommentbtn:hover{
+    background-color: #138496;
+}
+#deletearticle:hover{
+    background-color: #138496;
+}
+
+a{
+    color: #a94300;
+}
+
+a:hover {
+    color: #ea8800;
+}
+
+
+
+.container-comment-pool {
+    width: 100%;
+    height: auto;
+}
+
+.media .media-object {
+    max-width: 60px;
+}
+
+.media-body {
+    position: relative;
+    width: 100%;
+}
+
+#commentDiv${childComment.commentID} {
+    width: 100%;
+}
+
+.media-date {
+    position: relative;
+
+}
+
+.media-date li {
+    padding: 0;
+}
+
+.media-date li:first-child:before {
+    content: '';
+}
+
+.media-date li:before {
+    content: '.';
+    margin-left: -2px;
+    margin-right: 2px;
+}
+
+.media-comment {
+    margin-bottom: 20px;
+}
+
+.media-replied {
+    margin: 0 0 20px 20px;
+}
+
+.media-replied .media-heading {
+    padding-left: 6px;
+}
+
+.card .bg-light {
+    background-color: whitesmoke;
+    border: none;
+}
+
+.btn-circle {
+    font-weight: bold;
+    font-size: 12px;
+    padding: 6px 15px;
+    border-radius: 20px;
+    color: white;
+}
+
+.btn-circle span {
+    padding-right: 6px;
+}
+
+input[type="file"] {
+    z-index: 999;
+    line-height: 0;
+    font-size: 0;
+    position: absolute;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -ms-filter: "alpha(opacity=0)";
+    margin: 0;
+    padding: 0;
+    left: 0;
+}
+
+.well {
+    border: none;
+}
+
+#deletecommetnbtn {
+    margin-top: 10px;
+}
+
+.custom-input-file:hover .uploadPhoto {
+    display: block;
+}
+
+.media-list{
+    padding-left: 0px;
+}
+
+
+
+
+ /*i don't think this part did anything. was trying to fix grey bottom on mobile*/
+@media only screen and (max-width: 600px) {
+    body {
+        background-color: lightblue;
+    }
+
+    .media .media-object {
+        display:none;
+    }
 }
 
