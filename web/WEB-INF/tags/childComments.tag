@@ -18,10 +18,13 @@
         width: 100%;
     }
     .media-date {
-        position: absolute;
-        right: 25px;
-        top: 25px;
+        position: relative;
 
+
+    }
+    .media-list{
+        padding-left: 0;
+        margin-left: -2.8em;
     }
     .media-date li { padding: 0; }
     .media-date li:first-child:before { content: ''; }
@@ -32,19 +35,21 @@
     }
     .media-comment { margin-bottom: 20px; }
     .media-replied {
-        margin: 0 0 20px 20px;
+        margin: 0 0 20px 0px;
     }
     .media-replied .media-heading { padding-left: 6px; }
 
- HEAD
-    .meidia-list{
-
-    }
 
 .card .bg-light{
-    background-color: whitesmoke;
+
     border: none;
 }
+    .card{
+        border:none;
+    }
+    .media{
+        background-color: #f8f9fa;
+    }
 
     .btn-circle {
         font-weight: bold;
@@ -75,6 +80,51 @@
     #deletecommetnbtn{
         margin-top: 10px;
     }
+
+    #reply-btn-${childComment.commentID}{
+        background-color: #5b9b37;
+        padding:6px 15px;
+        border:#076426;
+        border-radius: 20px;
+        transition-duration: 0.4s;
+    }
+    #childcommentsub{
+        background-color: #5b9b37;
+        padding:6px 15px;
+        border:#076426;
+        border-radius: 20px;
+        transition-duration: 0.4s;
+    }
+
+    #childrencommentclose{
+        background-color: #5b9b37;
+        padding:6px 15px;
+        border:#076426;
+        border-radius: 20px;
+        transition-duration: 0.4s;
+    }
+    #deletecommetnbtn{
+        background-color: #5b9b37;
+        padding:6px 15px;
+        border:#076426;
+        border-radius: 20px;
+        transition-duration: 0.4s;
+    }
+
+    #reply-btn-${childComment.commentID}:hover{
+        background-color: #076426;
+    }
+    #childcommentsub:hover{
+        background-color: #076426;
+    }
+
+    #childrencommentclose:hover{
+        background-color: #076426;
+    }
+    #deletecommetnbtn{
+        background-color: #076426;
+    }
+
 
 
 
@@ -131,8 +181,8 @@
                                             <input type="hidden" name="commentID" value="${childComment.commentID}">
                                             <textarea placeholder="comment here..." maxlength="1000" name="content" class="form-control" rows="4"
                                                       id="content"></textarea>
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                            <button type="button" class="btn cancel btn-warning"
+                                            <button type="submit" id="childcommentsub" class="btn btn-primary">Submit</button>
+                                            <button type="button" id="childrencommentclose" class="btn cancel btn-warning"
                                                     onclick="closeForm(${childComment.commentID})">Close
                                             </button>
                                         </form>
@@ -164,7 +214,9 @@
                                     <ul class="media-list">
 
                                         <li class="media media-replied">
+                                            <hr>
                                             <myTags:childComments list="${childComment.children}"/>
+                                            <hr>
                                         </li>
                                     </ul>
                                 </div>
