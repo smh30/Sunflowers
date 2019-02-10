@@ -15,13 +15,14 @@
     </head>
     <body>
         <%@include file="../WEB-INF/partial/navbar.jsp" %>
+        <c:if test="${message!=null}">
+            <div class="alert alert-warning alert-dismissible" id="error-message">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    ${message}
+            </div>
+        </c:if>
         <div class="container">
-            <c:if test="${message!=null}">
-                <div class="alert alert-warning alert-dismissible" id="error-message">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        ${message}
-                </div>
-            </c:if>
+
             <div class="content">
             <h2>User Admin Table</h2>
 <div class="table-responsive-md">
@@ -67,25 +68,25 @@
                 <h2>Add user: </h2>
                 <br>
                 <label for="unameID">Username:</label>
-                <input type="text" id="unameID" name="username" class="form-control">
+                <input type="text" id="unameID" maxlength="30" name="username" class="form-control">
                 <br>
                 <label for="rnameID">Real Name:</label>
-                <input type="text" id="rnameID" name="realname" class="form-control">
+                <input type="text" id="rnameID" name="realname" maxlength="50" class="form-control">
                 <br>
                 <label for="countryID">Country:</label>
-                <input type="text" id="countryID" name="country" class="form-control">
+                <input type="text" id="countryID" maxlength="100" name="country" class="form-control">
                 <br>
                 <label for="dateofbirthID">Date of birth:</label>
                 <input type="date" id="dateofbirthID" name="dateofbirth" class="form-control">
                 <br>
                 <label for="descID">Description:</label>
-                <textarea rows="4" cols="80" id="descID" name="description" class="form-control">Description</textarea>
+                <textarea rows="4" cols="80" id="descID" maxlength="200" name="description" class="form-control">Description</textarea>
                 <br>
                 <label for="passwordID">Password:</label>
-                <input type="password" id="passwordID" name="password" class="form-control">
+                <input type="password" id="passwordID" name="password" minlength="8" class="form-control">
                 <br>
                 <label for="emailID"> Email:</label>
-                <input type="email" id="emailID" name="email" class="form-control">
+                <input type="email" id="emailID" name="email" maxlength="100" class="form-control">
                 <br>
                 <br>
                 <button type="submit" class="btn btn-primary" value="adminadduser">Create new user</button>
@@ -110,7 +111,16 @@
                     <tbody>
                         <c:forEach var="article" items="${articles}">
                             <tr>
-                                <td>${article.title}</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${article.title == null|| empty article.title}">
+                                            Untitled
+                                        </c:when>
+                                        <c:otherwise>
+                                            ${article.title}
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
                                 <td>${article.author.username}</td>
                                 <td>
                                     <form method="post" action="adminhideshowarticle">

@@ -146,17 +146,26 @@
 
                 <div class="form-group">
                     <label for="email" >Email:</label>
-                    <input type="email" id="email" name="email" value=${user.email} class="form-control">
+                    <c:choose>
+                        <c:when test="${user.email!=null && user.email != 'none'}">
+                    <input type="email" id="email" maxlength="100" name="email" value=${user.email} class="form-control">
+                    </c:when>
+                        <c:otherwise>
+                            <input type="email" id="email" maxlength="100" name="email" class="form-control" required>
+                            <small id="passwordInfo" class="form-text text-muted">Please enter an email address, otherwise we can't reset your password if you forget!</small>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
+
 
                 <div class="form-group">
                 <label for="rnameID">Real name:</label>
                 <c:choose>
                     <c:when test="${user.realName!=null}">
-                        <input type="text" id="rnameID" name="realname" value="${user.realName}" class="form-control">
+                        <input type="text" id="rnameID" maxlength="50" name="realname" value="${user.realName}" class="form-control">
                     </c:when>
                     <c:otherwise>
-                        <input type="text" id="rnameID" name="realname" class="form-control">
+                        <input type="text" id="rnameID" maxlength="50" name="realname" class="form-control">
                     </c:otherwise>
                 </c:choose>
                 </div>
@@ -165,10 +174,10 @@
             <label for="countryID">Country:</label>
             <c:choose>
                 <c:when test="${user.country!=null}">
-                    <input type="text" id="countryID" name="country" value=${user.country} class="form-control">
+                    <input type="text" id="countryID" name="country" maxlength="100" value=${user.country} class="form-control">
                 </c:when>
                 <c:otherwise>
-                    <input type="text" id="countryID" name="country" class="form-control">
+                    <input type="text" id="countryID" name="country" maxlength="100" class="form-control">
                 </c:otherwise>
             </c:choose>
                 </div>
@@ -187,28 +196,16 @@
             </c:choose>
                     </div>
 
-                <label for="emailID">Email:</label>
-                <c:choose>
-                    <c:when test="${user.email!=null}">
-                        <%--<input type="text" id="dateofbirthID" name="dateofbirth" value="${user.DOB}">--%>
-                        <input type="text" id="emailID" name="email" value="${user.email}">
-                    </c:when>
-                    <c:otherwise>
-                        <%--<input type="text" id="dateofbirthID" name="dateofbirth">--%>
-                        <input type="text" name="email" id="emailID">
-                    </c:otherwise>
-                </c:choose>
-                <br>
 
                         <div class="form-group">
             <label for="descID">Description:</label>
             <c:choose>
                 <c:when test="${user.description!=null}">
-                    <textarea rows="4" id="descID" name="description" class="form-control">${user.description}</textarea>
+                    <textarea rows="4" id="descID" name="description" maxlength="200" class="form-control">${user.description}</textarea>
                     <%--<input type="text" id="descID" name="description" value="${user.description}">--%>
                 </c:when>
                 <c:otherwise>
-                    <textarea rows="4" id="descID" name="description" class="form-control"></textarea>
+                    <textarea rows="4" id="descID" name="description" maxlength="200" class="form-control"></textarea>
                     <%--<input type="text" id="descID" name="description">--%>
                 </c:otherwise>
             </c:choose>

@@ -82,16 +82,17 @@
 
 <%@ include file="../WEB-INF/partial/navbar.jsp" %>
 <div class="bg">
-<div class="container">
-
-
-    <%--a message will display if a user has tried to login but had a wrong username or password--%>
     <c:if test="${message!=null}">
         <div class="alert alert-warning alert-dismissible" id="error-message">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 ${message}
         </div>
     </c:if>
+<div class="container">
+
+
+    <%--a message will display if a user has tried to login but had a wrong username or password--%>
+
 
     <%--if there are no articles, this message will appear--%>
     <c:if test="${empty articles}">
@@ -177,7 +178,6 @@
                 <c:otherwise>
                     <h2><a href="article?articleID=${article.ID}">${article.title}</a></h2>
                 </c:otherwise>
-                <%--todo make the 'author' link or popup the user info box/page--%>
             </c:choose>
 
             <p><a href="#" onclick="getAuthorInfo('${article.author.username}');return false;">Author: ${article.author.username}</a>

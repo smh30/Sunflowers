@@ -17,10 +17,11 @@ public class AdminAddUserServlet extends HttpServlet {
 
         boolean userCreated = UserDAO.newUser(username, password, getServletContext());
         if (!userCreated){
-            String message = "please choose a different username";
+            String message = "There was an issue with adding the new user. The username may be " +
+                    "taken already.";
             request.setAttribute("message", message);
 
-            request.getRequestDispatcher("web-pages/register.jsp").forward(request,
+            request.getRequestDispatcher("admininterface").forward(request,
                     response);
         } else {
 
@@ -37,8 +38,11 @@ public class AdminAddUserServlet extends HttpServlet {
 
             UserDAO.editUser(username, country, realName, description, dateOfBirth,
                     email, getServletContext());
-
-            response.sendRedirect("/admininterface");
+            
+            request.setAttribute("message", "New user " +username+ " successfully created!");
+    
+            request.getRequestDispatcher("admininterface").forward(request,
+                    response);
         }
 
     }

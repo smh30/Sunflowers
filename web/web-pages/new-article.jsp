@@ -21,12 +21,12 @@
 
 
         <style type="text/css">
-            #label1{
-                font-family: "Arial Black", arial-black ;
-            }
-            #label2{
-                font-family: "Arial Black", arial-black ;
-            }
+            /*#label1{*/
+                /*font-family: "Arial Black", arial-black ;*/
+            /*}*/
+            /*#label2{*/
+                /*font-family: "Arial Black", arial-black ;*/
+            /*}*/
 
             #submitBtn{
                 -webkit-transition-duration: 0.4s;
@@ -34,11 +34,14 @@
                 border: 2px solid #3e3e3e;
                 border-radius: 12px;
                 margin-top: 20px;
+                background-color: white;
+                opacity: 0.8;
             }
 
             #submitBtn:hover{
                 background-color: #3e3e3e;
                 color: white;
+
             }
 
 
