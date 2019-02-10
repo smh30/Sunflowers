@@ -33,6 +33,10 @@ public class ArticleDAO {
 
                 String orderBy = getOrderString(sort);
                 String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
+                
+                LocalDateTime a = LocalDateTime.now(ZoneId.of("UTC"));
+                Timestamp currentTime = Timestamp.valueOf(a);
+                System.out.println("current time for comparion:" +currentTime );
 
 
 // yes, this sql contains a concatenated string, but it can only have the values returned by the method above, so it should be safe
@@ -41,7 +45,7 @@ public class ArticleDAO {
                         "OFFSET ?")) {
 //                    stmt.setString(1, "article_author");
                     stmt.setInt(2, offset);
-                    stmt.setString(1, todaysDate);
+                    stmt.setTimestamp(1, currentTime);
                     ResultSet rs = stmt.executeQuery();
 
                     while (rs.next()) {
@@ -160,8 +164,8 @@ Timestamp tempTimestamp = null;
 
                 } else {
                     LocalDateTime a = LocalDateTime.now(ZoneId.of("Z"));
-                    tempTimestamp = Timestamp.valueOf(a);
-                    timestamp = tempTimestamp;
+                    timestamp = Timestamp.valueOf(a);
+                    //timestamp = tempTimestamp;
                     //currentInstant = Instant.now();
                 }
 
@@ -414,7 +418,7 @@ Timestamp tempTimestamp = null;
         return null;
     }
     
-    private static String getTimeString(Timestamp raw) {
+    public static String getTimeString(Timestamp raw) {
         String rstring = (raw.toString().replace(' ', 'T').substring(0, 19))+"Z" +
                 "[UTC]";
         ZonedDateTime utcTime = ZonedDateTime.parse(rstring);
@@ -422,7 +426,7 @@ Timestamp tempTimestamp = null;
         ZonedDateTime nzTime = utcTime.withZoneSameInstant(ZoneId.of("Pacific" +
                 "/Auckland"));
         //System.out.println("nz zoned time: " + c);
-        return DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss").format(nzTime);
+        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(nzTime);
     }
     
     public static Article editArticle(int id, String title, String content, ServletContext context) {

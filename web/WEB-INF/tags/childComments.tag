@@ -1,6 +1,7 @@
 <%@ attribute name="list" type="java.util.List" required="true" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="myTags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <style>
 
@@ -94,7 +95,7 @@
 
                                <span>
                             <ul class="media-date text-uppercase reviews list-inline">
-                                <li class="dd">${childComment.timestamp}</li>
+                                <li class="dd">${fn:substring(childComment.timeString,0,16)}</li>
                             </ul>
                                </span>
                             </div>
