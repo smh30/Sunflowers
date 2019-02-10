@@ -177,7 +177,7 @@
             <label for="countryID">Country:</label>
             <c:choose>
                 <c:when test="${user.country!=null}">
-                    <input type="text" id="countryID" name="country" maxlength="100" value=${user.country} class="form-control">
+                    <input type="text" id="countryID" name="country" maxlength="100" value='${user.country}' class="form-control">
                 </c:when>
                 <c:otherwise>
                     <input type="text" id="countryID" name="country" maxlength="100" class="form-control">

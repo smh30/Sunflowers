@@ -13,11 +13,7 @@ import java.io.IOException;
 @WebServlet(name = "LoadProfileServlet")
 public class LoadProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("LOAD PROFILE POST, SHOULDN'T BE HERE!! PROBLEM!!");
-//        String username = (String) request.getSession().getAttribute("username");
-//        User user = UserDAO.getUserDetails(username, getServletContext());
-//        request.setAttribute("user", user);
-//        request.getRequestDispatcher("web-pages/profile.jsp").forward(request, response);
+        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

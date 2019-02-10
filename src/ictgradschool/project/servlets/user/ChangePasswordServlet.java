@@ -35,7 +35,7 @@ public class ChangePasswordServlet extends HttpServlet {
             msg = "Your password was not changed. Please try again.";
         }
         request.setAttribute("message", msg);
-        request.getRequestDispatcher("/profile").forward(request, response);
+        request.getRequestDispatcher("profile").forward(request, response);
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
