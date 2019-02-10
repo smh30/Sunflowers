@@ -67,7 +67,7 @@
             margin: 7px;
             border:2px solid #666666;
             border-radius: 12px;
-            background-color: white;
+            background-color: whitesmoke;
         }
 
 
