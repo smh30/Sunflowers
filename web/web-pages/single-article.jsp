@@ -189,12 +189,13 @@
         </p>
 
         <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-        <%--<c:if test="${not empty article.timestamp}">--%>
+        <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+    <%--<c:if test="${not empty article.timestamp}">--%>
     <%--<span title="${article.timestamp}"><fmt:formatDate value="${article.timestamp}"--%>
                                                        <%--pattern="MM/dd/yyyy HH:mm"/></span>--%>
         <%--</c:if>--%>
         <c:if test="${not empty article.timeString}">
-            <p>Time String = ${article.timeString}</p>
+            <p>${fn:substring(article.timeString,0,16)}</p>
         </c:if>
         <%--<p>${article.timestamp}</p>--%>
 
