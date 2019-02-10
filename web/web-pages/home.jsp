@@ -196,23 +196,14 @@
                 <c:set var="endpara" value="${fn:substringBefore(therest,'</p>')}"/>
 
                 <c:set var="ismore" value="${fn:substringAfter(therest, '</p>')}"/>
-                ${firstpart}
-
-            <c:if test="${not empty therest}">
-
-
-                        <c:if test="${not empty ismore}">
-                            ${endpara}
+                ${firstpart}<c:if test="${not empty therest}"><c:if test="${not empty ismore}">${endpara}
                             <br><a href="article?articleID=${article.ID}">read more</a>
                         </c:if>
-                    
-
 
                 <c:set var="p" value="${fn:indexOf(therest, '</p>')}"/>
 
                 <c:if test="${p == -1}">
-                    <c:set var="endline" value="${fn:substring(therest, 0, fn:indexOf(therest, '\\\\n'))}"/>
-                    ${endline}
+                    <c:set var="endline" value="${fn:substring(therest, 0, fn:indexOf(therest, '\\\\n'))}"/>..${endline}
                 </c:if>
             </c:if>
 

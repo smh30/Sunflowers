@@ -191,8 +191,9 @@
             </div>
 
         </c:if>
-
+<div class="transparent-white">
         <p>${article.articleText}</p>
+</div>
 
 
         <%--the 'edit' and 'delete' buttons will only appear if the logged in user wrote the article --%>
