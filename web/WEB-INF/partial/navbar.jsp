@@ -66,7 +66,7 @@
 
                 <c:if test="${sessionScope.admin!=null}">
 
-                    <li class="nav-item"><a class="nav-link" href="admininterface">Admin Interface</a>
+                    <li class="nav-item"><a class="nav-link" href="admininterface"><i class='fas fa-pen-alt'></i>Admin Interface</a>
                     </li>
                 </c:if>
 

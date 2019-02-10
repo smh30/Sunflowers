@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+
 <style>
 
     .container-comment-pool{
@@ -20,6 +21,11 @@
     .media-date {
         position: relative;
 
+
+    }
+    .media-list{
+        padding-left: 0;
+        margin-left: -2.8em;
     }
     .media-date li { padding: 0; }
     .media-date li:first-child:before { content: ''; }
@@ -30,14 +36,21 @@
     }
     .media-comment { margin-bottom: 20px; }
     .media-replied {
-        margin: 0 0 20px 20px;
+        margin: 0 0 20px 0px;
     }
     .media-replied .media-heading { padding-left: 6px; }
 
+
 .card .bg-light{
-    background-color: whitesmoke;
+
     border: none;
 }
+    .card{
+        border:none;
+    }
+    .media{
+        background-color: #f8f9fa;
+    }
 
     .btn-circle {
         font-weight: bold;
@@ -69,17 +82,63 @@
         margin-top: 10px;
     }
 
+    #reply-btn-${childComment.commentID}{
+        background-color: #5b9b37;
+        padding:6px 15px;
+        border:#076426;
+        border-radius: 20px;
+        transition-duration: 0.4s;
+    }
+    #childcommentsub{
+        background-color: #5b9b37;
+        padding:6px 15px;
+        border:#076426;
+        border-radius: 20px;
+        transition-duration: 0.4s;
+    }
+
+    #childrencommentclose{
+        background-color: #5b9b37;
+        padding:6px 15px;
+        border:#076426;
+        border-radius: 20px;
+        transition-duration: 0.4s;
+    }
+    #deletecommetnbtn{
+        background-color: #5b9b37;
+        padding:6px 15px;
+        border:#076426;
+        border-radius: 20px;
+        transition-duration: 0.4s;
+    }
+
+    #reply-btn-${childComment.commentID}:hover{
+        background-color: #076426;
+    }
+    #childcommentsub:hover{
+        background-color: #076426;
+    }
+
+    #childrencommentclose:hover{
+        background-color: #076426;
+    }
+    #deletecommetnbtn{
+        background-color: #076426;
+    }
+
+
 
 
     .custom-input-file:hover .uploadPhoto { display: block; }
 </style>
+
+
 
 <c:if test="${!empty list}">
     <c:forEach var="childComment" items="${list}">
         <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
         <div class="container-comment-pool">
-
 
 
         <div class="tab-pane active" id="comments-logout">
@@ -94,14 +153,13 @@
                     <div class="media-body" id="commentDiv${childComment.commentID}">
                         <div class="card bg-light p-3">
 
-                            <div class="media-heading">
-                            <h4 class="card-title text-uppercase ßreviews"><strong>${childComment.commentAuthor.username} :</strong></h4>
+                            <div id="username" class="media-heading">
+                                <h4 class="card-title text-uppercase ßreviews">
+                                    <strong>${childComment.commentAuthor.username} :</strong></h4>
 
-                               <span>
-                            <ul class="media-date text-uppercase reviews list-inline">
-                                <li class="dd">${fn:substring(childComment.timeString,0,16)}</li>
-                            </ul>
-                               </span>
+
+                            <div id="timestamp" class="media-date text-uppercase reviews list-inline">
+                                <p class="dd">${fn:substring(childComment.timeString,0,16)}</p>
                             </div>
 
                             <div>
@@ -114,7 +172,8 @@
                                 <c:if test="${sessionScope.username != null}">
                                     <a class="btn btn-info btn-circle text-uppercase"
                                        id="reply-btn-${childComment.commentID}"
-                                       onclick="openForm(${childComment.commentID})" href="#commentDiv${childComment.commentID}"><span
+                                       onclick="openForm(${childComment.commentID})"
+                                       href="#commentDiv${childComment.commentID}"><span
                                             class="glyphicon glyphicon-share-alt"></span>
                                         Reply</a>
 
@@ -122,10 +181,11 @@
                                         <form method="post" action="addNestedComment" class="form-container">
                                             <input type="hidden" name="articleID" value="${article.ID}">
                                             <input type="hidden" name="commentID" value="${childComment.commentID}">
-                                            <textarea placeholder="comment here..." maxlength="1000" name="content" class="form-control" rows="4"
+                                            <textarea placeholder="comment here..." maxlength="1000" name="content"
+                                                      class="form-control" rows="4"
                                                       id="content"></textarea>
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                            <button type="button" class="btn cancel btn-warning"
+                                            <button type="submit" id="childcommentsub" class="btn btn-primary">Submit</button>
+                                            <button type="button" id="childrencommentclose" class="btn cancel btn-warning"
                                                     onclick="closeForm(${childComment.commentID})">Close
                                             </button>
                                         </form>
@@ -140,7 +200,8 @@
                                         <input type="hidden" name="commentID" value="${childComment.commentID}">
                                         <input type="hidden" name="articleID" value="${article.ID}">
 
-                                        <button id="deletecommetnbtn" class="btn btn-info btn-circle text-uppercase" type="submit"
+                                        <button id="deletecommetnbtn" class="btn btn-info btn-circle text-uppercase"
+                                                type="submit"
                                                 value="Delete Comment"><i class='fas fa-meh'></i> Delete Comment
                                         </button>
                                     </form>
@@ -157,12 +218,15 @@
                                     <ul class="media-list">
 
                                         <li class="media media-replied">
+                                            <hr>
                                             <myTags:childComments list="${childComment.children}"/>
+                                            <hr>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
+                    </div>
                     </div>
                 </li>
             </ul>
