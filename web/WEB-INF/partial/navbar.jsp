@@ -40,7 +40,7 @@
                                 <div class="form-group">
                                     <input type="hidden" name="from" value="${pageContext.request.requestURI}">
                                     <input type="hidden" name="articleID" value="${article.ID}">
-                                    <input type="submit" value="Login">
+                                    <input type="submit" class="btn-primary" value="Login">
                                 </div>
                             </form>
                         </div>
