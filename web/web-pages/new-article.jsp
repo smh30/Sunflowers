@@ -14,35 +14,15 @@
         <%--library for icon--%>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-
 
 
         <style type="text/css">
-            /*#label1{*/
-                /*font-family: "Arial Black", arial-black ;*/
-            /*}*/
-            /*#label2{*/
-                /*font-family: "Arial Black", arial-black ;*/
-            /*}*/
+
 
             #submitBtn{
-                -webkit-transition-duration: 0.4s;
-                transition-duration: 0.4s;
-                border: 2px solid #3e3e3e;
-                border-radius: 12px;
-                margin-top: 20px;
-                background-color: white;
-                opacity: 0.8;
+              margin: 10px;
             }
 
-            #submitBtn:hover{
-                background-color: #3e3e3e;
-                color: white;
-
-            }
 
 
             #choose-date{
@@ -122,7 +102,7 @@
 
 
         <div class="container text-right">
-             <button id="submitBtn" class="btn" type="submit">Submit</button>
+             <button id="submitBtn" class="btn-primary" type="submit">Submit</button>
         </div>
         </form>
 
