@@ -1,6 +1,6 @@
 package ictgradschool.project.servlets.user;
 
-import ictgradschool.project.DAOs.UserDAO;
+import ictgradschool.project.daos.UserDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

@@ -1,6 +1,5 @@
 package ictgradschool.project.servlets.user;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,9 +10,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import ictgradschool.project.DAOs.CustomProfilePicDAO;
+import ictgradschool.project.daos.CustomProfilePicDAO;
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 

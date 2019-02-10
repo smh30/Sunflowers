@@ -1,9 +1,9 @@
 package ictgradschool.project.servlets.article;
 
-import ictgradschool.project.DAOs.ArticleDAO;
-import ictgradschool.project.DAOs.CommentDAO;
-import ictgradschool.project.JavaBeans.Article;
-import ictgradschool.project.JavaBeans.Comment;
+import ictgradschool.project.daos.ArticleDAO;
+import ictgradschool.project.daos.CommentDAO;
+import ictgradschool.project.javabeans.Article;
+import ictgradschool.project.javabeans.Comment;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
 @WebServlet(name = "GetSingleArticleServlet")
 public class GetSingleArticleServlet extends HttpServlet {

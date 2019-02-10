@@ -1,9 +1,8 @@
 package ictgradschool.project.servlets.article;
 
-import ictgradschool.project.DAOs.ArticleDAO;
-import ictgradschool.project.JavaBeans.Article;
-import ictgradschool.project.JavaBeans.SearchParams;
-import ictgradschool.project.utilities.RandomPassword;
+import ictgradschool.project.daos.ArticleDAO;
+import ictgradschool.project.javabeans.Article;
+import ictgradschool.project.javabeans.SearchParams;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

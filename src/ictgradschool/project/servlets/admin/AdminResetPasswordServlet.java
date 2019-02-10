@@ -1,7 +1,7 @@
 package ictgradschool.project.servlets.admin;
 
-import ictgradschool.project.DAOs.AdminDAO;
-import ictgradschool.project.DAOs.UserDAO;
+import ictgradschool.project.daos.AdminDAO;
+import ictgradschool.project.daos.UserDAO;
 import ictgradschool.project.utilities.RandomPassword;
 
 import javax.mail.*;

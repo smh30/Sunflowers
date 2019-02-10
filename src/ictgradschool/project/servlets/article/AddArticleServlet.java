@@ -1,16 +1,14 @@
 package ictgradschool.project.servlets.article;
 
-import ictgradschool.project.DAOs.ArticleDAO;
-import ictgradschool.project.JavaBeans.Article;
+import ictgradschool.project.daos.ArticleDAO;
+import ictgradschool.project.javabeans.Article;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet(name = "AddArticleServlet")
 public class AddArticleServlet extends HttpServlet {

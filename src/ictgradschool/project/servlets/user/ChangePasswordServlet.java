@@ -1,13 +1,11 @@
 package ictgradschool.project.servlets.user;
 
-import ictgradschool.project.DAOs.AdminDAO;
-import ictgradschool.project.DAOs.UserDAO;
+import ictgradschool.project.daos.UserDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class ChangePasswordServlet extends HttpServlet {
