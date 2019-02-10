@@ -86,14 +86,14 @@
 
         <div class="container text-center">
             <br>
-            <label id="label1" for="exampleFormControlInput1">Article Title Here:</label>
+            <label id="titleID" for="title">Article Title Here:</label>
             <c:choose>
                 <c:when test="${title !=null}">
-                    <input type="text" name="article_title" class="form-control" id="exampleFormControlInput1"
+                    <input type="text" name="article_title" class="form-control" id="title"
                            value='${title}'>
                 </c:when>
                 <c:otherwise>
-                    <input type="text" name="article_title" class="form-control" id="exampleFormControlInput1"
+                    <input type="text" name="article_title" class="form-control" id="title"
                            placeholder="Your new article title...">
                 </c:otherwise>
             </c:choose>
@@ -103,18 +103,18 @@
 
         <div class="container text-center">
             <br>
-            <label id="label2" for="exampleFormControlTextarea1">Article Content Here:</label>
+            <label id="label2" for="content">Article Content Here:</label>
             <c:choose>
                 <c:when test="${content != null}">
-                <textarea class="form-control" name="article_content" id="exampleFormControlTextarea1"
+                <textarea class="form-control" name="article_content" id="content"
                           rows="30">${content}</textarea>
                 </c:when>
                 <c:when test="${article_content != null}">
-                    <textarea class="form-control" name="article_content" id="exampleFormControlTextarea1"
+                    <textarea class="form-control" name="article_content" id="content"
                               rows="30">${article_content}</textarea>
                 </c:when>
                 <c:otherwise>
-                    <textarea class="form-control" name="article_content" id="exampleFormControlTextarea1" rows="30"
+                    <textarea class="form-control" name="article_content" id="content" rows="30"
                               placeholder="Content here..."></textarea>
                 </c:otherwise>
             </c:choose>
@@ -127,7 +127,7 @@
         </form>
 
             <script>
-                CKEDITOR.replace('exampleFormControlTextarea1');
+                CKEDITOR.replace('content');
             </script>
                 </div>
     </body>
