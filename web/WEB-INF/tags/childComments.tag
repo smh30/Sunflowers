@@ -14,7 +14,7 @@
         width: 100% ;
     }
     #commentDiv${childComment.commentID}{
-        width: 90%;
+        width: 100%;
     }
     .media-date {
         position: absolute;
