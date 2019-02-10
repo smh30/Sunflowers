@@ -5,7 +5,7 @@
 <html>
     <head>
 
-        <title>AddNewArticle</title>
+        <title>Add New Article</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
@@ -89,11 +89,11 @@
             <label id="titleID" for="title">Article Title Here:</label>
             <c:choose>
                 <c:when test="${title !=null}">
-                    <input type="text" name="article_title" class="form-control" id="title"
+                    <input type="text" name="article_title" class="form-control" id="title" maxlength="200"
                            value='${title}'>
                 </c:when>
                 <c:otherwise>
-                    <input type="text" name="article_title" class="form-control" id="title"
+                    <input type="text" name="article_title" class="form-control" id="title" maxlength="200"
                            placeholder="Your new article title...">
                 </c:otherwise>
             </c:choose>
@@ -106,15 +106,15 @@
             <label id="label2" for="content">Article Content Here:</label>
             <c:choose>
                 <c:when test="${content != null}">
-                <textarea class="form-control" name="article_content" id="content"
+                <textarea class="form-control" name="article_content" id="content" maxlength="10000"
                           rows="30">${content}</textarea>
                 </c:when>
                 <c:when test="${article_content != null}">
-                    <textarea class="form-control" name="article_content" id="content"
+                    <textarea class="form-control" name="article_content" id="content" maxlength="10000"
                               rows="30">${article_content}</textarea>
                 </c:when>
                 <c:otherwise>
-                    <textarea class="form-control" name="article_content" id="content" rows="30"
+                    <textarea class="form-control" name="article_content" id="content" rows="30" maxlength="10000"
                               placeholder="Content here..."></textarea>
                 </c:otherwise>
             </c:choose>
