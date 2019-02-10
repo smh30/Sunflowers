@@ -101,24 +101,26 @@
 
         /* Set a style for the submit button */
         .form-container .btn {
-            background-color: #4CAF50;
+            background-color: green;
             color: white;
             padding: 5px 5px;
             border: none;
             cursor: pointer;
-            width: 45%;
+            width: 50px;
             margin-bottom: 10px;
             margin-left: 3%;
             opacity: 0.8;
             display: inline-block;
+            border-radius: 20px;
         }
 
         /* Add a red background color to the cancel button */
         .form-container .cancel {
-            width: 45%;
+            width:50px;
             display: inline-block;
             margin-right: 1%;
-            background-color: red;
+            background-color: green;
+            border-radius: 20px;
         }
 
         /* Add some hover effects to buttons */
@@ -126,27 +128,14 @@
             opacity: 1;
         }
 
-        #editarticle{
-            background-color: #31b0d5;
+        #editarticle,#deletearticle,#addcommentbtn{
+            background-color: green;
             font-weight: bold;
             font-size: 12px;
             padding: 6px 15px;
             border-radius: 20px;
         }
-        #deletearticle{
-            background-color: #31b0d5;
-            font-weight: bold;
-            font-size: 12px;
-            padding: 6px 15px;
-            border-radius: 20px;
-        }
-        #addcommentbtn{
-            background-color: #31b0d5;
-            font-weight: bold;
-            font-size: 12px;
-            padding: 6px 15px;
-            border-radius: 20px;
-        }
+
 
         #editarticle:hover{
             background-color: #138496;

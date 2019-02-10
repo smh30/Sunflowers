@@ -17,7 +17,9 @@
         width: 100%;
     }
     .media-date {
-        position: relative;
+        position: absolute;
+        right: 25px;
+        top: 25px;
 
     }
     .media-date li { padding: 0; }
@@ -33,7 +35,9 @@
     }
     .media-replied .media-heading { padding-left: 6px; }
 
+    .meidia-list{
 
+    }
 
     .btn-circle {
         font-weight: bold;
