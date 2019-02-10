@@ -1,13 +1,10 @@
-package ictgradschool.project.DAOs;
+package ictgradschool.project.daos;
 
-import ictgradschool.project.DAOs.CheckProperties.DAOCheckProperties;
-import ictgradschool.project.JavaBeans.Article;
-import ictgradschool.project.JavaBeans.Comment;
-import ictgradschool.project.JavaBeans.User;
+import ictgradschool.project.daos.checkproperties.DAOCheckProperties;
+import ictgradschool.project.javabeans.Comment;
+import ictgradschool.project.javabeans.User;
 
 import javax.servlet.ServletContext;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;

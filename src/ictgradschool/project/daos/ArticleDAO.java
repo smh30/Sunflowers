@@ -1,24 +1,18 @@
-package ictgradschool.project.DAOs;
+package ictgradschool.project.daos;
 
-import ictgradschool.project.DAOs.CheckProperties.DAOCheckProperties;
-import ictgradschool.project.JavaBeans.Article;
-import ictgradschool.project.JavaBeans.Comment;
-import ictgradschool.project.JavaBeans.User;
+import ictgradschool.project.daos.checkproperties.DAOCheckProperties;
+import ictgradschool.project.javabeans.Article;
+import ictgradschool.project.javabeans.User;
 
 import javax.servlet.ServletContext;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.*;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-import java.util.*;
 
 public class ArticleDAO {
 

@@ -1,6 +1,5 @@
-package ictgradschool.project.JavaBeans;
+package ictgradschool.project.javabeans;
 
-import javax.servlet.ServletContext;
 import java.io.Serializable;
 
 public class User implements Serializable {

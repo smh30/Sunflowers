@@ -1,7 +1,6 @@
 package ictgradschool.project.servlets.user;
 
-import ictgradschool.project.DAOs.ProfileDetailsDAO;
-import ictgradschool.project.DAOs.UserDAO;
+import ictgradschool.project.daos.UserDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +16,7 @@ public class DeleteProfileServlet extends HttpServlet {
         String username = request.getParameter("username");
         String admin = request.getParameter("admin");
 
-        boolean userDeleted = ProfileDetailsDAO.deleteUser(username, getServletContext());
+        boolean userDeleted = UserDAO.deleteUser(username, getServletContext());
 
         if (!userDeleted) {
             if (admin.equals("admin")) {

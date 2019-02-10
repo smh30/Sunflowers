@@ -1,10 +1,8 @@
-package ictgradschool.project.DAOs;
+package ictgradschool.project.daos;
 
-import ictgradschool.project.DAOs.CheckProperties.DAOCheckProperties;
+import ictgradschool.project.daos.checkproperties.DAOCheckProperties;
 
 import javax.servlet.ServletContext;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
 

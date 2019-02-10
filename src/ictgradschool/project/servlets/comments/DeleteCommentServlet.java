@@ -1,7 +1,6 @@
 package ictgradschool.project.servlets.comments;
 
-import ictgradschool.project.DAOs.ArticleDAO;
-import ictgradschool.project.DAOs.CommentDAO;
+import ictgradschool.project.daos.CommentDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

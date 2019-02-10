@@ -1,4 +1,4 @@
-package ictgradschool.project.JavaBeans;
+package ictgradschool.project.javabeans;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

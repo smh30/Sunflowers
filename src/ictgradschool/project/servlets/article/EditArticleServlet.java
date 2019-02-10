@@ -1,9 +1,8 @@
 package ictgradschool.project.servlets.article;
 
-import ictgradschool.project.DAOs.ArticleDAO;
-import ictgradschool.project.JavaBeans.Article;
+import ictgradschool.project.daos.ArticleDAO;
+import ictgradschool.project.javabeans.Article;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
