@@ -19,11 +19,7 @@
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
 
-    <%--library for the comment pool(this is what's wreckong the navbar--%>
-    <%--<link href="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">--%>
-    <%--<link rel="stylesheet" href="style.css">--%>
-    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--%>
-    <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>--%>
+
 
     <script type="text/javascript">
 
@@ -63,6 +59,91 @@
             })
         }
     </script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body{
+            font-family: 'Cabin', sans-serif;
+            font-size: 20px;
+        }
+
+        /* Full-width input fields */
+        .form-container input[type=text], .form-container input[type=password] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            border: none;
+            background: #f1f1f1;
+        }
+
+        /* When the inputs get focus, do something */
+        .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+        /* Set a style for the submit button */
+        .form-container .btn {
+            background-color: #5b9b37;
+            color: white;
+            padding: 5px 5px;
+            border: none;
+            cursor: pointer;
+            width: 50px;
+            margin-bottom: 10px;
+            margin-left: 3%;
+            opacity: 0.8;
+            display: inline-block;
+            border-radius: 20px;
+        }
+
+        /* Add a red background color to the cancel button */
+        .form-container .cancel {
+            width:50px;
+            display: inline-block;
+            margin-right: 1%;
+            background-color: #5b9b37;
+            border-radius: 20px;
+        }
+
+        /* Add some hover effects to buttons */
+        .form-container .btn:hover, .open-button:hover {
+            opacity: 1;
+        }
+
+        #editarticle,#deletearticle,#addcommentbtn{
+            background-color: #5b9b37;
+            font-weight: bold;
+            font-size: 12px;
+            padding: 6px 15px;
+            border-radius: 20px;
+        }
+
+
+        #editarticle:hover{
+            background-color: #076426;
+        }
+        #addcommentbtn:hover{
+            background-color: #076426;
+        }
+        #deletearticle:hover{
+            background-color: #076426;
+        }
+
+        a{
+            color: #a94300;
+        }
+
+        a:hover {
+            color: #ea8800;
+        }
+
+    </style>
+
 
 
 
