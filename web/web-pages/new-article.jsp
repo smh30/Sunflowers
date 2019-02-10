@@ -78,9 +78,10 @@
             </c:otherwise>
         </c:choose>
 
-        <div class="container" id="choose-date">
+        <div class="container text-center py-2" id="choose-date">
+
             <label for="date">Optionally, select a publication date for your post:</label>
-            <input type="date" id="date" name="pub-date">
+            <input type="date"  id="date" name="pub-date">
         </div>
 
         <div class="container text-center">
