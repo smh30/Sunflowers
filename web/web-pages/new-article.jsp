@@ -51,11 +51,11 @@
         <div class="container">
             <%--submits to a different servlet depending on whether it's a new article or an edit--%>
             <c:choose>
-            <c:when test="${'new_article' != null}">
+            <c:when test="${new_article != null}">
             <form action="new-article" method="post">
                 </c:when>
                 <c:otherwise>
-                <form action="edit_article" method="post">
+                <form action="edit-article" method="post">
                     <input type="hidden" name="articleID" value="${article.ID}">
                     </c:otherwise>
                     </c:choose>
