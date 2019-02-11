@@ -63,7 +63,6 @@ public class UserDAO {
                     } else {
                         byte[] salt = Passwords.getNextSalt(32);
                         byte[] hash = Passwords.hash(password.toCharArray(), salt);
-                        System.out.println("done hash");
                         try (PreparedStatement s2 = conn.prepareStatement("INSERT INTO user(iteration, salt, username, password)" +
                                 "VALUES (?, ?, ?, ?)")) {
                             s2.setInt(1, 100000);

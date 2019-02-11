@@ -71,7 +71,7 @@
                         <h2>Add user: </h2><br> <label for="unameID">Username:</label> <input type="text" id="unameID"
                                                                                               maxlength="30"
                                                                                               name="username"
-                                                                                              class="form-control"> <br>
+                                                                                              class="form-control" pattern="^\S{4,30}" required> <br>
                         <label for="rnameID">Real Name:</label> <input type="text" id="rnameID" name="realname"
                                                                        maxlength="50" class="form-control"> <br> <label
                             for="countryID">Country:</label> <input type="text" id="countryID" maxlength="100"
@@ -83,7 +83,7 @@
                                                                                 class="form-control">Description</textarea>
                         <br> <label for="passwordID">Password:</label> <input type="password" id="passwordID"
                                                                               name="password" minlength="8"
-                                                                              class="form-control"> <br> <label
+                                                                              class="form-control" required> <br> <label
                             for="emailID"> Email:</label> <input type="email" id="emailID" name="email" maxlength="100"
                                                                  class="form-control"> <br> <br>
                         <button type="submit" class="btn btn-primary" value="adminadduser">Create new user</button>
