@@ -17,12 +17,12 @@ public class EditArticleServlet extends HttpServlet {
         String content = request.getParameter("article_content");
         String stringID = request.getParameter("articleID");
         int articleID = Integer.parseInt(stringID);
-        Article arti = ArticleDAO.editArticle(articleID, title, content, getServletContext());
+        Article article = ArticleDAO.editArticle(articleID, title, content, getServletContext());
 
-        request.setAttribute("article", arti);
+        request.setAttribute("article", article);
 
         request.setAttribute("articleID", articleID);
-        request.getRequestDispatcher("/article").forward(request, response);
+        request.getRequestDispatcher("article").forward(request, response);
 
     }
 

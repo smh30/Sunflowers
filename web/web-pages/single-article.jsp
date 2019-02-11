@@ -207,7 +207,7 @@
             <hr>
         </div>
 
-    <myTags:childComments list="${comment}"/>
+    <myTags:childComments list="${comments}"/>
 
         <%@ include file="../WEB-INF/partial/_userinfomodal.jsp" %>
 </body>
