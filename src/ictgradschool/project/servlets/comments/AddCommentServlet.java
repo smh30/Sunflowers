@@ -19,7 +19,7 @@ public class AddCommentServlet extends HttpServlet {
 
         String user = (String) request.getSession().getAttribute("username");
 
-        content = content.replaceAll("(\r\n|\n\r|\r|\n)", "<br />");
+        content = content.replaceAll("(\r\n|\n\r|\r|\n)", "<br/>");
 
         boolean commentAdded = CommentDAO.newComment(content, articleID, user, getServletContext());
 
@@ -27,7 +27,6 @@ public class AddCommentServlet extends HttpServlet {
             
             String message = "Some trouble with adding your comment. Please try again.";
             request.setAttribute("message", message);
-            System.out.println("a message was added");
 
             request.getRequestDispatcher("article?articleID=" + Integer.parseInt(articleID)).forward(request, response);
 
@@ -35,7 +34,7 @@ public class AddCommentServlet extends HttpServlet {
         } else {
             request.setAttribute("articleID", articleID);
 
-            request.getRequestDispatcher("/article").forward(request, response);
+            request.getRequestDispatcher("article").forward(request, response);
         }
     }
 

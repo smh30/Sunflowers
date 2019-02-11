@@ -20,7 +20,7 @@ public class GetUserInfoServlet extends HttpServlet {
     
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        String image = "";
+        String image;
         if (user.getPictureURL() == null||user.isUseDefaultImage()){
             image = "images/default-photos-for-profile-page/" +user.getDefaultImage();
         } else {
