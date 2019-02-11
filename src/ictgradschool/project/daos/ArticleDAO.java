@@ -26,7 +26,6 @@ public class ArticleDAO {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
 
                 String orderBy = getOrderString(sort);
-                String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
                 
                 LocalDateTime a = LocalDateTime.now(ZoneId.of("UTC"));
                 Timestamp currentTime = Timestamp.valueOf(a);
@@ -37,23 +36,14 @@ public class ArticleDAO {
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article WHERE (hidden=0)" +
                         "AND NOT (article_author = 'deleted') AND NOT (article_timestamp > ?) ORDER BY" + orderBy + "LIMIT 10 " +
                         "OFFSET ?")) {
-//                    stmt.setString(1, "article_author");
-                    stmt.setInt(2, offset);
+
                     stmt.setTimestamp(1, currentTime);
+                    stmt.setInt(2, offset);
                     ResultSet rs = stmt.executeQuery();
 
                     while (rs.next()) {
 
-                        Article article = new Article();
-                        article.setTitle(rs.getString(1));
-                        article.setID(rs.getInt(3));
-                        article.setArticleText(rs.getString(4));
-                        article.setTimestamp(rs.getTimestamp(5));
-                        Timestamp raw =(rs.getTimestamp(5));
-                        article.setTimeString(getTimeString(raw));
-                        User articleAuthor = new User(rs.getString(2));
-                        article.setAuthor(articleAuthor);
-
+                        Article article = createArticleFromRS(rs);
                         articles.add(article);
                     }
 
@@ -65,6 +55,20 @@ public class ArticleDAO {
             return articles;
         }
         return null;
+    }
+
+    private static Article createArticleFromRS(ResultSet rs) throws SQLException {
+        Article article = new Article();
+        article.setTitle(rs.getString(1));
+        article.setID(rs.getInt(3));
+        article.setArticleText(rs.getString(4));
+        article.setTimestamp(rs.getTimestamp(5));
+        Timestamp rawTimestamp = (rs.getTimestamp(5));
+        article.setTimeString(getTimeString(rawTimestamp));
+        User articleAuthor = new User(rs.getString(2));
+        article.setAuthor(articleAuthor);
+
+        return article;
     }
 
     private static String getOrderString(String sort) {
@@ -118,17 +122,7 @@ public class ArticleDAO {
 
                     while (rs.next()) {
 
-                        Article article = new Article();
-                        article.setTitle(rs.getString(1));
-                        article.setID(rs.getInt(3));
-                        article.setArticleText(rs.getString(4));
-                        article.setTimestamp(rs.getTimestamp(5));
-                        Timestamp raw =(rs.getTimestamp(5));
-                        article.setTimeString(getTimeString(raw));
-                        User articleAuthor = new User(rs.getString(2));
-                        article.setAuthor(articleAuthor);
-                        //todo another query or add to this one to return the comments as well, and create a list<comment>
-
+                        Article article = createArticleFromRS(rs);
                         articles.add(article);
                     }
 
@@ -293,17 +287,7 @@ Timestamp tempTimestamp = null;
 
                     while (rs.next()) {
 
-                        Article article = new Article();
-                        article.setTitle(rs.getString(1));
-                        article.setID(rs.getInt(3));
-                        article.setArticleText(rs.getString(4));
-                        article.setTimestamp(rs.getTimestamp(5));
-                        Timestamp raw =(rs.getTimestamp(5));
-                        article.setTimeString(getTimeString(raw));
-                        User articleAuthor = new User(rs.getString(2));
-                        article.setAuthor(articleAuthor);
-
-
+                        Article article = createArticleFromRS(rs);
                         articles.add(article);
                     }
 
@@ -337,17 +321,7 @@ Timestamp tempTimestamp = null;
 
                     while (rs.next()) {
 
-                        Article article = new Article();
-                        article.setTitle(rs.getString(1));
-                        article.setID(rs.getInt(3));
-                        article.setArticleText(rs.getString(4));
-                        article.setTimestamp(rs.getTimestamp(5));
-                        Timestamp raw =(rs.getTimestamp(5));
-                        article.setTimeString(getTimeString(raw));
-                        User articleAuthor = new User(rs.getString(2));
-                        article.setAuthor(articleAuthor);
-
-
+                        Article article = createArticleFromRS(rs);
                         articles.add(article);
                     }
 
@@ -476,17 +450,7 @@ Timestamp tempTimestamp = null;
 
                     while (rs.next()) {
 
-                        Article article = new Article();
-                        article.setTitle(rs.getString(1));
-                        article.setID(rs.getInt(3));
-                        article.setArticleText(rs.getString(4));
-                        article.setTimestamp(rs.getTimestamp(5));
-                        Timestamp raw =(rs.getTimestamp(5));
-                        article.setTimeString(getTimeString(raw));
-                        User articleAuthor = new User(rs.getString(2));
-                        article.setAuthor(articleAuthor);
-
-
+                        Article article = createArticleFromRS(rs);
                         articles.add(article);
                     }
 
@@ -521,17 +485,7 @@ Timestamp tempTimestamp = null;
 
                     while (rs.next()) {
 
-                        Article article = new Article();
-                        article.setTitle(rs.getString(1));
-                        article.setID(rs.getInt(3));
-                        article.setArticleText(rs.getString(4));
-                        article.setTimestamp(rs.getTimestamp(5));
-                        Timestamp raw =(rs.getTimestamp(5));
-                        article.setTimeString(getTimeString(raw));
-                        User articleAuthor = new User(rs.getString(2));
-                        article.setAuthor(articleAuthor);
-
-
+                        Article article = createArticleFromRS(rs);
                         articles.add(article);
                     }
 
@@ -565,17 +519,7 @@ Timestamp tempTimestamp = null;
 
                     while (rs.next()) {
 
-                        Article article = new Article();
-                        article.setTitle(rs.getString(1));
-                        article.setID(rs.getInt(3));
-                        article.setArticleText(rs.getString(4));
-                        article.setTimestamp(rs.getTimestamp(5));
-                        Timestamp raw =(rs.getTimestamp(5));
-                        article.setTimeString(getTimeString(raw));
-                        User articleAuthor = new User(rs.getString(2));
-                        article.setAuthor(articleAuthor);
-
-
+                        Article article = createArticleFromRS(rs);
                         articles.add(article);
                     }
 

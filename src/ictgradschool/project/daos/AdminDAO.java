@@ -37,8 +37,8 @@ public class AdminDAO {
         return false;
     }
 
-    public static List <User> getAllUsers(ServletContext context) {
-        List <User> users = new ArrayList <>();
+    public static List<User> getAllUsers(ServletContext context) {
+        List<User> users = new ArrayList<>();
 
         Properties dbProps = DAOCheckProperties.check(context);
 
@@ -54,7 +54,6 @@ public class AdminDAO {
 
                         users.add(user);
                     }
-
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -63,43 +62,16 @@ public class AdminDAO {
         return users;
     }
 
-    // unnecessary method, never called
-//    public static List <User> getAllUserPasswords(String username, String password, ServletContext context) {
-//        List <User> users = new ArrayList <>();
-//
-//        Properties dbProps = DAOCheckProperties.check(context);
-//
-//        if (dbProps != null) {
-//            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-//                try (PreparedStatement stmt = conn.prepareStatement("SELECT username FROM user")) {
-//
-//                    ResultSet rs = stmt.executeQuery();
-//
-//                    while (rs.next()) {
-//                        User user = new User();
-//                        user.setUsername(rs.getString(1));
-//                    }
-//
-//                } catch (SQLException e) {
-//                    e.printStackTrace();
-//                }
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return users;
-//    }
-    
 
-    public static List <Article> getAllArticles(ServletContext context) {
-        List <Article> articles = new ArrayList <>();
+    public static List<Article> getAllArticles(ServletContext context) {
+        List<Article> articles = new ArrayList<>();
 
         Properties dbProps = DAOCheckProperties.check(context);
 
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                
+
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article WHERE NOT (article_author = 'deleted')")) {
 
                     ResultSet rs = stmt.executeQuery();
@@ -116,9 +88,7 @@ public class AdminDAO {
 
                         articles.add(article);
                     }
-
                 }
-
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -126,15 +96,14 @@ public class AdminDAO {
         return articles;
     }
 
-    public static List <Comment> getAllComments(int articleId, ServletContext context) {
-        List <Comment> comments = new ArrayList <>();
+    public static List<Comment> getAllComments(int articleId, ServletContext context) {
+        List<Comment> comments = new ArrayList<>();
 
         Properties dbProps = DAOCheckProperties.check(context);
 
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                //todo get the top-level comments (those without a parent)
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM comments WHERE " +
                         "article_id =? AND comments_author!='deleted' ORDER BY comments_timestamp ")) {
                     stmt.setInt(1, articleId);
@@ -153,7 +122,6 @@ public class AdminDAO {
                         comments.add(comment);
                     }
                 }
-
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -178,13 +146,10 @@ public class AdminDAO {
                     e.printStackTrace();
                     return false;
                 }
-
-
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
             }
-
             return true;
         }
         return false;
@@ -206,13 +171,10 @@ public class AdminDAO {
                     e.printStackTrace();
                     return false;
                 }
-
-
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
             }
-
             return true;
         }
         return false;
@@ -227,20 +189,16 @@ public class AdminDAO {
 
                 try (PreparedStatement s3 = conn.prepareStatement("UPDATE ysy.comments SET hidden = true WHERE comments_id = ?")) {
                     s3.setInt(1, commentId);
-
                     s3.execute();
 
                 } catch (SQLException e) {
                     e.printStackTrace();
                     return false;
                 }
-
-
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
             }
-
             return true;
         }
         return false;
@@ -255,20 +213,16 @@ public class AdminDAO {
 
                 try (PreparedStatement s3 = conn.prepareStatement("UPDATE ysy.comments SET hidden = false WHERE comments_id = ?")) {
                     s3.setInt(1, commentID);
-
                     s3.execute();
 
                 } catch (SQLException e) {
                     e.printStackTrace();
                     return false;
                 }
-
-
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
             }
-
             return true;
         }
         return false;
@@ -276,7 +230,7 @@ public class AdminDAO {
 
     public static String getUserEmail(String username, ServletContext context) {
         Properties dbProps = DAOCheckProperties.check(context);
-        String email ="";
+        String email = "";
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
@@ -285,10 +239,9 @@ public class AdminDAO {
                     s3.setString(1, username);
                     ResultSet rs = s3.executeQuery();
 
-                    if(rs.next()) {
-                        email = rs.getString( 1);
+                    if (rs.next()) {
+                        email = rs.getString(1);
                     }
-
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
