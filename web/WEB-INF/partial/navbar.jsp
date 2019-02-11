@@ -5,7 +5,13 @@
 
     <div class="container-fluid">
         <%--<div class="navbar-header">--%>
-        <a class="navbar-brand" href="home">Social Sunflowers</a>
+        <c:if test="${sessionScope.username == null}">
+             <a class="navbar-brand" href="home">Social Sunflowers</a>
+        </c:if>
+
+        <c:if test="${sessionScope.username != null}">
+             <a class="navbar-brand" href="home"><img src="/web-pages/images/sunflower-4.png" alt="Icon" height="45" width="45" /> Social Sunflowers</a>
+        </c:if>
         <%--</div>--%>
         <button class="navbar-toggler navbar-toggler-right navbar-dark" type="button" data-toggle="collapse"
                 data-target="#navbar-links"
@@ -73,8 +79,8 @@
                 <li class="nav-item"><a class="nav-link" href="logout"><i class='fas fa-sign-out-alt'></i> Logout</a></li>
             </ul>
         </div>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="navbar-text">welcome, ${sessionScope.username}</li>
+        <%--<ul class="nav navbar-nav navbar-right">--%>
+            <%--<li class="navbar-text">welcome, ${sessionScope.username}</li>--%>
             </c:if>
 
             <%--Yasmin figuring out how only admin users assigned to admin interface page--%>
@@ -82,7 +88,7 @@
 
 <%--test commit--%>
 
-    </ul>
+    <%--</ul>--%>
 
     </div>
 </nav>
