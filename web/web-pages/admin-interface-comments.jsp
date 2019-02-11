@@ -14,7 +14,7 @@
     <body>
         <%@include file="../WEB-INF/partial/navbar.jsp" %>
         <div id="comments_table" class="table-responsive-md container">
-<div class="content">
+            <div class="content">
                 <table class="table table-sm">
                     <thead class="thead-light">
                         <tr>
@@ -24,7 +24,7 @@
                             <th>Comment Parent:</th>
                             <th>Hide Comment:</th>
                             <th>Show Comment:</th>
-                            <th>Comment Status</th>
+                            <th>Comment Status:</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,28 +37,24 @@
                                 <td>
                                     <form method="post" action="adminhideshowcomment">
                                         <button type="submit" class="btn btn-primary">Hide Comment</button>
-                                        <input type="hidden" name="commentID" value="${comment.commentID}">
-                                        <input type="hidden" name="articleID" value="${articleID}">
-                                        <input type="hidden" name="action" value="hide">
+                                        <input type="hidden" name="commentID" value="${comment.commentID}"> <input
+                                            type="hidden" name="articleID" value="${articleID}"> <input type="hidden"
+                                                                                                        name="action"
+                                                                                                        value="hide">
                                     </form>
                                 </td>
                                 <td>
                                     <form method="post" action="adminhideshowcomment">
                                         <button type="submit" class="btn btn-primary">Show Comment</button>
-                                        <input type="hidden" name="commentID" value="${comment.commentID}">
-                                        <input type="hidden" name="articleID" value="${articleID}">
-                                        <input type="hidden" name="action" value="show">
+                                        <input type="hidden" name="commentID" value="${comment.commentID}"> <input
+                                            type="hidden" name="articleID" value="${articleID}"> <input type="hidden"
+                                                                                                        name="action"
+                                                                                                        value="show">
                                     </form>
                                 </td>
                                 <td>
-                                    <c:choose>
-                                        <c:when test="${comment.hidden}">
-                                            Hidden
-                                        </c:when>
-                                        <c:otherwise>
-                                            Showing
-                                        </c:otherwise>
-                                    </c:choose>
+                                    <c:choose> <c:when test="${comment.hidden}"> Hidden </c:when>
+                                        <c:otherwise> Showing </c:otherwise> </c:choose>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -66,7 +62,8 @@
                 </table>
 
 
-            <a href ="admininterface" class="btn btn-primary" type="submit">Back to Admin Interface Homepage</a>
-        </div></div>
+                <a href="admininterface" class="btn btn-primary" type="submit">Back to Admin Interface Homepage</a>
+            </div>
+        </div>
     </body>
 </html>
