@@ -293,6 +293,11 @@ body{
 }
 .media-list{
     padding-left: 0;
+    /*margin-left: -3.4em;*/
+}
+
+.media-list .media-list{
+    padding-left: 0;
     margin-left: -3.4em;
 }
 
@@ -315,7 +320,7 @@ body{
 }
 
 .media-replied {
-    margin: 0 0 20px 0px;
+    margin: 0 0 0px 0px;
 }
 
 .media-replied .media-heading {
@@ -423,6 +428,8 @@ input[type="file"] {
 .media-list{
     padding-left: 0px;
 }
+
+
 
 
 

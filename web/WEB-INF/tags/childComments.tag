@@ -22,14 +22,15 @@
                     </a>
 
                     <div class="media-body" id="commentDiv${childComment.commentID}">
-                        <div class="card bg-light p-3">
+                        <div class="card bg-light px-3 pt-3 pb-1">
 
                             <div id="username" class="media-heading">
                                 <h4 class="card-title text-uppercase ßreviews">
-                                    <strong>${childComment.commentAuthor.username} :</strong></h4>
+                                    <a href="#" onclick="getAuthorInfo('${childComment.commentAuthor.username}')"><strong>${childComment.commentAuthor.username} :</strong></a></h4>
 
 
                             <div id="timestamp" class="media-date text-uppercase reviews list-inline">
+
                                 <p class="dd">${fn:substring(childComment.timeString,0,16)}</p>
                             </div>
 
