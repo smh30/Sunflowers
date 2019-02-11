@@ -21,7 +21,7 @@ public class GetArticlesServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-System.out.println("in the home servlet");
+
         List <Article> articleList = new ArrayList <>();
 
         String sort = "newest";
@@ -45,7 +45,7 @@ System.out.println("in the home servlet");
                 offset = 0;
             }
         }
-//Need to commit
+
         String author = request.getParameter("author");
         String title = request.getParameter("title");
         String date = request.getParameter("date");
@@ -56,7 +56,6 @@ System.out.println("in the home servlet");
 
         if ((author == null && title == null && date == null) || (author.equals("") && title.equals("") && date.equals(""))) {
             articleList = ArticleDAO.getAllArticles(offset, sort, getServletContext());
-
 
         } else if (author != null && title == null && date == null) {
             searchAuthor = author;
@@ -90,23 +89,22 @@ System.out.println("in the home servlet");
                 articleList = ArticleDAO.getArticlesByDate(offset, date, sort, getServletContext());
             }
         }
+
         SearchParams searchParams = new SearchParams();
         searchParams.setSearchAuthor(searchAuthor);
         searchParams.setSearchTitle(searchTitle);
         searchParams.setSearchDate(searchDate);
 
-
         request.setAttribute("currentback", offset);
         request.setAttribute("searchParams", searchParams);
         request.setAttribute("currentsort", sort);
         request.setAttribute("articles", articleList);
-        String message;
+
         if (request.getParameter("message") != null) {
-            message = request.getParameter("message");
+            String message = request.getParameter("message");
             request.setAttribute("message", message);
         }
-        
-System.out.println("redirecting to jsp");
+
         request.getRequestDispatcher("web-pages/home.jsp").forward(request, response);
     }
 }
