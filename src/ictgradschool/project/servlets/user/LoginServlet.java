@@ -43,13 +43,10 @@ public class LoginServlet extends HttpServlet {
                     request.setAttribute("articleID", request.getParameter("articleID"));
                     request.getRequestDispatcher("article").forward(request, response);
                 } else {
-//                    request.getRequestDispatcher("home").forward(request, response);
                     response.sendRedirect("home");
                 }
-
             }
 
-            return;
         } else {
             String message = "The username or password was incorrect";
             request.setAttribute("message", message);

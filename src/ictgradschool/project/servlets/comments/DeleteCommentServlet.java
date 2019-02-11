@@ -15,9 +15,6 @@ public class DeleteCommentServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       // String commentAuthor = (String) request.getSession().getAttribute("username");
-
-       // String commentContent = request.getParameter("commentContent");
 
         int articleID =  Integer.parseInt(request.getParameter("articleID"));
 

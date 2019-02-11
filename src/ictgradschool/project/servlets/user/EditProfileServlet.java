@@ -14,21 +14,16 @@ import java.io.IOException;
 public class EditProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        User user;
         String username = request.getSession().getAttribute("username").toString();
 
         //if they're trying to change their default image
         if (request.getParameter("default-img") != null) {
 
-            //do a DAO to set the users preferred default
             String chosenImg = request.getParameter("default-img");
 
-            if (chosenImg.equals("custom")) {
-                // do nothing
-            } else {
+            if (!chosenImg.equals("custom")) {
                 UserDAO.changeDefaultImage(chosenImg, username, getServletContext());
             }
-
 
         } else {
             String country = request.getParameter("country");
@@ -57,7 +52,6 @@ public class EditProfileServlet extends HttpServlet {
 
 
         request.getRequestDispatcher("web-pages/profile.jsp").forward(request, response);
-
 
     }
 }

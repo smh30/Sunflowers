@@ -21,15 +21,15 @@ public class AddNestedCommentServlet extends HttpServlet {
 
         String parentID = request.getParameter("commentID");
 
-        boolean addnestedcomment = CommentDAO.addNestedComments(parentID,content,articleID,user,getServletContext());
+        boolean addNestedComment = CommentDAO.addNestedComments(parentID,content,articleID,user,getServletContext());
 
-        if(!addnestedcomment){
+        if(!addNestedComment){
             String message = "Your comment was not added. It may have been too long.";
             request.setAttribute("message", message);
             request.getRequestDispatcher("article?articleID="+Integer.parseInt(articleID)).forward(request,response);
         }else{
             request.setAttribute("articleID", articleID);
-            request.getRequestDispatcher("/article").forward(request,response);
+            request.getRequestDispatcher("article").forward(request,response);
         }
     }
 

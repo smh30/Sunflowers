@@ -16,7 +16,7 @@ public class ChangePasswordServlet extends HttpServlet {
         String newPassword = request.getParameter("newPassword");
         
         boolean oldPasswordOK;
-        String msg = "";
+        String msg;
         
         oldPasswordOK = UserDAO.checkPassword(username, oldPassword, getServletContext());
         if (oldPasswordOK) {
@@ -38,6 +38,4 @@ public class ChangePasswordServlet extends HttpServlet {
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
-
-
 }
