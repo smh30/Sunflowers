@@ -59,25 +59,6 @@ FOREIGN KEY (article_id) REFERENCES article(article_id)
 
 
 
-
-INSERT INTO article (article_title, article_author, article_body)
-VALUES ('Cats', 'y', 'Cats are cool'),
-        ('Dogs', 'y', 'Dogs are cooler than cats'),
-        ('Kittens', 'y', 'Got a new kitten she rocks'),
-        ('Birds', 'y', 'Get an owl'),
-        ('Rats', 'y', 'Never again');
-
-INSERT INTO comments(comments_author, coments_body, article_id)
-VALUES  ('y', 'Ron you are so wrong', '2'),
-        ('y', 'Guys, please be quiet', '2'),
-        ('y', 'Good call Ron!', '5'),
-        ('y', 'Little bit', '3'),
-        ('y', 'LOL you are so lucky bro', '4');
-
-
-
-
-
 ALTER TABLE user ADD COLUMN image varchar(80);
 
 ALTER TABLE comments ADD COLUMN parent_comment INT;
@@ -105,6 +86,11 @@ ALTER TABLE ysy.comments ADD COLUMN hidden BOOLEAN DEFAULT FALSE;
 
 
 
+DELETE FROM user;
+
+DELETE FROM article;
+
+DELETE FROM comments;
 
 
 
