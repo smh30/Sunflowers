@@ -29,7 +29,6 @@ public class ArticleDAO {
 
                 LocalDateTime a = LocalDateTime.now(ZoneId.of("UTC"));
                 Timestamp currentTime = Timestamp.valueOf(a);
-                System.out.println("current time for comparion:" + currentTime);
 
 
 // yes, this sql contains a concatenated string, but it can only have the values returned by the method above, so it should be safe

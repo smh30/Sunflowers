@@ -13,7 +13,6 @@ import java.io.IOException;
 @WebServlet(name = "AddArticleServlet")
 public class AddArticleServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String title = request.getParameter("article_title");
         String content = request.getParameter("article_content");
         String date = request.getParameter("pub_date");
