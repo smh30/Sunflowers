@@ -50,7 +50,7 @@ public class EditProfileServlet extends HttpServlet {
 
         request.setAttribute("country", temp.getCountry());
         request.setAttribute("description", temp.getDescription());
-        request.setAttribute("dateofbirth", temp.getDOB());
+        request.setAttribute("dateofbirth", temp.getDateOfBirth());
         request.setAttribute("image", temp.getPictureURL());
         request.setAttribute("realname", temp.getRealName());
         request.setAttribute("username", temp.getUsername());
