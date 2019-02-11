@@ -7,7 +7,6 @@ public class Article implements Serializable {
     private String title;
     private User author;
     private String articleText;
-    private Timestamp timestamp;
     private int ID;
     private boolean hidden;
     private String timeString;
@@ -40,14 +39,6 @@ public class Article implements Serializable {
 
     public void setArticleText(String articleText) {
         this.articleText = articleText;
-    }
-
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
     }
 
     public int getID() {
