@@ -23,13 +23,15 @@
               margin: 10px;
             }
 
-
-
             #choose-date{
                 margin-top: 6px;
                 border:2px solid #666666;
                 border-radius: 12px;
                 background-color: whitesmoke;
+            }
+
+            .cke_reset{
+                padding:8px;
             }
 
 
