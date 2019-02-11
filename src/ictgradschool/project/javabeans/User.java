@@ -1,6 +1,5 @@
-package ictgradschool.project.JavaBeans;
+package ictgradschool.project.javabeans;
 
-import javax.servlet.ServletContext;
 import java.io.Serializable;
 
 public class User implements Serializable {
@@ -10,7 +9,7 @@ public class User implements Serializable {
     String description;
     String pictureURL;
     String defaultImage;
-    String DOB;
+    String dateOfBirth;
     boolean useDefaultImage;
     String email;
 
@@ -46,13 +45,11 @@ public class User implements Serializable {
         this.pictureURL = pictureURL;
     }
 
-    public String getDOB() { return DOB;}
+    public String getDateOfBirth() { return dateOfBirth;}
 
-    public void setDOB(String DOB) {
-        this.DOB = DOB;
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
-
-
 
     public User (String username){
         this.username = username;

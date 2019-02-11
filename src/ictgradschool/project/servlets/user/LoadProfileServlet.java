@@ -1,7 +1,7 @@
 package ictgradschool.project.servlets.user;
 
-import ictgradschool.project.DAOs.UserDAO;
-import ictgradschool.project.JavaBeans.User;
+import ictgradschool.project.daos.UserDAO;
+import ictgradschool.project.javabeans.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,14 +1,12 @@
-package ictgradschool.project.JavaBeans;
+package ictgradschool.project.javabeans;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.List;
 
 public class Comment implements Serializable {
     private String  commentContent;
     private User commentAuthor;
     private int articleId;
-    private Timestamp timestamp;
     private int commentID;
     private List<Comment> children;
     private Comment parent;
@@ -31,7 +29,6 @@ public class Comment implements Serializable {
     public void setChildren(List<Comment> children) {
         this.children = children;
     }
-
 
     public int getCommentID() {
         return commentID;
@@ -63,14 +60,6 @@ public class Comment implements Serializable {
 
     public void setArticleId(int articleId) {
         this.articleId = articleId;
-    }
-
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
     }
 
     public int getParentID() { return parentID; }

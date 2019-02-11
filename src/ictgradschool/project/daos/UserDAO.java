@@ -1,50 +1,42 @@
-package ictgradschool.project.DAOs;
+package ictgradschool.project.daos;
 
-import ictgradschool.project.DAOs.CheckProperties.DAOCheckProperties;
-import ictgradschool.project.JavaBeans.User;
+import ictgradschool.project.daos.checkproperties.DAOCheckProperties;
+import ictgradschool.project.javabeans.User;
 import ictgradschool.project.utilities.Passwords;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
 
 public class UserDAO {
-    
+
     public static boolean checkPassword(String username, String password, ServletContext context) {
-        
+
         Properties dbProps = DAOCheckProperties.check(context);
-        
+
         if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE username = ?")) {
                     stmt.setString(1, username);
                     try (ResultSet r = stmt.executeQuery()) {
                         if (r.next()) {
-                            System.out.println("username found! " + r.getString(3));
                         /* If a matching row was found, hash the provided password with the retrieved salt and
         repetitions and compare it against the hash from the database.*/
-                            byte[] hash = r.getBytes(4);
-                            byte[] salt = r.getBytes(2);
                             int iterations = r.getInt(1);
-                            
+                            byte[] salt = r.getBytes(2);
+                            byte[] hash = r.getBytes(4);
+
                             if (Passwords.isExpectedPassword(password.toCharArray(), salt, iterations,
                                     hash)) {
-                                /* If the password did match, return true.*/
                                 return true;
                             } else {
-                                /* If they do not match,  return false.*/
                                 return false;
                             }
                         } else {
-                            //if no such user, return false;
                             return false;
                         }
                     }
                 }
-                
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -52,25 +44,23 @@ public class UserDAO {
         }
         return false;
     }
-    
+
     public static boolean newUser(String username, String password, ServletContext context) {
-        
+
         Properties dbProps = DAOCheckProperties.check(context);
-        
+
         if (dbProps != null) {
-            
+
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE username = ?")) {
                     stmt.setString(1, username);
                     ResultSet rs = stmt.executeQuery();
-                    
+
                     //this will be true if data was returned, ie the user exists already
                     if (rs.isBeforeFirst()) {
                         /*If it does, redirect the client back to the ​register.html document.*/
                         return false;
-                        
                     } else {
-
                         byte[] salt = Passwords.getNextSalt(32);
                         byte[] hash = Passwords.hash(password.toCharArray(), salt);
                         System.out.println("done hash");
@@ -80,13 +70,10 @@ public class UserDAO {
                             s2.setBytes(2, salt);
                             s2.setString(3, username);
                             s2.setBytes(4, hash);
-                            
-                            
+
                             s2.execute();
                         }
-                        
                         return true;
-                        
                     }
                 }
             } catch (SQLException e) {
@@ -96,38 +83,27 @@ public class UserDAO {
         }
         return false;
     }
-    
+
     public static User getUserDetails(String username, ServletContext context) {
         User user = new User();
-        
+
         Properties dbProps = DAOCheckProperties.check(context);
-        
+
         if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user WHERE username = ?")) {
                     stmt.setString(1, username);
                     try (ResultSet r = stmt.executeQuery()) {
                         if (r.next()) {
-                            String USERNAME = r.getString(3);
-                            String COUNTRY = r.getString(5);
-                            String REALNAME = r.getString(6);
-                            String DESC = r.getString(7);
-                            String IMAGEURL = r.getString(8);
-                            String DEFAULTIMG = r.getString(9);
-                            String DOB = r.getString(11);
-                            boolean useDefaultImg = r.getBoolean(12);
-                            String email = r.getString(13);
-
-                            user.setUsername(USERNAME);
-                            user.setCountry(COUNTRY);
-                            user.setRealName(REALNAME);
-                            user.setDescription(DESC);
-                            user.setDOB(DOB);
-                            user.setPictureURL(IMAGEURL);
-                            user.setDefaultImage(DEFAULTIMG);
-                            user.setUseDefaultImage(useDefaultImg);
-                            user.setEmail(email);
-
+                            user.setUsername(r.getString(3));
+                            user.setCountry(r.getString(5));
+                            user.setRealName(r.getString(6));
+                            user.setDescription(r.getString(7));
+                            user.setPictureURL(r.getString(8));
+                            user.setDefaultImage(r.getString(9));
+                            user.setDateOfBirth(r.getString(11));
+                            user.setUseDefaultImage(r.getBoolean(12));
+                            user.setEmail(r.getString(13));
                         }
                     }
                 }
@@ -138,22 +114,18 @@ public class UserDAO {
         }
         return null;
     }
-    
-    
+
+
     public static User editUser(String username, String country, String realName,
                                 String description, String dateOfBirth, String email, ServletContext context) {
-        
+
         User user = new User();
         Properties dbProps = DAOCheckProperties.check(context);
-        
+
         if (dbProps != null) {
-            
+
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                
-                //todo pretty unsure about using int for the date of birth - surely should be a
-                // date??? currently throws exception if no value is given but works in a way
-                
-                
+
                 try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.user SET country = " +
                         "? ,real_name=?, description = ?, date_of_birth = ?, email = ? WHERE ysy" +
                         ".user" +
@@ -165,95 +137,87 @@ public class UserDAO {
                     s2.setString(5, email);
                     s2.setString(6, username);
 
-                    
                     s2.execute();
-                    
-                    
+
                 } catch (SQLException e) {
                     e.printStackTrace();
-                    //return false;
                 }
-                
-                
-                //  return true;
                 return user;
-                
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            
+
             return user;
         }
         return null;
     }
-    
+
     public static void changeDefaultImage(String selectedImage, String username,
                                           ServletContext context) {
-        User user = new User();
-        
+
         Properties dbProps = DAOCheckProperties.check(context);
-        
+
         if (dbProps != null) {
-            
+
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                
+
                 try (PreparedStatement s2 = conn.prepareStatement("UPDATE ysy.user SET default_image = ?, use_default_image = true WHERE " +
                         "ysy.user.username= ?")) {
                     s2.setString(1, selectedImage);
                     s2.setString(2, username);
                     s2.execute();
-                    
-                    
+
+
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-                
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            
         }
     }
-    
+
     public static boolean isNameTaken(String toCheck, ServletContext context) {
         boolean taken = true;
-        
+
         Properties dbProps = DAOCheckProperties.check(context);
-        
+
         if (dbProps != null) {
-            
+
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                
+
                 try (PreparedStatement s2 = conn.prepareStatement("SELECT * FROM user WHERE " +
                         "username = ?")) {
                     s2.setString(1, toCheck);
                     try (ResultSet rs = s2.executeQuery()) {
-                        
+
                         if (rs.next()) {
                             taken = true;
                         } else {
                             taken = false;
                         }
                     }
-                    
+
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-                
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            
+
         }
-        
+
         return taken;
     }
-    
+
     public static boolean changePassword(String username, String password, ServletContext context) {
         Properties dbProps = DAOCheckProperties.check(context);
-        
+
         if (dbProps != null) {
-            
+
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 byte[] salt = Passwords.getNextSalt(32);
                 byte[] hash = Passwords.hash(password.toCharArray(), salt);
@@ -263,20 +227,48 @@ public class UserDAO {
                     s2.setBytes(1, salt);
                     s2.setBytes(2, hash);
                     s2.setString(3, username);
-                    
+
                     s2.execute();
                 }
-                
+
                 return true;
-                
-                
+
+
             } catch (
                     SQLException e) {
                 e.printStackTrace();
                 return false;
             }
-            
+
         }
         return false;
+    }
+
+    public static boolean deleteUser(String username, ServletContext context) {
+        Properties dbProps = DAOCheckProperties.check(context);
+
+        if (dbProps != null) {
+
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+
+                try (PreparedStatement s3 = conn.prepareStatement("DELETE FROM ysy.user WHERE username = ?")) {
+                    s3.setString(1, username);
+
+                    s3.execute();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+
+            return true;
+        }
+        return false;
+
     }
 }

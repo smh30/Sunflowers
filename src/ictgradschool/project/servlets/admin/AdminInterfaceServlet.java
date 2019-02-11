@@ -1,19 +1,14 @@
 package ictgradschool.project.servlets.admin;
 
-import ictgradschool.project.DAOs.AdminDAO;
-import ictgradschool.project.DAOs.CommentDAO;
-import ictgradschool.project.DAOs.ProfileDetailsDAO;
-import ictgradschool.project.DAOs.UserDAO;
-import ictgradschool.project.JavaBeans.Article;
-import ictgradschool.project.JavaBeans.Comment;
-import ictgradschool.project.JavaBeans.User;
+import ictgradschool.project.daos.AdminDAO;
+import ictgradschool.project.javabeans.Article;
+import ictgradschool.project.javabeans.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +36,7 @@ public class AdminInterfaceServlet extends HttpServlet {
         //TODO: Ask Steph if this is necessary
         String username1 = request.getParameter("username");
 
-        userList = AdminDAO.getAllUsers(username, getServletContext());
+        userList = AdminDAO.getAllUsers(getServletContext());
         System.out.println("Attempting processing: " + username);
 
         request.setAttribute("users", userList);

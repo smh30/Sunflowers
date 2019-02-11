@@ -1,7 +1,7 @@
 package ictgradschool.project.servlets.admin;
 
-import ictgradschool.project.DAOs.AdminDAO;
-import ictgradschool.project.JavaBeans.Comment;
+import ictgradschool.project.daos.AdminDAO;
+import ictgradschool.project.javabeans.Comment;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

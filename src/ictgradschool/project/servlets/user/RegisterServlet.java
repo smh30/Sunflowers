@@ -1,18 +1,13 @@
 package ictgradschool.project.servlets.user;
 
-import ictgradschool.project.DAOs.UserDAO;
-import ictgradschool.project.JavaBeans.User;
-import ictgradschool.project.utilities.Passwords;
+import ictgradschool.project.daos.UserDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.*;
-import java.util.Properties;
 
 @WebServlet(name = "RegisterServlet")
 public class RegisterServlet extends HttpServlet {

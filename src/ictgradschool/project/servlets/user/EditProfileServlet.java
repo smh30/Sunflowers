@@ -1,12 +1,8 @@
 package ictgradschool.project.servlets.user;
 
-import ictgradschool.project.DAOs.ArticleDAO;
-import ictgradschool.project.DAOs.ProfileDetailsDAO;
-import ictgradschool.project.DAOs.UserDAO;
-import ictgradschool.project.JavaBeans.Article;
-import ictgradschool.project.JavaBeans.User;
+import ictgradschool.project.daos.UserDAO;
+import ictgradschool.project.javabeans.User;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -54,7 +50,7 @@ public class EditProfileServlet extends HttpServlet {
 
         request.setAttribute("country", temp.getCountry());
         request.setAttribute("description", temp.getDescription());
-        request.setAttribute("dateofbirth", temp.getDOB());
+        request.setAttribute("dateofbirth", temp.getDateOfBirth());
         request.setAttribute("image", temp.getPictureURL());
         request.setAttribute("realname", temp.getRealName());
         request.setAttribute("username", temp.getUsername());

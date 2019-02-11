@@ -1,4 +1,4 @@
-package ictgradschool.project.DAOs.CheckProperties;
+package ictgradschool.project.daos.checkproperties;
 
 import javax.servlet.ServletContext;
 import java.io.FileInputStream;

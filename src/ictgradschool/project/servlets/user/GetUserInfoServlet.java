@@ -1,8 +1,8 @@
 package ictgradschool.project.servlets.user;
 import org.json.simple.JSONObject;
 
-import ictgradschool.project.DAOs.UserDAO;
-import ictgradschool.project.JavaBeans.User;
+import ictgradschool.project.daos.UserDAO;
+import ictgradschool.project.javabeans.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -30,7 +30,7 @@ public class GetUserInfoServlet extends HttpServlet {
         
         userJson.put("username", user.getUsername());
         userJson.put("realname", user.getRealName());
-        userJson.put("dob", user.getDOB());
+        userJson.put("dob", user.getDateOfBirth());
         userJson.put("country", user.getCountry());
         userJson.put("bio", user.getDescription());
         userJson.put("image", image);
