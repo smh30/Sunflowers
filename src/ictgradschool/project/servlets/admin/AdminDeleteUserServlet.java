@@ -1,6 +1,5 @@
 package ictgradschool.project.servlets.admin;
 
-import ictgradschool.project.daos.AdminDAO;
 import ictgradschool.project.daos.UserDAO;
 
 import javax.servlet.ServletException;

@@ -19,41 +19,29 @@ public class AdminInterfaceServlet extends HttpServlet {
         doGet(request, response);
     }
 
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        Boolean admin = Boolean.valueOf(request.getParameter("admin"));
-        
-        if(request.getSession().getAttribute("admin")==null){
+
+        if (request.getSession().getAttribute("admin") == null) {
             request.setAttribute("message", "You do not have permission to access that page");
-            request.getRequestDispatcher("home").forward(request,response);
-        }else{
+            request.getRequestDispatcher("home").forward(request, response);
+        } else {
 
-        List <User> userList = new ArrayList <>();
+            List<User> userList;
 
-        //TODO: Ask Steph if this is necessary
-        String username1 = request.getParameter("username");
+            userList = AdminDAO.getAllUsers(getServletContext());
 
-        userList = AdminDAO.getAllUsers(getServletContext());
-        System.out.println("Attempting processing: " + username);
-
-        request.setAttribute("users", userList);
+            request.setAttribute("users", userList);
 
 
-        List <User> userPasswordList = new ArrayList <>();
+            List<Article> articles;
 
-        List <Article> articles = new ArrayList <>();
+            articles = AdminDAO.getAllArticles(getServletContext());
 
-        String title = request.getParameter("title");
-        String author = request.getParameter("author");
+            request.setAttribute("articles", articles);
 
-        articles = AdminDAO.getAllArticles(getServletContext());
-
-        request.setAttribute("articles", articles);
-
-        request.getRequestDispatcher("web-pages/admin-interface.jsp").forward(request,response);
-    }}
+            request.getRequestDispatcher("web-pages/admin-interface.jsp").forward(request, response);
+        }
+    }
 }
 
