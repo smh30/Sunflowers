@@ -16,19 +16,18 @@ public class AddArticleServlet extends HttpServlet {
 
         String title = request.getParameter("article_title");
         String content = request.getParameter("article_content");
-        String date = request.getParameter("pub-date");
+        String date = request.getParameter("pub_date");
         String user = (String) request.getSession().getAttribute("username");
 
         Article newArticle = ArticleDAO.newArticle(title, content, user, date, getServletContext());
 
-        if (newArticle == null || newArticle.getID()==0) {
+        if (newArticle == null || newArticle.getID() == 0) {
 
             String message = "An error occurred while uploading your article. Please try again.</p><p>Your title or article may have been too long";
             request.setAttribute("message", message);
-            request.setAttribute("newarticle", true);
+            request.setAttribute("new_article", true);
             request.setAttribute("article_content", content);
             request.getRequestDispatcher("web-pages/new-article.jsp").forward(request, response);
-
 
         } else {
             request.setAttribute("new", true);
@@ -38,15 +37,14 @@ public class AddArticleServlet extends HttpServlet {
 
             request.getRequestDispatcher("article").forward(request, response);
         }
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getSession().getAttribute("username")==null){
+        if (request.getSession().getAttribute("username") == null) {
             request.setAttribute("message", "You do not have permission to access that page");
-            request.getRequestDispatcher("home").forward(request,response);
+            request.getRequestDispatcher("home").forward(request, response);
         } else {
-            request.setAttribute("newarticle", true);
+            request.setAttribute("new_article", true);
             request.getRequestDispatcher("web-pages/new-article.jsp").forward(request, response);
         }
     }
