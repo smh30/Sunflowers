@@ -1,8 +1,8 @@
 package ictgradschool.project.servlets.user;
 import org.json.simple.JSONObject;
 
-import ictgradschool.project.DAOs.UserDAO;
-import ictgradschool.project.JavaBeans.User;
+import ictgradschool.project.daos.UserDAO;
+import ictgradschool.project.javabeans.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,24 +20,20 @@ public class GetUserInfoServlet extends HttpServlet {
     
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        String image = "";
+        String image;
         if (user.getPictureURL() == null||user.isUseDefaultImage()){
             image = "images/default-photos-for-profile-page/" +user.getDefaultImage();
         } else {
             image = "Uploaded-Photos/"+user.getPictureURL();
         }
         JSONObject userJson = new JSONObject();
-    
-        // Adds a String value to the JSON
+        
         userJson.put("username", user.getUsername());
         userJson.put("realname", user.getRealName());
-        userJson.put("dob", user.getDOB());
+        userJson.put("dob", user.getDateOfBirth());
         userJson.put("country", user.getCountry());
         userJson.put("bio", user.getDescription());
         userJson.put("image", image);
-        
-    
-        //put only the relevant image, the entire url of it
         
             response.getWriter().print(userJson);
         

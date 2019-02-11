@@ -1,6 +1,6 @@
 package ictgradschool.project.servlets.article;
 
-import ictgradschool.project.DAOs.ArticleDAO;
+import ictgradschool.project.daos.ArticleDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,25 +8,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet(name = "DeleteArticleServlet")
 public class DeleteArticleServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String username = request.getParameter("author");
-
-        String title = request.getParameter("title");
-
-        String content = request.getParameter("articleText");
-
         int id = Integer.parseInt(request.getParameter("articleID"));
 
-        String user = (String) request.getSession().getAttribute("username");
+        boolean articleDeleted = ArticleDAO.deleteArticle(id, getServletContext());
 
-        boolean articeDeleted = ArticleDAO.deleteArticle(id, getServletContext());
-
-        if (!articeDeleted) {
+        if (!articleDeleted) {
             String message = "Some trouble with deleting your article. Please try again.";
             request.setAttribute("message", message);
 

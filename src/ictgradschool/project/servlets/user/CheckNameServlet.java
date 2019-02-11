@@ -1,6 +1,6 @@
 package ictgradschool.project.servlets.user;
 
-import ictgradschool.project.DAOs.UserDAO;
+import ictgradschool.project.daos.UserDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +16,7 @@ public class CheckNameServlet extends HttpServlet {
     
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String toCheck = req.getParameter("name");
-        boolean taken = true;
+        boolean taken;
         taken = UserDAO.isNameTaken(toCheck, getServletContext());
     
         resp.setContentType("text/plain");
@@ -26,7 +26,5 @@ public class CheckNameServlet extends HttpServlet {
         } else {
             resp.getWriter().write("false");
         }
-        
-        
     }
 }

@@ -1,13 +1,11 @@
 package ictgradschool.project.servlets.user;
 
-import ictgradschool.project.DAOs.AdminDAO;
-import ictgradschool.project.DAOs.UserDAO;
+import ictgradschool.project.daos.UserDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class ChangePasswordServlet extends HttpServlet {
@@ -18,7 +16,7 @@ public class ChangePasswordServlet extends HttpServlet {
         String newPassword = request.getParameter("newPassword");
         
         boolean oldPasswordOK;
-        String msg = "";
+        String msg;
         
         oldPasswordOK = UserDAO.checkPassword(username, oldPassword, getServletContext());
         if (oldPasswordOK) {
@@ -35,11 +33,9 @@ public class ChangePasswordServlet extends HttpServlet {
             msg = "Your password was not changed. Please try again.";
         }
         request.setAttribute("message", msg);
-        request.getRequestDispatcher("/profile").forward(request, response);
+        request.getRequestDispatcher("profile").forward(request, response);
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
-
-
 }

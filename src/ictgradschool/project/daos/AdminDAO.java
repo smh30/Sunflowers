@@ -1,15 +1,12 @@
-package ictgradschool.project.DAOs;
+package ictgradschool.project.daos;
 
-import ictgradschool.project.DAOs.CheckProperties.DAOCheckProperties;
-import ictgradschool.project.JavaBeans.Article;
-import ictgradschool.project.JavaBeans.Comment;
-import ictgradschool.project.JavaBeans.User;
-import ictgradschool.project.utilities.Passwords;
+import ictgradschool.project.daos.checkproperties.DAOCheckProperties;
+import ictgradschool.project.javabeans.Article;
+import ictgradschool.project.javabeans.Comment;
+import ictgradschool.project.javabeans.User;
 
 import javax.servlet.ServletContext;
-import javax.xml.transform.Result;
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -40,8 +37,8 @@ public class AdminDAO {
         return false;
     }
 
-    public static List <User> getAllUsers(String username, ServletContext context) {
-        List <User> users = new ArrayList <>();
+    public static List<User> getAllUsers(ServletContext context) {
+        List<User> users = new ArrayList<>();
 
         Properties dbProps = DAOCheckProperties.check(context);
 
@@ -57,7 +54,6 @@ public class AdminDAO {
 
                         users.add(user);
                     }
-
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -66,58 +62,9 @@ public class AdminDAO {
         return users;
     }
 
-    public static List <User> getAllUserPasswords(String username, String password, ServletContext context) {
-        List <User> users = new ArrayList <>();
 
-        Properties dbProps = DAOCheckProperties.check(context);
-
-        if (dbProps != null) {
-            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT username FROM user")) {
-
-                    ResultSet rs = stmt.executeQuery();
-
-                    while (rs.next()) {
-                        User user = new User();
-                        user.setUsername(rs.getString(1));
-                    }
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return users;
-    }
-
-    public static boolean deleteUser(String username, ServletContext context) {
-        Properties dbProps = DAOCheckProperties.check(context);
-
-        if (dbProps != null) {
-
-            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                try (PreparedStatement s3 = conn.prepareStatement("DELETE FROM ysy.user WHERE username = ?")) {
-                    s3.setString(1, username);
-
-                    s3.execute();
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    return false;
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return false;
-            }
-            return true;
-        }
-        return false;
-    }
-
-    public static List <Article> getAllArticles(ServletContext context) {
-        List <Article> articles = new ArrayList <>();
+    public static List<Article> getAllArticles(ServletContext context) {
+        List<Article> articles = new ArrayList<>();
 
         Properties dbProps = DAOCheckProperties.check(context);
 
@@ -125,8 +72,6 @@ public class AdminDAO {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
 
-
-// yes, this sql contains a concatenated string, but it can only have the values returned by the method above, so it should be safe
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article WHERE NOT (article_author = 'deleted')")) {
 
                     ResultSet rs = stmt.executeQuery();
@@ -143,9 +88,7 @@ public class AdminDAO {
 
                         articles.add(article);
                     }
-
                 }
-
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -153,15 +96,14 @@ public class AdminDAO {
         return articles;
     }
 
-    public static List <Comment> getAllComments(int articleId, ServletContext context) {
-        List <Comment> comments = new ArrayList <>();
+    public static List<Comment> getAllComments(int articleId, ServletContext context) {
+        List<Comment> comments = new ArrayList<>();
 
         Properties dbProps = DAOCheckProperties.check(context);
 
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                //todo get the top-level comments (those without a parent)
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM comments WHERE " +
                         "article_id =? AND comments_author!='deleted' ORDER BY comments_timestamp ")) {
                     stmt.setInt(1, articleId);
@@ -172,7 +114,6 @@ public class AdminDAO {
                         comment.setCommentID(rs.getInt(1));
                         User commentAuthor = new User(rs.getString(2));
                         comment.setCommentContent(rs.getString(3));
-                        comment.setTimestamp(rs.getTimestamp(4));
                         comment.setCommentAuthor(commentAuthor);
                         comment.setArticleId(rs.getInt(5));
                         comment.setParentID(rs.getInt(6));
@@ -180,7 +121,6 @@ public class AdminDAO {
                         comments.add(comment);
                     }
                 }
-
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -205,13 +145,10 @@ public class AdminDAO {
                     e.printStackTrace();
                     return false;
                 }
-
-
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
             }
-
             return true;
         }
         return false;
@@ -233,13 +170,10 @@ public class AdminDAO {
                     e.printStackTrace();
                     return false;
                 }
-
-
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
             }
-
             return true;
         }
         return false;
@@ -254,20 +188,16 @@ public class AdminDAO {
 
                 try (PreparedStatement s3 = conn.prepareStatement("UPDATE ysy.comments SET hidden = true WHERE comments_id = ?")) {
                     s3.setInt(1, commentId);
-
                     s3.execute();
 
                 } catch (SQLException e) {
                     e.printStackTrace();
                     return false;
                 }
-
-
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
             }
-
             return true;
         }
         return false;
@@ -282,20 +212,16 @@ public class AdminDAO {
 
                 try (PreparedStatement s3 = conn.prepareStatement("UPDATE ysy.comments SET hidden = false WHERE comments_id = ?")) {
                     s3.setInt(1, commentID);
-
                     s3.execute();
 
                 } catch (SQLException e) {
                     e.printStackTrace();
                     return false;
                 }
-
-
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
             }
-
             return true;
         }
         return false;
@@ -303,7 +229,7 @@ public class AdminDAO {
 
     public static String getUserEmail(String username, ServletContext context) {
         Properties dbProps = DAOCheckProperties.check(context);
-        String email ="";
+        String email = "";
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
@@ -312,10 +238,9 @@ public class AdminDAO {
                     s3.setString(1, username);
                     ResultSet rs = s3.executeQuery();
 
-                    if(rs.next()) {
-                        email = rs.getString( 1);
+                    if (rs.next()) {
+                        email = rs.getString(1);
                     }
-
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

@@ -1,7 +1,6 @@
 package ictgradschool.project.servlets.admin;
 
-import ictgradschool.project.DAOs.AdminDAO;
-import ictgradschool.project.DAOs.ProfileDetailsDAO;
+import ictgradschool.project.daos.UserDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +15,7 @@ public class AdminDeleteUserServlet extends HttpServlet {
 
         String username = request.getParameter("username");
 
-        boolean userDeleted = AdminDAO.deleteUser(username, getServletContext());
+        boolean userDeleted = UserDAO.deleteUser(username, getServletContext());
 
         if (!userDeleted) {
             String message = "Hello Admin. There is some trouble with deleting the user's account. Please try again.";

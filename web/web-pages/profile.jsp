@@ -1,22 +1,12 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: yab2
-  Date: 25/01/2019
-  Time: 3:16 PM
-  To change this template use File | Settings | File Templates.
---%>
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--TODO: Write JS external file and pop in????--%>
 <html>
 <%! String title = "Profile"; %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
 <title>${user.username}'s Profile</title>
-<%--library for icon--%>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
 
@@ -30,7 +20,9 @@
 
 <style>
 
-
+.form-control{
+    width: 95%;
+}
 
 
 </style>
@@ -61,7 +53,7 @@
             <img id="imageToSwap" src="Uploaded-Photos/${user.pictureURL}" width="225" class="img-thumbnail">
         </c:when>
     <c:otherwise>
-    <img id="imageToSwap" src="images/default-photos-for-profile-page/${user.defaultImage}" width="225">
+    <img id="imageToSwap" src="images/default-photos-for-profile-page/${user.defaultImage}" width="225" class="img-thumbnail">
 
     </c:otherwise>
     </c:choose>
@@ -69,10 +61,9 @@
 
     <%--this block is for choosing which of the default images the user prefers. Saves to db when they submit--%>
 
-
         <form method="POST" action="editprofile">
             <fieldset>
-                <legend>Choose default picture: </legend>
+                <legend>Choose default picture:</legend>
                 <div class="form-group">
             <select id="dlist" name="default-img" class="form-control" onchange="switchImage()">
                 <c:choose>
@@ -118,7 +109,7 @@
         <%--this is the form for uploading a custom avatar--%>
         <form method="POST" action="Upload" enctype="multipart/form-data">
             <fieldset>
-                <legend>Choose your own picture to upload: </legend>
+                <legend>Choose your own picture to upload:</legend>
                 <div class="form-group">
                 <div class="custom-file">
             <input type="file" id="userPicture" name="userPicture" size="50" accept="image/png, image/jpeg" class="custom-file-input">
@@ -141,7 +132,6 @@
             <fieldset>
                 <legend>Update user info: </legend>
 
-            <%--shouldn't need a choose here, there is always a username and it can't be edited--%>
                 <div class="form-group">
                 <label for="unameID">Username:</label>
             <input type="text" id="unameID" name="username" value=${user.username} readonly class="form-control">
@@ -177,7 +167,7 @@
             <label for="countryID">Country:</label>
             <c:choose>
                 <c:when test="${user.country!=null}">
-                    <input type="text" id="countryID" name="country" maxlength="100" value=${user.country} class="form-control">
+                    <input type="text" id="countryID" name="country" maxlength="100" value='${user.country}' class="form-control">
                 </c:when>
                 <c:otherwise>
                     <input type="text" id="countryID" name="country" maxlength="100" class="form-control">
@@ -188,12 +178,10 @@
                     <div class="form-group">
             <label for="dateofbirthID">Date of birth:</label>
             <c:choose>
-                <c:when test="${user.DOB!=null}">
-                    <%--<input type="text" id="dateofbirthID" name="dateofbirth" value="${user.DOB}">--%>
-                    <input type="date" id="dateofbirthID" name="dateofbirth" value="${user.DOB}" class="form-control">
+                <c:when test="${user.dateOfBirth!=null}">
+                    <input type="date" id="dateofbirthID" name="dateofbirth" value="${user.dateOfBirth}" class="form-control">
                 </c:when>
                 <c:otherwise>
-                    <%--<input type="text" id="dateofbirthID" name="dateofbirth">--%>
                     <input type="date" name="dateofbirth" id="dateofbirthID" class="form-control">
                 </c:otherwise>
             </c:choose>
@@ -205,11 +193,9 @@
             <c:choose>
                 <c:when test="${user.description!=null}">
                     <textarea rows="4" id="descID" name="description" maxlength="200" class="form-control">${user.description}</textarea>
-                    <%--<input type="text" id="descID" name="description" value="${user.description}">--%>
                 </c:when>
                 <c:otherwise>
                     <textarea rows="4" id="descID" name="description" maxlength="200" class="form-control"></textarea>
-                    <%--<input type="text" id="descID" name="description">--%>
                 </c:otherwise>
             </c:choose>
                         </div>
@@ -237,7 +223,6 @@
             </fieldset>
         </form><br>
 <hr>
-<%--todo add an "are you sure???" pop-up to this button--%>
         <form method="post" action="deleteuser">
             <fieldset><legend>Delete Account</legend>
                 <div class="form-group">

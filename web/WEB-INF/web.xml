@@ -8,6 +8,16 @@
         <welcome-file>home</welcome-file>
     </welcome-file-list>
 
+    <context-param>
+        <param-name>SENDING_ACCOUNT_ADDRESS</param-name>
+        <param-value>socialsunflowers@gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>SENDING_ACCOUNT_PASSWORD</param-name>
+        <param-value>teamsunflowers</param-value>
+    </context-param>
+
+
 
     <!-- ~~~~~~~~~~~~~~~-user related servlets ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`-->
 
@@ -253,6 +263,8 @@
         <servlet-name>AdminResetPassword</servlet-name>
         <url-pattern>/adminresetpassword</url-pattern>
     </servlet-mapping>
+
+
 
 
 </web-app>

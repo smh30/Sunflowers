@@ -1,13 +1,10 @@
-package ictgradschool.project.DAOs;
+package ictgradschool.project.daos;
 
-import ictgradschool.project.DAOs.CheckProperties.DAOCheckProperties;
-import ictgradschool.project.JavaBeans.Article;
-import ictgradschool.project.JavaBeans.Comment;
-import ictgradschool.project.JavaBeans.User;
+import ictgradschool.project.daos.checkproperties.DAOCheckProperties;
+import ictgradschool.project.javabeans.Comment;
+import ictgradschool.project.javabeans.User;
 
 import javax.servlet.ServletContext;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -24,7 +21,6 @@ public class CommentDAO {
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-                //todo get the top-level comments (those without a parent)
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM comments WHERE " +
                         "article_id =? AND parent_comment IS NULL AND comments_author!='deleted' " +
                         "AND (hidden = false) ORDER BY comments_timestamp ")) {
@@ -35,11 +31,10 @@ public class CommentDAO {
                         Comment comment = new Comment();
                         comment.setCommentID(rs.getInt(1));
                         User commentAuthor = new User(rs.getString(2));
+                        comment.setCommentAuthor(commentAuthor);
                         comment.setCommentContent(rs.getString(3));
-                        comment.setTimestamp(rs.getTimestamp(4));
                         Timestamp raw =(rs.getTimestamp(4));
                         comment.setTimeString(ArticleDAO.getTimeString(raw));
-                        comment.setCommentAuthor(commentAuthor);
                         comment.setArticleId(rs.getInt(5));
                         comments.add(comment);
                     }
@@ -56,7 +51,6 @@ public class CommentDAO {
                             tailList.remove(c);
                         }
                     }
-
                 }
 
             } catch (SQLException e) {
@@ -68,40 +62,6 @@ public class CommentDAO {
     }
 
 
-//    public static List <Comment> getChildren(int parentID, Properties dbProps) {
-//        List <Comment> children = new ArrayList <>();
-//
-//        try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-//            System.out.println("connection successful");
-//            //get the children of the given parent (those without a parent)
-//            try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM comments WHERE " +
-//                    "parent_comment = ? ORDER BY comments_timestamp ")) {
-//                stmt.setInt(1, parentID);
-//                ResultSet rs = stmt.executeQuery();
-//                while (rs.next()) {
-//                    //TODO To attach all its children into the root comment by recursion
-//                    Comment comment = new Comment();
-//                    comment.setCommentContent(rs.getString(3));
-//                    comment.setCommentID(rs.getInt(1));
-//                    comment.setTimestamp(rs.getTimestamp(5));
-//                    User commentAuthor = new User(rs.getString(2));
-//                    comment.setCommentAuthor(commentAuthor);
-//
-//                    // this part for sure isn't right;
-//                    List <Comment> childrenList = getChildren(comment.getCommentID(), dbProps);
-//                    if (childrenList.size() == 0) {
-//
-//                    }
-//                    comment.setChildren(childrenList);
-//                }
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//        return children;
-//    }
 
     public static void getChildren(Comment comment,ServletContext context) {
         Properties dbProps = DAOCheckProperties.check(context);
@@ -122,12 +82,11 @@ public class CommentDAO {
                         Comment co = new Comment();
                         co.setCommentID(rs.getInt(1));
                         User commentAuthor = new User(rs.getString(2));
+                        co.setCommentAuthor(commentAuthor);
                         co.setCommentContent(rs.getString(3));
-                        co.setTimestamp(rs.getTimestamp(4));
                         Timestamp raw =(rs.getTimestamp(4));
                         co.setTimeString(ArticleDAO.getTimeString(raw));
                         co.setArticleId(rs.getInt(5));
-                        co.setCommentAuthor(commentAuthor);
                         children.add(co);
                     }
 
@@ -146,8 +105,7 @@ public class CommentDAO {
 
         if (dbProps != null) {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-    
-                
+
                 LocalDateTime a = LocalDateTime.now(ZoneId.of("Z"));
                 Timestamp timestamp = Timestamp.valueOf(a);
                 
@@ -158,25 +116,20 @@ public class CommentDAO {
                     s2.setString(3, content);
                     s2.setTimestamp(4, timestamp);
 
-
                     s2.execute();
-
 
                 } catch (SQLException e) {
                     e.printStackTrace();
                     return false;
                 }
 
-
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
             }
-
             return true;
         }
         return false;
-
     }
 
     public static boolean deleteComment(int commentID, ServletContext context) {
@@ -186,8 +139,6 @@ public class CommentDAO {
         if (dbProps != null) {
 
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
-
-
                 try (PreparedStatement s3 = conn.prepareStatement("UPDATE comments SET comments_author = ? WHERE comments_id = ?")) {
 
                     s3.setString(1, "deleted");
@@ -200,19 +151,16 @@ public class CommentDAO {
                     return false;
                 }
 
-
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
             }
-
             return true;
         }
         return false;
 
     }
 
-    //TODO Add nested comment by comment_id as parent_id, article_id, content and ServletContext
 
     public static boolean addNestedComments(String parentid, String content, String ArticleId, String user, ServletContext context){
         Properties dbProps = DAOCheckProperties.check(context);
@@ -227,11 +175,9 @@ public class CommentDAO {
                         "VALUES (?, ?, ?, ?,?)")) {
                     s2.setString(1, user);
                     s2.setString(2, ArticleId);
-
                     s2.setString(3, content);
                     s2.setTimestamp(4, timestamp);
                     s2.setString(5,parentid);
-
 
                     s2.execute();
 
@@ -241,16 +187,13 @@ public class CommentDAO {
                     return false;
                 }
 
-
             } catch (SQLException e) {
                 e.printStackTrace();
                 return false;
             }
-
             return true;
         }
         return false;
-
     }
 
 }

@@ -1,6 +1,6 @@
 package ictgradschool.project.servlets.admin;
 
-import ictgradschool.project.DAOs.UserDAO;
+import ictgradschool.project.daos.UserDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,7 +31,6 @@ public class AdminAddUserServlet extends HttpServlet {
             String dateOfBirth = request.getParameter("dateofbirth");
             String email = request.getParameter("email");
 
-
             UserDAO.editUser(username, country, realName, description, dateOfBirth,
                     email, getServletContext());
             
@@ -40,7 +39,6 @@ public class AdminAddUserServlet extends HttpServlet {
             request.getRequestDispatcher("admininterface").forward(request,
                     response);
         }
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

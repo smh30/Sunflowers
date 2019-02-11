@@ -1,19 +1,21 @@
 package ictgradschool.project.servlets.user;
 
-import javax.servlet.ServletContext;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import ictgradschool.project.DAOs.CustomProfilePicDAO;
+import ictgradschool.project.daos.CustomProfilePicDAO;
+import ictgradschool.project.utilities.ImageDimension;
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
@@ -58,18 +60,34 @@ public class UploadProfilePictureServlet extends HttpServlet {
                     String[] split = fileName.split("\\\\");
                     String splited = split[split.length - 1];
                     fullsizeImageFile = new File(uploadsFolder, splited);
+                    
                     fi.write(fullsizeImageFile);
+                    
+                    BufferedImage bimg = ImageIO.read(fullsizeImageFile);
+                    Dimension imgSize = new Dimension(bimg.getWidth(), bimg.getHeight());
+                    Dimension boundary = new Dimension(250, 250);
+                    Dimension scaled = ImageDimension.getScaledDimension(imgSize, boundary);
+                    
+                    BufferedImage img = new BufferedImage(250, 250, BufferedImage.TYPE_INT_RGB);
+                    img.createGraphics().drawImage(ImageIO.read(fullsizeImageFile).getScaledInstance(scaled.width, scaled.height,
+                            Image.SCALE_SMOOTH), 0, 0, null);
+                    ImageIO.write(img, "jpg", fullsizeImageFile);
+                    
                 }
             }
             String image = fullsizeImageFile.getName();
             String user = (String) request.getSession().getAttribute("username");
+            
+            
             CustomProfilePicDAO.addImage(image, user, getServletContext());
 
-            request.getRequestDispatcher("/profile").forward(request, response);
+            request.getRequestDispatcher("profile").forward(request, response);
         } catch (Exception e) {
             throw new ServletException(e);
         }
     }
+    
+    
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

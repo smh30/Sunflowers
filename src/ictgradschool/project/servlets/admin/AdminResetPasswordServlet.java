@@ -1,7 +1,7 @@
 package ictgradschool.project.servlets.admin;
 
-import ictgradschool.project.DAOs.AdminDAO;
-import ictgradschool.project.DAOs.UserDAO;
+import ictgradschool.project.daos.AdminDAO;
+import ictgradschool.project.daos.UserDAO;
 import ictgradschool.project.utilities.RandomPassword;
 
 import javax.mail.*;
@@ -21,8 +21,9 @@ public class AdminResetPasswordServlet extends HttpServlet {
 
         String username = request.getParameter("username");
 
-        final String SENDING_ACCOUNT_ADDRESS = "socialsunflowers@gmail.com";
-        final String SENDING_ACCOUNT_PASSWORD = "teamsunflowers";
+        final String SENDING_ACCOUNT_ADDRESS = getServletContext().getInitParameter(
+                "SENDING_ACCOUNT_ADDRESS");
+        final String SENDING_ACCOUNT_PASSWORD =getServletContext().getInitParameter("SENDING_ACCOUNT_PASSWORD");
 
         String tempPw = RandomPassword.generateRandomPassword();
         UserDAO.changePassword(username, tempPw, getServletContext());
@@ -34,7 +35,8 @@ public class AdminResetPasswordServlet extends HttpServlet {
             request.getRequestDispatcher("admininterface").forward(request, response);
         } else {
             final String EMAIL_SUBJECT = "Resetting your password";
-            final String EMAIL_BODY = "Your temporary password is: " + tempPw;
+            final String EMAIL_BODY = "Your temporary password is: " + tempPw +" \nPlease update " +
+                    "your password as soon as possible";
 
             Properties props = new Properties();
             props.put("mail.smtp.auth", "true");
@@ -62,7 +64,7 @@ public class AdminResetPasswordServlet extends HttpServlet {
                 throw new RuntimeException(e);
             }
 
-            String message = "Send password reset email to user " + username;
+            String message = "Sent password reset email to user " + username;
             request.setAttribute("message", message);
             request.getRequestDispatcher("admininterface").forward(request, response);
         }

@@ -1,6 +1,6 @@
 package ictgradschool.project.servlets.nestedComments;
 
-import ictgradschool.project.DAOs.CommentDAO;
+import ictgradschool.project.daos.CommentDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet(name = "AddNestedCommentServlet")
 public class AddNestedCommentServlet extends HttpServlet {
@@ -22,15 +21,15 @@ public class AddNestedCommentServlet extends HttpServlet {
 
         String parentID = request.getParameter("commentID");
 
-        boolean addnestedcomment = CommentDAO.addNestedComments(parentID,content,articleID,user,getServletContext());
+        boolean addNestedComment = CommentDAO.addNestedComments(parentID,content,articleID,user,getServletContext());
 
-        if(!addnestedcomment){
+        if(!addNestedComment){
             String message = "Your comment was not added. It may have been too long.";
             request.setAttribute("message", message);
             request.getRequestDispatcher("article?articleID="+Integer.parseInt(articleID)).forward(request,response);
         }else{
             request.setAttribute("articleID", articleID);
-            request.getRequestDispatcher("/article").forward(request,response);
+            request.getRequestDispatcher("article").forward(request,response);
         }
     }
 

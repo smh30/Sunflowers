@@ -11,8 +11,6 @@ public class RandomPassword {
             pw += allAvailableChar[random];
         }
 
-        System.out.println(pw);
-
         return pw;
     }
 }

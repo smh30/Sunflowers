@@ -1,7 +1,6 @@
 package ictgradschool.project.servlets.comments;
 
-import ictgradschool.project.DAOs.ArticleDAO;
-import ictgradschool.project.DAOs.CommentDAO;
+import ictgradschool.project.daos.CommentDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,9 +15,6 @@ public class DeleteCommentServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       // String commentAuthor = (String) request.getSession().getAttribute("username");
-
-       // String commentContent = request.getParameter("commentContent");
 
         int articleID =  Integer.parseInt(request.getParameter("articleID"));
 

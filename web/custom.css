@@ -1,4 +1,4 @@
-
+/* ---------------Styles for navbar---------------------*/
 .navbar {
     background-color: #0e603f;
 }
@@ -126,10 +126,12 @@
     background-color: #5b9b37;
 }
 
+/*--------------- General Styles ----------------------*/
+
 body {
     background-image: url("images/sf-lesssky.jpg");
     background-repeat: no-repeat;
-    background-color: #cccccc;
+    background-color: #F2D99C;
     width:100%;
     height:100%;
     background-position: center;
@@ -188,6 +190,8 @@ a:hover {
 }
 
 
+/*----------------single-article-style-------------------*/
+
  * {
      box-sizing: border-box;
  }
@@ -197,7 +201,11 @@ body{
     font-size: 20px;
 }
 
-/* Full-width input fields */
+.form-control{
+    margin:10px;
+}
+
+/* -------------------Full-width input fields---------------------- */
 .form-container input[type=text], .form-container input[type=password] {
     width: 100%;
     padding: 15px;
@@ -214,12 +222,11 @@ body{
 
 /* Set a style for the submit button */
 .form-container .btn {
-    background-color: #4CAF50;
     color: white;
     padding: 5px 5px;
     border: none;
     cursor: pointer;
-    width: 45%;
+    /*width: 10%;*/
     margin-bottom: 10px;
     margin-left: 3%;
     opacity: 0.8;
@@ -228,10 +235,9 @@ body{
 
 /* Add a red background color to the cancel button */
 .form-container .cancel {
-    width: 45%;
+    /*width: 10%;*/
     display: inline-block;
-    margin-right: 1%;
-    background-color: red;
+    /*margin-left: 60%;*/
 }
 
 /* Add some hover effects to buttons */
@@ -239,47 +245,29 @@ body{
     opacity: 1;
 }
 
-#editarticle{
-    background-color: #31b0d5;
+#editarticle,#deletearticle,#addcommentbtn{
+    background-color: #5b9b37;
     font-weight: bold;
     font-size: 12px;
     padding: 6px 15px;
     border-radius: 20px;
 }
-#deletearticle{
-    background-color: #31b0d5;
-    font-weight: bold;
-    font-size: 12px;
-    padding: 6px 15px;
-    border-radius: 20px;
-}
-#addcommentbtn{
-    background-color: #31b0d5;
-    font-weight: bold;
-    font-size: 12px;
-    padding: 6px 15px;
-    border-radius: 20px;
-}
+
 
 #editarticle:hover{
-    background-color: #138496;
+    background-color: #076426;
 }
 #addcommentbtn:hover{
-    background-color: #138496;
+    background-color: #076426;
 }
 #deletearticle:hover{
-    background-color: #138496;
-}
-
-a{
-    color: #a94300;
-}
-
-a:hover {
-    color: #ea8800;
+    background-color: #076426;
 }
 
 
+
+
+/*comment-pool */
 
 .container-comment-pool {
     width: 100%;
@@ -287,7 +275,7 @@ a:hover {
 }
 
 .media .media-object {
-    max-width: 60px;
+    max-width: 120px;
 }
 
 .media-body {
@@ -302,6 +290,15 @@ a:hover {
 .media-date {
     position: relative;
 
+}
+.media-list{
+    padding-left: 0;
+    /*margin-left: -3.4em;*/
+}
+
+.media-list .media-list{
+    padding-left: 0;
+    margin-left: -3.4em;
 }
 
 .media-date li {
@@ -323,7 +320,7 @@ a:hover {
 }
 
 .media-replied {
-    margin: 0 0 20px 20px;
+    margin: 0 0 0px 0px;
 }
 
 .media-replied .media-heading {
@@ -333,6 +330,15 @@ a:hover {
 .card .bg-light {
     background-color: whitesmoke;
     border: none;
+
+}
+.card{
+    border:none;
+}
+.media{
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    padding-bottom: 5px;
 }
 
 .btn-circle {
@@ -368,6 +374,53 @@ input[type="file"] {
     margin-top: 10px;
 }
 
+.btn-info{
+    background-color: #5b9b37;
+    padding:6px 15px;
+    border:#076426;
+    border-radius: 20px;
+    transition-duration: 0.4s;
+}
+#childcommentsub{
+    background-color: #5b9b37;
+    padding:6px 15px;
+    border:#076426;
+    border-radius: 20px;
+    transition-duration: 0.4s;
+}
+
+#childrencommentclose{
+    font-weight: bold;
+    background-color: #5b9b37;
+    padding:6px 15px;
+    border:#076426;
+    border-radius: 20px;
+    transition-duration: 0.4s;
+}
+#deletecommetnbtn{
+    background-color: #5b9b37;
+    padding:6px 15px;
+    border:#076426;
+    border-radius: 20px;
+    transition-duration: 0.4s;
+}
+
+
+#childcommentsub:hover{
+    background-color: #076426;
+}
+
+#childrencommentclose:hover{
+    background-color: #076426;
+}
+#deletecommetnbtn:hover{
+    background-color: #076426;
+}
+.btn-info:hover{
+    background-color: #076426;
+}
+
+
 .custom-input-file:hover .uploadPhoto {
     display: block;
 }
@@ -379,14 +432,4 @@ input[type="file"] {
 
 
 
- /*i don't think this part did anything. was trying to fix grey bottom on mobile*/
-@media only screen and (max-width: 600px) {
-    body {
-        background-color: lightblue;
-    }
-
-    .media .media-object {
-        display:none;
-    }
-}
 

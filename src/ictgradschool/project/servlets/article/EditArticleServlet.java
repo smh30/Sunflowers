@@ -1,9 +1,8 @@
 package ictgradschool.project.servlets.article;
 
-import ictgradschool.project.DAOs.ArticleDAO;
-import ictgradschool.project.JavaBeans.Article;
+import ictgradschool.project.daos.ArticleDAO;
+import ictgradschool.project.javabeans.Article;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,12 +17,12 @@ public class EditArticleServlet extends HttpServlet {
         String content = request.getParameter("article_content");
         String stringID = request.getParameter("articleID");
         int articleID = Integer.parseInt(stringID);
-        Article arti = ArticleDAO.editArticle(articleID, title, content, getServletContext());
+        Article article = ArticleDAO.editArticle(articleID, title, content, getServletContext());
 
-        request.setAttribute("article", arti);
+        request.setAttribute("article", article);
 
         request.setAttribute("articleID", articleID);
-        request.getRequestDispatcher("/article").forward(request, response);
+        request.getRequestDispatcher("article").forward(request, response);
 
     }
 

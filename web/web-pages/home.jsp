@@ -1,11 +1,5 @@
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: yab2
-  Date: 25/01/2019
-  Time: 3:15 PM
-  To change this template use File | Settings | File Templates.
---%>
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
@@ -13,52 +7,7 @@
     <title>Home</title>
     <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-    <%--library for icon, moved into partial header--%>
-    <%--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">--%>
-    <%--<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>--%>
-    <%--<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>--%>
-    <%--<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>--%>
-    <%--<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>--%>
-
-    <script type="text/javascript">
-
-        function getAuthorInfo(authorName) {
-            console.log("name to search:" + authorName);
-            $.ajax({
-                url: "userInfo",
-                type: "POST",
-                data: {username: authorName},
-                success: function (msg) {
-
-                    console.log("a message arrived back from userInfo: " + JSON.stringify(msg));
-                    console.log("the real name:" + msg.realname);
-                    //do the thing to show if it's good or not
-                    $('#modal-title').text("Username: " + msg.username);
-                    $('#modal-body').text("");
-
-                    $('#modal-body').append("<div id=\"image\" class=\"text-center\"><img src="+ msg.image+"></div>");
-
-                    if (msg.realname !== "" && msg.realname !== null){
-                        $('#modal-body').append("Real Name: " + msg.realname + "<br>");
-                    }
-                    if (msg.dob != null) {
-                        $('#modal-body').append("Date of Birth: " + msg.dob + "<br>");
-                    }
-                    if (msg.country !== "" && msg.country !== null) {
-                        $('#modal-body').append("Country: " + msg.country + "<br>");
-                    }
-                    if (msg.bio !== "" && msg.bio !== null) {
-                        $('#modal-body').append("Bio: " + msg.bio + "<br>");
-                    }
-
-
-                    $("#userInfoModal").modal('show');
-
-
-                }
-            })
-        }
-    </script>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
     <style type="text/css">
 
@@ -70,29 +19,21 @@
             background-color: whitesmoke;
         }
 
-
-
-
-
     </style>
 
 </head>
 
 <body>
-
 <%@ include file="../WEB-INF/partial/navbar.jsp" %>
 <div class="bg">
     <c:if test="${message!=null}">
         <div class="alert alert-warning alert-dismissible" id="error-message">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <%--a message will display if a user has tried to login but had a wrong username or password--%>
                 ${message}
         </div>
     </c:if>
 <div class="container">
-
-
-    <%--a message will display if a user has tried to login but had a wrong username or password--%>
-
 
     <%--if there are no articles, this message will appear--%>
     <c:if test="${empty articles}">
@@ -164,11 +105,6 @@
     </form>
 </div>
 
-
-    <%--      end sort order dropdown     --%>
-
-
-    <%--  begin showing articles    --%>
     <c:forEach items="${articles}" var="article">
         <div class="article">
             <c:choose>
@@ -182,10 +118,7 @@
 
             <p><a href="#" onclick="getAuthorInfo('${article.author.username}');return false;">Author: ${article.author.username}</a>
             </p>
-                <%--this block converts the timestamp to a nicer format for viewing on the page--%>
             <c:if test="${not empty article.timeString}">
-                <%--<span title="${article.timestamp}">--%>
-                <%--<fmt:formatDate value="${article.timestamp}" pattern="MM/dd/yyyy HH:mm"/></span>--%>
 
                 <p>${fn:substring(article.timeString,0,16)}</p>
             </c:if>
@@ -206,11 +139,8 @@
                     <c:set var="endline" value="${fn:substring(therest, 0, fn:indexOf(therest, '\\\\n'))}"/>..${endline}
                 </c:if>
             </c:if>
-
-
         </div>
     </c:forEach>
-    <%--end articles display--%>
 
     <%--if there are more than 10 articles for the current search, show the back button to see more--%>
     <c:if test="${fn:length(articles) == 10}">
@@ -233,29 +163,7 @@
 </div>
 </div>
 
-<div class="modal" id="userInfoModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title" id="modal-title">Modal Heading</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body" id="modal-body">
-
-            </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
-
-        </div>
-    </div>
-</div>
+<%@ include file="../WEB-INF/partial/_userinfomodal.jsp" %>
 
 </body>
 </html>
