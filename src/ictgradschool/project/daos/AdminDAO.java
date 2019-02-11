@@ -114,7 +114,6 @@ public class AdminDAO {
                         comment.setCommentID(rs.getInt(1));
                         User commentAuthor = new User(rs.getString(2));
                         comment.setCommentContent(rs.getString(3));
-                        comment.setTimestamp(rs.getTimestamp(4));
                         comment.setCommentAuthor(commentAuthor);
                         comment.setArticleId(rs.getInt(5));
                         comment.setParentID(rs.getInt(6));

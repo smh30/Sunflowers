@@ -8,7 +8,6 @@ public class Comment implements Serializable {
     private String  commentContent;
     private User commentAuthor;
     private int articleId;
-    private Timestamp timestamp;
     private int commentID;
     private List<Comment> children;
     private Comment parent;
@@ -63,14 +62,6 @@ public class Comment implements Serializable {
 
     public void setArticleId(int articleId) {
         this.articleId = articleId;
-    }
-
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
     }
 
     public int getParentID() { return parentID; }
