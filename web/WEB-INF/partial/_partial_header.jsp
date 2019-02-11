@@ -13,7 +13,7 @@
     <%--<base href="https://sporadic.nz/ysy_unnamed">--%>
     <link rel="icon"
           type="image/png"
-          href="images/sunflower-5.png">
+          href="images/tinyflower.png">
 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
