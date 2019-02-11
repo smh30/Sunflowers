@@ -1,10 +1,13 @@
-
-<%@ taglib prefix="myTags" tagdir="/WEB-INF/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
 <head>
+    <%@ taglib prefix="myTags" tagdir="/WEB-INF/tags" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     <title>
     <c:choose>
         <c:when test="${article.title == null|| empty article.title}">Untitled Article
@@ -19,59 +22,11 @@
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 
 
-
-
-    <%--<script type="text/javascript">--%>
-
-        <%--function getAuthorInfo(authorName) {--%>
-            <%--console.log("name to search:" + authorName);--%>
-            <%--$.ajax({--%>
-                <%--url: "userInfo",--%>
-                <%--type: "POST",--%>
-                <%--data: {username: authorName},--%>
-                <%--success: function (msg) {--%>
-
-                    <%--console.log("a message arrived back from userInfo: " + JSON.stringify(msg));--%>
-                    <%--console.log("the real name:" + msg.realname);--%>
-                    <%--//do the thing to show if it's good or not--%>
-                    <%--$('#modal-title').text("Username: " + msg.username);--%>
-                    <%--$('#modal-body').text("");--%>
-                    <%--$('#modal-body').append("<img src=" + msg.image + "><br>");--%>
-
-                    <%--if (msg.realname !== "" && msg.realname !== null) {--%>
-                        <%--$('#modal-body').append("Real Name: " + msg.realname + "<br>");--%>
-                    <%--}--%>
-                    <%--if (msg.dob != null) {--%>
-                        <%--$('#modal-body').append("Date of Birth: " + msg.dob + "<br>");--%>
-                    <%--}--%>
-                    <%--if (msg.country !== "" && msg.country !== null) {--%>
-                        <%--$('#modal-body').append("Country: " + msg.country + "<br>");--%>
-                    <%--}--%>
-                    <%--if (msg.bio !== "" && msg.bio !== null) {--%>
-                        <%--$('#modal-body').append("Bio: " + msg.bio + "<br>");--%>
-                    <%--}--%>
-
-
-                    <%--$("#userInfoModal").modal('show');--%>
-
-
-                <%--}--%>
-            <%--})--%>
-        <%--}--%>
-    <%--</script>--%>
-
     <style>
-        /*comment-pool-reply-button*/
-
         #reply-reply-btn-${childComment.commentID}:hover{
             background-color: #076426;
         }
-
     </style>
-
-
-
-
 </head>
 <body>
 
@@ -100,10 +55,6 @@
         <p><a href="#" onclick="getAuthorInfo('${article.author.username}')">Author: ${article.author.username}</a>
         </p>
 
-        <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
-
-        <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
         <c:if test="${not empty article.timeString}">
             <p>${fn:substring(article.timeString,0,16)}</p>
@@ -140,13 +91,8 @@
         <hr>
     </div>
 
-
-
     <%--Comment Publish Form--%>
     <c:if test="${sessionScope.username != null}">
-        <%--another form which posts to /addcomment
-                 text field for writing comment
-                 submit button--%>
     <div class="add-comment">
         <div class="form-group">
             <form method="post" action="addcomment">
@@ -157,10 +103,8 @@
                 <br>
                 <button id="addcommentbtn" class="btn btn-primary" type="submit" value="Add Comment">Add Comment</button>
             </form>
-
         </div>
     </div>
-
     </c:if>
 
 
@@ -177,30 +121,6 @@
         }
     </script>
 
-    <%--&lt;%&ndash;this modal pops up if the username is clicked, it shows the user info&ndash;%&gt;--%>
-    <%--<div class="modal" id="userInfoModal">--%>
-        <%--<div class="modal-dialog">--%>
-            <%--<div class="modal-content">--%>
-
-                <%--<!-- Modal Header -->--%>
-                <%--<div class="modal-header">--%>
-                    <%--<h4 class="modal-title" id="modal-title">Modal Heading</h4>--%>
-                    <%--<button type="button" class="close" data-dismiss="modal">&times;</button>--%>
-                <%--</div>--%>
-
-                <%--<!-- Modal body -->--%>
-                <%--<div class="modal-body" id="modal-body">--%>
-
-                <%--</div>--%>
-
-                <%--<!-- Modal footer -->--%>
-                <%--<div class="modal-footer">--%>
-                    <%--<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>--%>
-                <%--</div>--%>
-
-            <%--</div>--%>
-        <%--</div>--%>
-    <%--</div>--%>
 
         <div class="page-header">
             <h2 class="reviews">Comments</h2>

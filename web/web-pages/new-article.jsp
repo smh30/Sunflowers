@@ -1,6 +1,4 @@
-<!-- Created by IntelliJ IDEA. User: yab2 Date: 25/01/2019 Time: 3:16 PM To change this template use File | Settings | File Templates. -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns="http://www.w3.org/1999/xhtml" version="2.0">--%>
 
 <html>
     <head>
@@ -11,7 +9,6 @@
         <%@ include file="../WEB-INF/partial/_partial_header.jsp" %>
         <script src="ckeditor/ckeditor.js"></script>
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
-        <%--library for icon--%>
         <link rel="stylesheet"
               href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css'
@@ -59,7 +56,8 @@
                 </c:when>
                 <c:otherwise>
                 <form action="edit_article" method="post">
-                    <input type="hidden" name="articleID" value="${article.ID}"> <%--<%}%>--%> </c:otherwise>
+                    <input type="hidden" name="articleID" value="${article.ID}">
+                    </c:otherwise>
                     </c:choose>
 
                     <div class="container text-center py-2" id="choose-date">
@@ -75,9 +73,7 @@
                         <c:otherwise> <input type="text" name="article_title" class="form-control" id="title"
                                              maxlength="200" placeholder="Your new article title..."> </c:otherwise>
                     </c:choose>
-
                     </div>
-
 
                     <div class="container text-center">
                         <br> <label id="label2" for="content">Article Content Here:</label> <c:choose> <c:when

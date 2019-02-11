@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: yab2
-  Date: 25/01/2019
-  Time: 3:17 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -49,7 +42,6 @@
                 data: {name: nameCheck},
                 success: function (msg) {
                     console.log(msg);
-                    //do the thing to show if it's good or not
                     if (msg === "true") {
                         $('#nameFail').html("<div class=\"alert alert-warning alert-dismissible\" id=\"error-message\" >" +
                             "<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>Please choose a different username</div>")
@@ -84,14 +76,6 @@
             background-color: whitesmoke;
         }
 
-        .article {
-            padding: 6px;
-            margin: 7px;
-            border: 2px solid #666666;
-            border-radius: 12px;
-            background-color: whitesmoke;
-        }
-
         .form-control:hover {
             background-color: #8a8a8a;
             color: black;
@@ -103,7 +87,6 @@
 </head>
 
 <body>
-<!-- i've included the navbar here so that i can have links to test the login etc with - steph -->
 <%@ include file="../WEB-INF/partial/navbar.jsp" %>
 <div class="container">
 

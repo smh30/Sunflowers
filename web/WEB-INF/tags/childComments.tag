@@ -102,8 +102,5 @@
                 </li>
             </ul>
         </div>
-
-
     </c:forEach>
-
 </c:if>
