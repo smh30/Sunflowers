@@ -103,7 +103,7 @@
             <div class="form-group">
                 <label class="label-txt" for="username">Username: </label>
                 <%--the onchange means that when the box loses focus it does the thing --%>
-                <input type="text" id="username" name="username" maxlength="30" onchange="checkName(this.value)" class="form-control">
+                <input type="text" id="username" name="username" maxlength="30" pattern="^\S{4,30}" onchange="checkName(this.value)" class="form-control">
             </div>
 
             <div class="form-group">
