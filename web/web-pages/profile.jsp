@@ -53,7 +53,7 @@
             <img id="imageToSwap" src="Uploaded-Photos/${user.pictureURL}" width="225" class="img-thumbnail">
         </c:when>
     <c:otherwise>
-    <img id="imageToSwap" src="images/default-photos-for-profile-page/${user.defaultImage}" width="225">
+    <img id="imageToSwap" src="images/default-photos-for-profile-page/${user.defaultImage}" width="225" class="img-thumbnail">
 
     </c:otherwise>
     </c:choose>
