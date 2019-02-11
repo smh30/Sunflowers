@@ -14,7 +14,7 @@
                 $('#modal-title').text("Username: " + msg.username);
                 $('#modal-body').text("");
 
-                $('#modal-body').append("<div id=\"image\" class=\"text-center\"><img src="+ msg.image+"></div>");
+                $('#modal-body').append("<div id=\"image\" class=\"text-center\"><img src=\""+ msg.image + "\" width=\"250\"></div>");
 
                 if (msg.realname !== "" && msg.realname !== null){
                     $('#modal-body').append("Real Name: " + msg.realname + "<br>");
