@@ -56,8 +56,8 @@
                                             <textarea placeholder="comment here..." maxlength="1000" name="content"
                                                       class="form-control" rows="4"
                                                       id="content"></textarea>
-                                            <button type="submit" id="childcommentsub" class="btn btn-primary">Submit</button>
-                                            <button type="button" id="childrencommentclose" class="btn cancel btn-warning"
+                                            <button type="submit" id="childcommentsub" class="btn btn-circle">Submit</button>
+                                            <button type="button" id="childrencommentclose" class="btn cancel btn-circle"
                                                     onclick="closeForm(${childComment.commentID})">Close
                                             </button>
                                         </form>
