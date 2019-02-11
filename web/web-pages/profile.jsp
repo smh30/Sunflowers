@@ -188,9 +188,9 @@
                     <div class="form-group">
             <label for="dateofbirthID">Date of birth:</label>
             <c:choose>
-                <c:when test="${user.DOB!=null}">
-                    <%--<input type="text" id="dateofbirthID" name="dateofbirth" value="${user.DOB}">--%>
-                    <input type="date" id="dateofbirthID" name="dateofbirth" value="${user.DOB}" class="form-control">
+                <c:when test="${user.dateOfBirth!=null}">
+                    <%--<input type="text" id="dateofbirthID" name="dateofbirth" value="${user.dateOfBirth}">--%>
+                    <input type="date" id="dateofbirthID" name="dateofbirth" value="${user.dateOfBirth}" class="form-control">
                 </c:when>
                 <c:otherwise>
                     <%--<input type="text" id="dateofbirthID" name="dateofbirth">--%>

@@ -1,7 +1,6 @@
 package ictgradschool.project.javabeans;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 public class Article implements Serializable {
     private String title;
@@ -10,12 +9,8 @@ public class Article implements Serializable {
     private int ID;
     private boolean hidden;
     private String timeString;
-    // this one will depend on how we implement the comments
-    //todo getters and setters for comments once
-    //private List<Comment> comments;
 
-    public Article(){
-    }
+    public Article(){ }
 
     public String getTitle() {
         return title;
@@ -53,9 +48,6 @@ public class Article implements Serializable {
 
     public void setHidden(boolean hidden) { this.hidden = hidden; }
 
-    public void setAuthor(String string) {
-    }
-    
     public String getTimeString() {
         return timeString;
     }

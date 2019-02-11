@@ -101,7 +101,7 @@ public class UserDAO {
                             user.setDescription(r.getString(7));
                             user.setPictureURL(r.getString(8));
                             user.setDefaultImage(r.getString(9));
-                            user.setDOB(r.getString(11));
+                            user.setDateOfBirth(r.getString(11));
                             user.setUseDefaultImage(r.getBoolean(12));
                             user.setEmail(r.getString(13));
                         }

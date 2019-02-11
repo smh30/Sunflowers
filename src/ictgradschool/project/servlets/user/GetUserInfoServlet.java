@@ -30,7 +30,7 @@ public class GetUserInfoServlet extends HttpServlet {
         
         userJson.put("username", user.getUsername());
         userJson.put("realname", user.getRealName());
-        userJson.put("dob", user.getDOB());
+        userJson.put("dob", user.getDateOfBirth());
         userJson.put("country", user.getCountry());
         userJson.put("bio", user.getDescription());
         userJson.put("image", image);
