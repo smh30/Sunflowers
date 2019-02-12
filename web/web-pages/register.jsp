@@ -108,7 +108,7 @@
 
             <div class="form-group">
                 <label for="password">Password: </label>
-                <input type="password" id="password" name="password" minlength="8" maxlength="50" class="form-control">
+                <input type="password" id="password" name="password" minlength="8" pattern="{8,50}" maxlength="50" class="form-control">
                 <small id="passwordInfo" class="form-text text-muted">Minimum 8 characters</small>
             </div>
             <div class="g-recaptcha" data-sitekey="6Lc52o4UAAAAAF2qwLx_jR66r2nUDGMTz9FSM2-N"
