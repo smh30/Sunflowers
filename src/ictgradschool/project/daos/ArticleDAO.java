@@ -425,12 +425,17 @@ public class ArticleDAO {
                 int nextday = dayint + 1;
                 String end = midnightString.substring(0,8) + nextday + " 11:00:00";
                 
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author LIKE ? AND article_title LIKE ? AND article_timestamp LIKE ?  AND (hidden=0) AND NOT (article_author = 'deleted')  AND NOT (article_timestamp > ?) ORDER BY" + orderBy + "LIMIT 10 OFFSET ?")) {
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a " +
+                        "WHERE article_author LIKE ? AND article_title LIKE ? AND " +
+                        "article_timestamp BETwEEN ? AND ?  AND (hidden=0) AND NOT " +
+                        "(article_author = " +
+                        "'deleted')  AND NOT (article_timestamp > ?) ORDER BY" + orderBy + "LIMIT 10 OFFSET ?")) {
                     stmt.setString(1, author);
                     stmt.setString(2, "%" + title + "%");
-                    stmt.setString(3, date + "%");
-                    stmt.setString(4, todaysDate);
-                    stmt.setInt(5, offset);
+                    stmt.setString(3, start);
+                    stmt.setString(4, end);
+                    stmt.setString(5, todaysDate);
+                    stmt.setInt(6, offset);
                     ResultSet rs = stmt.executeQuery();
                     
                     while (rs.next()) {
@@ -476,8 +481,8 @@ public class ArticleDAO {
                         " " +
                         "(article_author = 'deleted')  AND (hidden=0)  AND NOT (article_timestamp > ?) ORDER BY" + orderBy + "LIMIT 10 OFFSET ?")) {
                     stmt.setString(1, "%" + title + "%");
-                    stmt.setString(2, start + "%");
-                    stmt.setString(3, end + "%");
+                    stmt.setString(2, start);
+                    stmt.setString(3, end);
                     stmt.setString(4, todaysDate);
                     stmt.setInt(5, offset);
                     ResultSet rs = stmt.executeQuery();
@@ -524,8 +529,8 @@ public class ArticleDAO {
                         " " +
                         "(article_author = 'deleted')  AND (hidden=0)  AND NOT (article_timestamp > ?) ORDER BY" + orderBy + "LIMIT 10 OFFSET ?")) {
                     stmt.setString(1, author);
-                    stmt.setString(2, start + "%");
-                    stmt.setString(3, end + "%");
+                    stmt.setString(2, start);
+                    stmt.setString(3, end);
                     stmt.setString(4, todaysDate);
                     stmt.setInt(5, offset);
                     ResultSet rs = stmt.executeQuery();
