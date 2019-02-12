@@ -141,7 +141,7 @@
                     <label for="email" >Email:</label>
                     <c:choose>
                         <c:when test="${user.email!=null && user.email != 'none'}">
-                    <input type="email" id="email" maxlength="100" name="email" value=${user.email} class="form-control">
+                    <input type="email" id="email" maxlength="100" name="email" value='${user.email}' class="form-control">
                     </c:when>
                         <c:otherwise>
                             <input type="email" id="email" maxlength="100" name="email" class="form-control" required>

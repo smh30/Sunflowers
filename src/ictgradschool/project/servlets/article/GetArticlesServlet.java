@@ -74,6 +74,10 @@ public class GetArticlesServlet extends HttpServlet {
                     } else {
                         articleList = ArticleDAO.getArticlesByTitleAndAuthor(offset, title, author, sort, getServletContext());
                     }
+                } if (!date.equals("")){
+                    searchDate = date;
+                    articleList = ArticleDAO.getArticlesByAuthorAndDate(offset, author, date,
+                            sort, getServletContext());
                 } else {
                     articleList = ArticleDAO.getArticlesByAuthor(offset, author, sort, getServletContext());
                 }
