@@ -6,9 +6,7 @@ import ictgradschool.project.javabeans.User;
 
 import javax.servlet.ServletContext;
 import java.sql.*;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -353,12 +351,39 @@ public class ArticleDAO {
             
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 String orderBy = getOrderString(sort);
+                System.out.println("date = " + date);
+                
+                LocalDateTime midnightToday = LocalDateTime.parse(date+" 00:00:00", DateTimeFormatter.ofPattern("yyyy" +
+                        "-MM-dd HH:mm:ss"));
+                Instant midnightInstant = midnightToday.toInstant(ZoneOffset.of("+13:00"));
+                LocalDateTime midnightUtc = LocalDateTime.ofInstant(midnightInstant, ZoneId.of("Z"));
+                String midnightString = midnightUtc.toString();
+                midnightString = midnightString.substring(0, 10);
+                
+                String start = midnightString + " 11:00:00";
+                String day = midnightString.substring(8, 10);
+                int dayint = Integer.parseInt(day);
+                int nextday = dayint + 1;
+                String end = midnightString.substring(0,8) + nextday + " 11:00:00";
+                System.out.println("start = " +start);
+                System.out.println("end  =" + end);
+                
+                
                 String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
                 
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_timestamp LIKE ? AND NOT (article_author = 'deleted')  AND (hidden=0)  AND NOT (article_timestamp > ?) ORDER BY" + orderBy + "LIMIT 10 OFFSET ?")) {
-                    stmt.setString(1, date + "%");
-                    stmt.setString(2, todaysDate);
-                    stmt.setInt(3, offset);
+//
+                    try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a " +
+                            "WHERE article_timestamp BETWEEN ? AND " +
+                            "? AND NOT " +
+                            "(article_author =" +
+                            " " +
+                            "'deleted')  " +
+                            "AND " +
+                            "(hidden=0)  AND NOT (article_timestamp > ?) ORDER BY" + orderBy + "LIMIT 10 OFFSET ?")) {
+                        stmt.setString(1, start);
+                        stmt.setString(2, end);
+                    stmt.setString(3, todaysDate);
+                    stmt.setInt(4, offset);
                     ResultSet rs = stmt.executeQuery();
                     
                     while (rs.next()) {
@@ -386,6 +411,19 @@ public class ArticleDAO {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 String orderBy = getOrderString(sort);
                 String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
+    
+                LocalDateTime midnightToday = LocalDateTime.parse(date+" 00:00:00", DateTimeFormatter.ofPattern("yyyy" +
+                        "-MM-dd HH:mm:ss"));
+                Instant midnightInstant = midnightToday.toInstant(ZoneOffset.of("+13:00"));
+                LocalDateTime midnightUtc = LocalDateTime.ofInstant(midnightInstant, ZoneId.of("Z"));
+                String midnightString = midnightUtc.toString();
+                midnightString = midnightString.substring(0, 10);
+    
+                String start = midnightString + " 11:00:00";
+                String day = midnightString.substring(8, 10);
+                int dayint = Integer.parseInt(day);
+                int nextday = dayint + 1;
+                String end = midnightString.substring(0,8) + nextday + " 11:00:00";
                 
                 try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_author LIKE ? AND article_title LIKE ? AND article_timestamp LIKE ?  AND (hidden=0) AND NOT (article_author = 'deleted')  AND NOT (article_timestamp > ?) ORDER BY" + orderBy + "LIMIT 10 OFFSET ?")) {
                     stmt.setString(1, author);
@@ -419,12 +457,77 @@ public class ArticleDAO {
             try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
                 String orderBy = getOrderString(sort);
                 String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
+    
+                LocalDateTime midnightToday = LocalDateTime.parse(date+" 00:00:00", DateTimeFormatter.ofPattern("yyyy" +
+                        "-MM-dd HH:mm:ss"));
+                Instant midnightInstant = midnightToday.toInstant(ZoneOffset.of("+13:00"));
+                LocalDateTime midnightUtc = LocalDateTime.ofInstant(midnightInstant, ZoneId.of("Z"));
+                String midnightString = midnightUtc.toString();
+                midnightString = midnightString.substring(0, 10);
+    
+                String start = midnightString + " 11:00:00";
+                String day = midnightString.substring(8, 10);
+                int dayint = Integer.parseInt(day);
+                int nextday = dayint + 1;
+                String end = midnightString.substring(0,8) + nextday + " 11:00:00";
                 
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a WHERE article_title LIKE ? AND article_timestamp LIKE ? AND NOT (article_author = 'deleted')  AND (hidden=0)  AND NOT (article_timestamp > ?) ORDER BY" + orderBy + "LIMIT 10 OFFSET ?")) {
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a " +
+                        "WHERE article_title LIKE ? AND article_timestamp BETWEEN ? AND ? AND NOT" +
+                        " " +
+                        "(article_author = 'deleted')  AND (hidden=0)  AND NOT (article_timestamp > ?) ORDER BY" + orderBy + "LIMIT 10 OFFSET ?")) {
                     stmt.setString(1, "%" + title + "%");
-                    stmt.setString(2, date + "%");
-                    stmt.setString(3, todaysDate);
-                    stmt.setInt(4, offset);
+                    stmt.setString(2, start + "%");
+                    stmt.setString(3, end + "%");
+                    stmt.setString(4, todaysDate);
+                    stmt.setInt(5, offset);
+                    ResultSet rs = stmt.executeQuery();
+                    
+                    while (rs.next()) {
+                        Article article = createArticleFromRS(rs);
+                        articles.add(article);
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return articles;
+        }
+        return null;
+    }
+    
+    public static List<Article> getArticlesByAuthorAndDate(int offset, String author, String date,
+                                                      String sort, ServletContext context) {
+        List<Article> articles = new ArrayList<>();
+        Properties dbProps = DAOCheckProperties.check(context);
+        
+        if (dbProps != null) {
+            
+            try (Connection conn = DriverManager.getConnection(dbProps.getProperty("url"), dbProps)) {
+                String orderBy = getOrderString(sort);
+                String todaysDate = Timestamp.valueOf(LocalDateTime.now()).toString();
+                
+                LocalDateTime midnightToday = LocalDateTime.parse(date+" 00:00:00", DateTimeFormatter.ofPattern("yyyy" +
+                        "-MM-dd HH:mm:ss"));
+                Instant midnightInstant = midnightToday.toInstant(ZoneOffset.of("+13:00"));
+                LocalDateTime midnightUtc = LocalDateTime.ofInstant(midnightInstant, ZoneId.of("Z"));
+                String midnightString = midnightUtc.toString();
+                midnightString = midnightString.substring(0, 10);
+                
+                String start = midnightString + " 11:00:00";
+                String day = midnightString.substring(8, 10);
+                int dayint = Integer.parseInt(day);
+                int nextday = dayint + 1;
+                String end = midnightString.substring(0,8) + nextday + " 11:00:00";
+                
+                try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM article AS a " +
+                        "WHERE article_author LIKE ? AND article_timestamp BETWEEN ? AND ? AND NOT" +
+                        " " +
+                        "(article_author = 'deleted')  AND (hidden=0)  AND NOT (article_timestamp > ?) ORDER BY" + orderBy + "LIMIT 10 OFFSET ?")) {
+                    stmt.setString(1, author);
+                    stmt.setString(2, start + "%");
+                    stmt.setString(3, end + "%");
+                    stmt.setString(4, todaysDate);
+                    stmt.setInt(5, offset);
                     ResultSet rs = stmt.executeQuery();
                     
                     while (rs.next()) {
